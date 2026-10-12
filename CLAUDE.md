@@ -1,6 +1,6 @@
 # Sound Clash – Hinweise für Claude
 
-Partyspiel rund um Musik (Blind ranken, Guess the Song, Timeline Masters). React 19, TypeScript,
+Partyspiel rund um Musik (Sound Clash: Künstler blind ranken, Song-Duelle). React 19, TypeScript,
 Vite 8, PWA auf GitHub Pages unter `/SoundClashBeta/`. Tim spricht Deutsch, ist kein Programmierer,
 nimmt Vorgaben wörtlich und will bei Unklarheiten gefragt werden.
 
@@ -37,6 +37,7 @@ src/ui/               Bausteine: Kopfleiste, Hintergrund, Partikel, Toast, Splas
 src/styles/           themes.css (Album-Themes), base, background, components, screens, games
 src/data/             catalog.json (Genres + Künstler-Cache), avatars.ts (eingebaute Avatare)
 src/remote/           Handy-Begleiter: host.ts (Hauptgerät), client.ts + RemoteApp.tsx (Handy), protocol.ts
+src/ui/Vinyl.tsx      realistische Schallplatte (Cover als Etikett); Hintergrund-Mosaik in Background.tsx
 tests/                Playwright-Verhaltenstests, aufgezeichnete Deezer-Antworten, Referenzen
 docs/                 MECHANIK.md, HANDY-BEGLEITER.md, BERICHT.md, screenshots/
 ```
@@ -76,7 +77,12 @@ Handys koppeln sich optional per QR-Code
 ihr Line-up sehen und – wenn sie dran sind – drehen, setzen und Songs wählen. Das Handy löst nur
 dieselben Aktionen aus wie ein Tippen am Hauptgerät (`src/remote/host.ts` prüft, wer dran ist).
 Alles muss kostenlos nutzbar bleiben (kein bezahlter Dienst, kein eigener Server). Details:
-`docs/HANDY-BEGLEITER.md`, Test: `tests/begleiter.spec.ts`.
+`docs/HANDY-BEGLEITER.md`, Tests: `tests/begleiter.spec.ts`, `tests/handymodus.spec.ts`.
+
+**Handy-Modus** (Einrichtung → „Spielweise: 📱 Mit Handys“, `S.phoneMode`, Tims Vorgabe, MECHANIK §11):
+Spieler machen alles am Handy, das Hauptgerät ist die Bühne (`src/screens/PhoneMode.tsx`: Kacheln
+bei der Songwahl, Bildschirm `listen` spielt die Songs nacheinander je 30 Sek; `CineDraft` in
+`Draft.tsx`). Die Wertung ist dieselbe wie im klassischen Modus. „Nur Hauptgerät“ bleibt exakt wie das Original.
 
 ## Speicher (nur lokal, kein Server)
 
@@ -85,7 +91,7 @@ Die Herkunft `v6fdb8msrw-dotcom.github.io` teilen sich Sound Clash und **Muscle 
 
 | Schlüssel | Inhalt |
 |---|---|
-| `soundclash.app.settings` | Einstellungen, Namen, Avatare, Topf, Turnier-Kader (Format wie `save()` im Original) |
+| `soundclash.app.settings` | Einstellungen, Namen, Avatare, Topf, Turnier-Kader (Format wie `save()` im Original, plus `pickSec`, `autoScroll`, `phoneMode`) |
 | `soundclash.app.rivalry` | Ewige Rivalität `{ "a|b": {a,b,aw,bw,draws,last} }` |
 | `soundclash.v5`, `soundclash.rivalry` | alte Schlüssel des Originals – nur lesen (einmalige Übernahme), nie ändern |
 | `soundclash.app.pair` (sessionStorage) | Spielcode der Handy-Kopplung am Hauptgerät |
@@ -96,7 +102,8 @@ Export/Import als Datei (`sound-clash-spielstand-JJJJ-MM-TT.json`, Teilen-Menü/
 
 ## Git und Veröffentlichung
 
-- Arbeitsbranch `react-umbau`. Pushen kann nur Tim (GitHub Desktop); Terminal-Push gibt 403.
-- Veröffentlichung über `.github/workflows/deploy.yml` (GitHub Actions → Pages). Solange Pages noch
-  „Deploy from branch“ nutzt, darf der Vite-Quellcode nicht auf `main`.
+- Arbeiten auf einem Feature-Branch, danach `main` per Fast-Forward nachziehen. Pushen kann nur Tim
+  (GitHub Desktop, „Push origin“); Terminal-Push gibt 403.
+- Veröffentlichung: Jeder Push auf `main` startet `.github/workflows/deploy.yml` (Tests, Build,
+  GitHub Pages). Pages steht auf „GitHub Actions“. Browser-Cache 10 Min – zum Prüfen `?neu=1` anhängen.
 - Commit-Nachrichten auf Deutsch, Ende: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.

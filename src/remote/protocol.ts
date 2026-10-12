@@ -20,6 +20,7 @@ export function newCode(): string {
 export type Role = 'audience' | number
 
 export interface ViewSong {
+  id?: number | string
   title: string
   cover: string
   dur: string
@@ -62,13 +63,20 @@ export interface HostView {
   voteWinner: number | null
   /** Schlüssel des aktuellen Duells (Stimmen gelten pro Duell). */
   duelKey: string
+  phoneMode: boolean
+  ready: Record<number, boolean>
+  listen: { order: number[]; idx: number } | null
+  /** Spieler, dessen Song gerade auf dem Hauptgerät läuft (oder null). */
+  nowPlaying: number | null
+  /** Spielerplätze, für die gerade ein Handy verbunden ist. */
+  online: number[]
 }
 
 export function duelKey(S: State) {
   return S.round + '-' + (S.sd ? 'sd' : S.duel)
 }
 
-export function buildView(S: State): HostView {
+export function buildView(S: State, extra: { nowPlaying: number | null; online: number[] } = { nowPlaying: null, online: [] }): HostView {
   const players = Array.from({ length: S.players }, (_, j) => j + 1)
   const colors: Record<number, string> = {}
   const scores: Record<number, number> = {}
@@ -79,7 +87,7 @@ export function buildView(S: State): HostView {
     colors[p] = pcol(S, p)
     scores[p] = roundScore(S, p)
     w[p] = wins(S, p)
-    songs[p] = (S.songs[p] || []).map((so) => (so ? { title: so.title, cover: so.cover, dur: so.dur } : null))
+    songs[p] = (S.songs[p] || []).map((so) => (so ? { id: so.id, title: so.title, cover: so.cover, dur: so.dur } : null))
     for (const a of S.lineup[p] || []) if (a) pics[a] = picOf(a)
   }
   if (S.sdArt) for (const a of Object.values(S.sdArt)) pics[a] = picOf(a)
@@ -119,6 +127,11 @@ export function buildView(S: State): HostView {
     tally: S.tally,
     voteWinner: S.voteWinner,
     duelKey: duelKey(S),
+    phoneMode: S.phoneMode,
+    ready: S.ready,
+    listen: S.listen,
+    nowPlaying: extra.nowPlaying,
+    online: extra.online,
   }
 }
 
@@ -134,6 +147,7 @@ export type PhoneMsg =
   | { t: 'pickSong'; i: number; track: Track }
   | { t: 'manualSong'; i: number; text: string }
   | { t: 'pickNext' }
+  | { t: 'pickDone'; on?: boolean }
 
 /** Antwort des Hosts an ein Handy (z. B. eigene Stimme). */
 export interface PhoneState {

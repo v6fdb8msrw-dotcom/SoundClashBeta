@@ -55,7 +55,7 @@ export type Fx =
 
 export type PickId =
   | 'theme' | 'players' | 'size' | 'series' | 'genre' | 'songMode' | 'sameArtist' | 'mode' | '_x'
-  | 'audience' | 'autoScroll' | 'pickSec' | 'ambience' | 'bg'
+  | 'audience' | 'autoScroll' | 'pickSec' | 'ambience' | 'bg' | 'phoneMode'
 
 export type Action =
   | { type: 'load'; saved: Partial<SavedSettings> | null }
@@ -84,6 +84,8 @@ export type Action =
   | { type: 'skipSongs' }
   | { type: 'pickNext' }
   | { type: 'pickTimeUp'; track: Track | null }
+  | { type: 'phoneReady'; p: number; on?: boolean }
+  | { type: 'listenNext' }
   | { type: 'win'; p: number }
   | { type: 'advance' }
   | { type: 'bump'; p: number; d: number }
@@ -145,7 +147,7 @@ export function initialState(): State {
     setupTab: 'cfg',
     mode: 'clash', T: null,
     lineup: {}, songs: {}, winners: [], used: {}, pending: null, duel: 0, wins: {}, round: 1, sd: null, sdArt: null, regularWinners: null, regular: null,
-    warnOff: false, colors: null, spin: null,
+    warnOff: false, colors: null, spin: null, phoneMode: false, ready: {}, listen: null,
   }
 }
 
@@ -311,7 +313,7 @@ export function reduce(state: State, action: Action, env: Env, GEN: Genres): { s
 function normalize(S: State) {
   if (!BGS.some((b) => b[0] === S.bg)) S.bg = 'mosaic'
   setBodyTheme(S.theme)
-  if (S.screen === 'duel' && S.audience && !S.votePhase) {
+  if ((S.screen === 'duel' || S.screen === 'listen') && S.audience && !S.votePhase) {
     S.tally = {}
     for (let q = 1; q <= S.players; q++) S.tally[q] = 0
     S.votePhase = 'tally'
@@ -405,6 +407,8 @@ function resetRound(S: State, c: Ctx) {
   S.sdArt = null
   S.regularWinners = null
   S.regular = null
+  S.ready = {}
+  S.listen = null
   for (let p = 1; p <= S.players; p++) {
     S.lineup[p] = new Array(n).fill(null)
     S.songs[p] = new Array(n).fill(null)
@@ -439,6 +443,7 @@ function place(S: State, c: Ctx, pos: number) {
   if (allFull(S)) {
     S.duel = 0
     S.pickIdx = 0
+    S.ready = {}
     if (perDuel(S)) {
       S.screen = 'pick'
       c.fx.push({ t: 'loadTopsFor', names: duelArtists(S, 0) })
@@ -492,11 +497,24 @@ function advance(S: State, c: Ctx) {
   if (S.duel < last) {
     S.duel++
     S.pickIdx = 0
+    S.ready = {}
     if (perDuel(S)) {
       S.screen = 'pick'
       c.fx.push({ t: 'loadTopsFor', names: duelArtists(S, S.duel) })
-    }
+    } else if (S.phoneMode) startListen(S, c)
   } else finishRound(S, c)
+}
+
+/**
+ * Handy-Modus: Songs des Duells nacheinander auf dem Hauptgerät abspielen.
+ * Wer anfängt, rückt jedes Duell eins weiter (1-2-3, 2-3-1, 3-1-2 …).
+ */
+function startListen(S: State, c: Ctx) {
+  stopAudio(c)
+  const ps = parts(S)
+  const r = ps.length ? S.duel % ps.length : 0
+  S.listen = { order: ps.slice(r).concat(ps.slice(0, r)), idx: 0 }
+  S.screen = 'listen'
 }
 
 function finishRound(S: State, c: Ctx) {
@@ -537,6 +555,7 @@ function finishRound(S: State, c: Ctx) {
     S.duel = 0
     for (let p = 1; p <= S.players; p++) S.songs[p] = [null]
     S.pickIdx = 0
+    S.ready = {}
     S.screen = perDuel(S) ? 'pick' : 'songs'
     const _sdn: string[] = []
     for (let p = 1; p <= S.players; p++) if (S.sdArt[p] && !_sdn.includes(S.sdArt[p])) _sdn.push(S.sdArt[p])
@@ -680,6 +699,11 @@ function pick(S: State, c: Ctx, id: PickId, v: string) {
       c.fx.push({ t: 'bgSeed' })
       save(c)
       return
+    case 'phoneMode':
+      S.phoneMode = v === '1'
+      resetAll(S, c)
+      save(c)
+      return
   }
 }
 
@@ -711,6 +735,7 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       if (!THEMES.some((t) => t[0] === S.theme)) S.theme = 'silksonic'
       if (Array.isArray(d.pool)) S.pool = d.pool
       if ([0, 30, 45, 60].includes(d.pickSec as number)) S.pickSec = d.pickSec as number
+      if (typeof d.phoneMode === 'boolean') S.phoneMode = d.phoneMode
       if (isT(S)) {
         // Kaderfarben passend zum geladenen Theme berechnen
         setBodyTheme(S.theme)
@@ -735,7 +760,7 @@ export function savedSettings(S: State): SavedSettings {
     series: S.series, muted: S.muted, ambience: S.ambience, theme: S.theme, bg: S.bg, genre: S.genre, pool: S.pool,
     warnOff: S.warnOff, songMode: S.songMode, sameArtist: S.sameArtist, custom: S.custom, audience: S.audience,
     mode: S.mode, roster: S.T ? S.T.roster : null,
-    autoScroll: S.autoScroll, pickSec: S.pickSec,
+    autoScroll: S.autoScroll, pickSec: S.pickSec, phoneMode: S.phoneMode,
   }
 }
 
@@ -883,8 +908,30 @@ function apply(S: State, a: Action, c: Ctx) {
     case 'skipSongs':
       stopAudio(c)
       S.duel = 0
+      if (S.phoneMode) return startListen(S, c)
       S.screen = 'duel'
       return
+    case 'phoneReady': {
+      // Handy-Modus: Spieler meldet „fertig gewählt“ (am Handy oder am Hauptgerät)
+      if (!S.phoneMode || (S.screen !== 'pick' && S.screen !== 'songs')) return
+      if (!parts(S).includes(a.p)) return
+      S.ready[a.p] = a.on !== false
+      if (a.on === false) return
+      tone(c, 880, 0, 0.12, 0.1)
+      if (parts(S).every((q) => S.ready[q])) {
+        sound(c, 'chime')
+        if (S.screen === 'songs') S.duel = 0
+        startListen(S, c)
+      }
+      return
+    }
+    case 'listenNext': {
+      if (S.screen !== 'listen' || !S.listen) return
+      stopAudio(c)
+      S.listen.idx++
+      if (S.listen.idx >= S.listen.order.length) S.screen = 'duel'
+      return
+    }
     case 'pickNext':
       return pickNext(S, c)
     case 'pickTimeUp': {

@@ -135,7 +135,8 @@
     "mode": "clash",
     "roster": null,
     "autoScroll": false,
-    "pickSec": 45
+    "pickSec": 45,
+    "phoneMode": false
    },
    "rivalry": null,
    "keys": [
@@ -228,7 +229,8 @@
     "mode": "clash",
     "roster": null,
     "autoScroll": false,
-    "pickSec": 45
+    "pickSec": 45,
+    "phoneMode": false
    },
    "rivalry": null,
    "keys": [
@@ -332,7 +334,8 @@
      }
     ],
     "autoScroll": false,
-    "pickSec": 45
+    "pickSec": 45,
+    "phoneMode": false
    },
    "rivalry": null,
    "keys": [

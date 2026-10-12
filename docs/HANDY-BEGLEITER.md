@@ -6,12 +6,29 @@ Auf Tims Wunsch können sich Mitspieler zusätzlich mit dem Handy per QR-Code an
 Das ist eine Fernbedienung, kein eigenes Spiel. Alles bleibt kostenlos: kein eigener Server, kein Konto,
 keine gespeicherten Daten im Netz.
 
+## Zwei Spielweisen
+
+In der Einrichtung unter **„Spielweise“**:
+
+- **Nur Hauptgerät:** alles wie bisher. Handys können trotzdem über das Handy-Symbol oben gekoppelt
+  werden (Abstimmen, Line-up, selbst drehen/setzen/wählen, wenn man dran ist).
+- **📱 Mit Handys (Handy-Modus):** Die Spieler machen alles am Handy, das Hauptgerät ist die große
+  Bühne. QR-Code und „verbunden/wartet“ pro Spieler stehen direkt in der Einrichtung. Ablauf:
+  Rad drehen und setzen am Handy → alle wählen ihren Song **gleichzeitig** am Handy und tippen
+  „Fertig“ → das Hauptgerät spielt die Songs **nacheinander** (je 30 Sek, Reihenfolge rückt pro Duell
+  um eins weiter) → Abstimmen am Handy, schon während die Songs laufen → Entscheidung am Hauptgerät.
+  Details in `docs/MECHANIK.md` §11.
+
 ## Was der Handy-Begleiter kann
 
-Am Hauptgerät oben **„📱 Handys“** → QR-Code und Spielcode (5 Zeichen). Handy-Kamera scannen → das
-Handy öffnet `…/SoundClashBeta/?join=CODE` und fragt „Wer bist du?“ (Spieler P1–P6 oder Publikum).
+Am Hauptgerät oben **„📱 Handys“** (oder im Handy-Modus direkt in der Einrichtung) → QR-Code und
+Spielcode (5 Zeichen). Handy-Kamera scannen → das Handy öffnet `…/SoundClashBeta/?join=CODE` und fragt
+„Wer bist du?“ (Spieler P1–P6 oder Publikum). Zuschauer können jederzeit dazukommen – während einer
+Runde zeigt das Hauptgerät dafür unten rechts einen kleinen QR-Code „Mit abstimmen“.
 
 - **Abstimmen:** Im Duell („Publikum stimmt ab“) tippt jeder am eigenen Handy den besseren Song an.
+  Jede Karte zeigt deutlich, **wer** den Song gewählt hat (Avatar, Name, „hat gewählt“), dazu Cover,
+  Titel und Künstler. Der Song, der gerade läuft, trägt „▶ läuft gerade“.
   Eine Stimme pro Handy und Duell, Wechsel jederzeit möglich. Am Hauptgerät zählt das genau wie
   „+1 Stimme“ (bzw. „−“ beim Wechsel). Abstimmung schließen und Sieger bestätigen bleibt am Hauptgerät.
 - **Eigenes Line-up:** Plätze, gezogene Künstler, gewählte Songs, ×2-Plätze und „als Nächstes“.
@@ -22,7 +39,8 @@ Handy öffnet `…/SoundClashBeta/?join=CODE` und fragt „Wer bist du?“ (Spie
 
 **Regeln unverändert:** Das Handy schickt nur Wünsche. Das Hauptgerät prüft, ob der Spieler gerade dran
 ist, und führt dann exakt die Aktion aus, die auch ein Tippen am Hauptgerät auslöst (`spin`, `place`,
-`pickSong`, `manualSong`, `pickNext`, `bump`). Siehe `src/remote/host.ts`.
+`pickSong`, `manualSong`, `pickNext`, `bump`; im Handy-Modus zusätzlich `phoneReady` für „Fertig“).
+Siehe `src/remote/host.ts`.
 
 ## Technik
 
@@ -44,5 +62,10 @@ ist, und führt dann exakt die Aktion aus, die auch ein Tippen am Hauptgerät au
 - **Grenzen:** Am zuverlässigsten im selben WLAN. In seltenen Netzen (z. B. strenge Firmen-WLANs
   oder manche Mobilfunk-NATs) klappt eine direkte WebRTC-Verbindung nicht. Dann hilft ein kostenloser
   TURN-Dienst (Trystero `turnConfig`), der aber ein Konto braucht. Deshalb ist er nicht eingebaut.
-- **Test:** `tests/begleiter.spec.ts` koppelt Hauptgerät und zwei Handys über die echten Relays,
+- **Tests:** `tests/begleiter.spec.ts` koppelt Hauptgerät und zwei Handys über die echten Relays,
   dreht und setzt vom Handy, wählt einen Song und stimmt ab (inkl. Stimme ändern).
+  `tests/handymodus.spec.ts` spielt den Handy-Modus: zwei Spieler-Handys drehen und setzen alles,
+  ein Zuschauer kommt mitten in der Runde dazu, beide wählen gleichzeitig und tippen „Fertig“, die
+  Songs laufen nacheinander am Hauptgerät, die Handys zeigen „läuft gerade“ und stimmen ab.
+- **Ton am iPhone:** Musik spielt nur das Hauptgerät. Die Hörprobe am Handy ist nur zum Reinhören
+  beim Aussuchen. Damit Safari am Hauptgerät abspielen darf, wird der Ton beim ersten Tippen entsperrt.

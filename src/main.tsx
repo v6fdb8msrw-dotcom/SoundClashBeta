@@ -31,6 +31,8 @@ import './styles/screens.css'
 import './styles/games.css'
 import './styles/remote.css'
 import './styles/simple.css'
+import './styles/vinyl.css'
+import './styles/cinema.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 

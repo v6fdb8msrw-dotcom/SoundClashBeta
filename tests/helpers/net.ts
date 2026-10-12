@@ -36,7 +36,7 @@ async function loadDeezer(u: URL): Promise<unknown> {
   return data
 }
 
-function silentWav(seconds = 4, rate = 8000): Buffer {
+export function silentWav(seconds = 4, rate = 8000): Buffer {
   const n = seconds * rate
   const b = Buffer.alloc(44 + n)
   b.write('RIFF', 0)

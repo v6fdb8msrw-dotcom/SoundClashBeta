@@ -156,6 +156,36 @@ function playDeezer(url: string, key: string) {
   startAmbience()
 }
 
+/**
+ * Safari erlaubt Ton nur nach einer Berührung. Im Handy-Modus startet das Hauptgerät die
+ * Vorschauen selbst – deshalb beim ersten Tippen/Klicken die Wiedergabe einmal „freischalten“.
+ */
+const SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='
+let unlocked = false
+export function unlockAudio() {
+  if (unlocked) return
+  unlocked = true
+  const el = element()
+  if (!audio) {
+    try {
+      el.src = SILENT
+      void el.play().then(() => el.pause()).catch(() => undefined)
+    } catch {
+      // ignorieren
+    }
+  }
+  if (el === fxEl) connectAnalyser(el)
+}
+if (typeof window !== 'undefined') {
+  const once = () => {
+    unlockAudio()
+    window.removeEventListener('pointerdown', once)
+    window.removeEventListener('keydown', once)
+  }
+  window.addEventListener('pointerdown', once)
+  window.addEventListener('keydown', once)
+}
+
 export function currentTime(): { t: number; d: number } {
   return audio && playing ? { t: audio.currentTime || 0, d: audio.duration || 30 } : { t: 0, d: 30 }
 }

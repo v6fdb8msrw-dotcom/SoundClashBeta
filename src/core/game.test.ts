@@ -105,3 +105,67 @@ describe('Turnier (auf Tims Wunsch korrigiert)', () => {
     expect(S.T!.r).toBe(0)
   })
 })
+
+describe('Handy-Modus (Tims Vorgabe, MECHANIK §11)', () => {
+  function phoneStarted(players: number) {
+    let S = run(initialState(), { type: 'load', saved: null }, { type: 'go', to: 'setup' }, { type: 'pick', id: 'phoneMode', v: '1' })
+    S = run(S, { type: 'pick', id: 'players', v: String(players) }, { type: 'pick', id: 'size', v: '5' })
+    for (const n of GEN.rnb.artists!.slice(0, players * 5)) S = run(S, { type: 'poolToggle', name: n })
+    S = run(S, { type: 'start' })
+    while (S.screen === 'draft') {
+      S = run(S, { type: 'spin' }, { type: 'land' })
+      S = run(S, { type: 'place', pos: S.lineup[S.pending!.player].indexOf(null) })
+    }
+    return { ...S, audience: false }
+  }
+  const ready = (...ps: number[]): Action[] => ps.map((p) => ({ type: 'phoneReady', p }))
+
+  it('alle wählen gleichzeitig, dann laufen die Songs nacheinander', () => {
+    let S = phoneStarted(3)
+    expect(S.phoneMode).toBe(true)
+    expect(S.screen).toBe('pick')
+    S = run(S, ...ready(1, 2))
+    expect(S.screen).toBe('pick')
+    // „Song ändern“ nimmt das Fertig zurück
+    S = run(S, { type: 'phoneReady', p: 2, on: false }, ...ready(3))
+    expect(S.screen).toBe('pick')
+    S = run(S, ...ready(2))
+    expect(S.screen).toBe('listen')
+    expect(S.listen).toEqual({ order: [1, 2, 3], idx: 0 })
+    S = run(S, { type: 'listenNext' }, { type: 'listenNext' })
+    expect(S.screen).toBe('listen')
+    S = run(S, { type: 'listenNext' })
+    expect(S.screen).toBe('duel')
+  })
+
+  it('Abspiel-Reihenfolge rückt pro Duell um eins weiter', () => {
+    let S = phoneStarted(3)
+    const orders: number[][] = []
+    for (let d = 0; d < 4; d++) {
+      S = run(S, ...ready(1, 2, 3))
+      orders.push(S.listen!.order)
+      S = run(S, { type: 'listenNext' }, { type: 'listenNext' }, { type: 'listenNext' }, { type: 'win', p: 1 })
+      expect(S.ready).toEqual({})
+    }
+    expect(orders).toEqual([
+      [1, 2, 3],
+      [2, 3, 1],
+      [3, 1, 2],
+      [1, 2, 3],
+    ])
+  })
+
+  it('„Nur Hauptgerät“ bleibt wie das Original', () => {
+    let S = started(2)
+    while (S.screen === 'draft') {
+      S = run(S, { type: 'spin' }, { type: 'land' })
+      S = run(S, { type: 'place', pos: S.lineup[S.pending!.player].indexOf(null) })
+    }
+    expect(S.phoneMode).toBe(false)
+    S = run(S, ...ready(1, 2))
+    expect(S.screen).toBe('pick')
+    S = run(S, { type: 'pickNext' }, { type: 'pickNext' })
+    expect(S.screen).toBe('duel')
+    expect(S.listen).toBeNull()
+  })
+})

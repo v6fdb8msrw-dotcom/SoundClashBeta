@@ -1016,7 +1016,8 @@
     "mode": "clash",
     "roster": null,
     "autoScroll": true,
-    "pickSec": 30
+    "pickSec": 30,
+    "phoneMode": false
    },
    "rivalry": {
     "p1|p2": {

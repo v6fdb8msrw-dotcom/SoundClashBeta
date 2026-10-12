@@ -8,12 +8,14 @@ import { Draft } from './screens/Draft'
 import { Duel } from './screens/Duel'
 import { Final } from './screens/Final'
 import { Pick } from './screens/Pick'
+import { Listen, PhonePick, PhoneSongs } from './screens/PhoneMode'
 import { Round } from './screens/Round'
 import { Setup } from './screens/Setup'
 import { Songs } from './screens/Songs'
 import { configureAudio } from './services/audio'
 import { dz } from './services/deezer'
-import { resumeHost } from './remote/host'
+import { onlineRoles, resumeHost } from './remote/host'
+import { drawer } from './core/game'
 import { loadRivalry } from './services/rivalry'
 import { configureSfx } from './services/sfx'
 import { loadSettings, migrateLegacy } from './services/storage'
@@ -45,7 +47,8 @@ function boot() {
 boot()
 
 function screenKey(S: State): string {
-  if (S.screen === 'pick') return `pick-${S.round}-${S.sd ? 'sd' : S.duel}-${S.pickIdx}`
+  if (S.screen === 'pick') return `pick-${S.round}-${S.sd ? 'sd' : S.duel}-${S.phoneMode ? 'p' : S.pickIdx}`
+  if (S.screen === 'listen') return `listen-${S.round}-${S.sd ? 'sd' : S.duel}`
   if (S.screen === 'duel') return `duel-${S.round}-${S.sd ? 'sd' : S.duel}`
   if (S.screen === 'draft') return `draft-${S.round}-${S.T ? S.T.r + '-' + S.T.m : ''}`
   if (S.screen === 'bracket') return `bracket-${S.T ? S.T.r + '-' + S.T.m : ''}`
@@ -60,9 +63,11 @@ function ScreenView({ S }: { S: State }): ReactNode {
     case 'draft':
       return <Draft S={S} />
     case 'songs':
-      return <Songs S={S} />
+      return S.phoneMode ? <PhoneSongs S={S} /> : <Songs S={S} />
     case 'pick':
-      return <Pick S={S} />
+      return S.phoneMode ? <PhonePick S={S} /> : <Pick S={S} />
+    case 'listen':
+      return <Listen S={S} />
     case 'duel':
       return <Duel S={S} />
     case 'round':
@@ -93,6 +98,8 @@ export default function App() {
         tag = ((t && t.tagName) || '').toLowerCase()
       if (tag === 'input' || tag === 'textarea' || tag === 'button' || (t && t.isContentEditable)) return
       if (getState().screen !== 'draft') return
+      // Handy-Modus: dreht der Spieler am Handy, nicht per Leertaste am Hauptgerät
+      if (getState().phoneMode && onlineRoles().includes(drawer(getState()))) return
       e.preventDefault()
       dispatch({ type: 'spin' })
     }
@@ -122,7 +129,7 @@ export default function App() {
   useEffect(() => {
     if (lastScreen.current !== S.screen) {
       lastScreen.current = S.screen
-      if (S.screen !== 'draft') window.scrollTo({ top: 0, behavior: env.reduce ? 'auto' : 'smooth' })
+      if (S.screen !== 'draft' || S.phoneMode) window.scrollTo({ top: 0, behavior: env.reduce ? 'auto' : 'smooth' })
     }
   }, [S.screen])
 

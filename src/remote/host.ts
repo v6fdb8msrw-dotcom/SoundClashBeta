@@ -1,6 +1,7 @@
 import { joinRoom, type Room } from 'trystero'
 import { dispatch, getState, subscribe } from '../app/store'
-import { allFull, drawer, pickOrder, voteTotal } from '../core/game'
+import { playing, subscribeAudio } from '../services/audio'
+import { allFull, drawer, parts, pickOrder, voteTotal } from '../core/game'
 import type { State } from '../core/types'
 import { APP_ID, buildView, duelKey, newCode, slimTrack, type PhoneMsg, type PhoneState, type Role } from './protocol'
 
@@ -53,10 +54,22 @@ function avatarsOf(S: State) {
   return out
 }
 
+/** Spieler, dessen Song gerade auf dem Hauptgerät läuft (Schlüssel d1_0, l2_3, s1_0 …). */
+function nowPlayingPlayer(): number | null {
+  const m = playing ? /^(?:d|v|l|s)(\d+)_/.exec(playing) : null
+  return m ? +m[1] : null
+}
+/** Spielerplätze mit verbundenem Handy. */
+export function onlineRoles(): number[] {
+  const out = new Set<number>()
+  phones.forEach((p) => typeof p.role === 'number' && out.add(p.role))
+  return [...out].sort()
+}
+
 function pushView(target?: string) {
   if (!room || !sendView) return
   const S = getState()
-  sendView(buildView(S), target ? { target } : undefined)
+  sendView(buildView(S, { nowPlaying: nowPlayingPlayer(), online: onlineRoles() }), target ? { target } : undefined)
   const av = avatarsOf(S)
   const sig = JSON.stringify(av).length + ':' + Object.values(av).map((x) => x.slice(-24)).join('|')
   if (target || sig !== lastAvatars) {
@@ -88,7 +101,7 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
   if (role === null) return false
   switch (m.t) {
     case 'vote':
-      return S.screen === 'duel' && S.audience && S.votePhase === 'tally' && m.key === duelKey(S) && (S.sd ? !!(S.sdArt && S.sdArt[m.p]) : m.p >= 1 && m.p <= S.players)
+      return (S.screen === 'duel' || S.screen === 'listen') && S.audience && S.votePhase === 'tally' && m.key === duelKey(S) && (S.sd ? !!(S.sdArt && S.sdArt[m.p]) : m.p >= 1 && m.p <= S.players)
     case 'spin':
       return role !== 'audience' && S.screen === 'draft' && !S.pending && !S.spin && !allFull(S) && drawer(S) === role
     case 'place':
@@ -96,11 +109,15 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
     case 'pickSong':
     case 'manualSong':
       if (role === 'audience') return false
+      // Handy-Modus: alle Teilnehmer wählen gleichzeitig
+      if (S.screen === 'pick' && S.phoneMode) return parts(S).includes(role) && m.i === S.duel
       if (S.screen === 'pick') return pickOrder(S, S.duel)[S.pickIdx] === role && m.i === S.duel
       if (S.screen === 'songs') return !!(S.songs[role] && m.i >= 0 && m.i < S.songs[role].length) && !(S.sd && !S.sdArt?.[role])
       return false
     case 'pickNext':
-      return role !== 'audience' && S.screen === 'pick' && pickOrder(S, S.duel)[S.pickIdx] === role
+      return role !== 'audience' && !S.phoneMode && S.screen === 'pick' && pickOrder(S, S.duel)[S.pickIdx] === role
+    case 'pickDone':
+      return role !== 'audience' && S.phoneMode && (S.screen === 'pick' || S.screen === 'songs') && parts(S).includes(role)
   }
   return false
 }
@@ -111,7 +128,7 @@ function onPhone(m: PhoneMsg, peerId: string) {
   if (m.t === 'hello') {
     ph.role = m.role === 'audience' || (typeof m.role === 'number' && m.role >= 1 && m.role <= 6) ? m.role : null
     notify()
-    pushView(peerId)
+    pushView()
     pushMine(peerId)
     return
   }
@@ -139,6 +156,8 @@ function onPhone(m: PhoneMsg, peerId: string) {
       return dispatch({ type: 'manualSong', p: ph.role as number, i: m.i, text: String(m.text || '').slice(0, 120), id: 'm' + Date.now() })
     case 'pickNext':
       return dispatch({ type: 'pickNext' })
+    case 'pickDone':
+      return dispatch({ type: 'phoneReady', p: ph.role as number, on: m.on !== false })
   }
 }
 
@@ -169,8 +188,14 @@ export function startHost(): string {
     phones.delete(peerId)
     votes.delete(peerId)
     notify()
+    pushView()
   }
-  unsub = subscribe(onState)
+  const u1 = subscribe(onState)
+  const u2 = subscribeAudio(() => {
+    clearTimeout(viewT)
+    viewT = setTimeout(() => pushView(), 120)
+  })
+  unsub = () => (u1(), u2())
   votesKey = duelKey(getState())
   notify()
   return code

@@ -6,6 +6,8 @@
 export type Screen =
   | 'home' | 'setup' | 'bracket' | 'draft' | 'songs' | 'pick' | 'duel' | 'round' | 'final'
   | 'gssetup' | 'gsplay' | 'sbsetup' | 'sbplay' | 'tlsetup' | 'tlplay' | 'ddsetup' | 'ddplay' | 'soon'
+  /** Handy-Modus: Songs laufen nacheinander auf dem Hauptgerät, bevor entschieden wird. */
+  | 'listen'
 
 /** Gewählter Song pro Platz. */
 export interface Song {
@@ -173,6 +175,12 @@ export interface State {
   regular: { winners: (number | null)[]; songs: Record<number, (Song | null)[]>; scores: Record<number, number> } | null
   warnOff: boolean
   colors: Record<number, string> | null
+  /** Handy-Modus: Spieler wählen am Handy (gleichzeitig), das Hauptgerät zeigt und spielt ab. */
+  phoneMode: boolean
+  /** Handy-Modus: wer mit der Songwahl fertig ist (aktuelles Duell bzw. alle Songs). */
+  ready: Record<number, boolean>
+  /** Handy-Modus: Abspiel-Reihenfolge des aktuellen Duells und der gerade laufende Song. */
+  listen: { order: number[]; idx: number } | null
   /** Laufende Raddrehung: Zielsegment (im Original die Variablen spinning/tg). */
   spin: { target: number; n: number } | null
   gs?: GuessState
@@ -203,6 +211,7 @@ export interface SavedSettings {
   roster: RosterEntry[] | null
   autoScroll?: boolean
   pickSec?: number
+  phoneMode?: boolean
 }
 
 export interface Rivalry {

@@ -8,6 +8,7 @@ import type { State } from '../core/types'
 import { GEN, ak, fansOf, realName } from '../services/catalog'
 import { ArtImg, AvImg, Btn, Presence, Seg, Sel, type Opt } from '../ui/primitives'
 import { Warn } from '../ui/Warn'
+import { PairPanel } from '../ui/PairPanel'
 
 const pick = (id: PickId) => (v: string) => dispatch({ type: 'pick', id, v })
 
@@ -220,6 +221,15 @@ export function Setup({ S }: { S: State }) {
         </h2>
         <p className="lede">Blind ranken. Song für Song. Bis einer krönt.</p>
       </div>
+      <section className="card scard" data-card="mode">
+        <Seg id="phoneMode" label="Spielweise" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[{ v: '0', t: 'Nur Hauptgerät' }, { v: '1', t: '📱 Mit Handys' }]} />
+        <p className="hint" style={{ textAlign: 'left', margin: '10px 0 0' }}>
+          {S.phoneMode
+            ? 'Jeder spielt am eigenen Handy: drehen, setzen und Songs wählen. Dieses Gerät zeigt das Spiel groß und spielt die Musik.'
+            : 'Alles wird an diesem Gerät gespielt. Handys können trotzdem zum Abstimmen dazukommen (📱 oben).'}
+        </p>
+        {S.phoneMode ? <PairPanel /> : null}
+      </section>
       {isT(S) ? <RosterCard S={S} /> : <PlayersCard S={S} />}
       <section className="card scard" data-card="cfg">
         <div className="cardhead">

@@ -9,6 +9,8 @@ import { spot, yt } from '../services/deezer'
 import { CoverViz } from '../ui/CoverViz'
 import { burstAt } from '../ui/Fx'
 import { ArtImg, AvImg, Btn, Tilt, useAudio } from '../ui/primitives'
+import { Vinyl } from '../ui/Vinyl'
+import { QrCorner } from '../ui/PairPanel'
 
 /** Duell: Platz gegen Platz, reinhören, abstimmen oder gemeinsam antippen (duelScreen im Original). */
 
@@ -93,7 +95,7 @@ function Card({ S, p, idx }: { S: State; p: number; idx: number }) {
           <div className="dsong">
             <div className="top">
               <span className={'coverwrap' + (on ? ' playing' : '')}>
-                {so.cover ? <img src={so.cover} alt="" /> : <span className="cph">♪</span>}
+                {on ? <Vinyl cover={so.cover || glow} color={pcol(S, p)} /> : so.cover ? <img src={so.cover} alt="" /> : <span className="cph">♪</span>}
                 <CoverViz on={on} color={pcol(S, p)} />
               </span>
               <span>
@@ -227,6 +229,7 @@ export function Duel({ S }: { S: State }) {
           </div>
         )
       ) : null}
+      {S.phoneMode ? <QrCorner /> : null}
     </>
   )
 }

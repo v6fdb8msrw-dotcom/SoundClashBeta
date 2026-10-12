@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Realistische Schallplatte (Rillen, Liedpausen, Glanz, Label mit Cover, Mittelloch)
+   ========================================================================== */
+
+.vinyl {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55));
+}
+.vinyl-disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, transparent 0 33%, rgba(255, 255, 255, 0.06) 33.4% 33.8%, transparent 34.2%),
+    radial-gradient(circle, #1a1a1d 0%, #0c0c0e 38%, #080809 70%, #121214 97%, #050506 100%);
+  will-change: transform;
+}
+.vinyl.spin .vinyl-disc {
+  animation: vinylSpin 4.6s linear infinite;
+}
+@keyframes vinylSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* feine Rillen nur im bespielten Bereich */
+.vinyl-grooves {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle, rgba(255, 255, 255, 0.045) 0 0.5px, rgba(0, 0, 0, 0) 0.7px 1.9px),
+    repeating-radial-gradient(circle, rgba(0, 0, 0, 0.35) 0 1px, rgba(0, 0, 0, 0) 1px 5px);
+  -webkit-mask: radial-gradient(circle, transparent 0 36%, #000 36.5% 96.5%, transparent 97%);
+  mask: radial-gradient(circle, transparent 0 36%, #000 36.5% 96.5%, transparent 97%);
+}
+/* Liedpausen: etwas glattere, hellere Ringe */
+.vinyl-tracks {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    transparent 0 49%,
+    rgba(255, 255, 255, 0.07) 49.4% 50%,
+    transparent 50.4% 62%,
+    rgba(255, 255, 255, 0.06) 62.4% 63%,
+    transparent 63.4% 76%,
+    rgba(255, 255, 255, 0.07) 76.4% 77%,
+    transparent 77.4% 88%,
+    rgba(255, 255, 255, 0.05) 88.4% 89%,
+    transparent 89.4%
+  );
+}
+/* Label mit Cover, leicht abgedunkelter Rand wie bedrucktes Papier */
+.vinyl-label {
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  background-color: var(--vc);
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+    inset 0 0 18px rgba(0, 0, 0, 0.45),
+    0 0 0 2px rgba(0, 0, 0, 0.6);
+}
+.vinyl-label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, rgba(255, 255, 255, 0.22), transparent 45%), radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.35) 100%);
+}
+.vinyl-label-blank {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, color-mix(in srgb, var(--vc) 55%, #fff), var(--vc) 55%, color-mix(in srgb, var(--vc) 60%, #000));
+}
+.vinyl-label-ring {
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+/* Mittelloch mit Metallrand */
+.vinyl-hole {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4.2%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #050506 0 45%, #9a9aa2 52%, #e6e6ea 62%, #6c6c74 80%, #2a2a2e 100%);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+/* Glanz bleibt stehen, während die Platte läuft */
+.vinyl-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    conic-gradient(from 25deg, transparent 0 7%, rgba(255, 255, 255, 0.16) 11%, rgba(255, 255, 255, 0.02) 17%, transparent 22% 50%, rgba(255, 255, 255, 0.11) 57%, transparent 64%),
+    conic-gradient(from 200deg, rgba(120, 180, 255, 0.05), rgba(255, 120, 200, 0.05), rgba(255, 220, 120, 0.05), rgba(120, 180, 255, 0.05));
+  -webkit-mask: radial-gradient(circle, transparent 0 34%, #000 37% 96%, transparent 97%);
+  mask: radial-gradient(circle, transparent 0 34%, #000 37% 96%, transparent 97%);
+  mix-blend-mode: screen;
+}
+.vinyl-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.08),
+    inset 0 2px 6px rgba(255, 255, 255, 0.06),
+    inset 0 -6px 18px rgba(0, 0, 0, 0.6);
+}
+@media (prefers-reduced-motion: reduce) {
+  .vinyl.spin .vinyl-disc {
+    animation: none;
+  }
+}

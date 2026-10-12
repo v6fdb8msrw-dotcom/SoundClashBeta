@@ -1,0 +1,658 @@
+/* ==========================================================================
+   Kino-Ebene: laufendes Mosaik, Plattenspieler, Bühnenlicht in Spielerfarbe,
+   Handy-Modus-Bildschirme am Hauptgerät
+   ========================================================================== */
+
+/* ---------- Künstler-Mosaik zieht nach links ---------- */
+.wall-stage {
+  inset: -14% -10%;
+  perspective: none;
+}
+#wall {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: rotate(-7deg) scale(1.08);
+  transform-origin: 50% 40%;
+  animation: none;
+  transition: opacity 0.6s;
+}
+#wall.beat {
+  animation: wallBeat 0.62s ease-in-out infinite;
+}
+.wall-row {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  animation: wallScroll var(--dur, 160s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+}
+.wall-row img {
+  width: var(--rowh, 120px);
+  height: var(--rowh, 120px);
+  flex: 0 0 auto;
+  border-radius: 12px;
+  object-fit: cover;
+  filter: var(--wall-filter, none);
+  --im: 0.62;
+}
+@keyframes wallScroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wall-row {
+    animation: none;
+  }
+}
+
+/* ---------- Plattenspieler ---------- */
+#deck .deck-vinyl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#deck .vinyl.spin .vinyl-disc {
+  animation-duration: 7s;
+}
+#deck.spinning-song .vinyl.spin .vinyl-disc {
+  animation-duration: 4.6s;
+}
+.deck-plinth {
+  position: absolute;
+  inset: -9%;
+  border-radius: 7%;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 3px),
+    linear-gradient(145deg, color-mix(in srgb, var(--surface-2) 70%, #1b1b20), color-mix(in srgb, var(--bg) 85%, #000));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 40px 90px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Bühnenlicht in der Farbe des aktiven Spielers ---------- */
+.stagelight {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(900px 520px at 50% 105%, color-mix(in srgb, var(--sl, var(--primary)) 26%, transparent), transparent 70%);
+  transition: background 0.8s;
+}
+
+/* ---------- Handy-Modus: Kopfzeile der Kino-Bildschirme ---------- */
+.cine-head {
+  text-align: center;
+  margin: 4px 0 26px;
+}
+.cine-head .kicker {
+  color: var(--primary);
+}
+.cine-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 0.95;
+  letter-spacing: var(--tr);
+  margin: 0;
+  font-weight: 400;
+  background: linear-gradient(180deg, var(--text) 35%, color-mix(in srgb, var(--text) 50%, var(--primary)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cine-sub {
+  color: var(--muted);
+  font-size: clamp(15px, 1.8vw, 19px);
+  margin: 10px 0 0;
+}
+
+/* Kacheln „wählt …“ / „bereit“ */
+.ptiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.ptile {
+  position: relative;
+  border-radius: 26px;
+  padding: 22px 18px 20px;
+  text-align: center;
+  border: 1px solid color-mix(in srgb, var(--pc) 45%, var(--line-soft));
+  background: linear-gradient(170deg, color-mix(in srgb, var(--pc) 14%, var(--surface)), color-mix(in srgb, var(--surface) 55%, transparent));
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  transition:
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.ptile.ready {
+  border-color: var(--pc);
+  box-shadow:
+    0 0 0 1px var(--pc),
+    0 0 50px -12px var(--pc);
+}
+.ptile-av {
+  width: 78px;
+  height: 78px;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--pc),
+    0 0 30px -6px var(--pc);
+}
+.ptile-name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  margin: 12px 0 2px;
+  color: var(--pc);
+}
+.ptile-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.ptile-art img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ptile-state {
+  margin-top: 16px;
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  border: 1px solid var(--line-soft);
+}
+.ptile.ready .ptile-state {
+  background: var(--pc);
+  color: #120806;
+  border-color: var(--pc);
+}
+.dots i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 1.5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dot 1.2s ease-in-out infinite;
+}
+.dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes dot {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+.ptile-phone {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  font-family: var(--font-hud);
+  color: var(--muted);
+}
+.ptile-phone.on {
+  color: #4ade80;
+}
+.ptile-manual {
+  margin-top: 12px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ptile-progress {
+  margin-top: 12px;
+  height: 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  overflow: hidden;
+}
+.ptile-progress i {
+  display: block;
+  height: 100%;
+  background: var(--pc);
+  transition: width 0.5s var(--ease-out);
+}
+.manual-pick {
+  max-width: 640px;
+  margin: 22px auto 0;
+}
+
+/* ---------- Abspielen (Handy-Modus) ---------- */
+.listen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  min-height: min(68vh, 640px);
+}
+.listen-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.listen-stage .vinyl {
+  width: min(460px, 78vw);
+}
+.listen-stage .coverviz {
+  inset: -14%;
+  width: 128%;
+  height: 128%;
+}
+.listen-sleeve {
+  position: absolute;
+  left: -6%;
+  width: 54%;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  transform: rotate(-6deg);
+  z-index: 2;
+}
+.listen-info .who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.listen-info .who img {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--pc),
+    0 0 30px -4px var(--pc);
+}
+.listen-info .who b {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  color: var(--pc);
+  line-height: 1;
+}
+.listen-info .who small {
+  display: block;
+  font-family: var(--font-hud);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.listen-song {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1;
+  margin: 0;
+  letter-spacing: var(--tr);
+  font-weight: 400;
+}
+.listen-artist {
+  font-size: clamp(17px, 2vw, 22px);
+  color: var(--muted);
+  margin: 10px 0 24px;
+}
+.listen-bar {
+  height: 8px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  overflow: hidden;
+}
+.listen-bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--pc), color-mix(in srgb, var(--pc) 50%, #fff));
+  box-shadow: 0 0 16px var(--pc);
+}
+.listen-time {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-hud);
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.listen-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.queue {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+.qitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 16px;
+  border: 1px solid var(--line-soft);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  opacity: 0.55;
+  transition: all 0.4s;
+}
+.qitem img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.qitem b {
+  display: block;
+  font-size: 14px;
+}
+.qitem small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.qitem.now {
+  opacity: 1;
+  border-color: var(--pc);
+  box-shadow: 0 0 30px -10px var(--pc);
+  transform: scale(1.05);
+}
+.qitem.done {
+  opacity: 0.8;
+}
+.qr-corner {
+  position: fixed;
+  right: max(18px, var(--safe-right));
+  bottom: calc(18px + var(--safe-bottom));
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 13px;
+  max-width: 280px;
+}
+.qr-corner .qr {
+  width: 84px;
+  height: 84px;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+.qr-corner .qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.qr-corner b {
+  display: block;
+  font-family: var(--font-hud);
+  font-size: 14px;
+}
+.qr-corner span {
+  color: var(--muted);
+}
+
+/* ---------- Ziehen im Handy-Modus: Rad groß, Spieler am Zug darunter ---------- */
+.cine-draft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.cine-draft .dhead {
+  margin-bottom: 0;
+}
+.cine-draft .wheelbox {
+  width: min(460px, 80vw, max(300px, 100dvh - 470px));
+}
+.cine-draft .hub {
+  pointer-events: none;
+}
+.cine-draft .phonehint {
+  font-family: var(--font-hud);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--pc, var(--primary));
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.cine-active {
+  width: min(760px, 100%);
+}
+.cine-active .pcluster {
+  opacity: 1;
+}
+.cine-others {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.mini-cluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 8px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--pc) 35%, var(--line-soft));
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+.mini-cluster img {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.mini-cluster .nm {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--pc);
+}
+.mini-slots {
+  display: flex;
+  gap: 3px;
+}
+.mini-slots i {
+  width: 10px;
+  height: 18px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+}
+.mini-slots i.on {
+  background: var(--pc);
+}
+
+/* ---------- Duell: laufendes Cover als echte Platte ---------- */
+.coverwrap .vinyl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+@media (max-width: 860px) {
+  .listen {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 22px;
+  }
+  .listen-info .who {
+    justify-content: center;
+  }
+  .listen-actions {
+    justify-content: center;
+  }
+  .qr-corner {
+    display: none;
+  }
+}
+
+.cine-wheel.remote .hub {
+  pointer-events: none;
+}
+.cine-wheel {
+  padding: 8px;
+  border-radius: 32px;
+}
+
+/* ---------- „Alle haben gewählt“ vor dem Abspielen ---------- */
+/* perspective nur am Raster: an .listen-intro würde es den festen QR-Code unten rechts einfangen */
+.intro-grid {
+  perspective: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  max-width: 1180px;
+  margin: 8px auto 0;
+}
+.intro-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 22px 18px 20px;
+  border-radius: 28px;
+  text-align: center;
+  border: 1px solid color-mix(in srgb, var(--pc) 50%, var(--line-soft));
+  background:
+    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--pc) 26%, transparent), transparent 70%),
+    linear-gradient(170deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface) 45%, transparent));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--pc) 20%, transparent),
+    0 30px 60px -28px var(--pc);
+  transform-style: preserve-3d;
+}
+.intro-n {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--pc);
+}
+.intro-disc {
+  width: min(170px, 60%);
+  aspect-ratio: 1;
+}
+.intro-disc .vinyl {
+  width: 100%;
+  height: 100%;
+}
+.intro-who {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  text-align: left;
+}
+.intro-who img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--pc);
+}
+.intro-who small {
+  display: block;
+  font-family: var(--font-hud);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.intro-who b {
+  color: var(--pc);
+  font-size: 16px;
+}
+.intro-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+.intro-artist {
+  color: var(--muted);
+  font-size: 14px;
+}
+.intro-go {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+}
+.intro-bar {
+  width: min(320px, 70vw);
+  height: 4px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+}
+.intro-bar i {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  transform-origin: left;
+  animation: introBar linear forwards;
+}
+@keyframes introBar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

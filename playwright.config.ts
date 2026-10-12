@@ -31,7 +31,7 @@ export default defineConfig({
     env: { TEST_PORT: String(PORT) },
   },
   projects: [
-    { name: 'legacy', use: { baseURL: `http://127.0.0.1:${PORT}/legacy/index.html` }, testIgnore: /(pwa|neu|screenshots|begleiter)\.spec\.ts/ },
+    { name: 'legacy', use: { baseURL: `http://127.0.0.1:${PORT}/legacy/index.html` }, testIgnore: /(pwa|neu|screenshots|begleiter|handymodus)\.spec\.ts/ },
     { name: 'neu', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/`, serviceWorkers: 'block' }, testIgnore: /(pwa|minigames)\.spec\.ts/ },
     { name: 'pwa', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/`, serviceWorkers: 'allow' }, testMatch: /pwa\.spec\.ts/ },
   ],
