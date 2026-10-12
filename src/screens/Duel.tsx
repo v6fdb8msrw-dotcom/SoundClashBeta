@@ -11,6 +11,8 @@ import { burstAt } from '../ui/Fx'
 import { ArtImg, AvImg, Btn, Tilt, useAudio } from '../ui/primitives'
 import { Vinyl } from '../ui/Vinyl'
 import { QrCorner } from '../ui/PairPanel'
+import { useHost } from '../ui/PairDialog'
+import { voterRoles } from '../remote/host'
 
 /** Duell: Platz gegen Platz, reinhören, abstimmen oder gemeinsam antippen (duelScreen im Original). */
 
@@ -51,6 +53,28 @@ function VoteBlock({ S, p }: { S: State; p: number }) {
         </div>
       )}
     </>
+  )
+}
+
+/** Handy-Modus: wer (per Handy) für diesen Song gestimmt hat; Stimmen vom Hauptgerät als „+n“. */
+function Voters({ S, p }: { S: State; p: number }) {
+  useHost()
+  const list = voterRoles()[p] || []
+  const local = Math.max(0, ((S.tally || {})[p] || 0) - list.length)
+  const aud = list.filter((r) => r === 'audience').length
+  const ps = list.filter((r): r is number => typeof r === 'number')
+  return (
+    <div className={'voters' + (!list.length && !local ? ' empty' : '')} data-voters={p}>
+      {!list.length && !local ? <span className="vnone">noch keine Stimme</span> : null}
+      {ps.map((r) => (
+        <motion.span key={r} className="voter" style={{ ['--pc' as string]: pcol(S, r) }} initial={env.reduce ? false : { scale: 0.4, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+          <AvImg S={S} p={r} />
+          {pname(S, r)}
+        </motion.span>
+      ))}
+      {aud ? <span className="voter aud">🙋 {aud} Publikum</span> : null}
+      {local ? <span className="voter aud">🖥 +{local}</span> : null}
+    </div>
   )
 }
 
@@ -104,18 +128,22 @@ function Card({ S, p, idx }: { S: State; p: number; idx: number }) {
                 <span className="td">{so.dur || ''}</span>
               </span>
             </div>
-            <div className="links">
-              <button className={'lnk ' + (on ? 'on' : '')} data-pv3={k} data-url={so.preview || ''} onClick={() => play(so.preview || '', k)}>
-                {on ? '⏸ Pause' : '▶ 30 Sek'}
-              </button>
-              <a className="lnk" href={spot(a, so.title || '')} target="_blank" rel="noopener">
-                ↗ Spotify
-              </a>
-              <a className="lnk" href={yt(a, so.title || '')} target="_blank" rel="noopener">
-                ↗ YouTube
-              </a>
-            </div>
+            {/* Handy-Modus: nur der gewählte Song – gehört wurde er schon beim Aufdecken */}
+            {S.phoneMode ? null : (
+              <div className="links">
+                <button className={'lnk ' + (on ? 'on' : '')} data-pv3={k} data-url={so.preview || ''} onClick={() => play(so.preview || '', k)}>
+                  {on ? '⏸ Pause' : '▶ 30 Sek'}
+                </button>
+                <a className="lnk" href={spot(a, so.title || '')} target="_blank" rel="noopener">
+                  ↗ Spotify
+                </a>
+                <a className="lnk" href={yt(a, so.title || '')} target="_blank" rel="noopener">
+                  ↗ YouTube
+                </a>
+              </div>
+            )}
           </div>
+          {S.phoneMode && S.audience ? <Voters S={S} p={p} /> : null}
           <VoteBlock S={S} p={p} />
         </div>
       </Tilt>
@@ -171,6 +199,7 @@ export function Duel({ S }: { S: State }) {
         <motion.div className="big" initial={env.reduce ? false : { scale: 0.7, opacity: 0, letterSpacing: '0.4em' }} animate={{ scale: 1, opacity: 1, letterSpacing: '0.02em' }} transition={{ type: 'spring', stiffness: 200, damping: 18 }}>
           {sd ? 'Sudden Death' : '#' + pos + ' · ' + pt + ' PTS'}
         </motion.div>
+        {S.phoneMode && S.audience && S.votePhase === 'tally' ? <p className="lede vs-lede">Alle Songs gehört – jetzt am Handy abstimmen</p> : null}
         {sd ? (
           <p className="lede">
             {sameArt(S) ? (
@@ -182,7 +211,7 @@ export function Duel({ S }: { S: State }) {
           </p>
         ) : null}
       </div>
-      <div className={'cols duelcols n' + cards.length}>
+      <div className={'cols duelcols n' + cards.length + (S.phoneMode ? ' vs-cine' : '')}>
         {cards.length === 2 ? (
           <>
             {cards[0]}

@@ -16,6 +16,10 @@ export const BGS: readonly [string, string][] = [
   ['walldeck', 'Mosaik + Plattenspieler'],
   ['aurora', 'Aurora (Beat)'],
   ['auroradeck', 'Aurora + Plattenspieler'],
+  // neu (Tims Wunsch nach mehr Auswahl)
+  ['flow', 'Mosaik (wandernd)'],
+  ['stage', 'Bühne (Lichtkegel)'],
+  ['horizon', 'Neon-Horizont'],
 ]
 
 export const THEMES: readonly [string, string][] = [

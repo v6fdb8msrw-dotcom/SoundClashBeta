@@ -65,18 +65,30 @@ export interface HostView {
   duelKey: string
   phoneMode: boolean
   ready: Record<number, boolean>
-  listen: { order: number[]; idx: number } | null
+  listen: State['listen']
+  /** Drehung des Rads (Ziel-Segment), damit das Handy sie klein mitzeigt. */
+  spin: { target: number; n: number } | null
+  /** Künstler im Topf (nur beim Ziehen, für das kleine Rad am Handy). */
+  pool: string[]
   /** Spieler, dessen Song gerade auf dem Hauptgerät läuft (oder null). */
   nowPlaying: number | null
   /** Spielerplätze, für die gerade ein Handy verbunden ist. */
   online: number[]
+  /** Wer per Handy für welchen Song gestimmt hat (Spieler-Nr. oder Publikum). */
+  voters: Record<number, Role[]>
 }
 
 export function duelKey(S: State) {
   return S.round + '-' + (S.sd ? 'sd' : S.duel)
 }
 
-export function buildView(S: State, extra: { nowPlaying: number | null; online: number[] } = { nowPlaying: null, online: [] }): HostView {
+export interface ViewExtra {
+  nowPlaying: number | null
+  online: number[]
+  voters: Record<number, Role[]>
+}
+
+export function buildView(S: State, extra: ViewExtra = { nowPlaying: null, online: [], voters: {} }): HostView {
   const players = Array.from({ length: S.players }, (_, j) => j + 1)
   const colors: Record<number, string> = {}
   const scores: Record<number, number> = {}
@@ -130,8 +142,11 @@ export function buildView(S: State, extra: { nowPlaying: number | null; online: 
     phoneMode: S.phoneMode,
     ready: S.ready,
     listen: S.listen,
+    spin: S.spin ? { target: S.spin.target, n: S.spin.n } : null,
+    pool: S.screen === 'draft' ? S.pool.slice(0, 80) : [],
     nowPlaying: extra.nowPlaying,
     online: extra.online,
+    voters: extra.voters,
   }
 }
 
@@ -148,6 +163,8 @@ export type PhoneMsg =
   | { t: 'manualSong'; i: number; text: string }
   | { t: 'pickNext' }
   | { t: 'pickDone'; on?: boolean }
+  | { t: 'reveal' }
+  | { t: 'listenNext' }
 
 /** Antwort des Hosts an ein Handy (z. B. eigene Stimme). */
 export interface PhoneState {

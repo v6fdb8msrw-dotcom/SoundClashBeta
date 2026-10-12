@@ -66,10 +66,23 @@ export function onlineRoles(): number[] {
   return [...out].sort()
 }
 
+/** Wer per Handy wofür gestimmt hat: Song (Spieler-Nr.) → Rollen der Handys. */
+export function voterRoles(): Record<number, Role[]> {
+  const out: Record<number, Role[]> = {}
+  if (votesKey !== duelKey(getState())) return out
+  votes.forEach((p, peerId) => {
+    const r = phones.get(peerId)?.role
+    if (r == null) return
+    ;(out[p] = out[p] || []).push(r)
+  })
+  for (const k in out) out[k].sort((a, b) => (a === 'audience' ? 99 : a) - (b === 'audience' ? 99 : b))
+  return out
+}
+
 function pushView(target?: string) {
   if (!room || !sendView) return
   const S = getState()
-  sendView(buildView(S, { nowPlaying: nowPlayingPlayer(), online: onlineRoles() }), target ? { target } : undefined)
+  sendView(buildView(S, { nowPlaying: nowPlayingPlayer(), online: onlineRoles(), voters: voterRoles() }), target ? { target } : undefined)
   const av = avatarsOf(S)
   const sig = JSON.stringify(av).length + ':' + Object.values(av).map((x) => x.slice(-24)).join('|')
   if (target || sig !== lastAvatars) {
@@ -92,6 +105,7 @@ function onState() {
     votesKey = k
     votes.clear()
     phones.forEach((_, id) => pushMine(id))
+    notify()
   }
   clearTimeout(viewT)
   viewT = setTimeout(() => pushView(), 120)
@@ -101,7 +115,8 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
   if (role === null) return false
   switch (m.t) {
     case 'vote':
-      return (S.screen === 'duel' || S.screen === 'listen') && S.audience && S.votePhase === 'tally' && m.key === duelKey(S) && (S.sd ? !!(S.sdArt && S.sdArt[m.p]) : m.p >= 1 && m.p <= S.players)
+      // Handy-Modus: abgestimmt wird erst im Versus-Screen, wenn alle Songs aufgedeckt sind
+      return S.screen === 'duel' && S.audience && S.votePhase === 'tally' && m.key === duelKey(S) && (S.sd ? !!(S.sdArt && S.sdArt[m.p]) : m.p >= 1 && m.p <= S.players)
     case 'spin':
       return role !== 'audience' && S.screen === 'draft' && !S.pending && !S.spin && !allFull(S) && drawer(S) === role
     case 'place':
@@ -118,6 +133,10 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
       return role !== 'audience' && !S.phoneMode && S.screen === 'pick' && pickOrder(S, S.duel)[S.pickIdx] === role
     case 'pickDone':
       return role !== 'audience' && S.phoneMode && (S.screen === 'pick' || S.screen === 'songs') && parts(S).includes(role)
+    case 'reveal':
+      return S.screen === 'listen' && !!S.listen && S.listen.order[S.listen.idx] === role
+    case 'listenNext':
+      return S.screen === 'listen' && !!S.listen && S.listen.shown && S.listen.order[S.listen.idx] === role
   }
   return false
 }
@@ -144,6 +163,7 @@ function onPhone(m: PhoneMsg, peerId: string) {
       votes.set(peerId, m.p)
       votesKey = duelKey(getState())
       pushMine(peerId)
+      notify()
       return
     }
     case 'spin':
@@ -158,6 +178,10 @@ function onPhone(m: PhoneMsg, peerId: string) {
       return dispatch({ type: 'pickNext' })
     case 'pickDone':
       return dispatch({ type: 'phoneReady', p: ph.role as number, on: m.on !== false })
+    case 'reveal':
+      return dispatch({ type: 'listenPlay' })
+    case 'listenNext':
+      return dispatch({ type: 'listenNext' })
   }
 }
 
@@ -186,6 +210,7 @@ export function startHost(): string {
   }
   room.onPeerLeave = (peerId: string) => {
     phones.delete(peerId)
+    // Stimme bleibt im Ergebnis (wie am Host gezählt), nur die Zuordnung zum Handy entfällt
     votes.delete(peerId)
     notify()
     pushView()

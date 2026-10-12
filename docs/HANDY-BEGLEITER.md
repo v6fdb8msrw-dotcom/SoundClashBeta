@@ -8,16 +8,17 @@ keine gespeicherten Daten im Netz.
 
 ## Zwei Spielweisen
 
-In der Einrichtung unter **„Spielweise“**:
+In der Einrichtung unter **„Wie wird gesteuert?“**:
 
-- **Nur Hauptgerät:** alles wie bisher. Handys können trotzdem über das Handy-Symbol oben gekoppelt
+- **🖥 An diesem Gerät:** alles wie bisher. Handys können trotzdem über das Handy-Symbol oben gekoppelt
   werden (Abstimmen, Line-up, selbst drehen/setzen/wählen, wenn man dran ist).
-- **📱 Mit Handys (Handy-Modus):** Die Spieler machen alles am Handy, das Hauptgerät ist die große
-  Bühne. QR-Code und „verbunden/wartet“ pro Spieler stehen direkt in der Einrichtung. Ablauf:
-  Rad drehen und setzen am Handy → alle wählen ihren Song **gleichzeitig** am Handy und tippen
-  „Fertig“ → das Hauptgerät spielt die Songs **nacheinander** (je 30 Sek, Reihenfolge rückt pro Duell
-  um eins weiter) → Abstimmen am Handy, schon während die Songs laufen → Entscheidung am Hauptgerät.
-  Details in `docs/MECHANIK.md` §11.
+- **📱 Mit den Handys (Handy-Modus):** Die Spieler steuern alles am Handy, das Hauptgerät ist die große
+  Bühne. QR-Code, Verbindungslink und „verbunden/wartet“ pro Spieler stehen direkt in der Einrichtung.
+  Ablauf: drehen am Handy (Rad groß am Hauptgerät, klein am Handy) → setzen am Handy → alle wählen
+  ihren Song **gleichzeitig** und tippen „Fertig“ → **Spieler für Spieler aufdecken**: Play am Handy,
+  der Song läuft am Hauptgerät (30 Sek, „Weiter“ geht früher; Reihenfolge rückt pro Duell um eins
+  weiter) → **Versus**: jetzt am Handy abstimmen, am Hauptgerät sieht man, wer wofür gestimmt hat.
+  Zwischen den Szenen kurze Kino-Überblendungen. Details in `docs/MECHANIK.md` §11.
 
 ## Was der Handy-Begleiter kann
 
@@ -28,10 +29,11 @@ Runde zeigt das Hauptgerät dafür unten rechts einen kleinen QR-Code „Mit abs
 
 - **Abstimmen:** Im Duell („Publikum stimmt ab“) tippt jeder am eigenen Handy den besseren Song an.
   Jede Karte zeigt deutlich, **wer** den Song gewählt hat (Avatar, Name, „hat gewählt“), dazu Cover,
-  Titel und Künstler. Der Song, der gerade läuft, trägt „▶ läuft gerade“.
+  Titel, Künstler und wer schon dafür gestimmt hat. Im Handy-Modus geht das erst im Versus-Screen.
   Eine Stimme pro Handy und Duell, Wechsel jederzeit möglich. Am Hauptgerät zählt das genau wie
   „+1 Stimme“ (bzw. „−“ beim Wechsel). Abstimmung schließen und Sieger bestätigen bleibt am Hauptgerät.
-- **Eigenes Line-up:** Plätze, gezogene Künstler, gewählte Songs, ×2-Plätze und „als Nächstes“.
+- **Eigenes Line-up:** Plätze, gezogene Künstler, gewählte Songs, ×2-Plätze und „jetzt“ – steht
+  immer unten auf dem Handy.
 - **Selbst spielen, wenn man dran ist:** Rad drehen, den gezogenen Künstler blind auf einen Platz
   setzen, den eigenen Song wählen (Top-Tracks, Suche, „von Hand“), Hörprobe leise am eigenen Handy,
   bestätigen oder überspringen. Bei „Alle vorab“ wählt man alle eigenen Songs am Handy.
@@ -39,7 +41,8 @@ Runde zeigt das Hauptgerät dafür unten rechts einen kleinen QR-Code „Mit abs
 
 **Regeln unverändert:** Das Handy schickt nur Wünsche. Das Hauptgerät prüft, ob der Spieler gerade dran
 ist, und führt dann exakt die Aktion aus, die auch ein Tippen am Hauptgerät auslöst (`spin`, `place`,
-`pickSong`, `manualSong`, `pickNext`, `bump`; im Handy-Modus zusätzlich `phoneReady` für „Fertig“).
+`pickSong`, `manualSong`, `pickNext`, `bump`; im Handy-Modus zusätzlich `phoneReady` für „Fertig“,
+`listenPlay` für Play/Pause beim Aufdecken und `listenNext` für „Weiter“).
 Siehe `src/remote/host.ts`.
 
 ## Technik
@@ -65,7 +68,8 @@ Siehe `src/remote/host.ts`.
 - **Tests:** `tests/begleiter.spec.ts` koppelt Hauptgerät und zwei Handys über die echten Relays,
   dreht und setzt vom Handy, wählt einen Song und stimmt ab (inkl. Stimme ändern).
   `tests/handymodus.spec.ts` spielt den Handy-Modus: zwei Spieler-Handys drehen und setzen alles,
-  ein Zuschauer kommt mitten in der Runde dazu, beide wählen gleichzeitig und tippen „Fertig“, die
-  Songs laufen nacheinander am Hauptgerät, die Handys zeigen „läuft gerade“ und stimmen ab.
+  ein Zuschauer kommt mitten in der Runde dazu, beide wählen gleichzeitig und tippen „Fertig“, jeder
+  deckt per Play am Handy auf (inkl. Pause, weiter abspielen, „Weiter“), Abstimmen ist erst im Versus
+  möglich, und das Hauptgerät zeigt, wer wofür gestimmt hat.
 - **Ton am iPhone:** Musik spielt nur das Hauptgerät. Die Hörprobe am Handy ist nur zum Reinhören
   beim Aussuchen. Damit Safari am Hauptgerät abspielen darf, wird der Ton beim ersten Tippen entsperrt.

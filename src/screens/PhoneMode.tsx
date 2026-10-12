@@ -1,13 +1,11 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
-import { dispatch, env } from '../app/store'
+import { dispatch, env, getState } from '../app/store'
 import { N, parts, pcol, pname, pts, sdArt } from '../core/game'
 import type { State } from '../core/types'
 import * as audioSvc from '../services/audio'
-import { play, stopAudio } from '../services/audio'
+import { pauseAudio, play, resumeAudio, stopAudio } from '../services/audio'
 import { picBigOf, picOf } from '../services/catalog'
-import { spot, yt } from '../services/deezer'
-import { CoverViz } from '../ui/CoverViz'
 import { useHost } from '../ui/PairDialog'
 import { QrCorner } from '../ui/PairPanel'
 import { ArtImg, AvImg, Btn, useAudio } from '../ui/primitives'
@@ -203,10 +201,23 @@ export function PhoneSongs({ S }: { S: State }) {
 }
 
 const LISTEN_SECS = 30
-const INTRO_MS = 6000
 
-/** Abspielen: ein Song nach dem anderen, groß auf dem Hauptgerät. Abgestimmt wird am Handy. */
+function Dots() {
+  return (
+    <span className="dots" aria-hidden>
+      <i />
+      <i />
+      <i />
+    </span>
+  )
+}
+
+/**
+ * Aufdecken: Spieler für Spieler. Der Spieler drückt am Handy Play, der Song läuft hier groß
+ * (30 Sek oder bis die Vorschau endet, „Weiter“ am Handy geht früher). Danach der Versus-Screen.
+ */
 export function Listen({ S }: { S: State }) {
+  const online = useOnline()
   const { playing } = useAudio()
   const L = S.listen!
   const p = L.order[L.idx]
@@ -217,40 +228,38 @@ export function Listen({ S }: { S: State }) {
   const cover = so?.cover || picBigOf(a) || picOf(a) || ''
   const bar = useRef<HTMLElement>(null)
   const tl = useRef<HTMLSpanElement>(null)
-  const [paused, setPaused] = useState(false)
-  // Erst „Alle haben gewählt“ mit allen Songs, dann geht es mit dem ersten Song los
-  const [intro, setIntro] = useState(L.idx === 0)
-  const votes = Object.values(S.tally || {}).reduce((x, y) => x + y, 0)
-  useEffect(() => {
-    if (!intro) return
-    const t = setTimeout(() => setIntro(false), INTRO_MS)
-    return () => clearTimeout(t)
-  }, [intro])
+  const phone = online.has(p)
+  const last = L.idx + 1 >= L.order.length
 
-  // Automatisch abspielen; nach 30 Sek (oder wenn die Vorschau endet) weiter zum nächsten Song
-  const pausedRef = useRef(false)
-  pausedRef.current = paused
+  // Abspielen und Anhalten folgen dem Spielstand (Play/Pause kommt vom Handy oder von hier)
   useEffect(() => {
-    if (intro) return
-    setPaused(false)
-    const startAt = performance.now() + 900
-    const t0 = setTimeout(() => {
-      if (so?.preview) play(so.preview, key, so.cover)
-    }, 900)
+    if (!L.shown || !so?.preview) return
+    if (L.paused) {
+      if (audioSvc.playing === key) pauseAudio()
+      return
+    }
+    if (audioSvc.playing !== key && !resumeAudio(key)) play(so.preview, key, so.cover)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [L.shown, L.paused, key])
+
+  // Zeit läuft nur beim Abspielen; nach 30 Sek oder am Ende der Vorschau ist der Nächste dran
+  useEffect(() => {
+    if (!L.shown) return
     let raf = 0
-    let last = performance.now()
+    let prev = performance.now()
     let elapsed = 0
     let started = false
-    const limit = (so?.preview ? LISTEN_SECS : 6) * 1000
+    const limit = (so?.preview ? LISTEN_SECS : 8) * 1000
     const tick = (now: number) => {
-      const dt = now - last
-      last = now
-      if (!pausedRef.current && now >= startAt) elapsed += dt
+      const dt = now - prev
+      prev = now
+      const paused = !!getState().listen?.paused
+      if (!paused) elapsed += dt
       if (audioSvc.playing === key) started = true
       const f = Math.min(1, elapsed / limit)
       if (bar.current) bar.current.style.width = f * 100 + '%'
       if (tl.current) tl.current.textContent = Math.max(0, Math.ceil((limit - elapsed) / 1000)) + ' s'
-      const ended = started && audioSvc.playing !== key && !pausedRef.current
+      const ended = started && audioSvc.playing !== key && !paused
       if (elapsed >= limit || ended) {
         dispatch({ type: 'listenNext' })
         return
@@ -258,159 +267,101 @@ export function Listen({ S }: { S: State }) {
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
-    return () => {
-      clearTimeout(t0)
-      cancelAnimationFrame(raf)
-    }
+    return () => cancelAnimationFrame(raf)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, intro])
-
-  if (intro) return <ListenIntro S={S} onGo={() => setIntro(false)} />
+  }, [key, L.shown])
 
   return (
-    <div className="listen-wrap" style={{ ['--pc' as string]: pcol(S, p) }}>
-      <div className="cine-head" style={{ marginBottom: 10 }}>
-        <p className="kicker">
-          Runde {S.round} · {S.sd ? 'Sudden Death' : 'Platz #' + (S.duel + 1) + ' · ×' + pts(S, S.duel + 1)} · Song {L.idx + 1} von {L.order.length}
-        </p>
-      </div>
-      <AnimatePresence mode="wait">
+    <div className="rv" style={{ ['--pc' as string]: pcol(S, p) }}>
+      <p className="kicker rv-kicker">
+        Runde {S.round} · {S.sd ? 'Sudden Death' : 'Platz #' + (S.duel + 1) + ' · ×' + pts(S, S.duel + 1)} · Song {L.idx + 1} von {L.order.length}
+      </p>
+      <div className="rv-main" key={key}>
         <motion.div
-          key={key}
-          className="listen"
-          initial={env.reduce ? false : { opacity: 0, x: 80, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-          exit={env.reduce ? undefined : { opacity: 0, x: -80, filter: 'blur(10px)' }}
-          transition={{ type: 'spring', stiffness: 160, damping: 22 }}
+          className={'rv-disc' + (L.shown ? ' shown' : '')}
+          initial={env.reduce ? false : { x: -160, opacity: 0, rotate: -60 }}
+          animate={{ x: 0, opacity: 1, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 16, delay: 0.15 }}
         >
-          <div className="listen-stage">
-            {so?.cover ? <motion.img className="listen-sleeve" src={so.cover} alt="" initial={env.reduce ? false : { x: 0, rotate: 0 }} animate={{ x: -40, rotate: -6 }} transition={{ delay: 0.3, type: 'spring', stiffness: 90, damping: 16 }} /> : null}
-            <motion.div initial={env.reduce ? false : { x: -60 }} animate={{ x: 30 }} transition={{ delay: 0.25, type: 'spring', stiffness: 80, damping: 16 }} style={{ position: 'relative' }}>
-              <Vinyl cover={cover} spinning={playing === key} color={pcol(S, p)} />
-              <CoverViz on={playing === key} color={pcol(S, p)} />
-            </motion.div>
-          </div>
-          <div className="listen-info">
-            <div className="who">
-              <AvImg S={S} p={p} />
-              <span>
-                <small>gewählt von</small>
-                <b>{pname(S, p)}</b>
-              </span>
-            </div>
-            <h2 className="listen-song">{so?.title || 'Kein Song gewählt'}</h2>
-            <p className="listen-artist">{a}</p>
-            <div className="listen-bar">
-              <i ref={bar} />
-            </div>
-            <div className="listen-time">
-              <span>{so?.preview ? '30-Sek-Vorschau' : 'keine Vorschau – Spotify/YouTube'}</span>
-              <span ref={tl} />
-            </div>
-            <div className="listen-actions">
-              {so?.preview ? (
-                <button
-                  className="lnk"
-                  onClick={() => {
-                    if (playing === key) {
-                      stopAudio()
-                      setPaused(true)
-                    } else {
-                      play(so.preview, key, so.cover)
-                      setPaused(false)
-                    }
-                  }}
-                >
-                  {playing === key ? '⏸ Pause' : '▶ Abspielen'}
-                </button>
-              ) : null}
-              <a className="lnk" href={spot(a, so?.title || '')} target="_blank" rel="noopener">
-                ↗ Spotify
-              </a>
-              <a className="lnk" href={yt(a, so?.title || '')} target="_blank" rel="noopener">
-                ↗ YouTube
-              </a>
-              <Btn className="sm" id="listenNext" onClick={() => dispatch({ type: 'listenNext' })}>
-                {L.idx + 1 < L.order.length ? 'Nächster Song ⏭' : 'Zur Entscheidung →'}
-              </Btn>
-            </div>
-          </div>
+          <Vinyl cover={L.shown ? cover : undefined} spinning={playing === key} color={pcol(S, p)} />
+          {!L.shown ? <span className="rv-q">?</span> : null}
         </motion.div>
-      </AnimatePresence>
+        <div className="rv-info">
+          <motion.div className="rv-who" initial={env.reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+            <AvImg S={S} p={p} className="rv-av" />
+            <span>
+              <small>{L.shown ? 'gewählt von' : 'deckt jetzt auf'}</small>
+              <b>{pname(S, p)}</b>
+            </span>
+          </motion.div>
+          <motion.div className="rv-artist" initial={env.reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
+            <ArtImg n={a} />
+            <span>{a}</span>
+          </motion.div>
+          <AnimatePresence mode="wait" initial={false}>
+            {L.shown ? (
+              <motion.h2
+                key="t"
+                className="rv-title listen-song"
+                initial={env.reduce ? false : { opacity: 0, y: 30, filter: 'blur(14px)', letterSpacing: '0.25em' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)', letterSpacing: '-0.01em' }}
+                transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                {so?.title || 'Kein Song gewählt'}
+              </motion.h2>
+            ) : (
+              <motion.h2 key="h" className="rv-title hidden" exit={env.reduce ? undefined : { opacity: 0, filter: 'blur(12px)' }}>
+                Noch geheim
+              </motion.h2>
+            )}
+          </AnimatePresence>
+          {L.shown ? (
+            <>
+              <div className="listen-bar">
+                <i ref={bar} />
+              </div>
+              <div className="listen-time">
+                <span>{so?.preview ? (L.paused ? '⏸ angehalten' : '30-Sek-Vorschau') : 'keine Vorschau'}</span>
+                <span ref={tl} />
+              </div>
+            </>
+          ) : (
+            <p className="rv-wait">
+              {phone ? (
+                <>
+                  📱 {pname(S, p)} drückt Play am Handy <Dots />
+                </>
+              ) : (
+                'Handy nicht verbunden – hier aufdecken'
+              )}
+            </p>
+          )}
+          <div className="rv-ctrl">
+            <button className={'lnk' + (L.shown && !L.paused ? ' on' : '')} id="listenPlay" onClick={() => dispatch({ type: 'listenPlay' })}>
+              {!L.shown ? '▶ Aufdecken' : L.paused ? '▶ Weiter abspielen' : '⏸ Pause'}
+            </button>
+            {L.shown ? (
+              <Btn className="sm" id="listenNext" onClick={() => dispatch({ type: 'listenNext' })}>
+                {last ? 'Zum Versus →' : 'Nächster Spieler ⏭'}
+              </Btn>
+            ) : null}
+          </div>
+        </div>
+      </div>
       <div className="queue">
         {L.order.map((q, k) => {
           const qso = (S.songs[q] || [])[i]
+          const done = k < L.idx
           return (
-            <div key={q} className={'qitem' + (k === L.idx ? ' now' : k < L.idx ? ' done' : '')} style={{ ['--pc' as string]: pcol(S, q) }}>
-              {qso?.cover && k <= L.idx ? <img src={qso.cover} alt="" /> : <AvImg S={S} p={q} />}
+            <div key={q} className={'qitem' + (k === L.idx ? ' now' : done ? ' done' : '')} style={{ ['--pc' as string]: pcol(S, q) }}>
+              {qso?.cover && (done || (k === L.idx && L.shown)) ? <img src={qso.cover} alt="" /> : <AvImg S={S} p={q} />}
               <span>
                 <b>{pname(S, q)}</b>
-                <small>{k < L.idx ? '✓ gehört' : k === L.idx ? '▶ läuft' : 'gleich'}</small>
+                <small>{done ? qso?.title || '✓ gehört' : k === L.idx ? (L.shown ? '▶ läuft' : 'deckt auf') : 'gleich'}</small>
               </span>
             </div>
           )
         })}
-        {S.audience ? <span className="pill">🗳 {votes} {votes === 1 ? 'Stimme' : 'Stimmen'}</span> : null}
-      </div>
-      <QrCorner />
-    </div>
-  )
-}
-
-/** „Alle haben gewählt“: alle Songs des Duells auf einen Blick, danach laufen sie nacheinander. */
-function ListenIntro({ S, onGo }: { S: State; onGo: () => void }) {
-  const L = S.listen!
-  const i = S.sd ? 0 : S.duel
-  return (
-    <div className="listen-intro">
-      <div className="cine-head">
-        <p className="kicker">
-          Runde {S.round} · {S.sd ? 'Sudden Death' : 'Platz #' + (S.duel + 1) + ' · ×' + pts(S, S.duel + 1)}
-        </p>
-        <motion.h2 className="cine-title" initial={env.reduce ? false : { opacity: 0, scale: 0.9, letterSpacing: '0.2em' }} animate={{ opacity: 1, scale: 1, letterSpacing: '0em' }} transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}>
-          Alle haben gewählt
-        </motion.h2>
-        <p className="cine-sub">Gleich laufen die Songs nacheinander · je 30 Sekunden · abstimmen am Handy</p>
-      </div>
-      <div className="intro-grid">
-        {L.order.map((q, k) => {
-          const a = artistOf(S, q, S.duel)
-          const so = (S.songs[q] || [])[i]
-          const cover = so?.cover || picBigOf(a) || picOf(a) || ''
-          return (
-            <motion.div
-              key={q}
-              className="intro-card"
-              style={{ ['--pc' as string]: pcol(S, q) }}
-              data-intro={q}
-              initial={env.reduce ? false : { opacity: 0, y: 60, rotateX: -35 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.35 + k * 0.18 }}
-            >
-              <span className="intro-n">{k + 1}</span>
-              <div className="intro-disc">
-                <Vinyl cover={cover} spinning={false} color={pcol(S, q)} />
-              </div>
-              <div className="intro-who">
-                <AvImg S={S} p={q} />
-                <span>
-                  <small>gewählt von</small>
-                  <b>{pname(S, q)}</b>
-                </span>
-              </div>
-              <div className="intro-title">{so?.title || 'Kein Song gewählt'}</div>
-              <div className="intro-artist">{a}</div>
-            </motion.div>
-          )
-        })}
-      </div>
-      <div className="intro-go">
-        <div className="intro-bar">
-          <i style={{ animationDuration: INTRO_MS + 'ms' }} />
-        </div>
-        <Btn id="listenStart" onClick={onGo}>
-          Los geht’s ▶
-        </Btn>
       </div>
       <QrCorner />
     </div>

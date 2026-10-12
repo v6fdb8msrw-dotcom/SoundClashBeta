@@ -180,7 +180,8 @@ export interface State {
   /** Handy-Modus: wer mit der Songwahl fertig ist (aktuelles Duell bzw. alle Songs). */
   ready: Record<number, boolean>
   /** Handy-Modus: Abspiel-Reihenfolge des aktuellen Duells und der gerade laufende Song. */
-  listen: { order: number[]; idx: number } | null
+  /** Handy-Modus: Songs werden Spieler für Spieler aufgedeckt (shown) und abgespielt (paused = angehalten). */
+  listen: { order: number[]; idx: number; shown: boolean; paused: boolean } | null
   /** Laufende Raddrehung: Zielsegment (im Original die Variablen spinning/tg). */
   spin: { target: number; n: number } | null
   gs?: GuessState

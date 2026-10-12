@@ -22,6 +22,7 @@ import { loadSettings, migrateLegacy } from './services/storage'
 import { Background } from './ui/Background'
 import { Fx } from './ui/Fx'
 import { Presence, setOpenSel } from './ui/primitives'
+import { SceneCut } from './ui/SceneCut'
 import { Splash } from './ui/Splash'
 import { Toast } from './ui/Toast'
 import { TopBar } from './ui/TopBar'
@@ -136,8 +137,10 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Background S={S} />
+      {S.phoneMode && S.screen !== 'setup' ? <div className="cine-vignette" aria-hidden /> : null}
       <Fx />
       <Toast />
+      <SceneCut S={S} />
       <Splash />
       <div className="wrap">
         <TopBar S={S} shrink={shrink} />

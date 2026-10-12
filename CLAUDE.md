@@ -79,10 +79,14 @@ dieselben Aktionen aus wie ein Tippen am Hauptgerät (`src/remote/host.ts` prüf
 Alles muss kostenlos nutzbar bleiben (kein bezahlter Dienst, kein eigener Server). Details:
 `docs/HANDY-BEGLEITER.md`, Tests: `tests/begleiter.spec.ts`, `tests/handymodus.spec.ts`.
 
-**Handy-Modus** (Einrichtung → „Spielweise: 📱 Mit Handys“, `S.phoneMode`, Tims Vorgabe, MECHANIK §11):
-Spieler machen alles am Handy, das Hauptgerät ist die Bühne (`src/screens/PhoneMode.tsx`: Kacheln
-bei der Songwahl, Bildschirm `listen` spielt die Songs nacheinander je 30 Sek; `CineDraft` in
-`Draft.tsx`). Die Wertung ist dieselbe wie im klassischen Modus. „Nur Hauptgerät“ bleibt exakt wie das Original.
+**Handy-Modus** (Einrichtung → „Wie wird gesteuert? 📱 Mit den Handys“, `S.phoneMode`, Tims Vorgabe,
+MECHANIK §11): Spieler steuern alles am Handy, das Hauptgerät ist die Bühne – `CineDraft` in
+`Draft.tsx` (Spielfeld groß, Rad als Einblendung), `src/screens/PhoneMode.tsx` (Kacheln bei der
+Songwahl, Bildschirm `listen` = Aufdecken Spieler für Spieler mit `listenPlay`/`listenNext`),
+Versus in `Duel.tsx` (ohne Links, mit „wer hat wofür gestimmt“ aus `voterRoles()` in `host.ts`),
+Kino-Überblendungen in `src/ui/SceneCut.tsx`. Die Wertung ist dieselbe wie im klassischen Modus.
+„An diesem Gerät“ bleibt exakt wie das Original. Klassennamen `.remote`/`.r-*` gehören der Handy-Seite –
+am Hauptgerät nicht verwenden.
 
 ## Speicher (nur lokal, kein Server)
 

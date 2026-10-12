@@ -45,7 +45,38 @@ export function PairPanel() {
         <p className="pair-code">
           Code <b id="pairCode">{code}</b>
         </p>
+        <LinkRow url={url} />
       </div>
+    </div>
+  )
+}
+
+/** Verbindungslink zum Kopieren oder Teilen (z. B. per AirDrop oder in den Gruppenchat). */
+function LinkRow({ url }: { url: string }) {
+  const [done, setDone] = useState(false)
+  const share = typeof navigator !== 'undefined' && 'share' in navigator
+  return (
+    <div className="pp-link">
+      <span className="pp-url" title={url}>
+        {url.replace(/^https?:\/\//, '')}
+      </span>
+      <button
+        type="button"
+        className="lnk"
+        onClick={() => {
+          void navigator.clipboard?.writeText(url).then(() => {
+            setDone(true)
+            setTimeout(() => setDone(false), 1800)
+          })
+        }}
+      >
+        {done ? '✓ Kopiert' : 'Link kopieren'}
+      </button>
+      {share ? (
+        <button type="button" className="lnk" onClick={() => void navigator.share({ title: 'Sound Clash', text: 'Komm in die Runde:', url }).catch(() => undefined)}>
+          Teilen
+        </button>
+      ) : null}
     </div>
   )
 }

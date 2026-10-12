@@ -17,7 +17,7 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   // 30 Sek stille Hörprobe, damit kein Song während der Prüfungen von selbst endet
   const longWav = silentWav(30)
   const ctx = async (opts: Parameters<typeof browser.newContext>[0]) => {
-    const c = await browser.newContext({ reducedMotion: 'reduce', serviceWorkers: 'block', ...opts })
+    const c = await browser.newContext({ reducedMotion: process.env.SHOTS ? 'no-preference' : 'reduce', serviceWorkers: 'block', ...opts })
     await mockNetwork(c)
     await c.route(/https:\/\/[^/]*preview[^/]*\.dzcdn\.net\/.*/, (route) =>
       route.fulfill({ status: 200, contentType: 'audio/wav', body: longWav, headers: { 'access-control-allow-origin': '*', 'accept-ranges': 'none' } }),
@@ -50,12 +50,14 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   await host.locator('#startBtn').click()
 
   // Ziehen: nur am Handy (am Hauptgerät gibt es keinen Dreh-Knopf, solange das Handy verbunden ist)
-  await host.locator('.cine-draft .phonehint').waitFor({ timeout: 30_000 })
+  await host.locator('.cine-draft2 .phonehint').waitFor({ timeout: 30_000 })
   await expect(host.locator('#spinBtn')).toHaveCount(0)
   const phones = [p1, p2]
   let shotSpin = false
   let shotPlace = false
-  for (let step = 0; step < 40; step++) {
+  let spins = 0
+  const until = Date.now() + 200_000
+  while (Date.now() < until) {
     if (await host.locator('[data-ptile]').count()) break
     let acted = false
     for (const ph of phones) {
@@ -64,7 +66,7 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
         if (!shotPlace) {
           shotPlace = true
           await SHOT(ph, 'handy-8-blind-setzen')
-          await SHOT(host, 'mac-15-handymodus-ziehen')
+          await SHOT(host, 'mac-15c-handymodus-gezogen')
         }
         await place.first().click()
         acted = true
@@ -72,9 +74,22 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
       }
       const spin = ph.locator('[data-rspin]:not([disabled])')
       if (await spin.count()) {
+        spins++
+        // Spielfeld-Ansicht, wenn der zweite Spieler gleich dreht (P1 hat schon einen Künstler)
+        if (spins === 2) await SHOT(host, 'mac-15-handymodus-ziehen')
         if (!shotSpin) {
           shotSpin = true
           await SHOT(ph, 'handy-7-drehen')
+          await spin.click()
+          // Rad wird groß am Hauptgerät eingeblendet und klein am Handy gezeigt
+          if (process.env.SHOTS) {
+            await host.locator('.wheel-overlay').waitFor({ timeout: 15_000 })
+            await ph.locator('.r-wheel').waitFor({ timeout: 15_000 })
+            await host.screenshot({ path: 'docs/screenshots/mac-15b-handymodus-rad.jpg', type: 'jpeg', quality: 78, scale: 'css' })
+            await ph.screenshot({ path: 'docs/screenshots/handy-7b-rad.jpg', type: 'jpeg', quality: 78, scale: 'css' })
+          }
+          acted = true
+          break
         }
         await spin.click()
         acted = true
@@ -103,43 +118,61 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   await expect(p2.locator('.r-trk.on')).toHaveCount(1, { timeout: 15_000 })
   await p2.locator('[data-rdone]').click()
 
-  // „Alle haben gewählt“: beide Songs auf einen Blick, dann geht es los
-  await host.locator('.listen-intro').waitFor({ timeout: 15_000 })
-  await expect(host.locator('[data-intro]')).toHaveCount(2)
-  await expect(host.locator('[data-intro="1"]')).toContainText('gewählt von')
-  await SHOT(host, 'mac-17-handymodus-alle-gewaehlt')
-  await host.locator('#listenStart').click()
+  // Aufdecken Spieler für Spieler: zuerst P1 (Duell 1). Abstimmen geht erst im Versus.
+  if (process.env.SHOTS) {
+    // Kino-Überblendung „Alle haben gewählt“ mitten im Übergang
+    await host.locator('.scenecut').waitFor({ timeout: 15_000 })
+    await host.waitForTimeout(420)
+    await host.screenshot({ path: 'docs/screenshots/mac-16b-ueberblendung.jpg', type: 'jpeg', quality: 78, scale: 'css' })
+    await host.waitForTimeout(1200)
+  }
+  await host.locator('.rv').waitFor({ timeout: 15_000 })
+  await expect(host.locator('.rv-who b')).toHaveText(/P1|Spieler 1/)
+  await expect(host.locator('.rv-title')).toHaveText('Noch geheim')
+  await expect(p1.locator('[data-rreveal]')).toBeVisible({ timeout: 20_000 })
+  await expect(p2.locator('[data-rreveal]')).toHaveCount(0)
+  await expect(fan.locator('[data-rq="1"]')).toContainText('noch geheim', { timeout: 20_000 })
+  await expect(fan.locator('[data-rvote]')).toHaveCount(0)
+  await expect(p1.locator('.r-card .r-kicker', { hasText: 'Dein Line-up' })).toBeVisible()
+  await SHOT(host, 'mac-17-handymodus-aufdecken')
+  await SHOT(p1, 'handy-11-aufdecken')
+  await p1.locator('[data-rreveal]').click()
+  await expect(host.locator('.rv-title')).not.toHaveText('Noch geheim', { timeout: 15_000 })
+  const t1 = (await host.locator('.rv-title').textContent())!.trim()
+  await expect(fan.locator('[data-rq="1"]')).toContainText('läuft gerade', { timeout: 20_000 })
+  await expect(fan.locator('[data-rq="1"]')).toContainText(t1)
+  await expect(fan.locator('[data-rq="2"]')).toContainText('noch geheim')
+  await SHOT(host, 'mac-18-handymodus-song-laeuft')
+  await SHOT(fan, 'handy-12-laeuft-gerade')
+  // Weiter am Handy → P2 ist dran
+  await p1.locator('[data-rlnext]').click()
+  await expect(host.locator('.rv-who b')).toHaveText(/P2|Spieler 2/, { timeout: 15_000 })
+  await expect(host.locator('.rv-title')).toHaveText('Noch geheim')
+  await p2.locator('[data-rreveal]').click({ timeout: 20_000 })
+  await expect(host.locator('.rv-title')).not.toHaveText('Noch geheim', { timeout: 15_000 })
+  const t2 = (await host.locator('.rv-title').textContent())!.trim()
+  // Pause und weiter abspielen vom Handy
+  await expect(p2.locator('[data-rreveal]')).toContainText('Pause', { timeout: 15_000 })
+  await p2.locator('[data-rreveal]').click()
+  await expect(host.locator('.listen-time')).toContainText('angehalten', { timeout: 15_000 })
+  await expect(p2.locator('[data-rreveal]')).toContainText('Weiter abspielen', { timeout: 15_000 })
+  await p2.locator('[data-rreveal]').click()
+  await expect(host.locator('.listen-time')).toContainText('30-Sek-Vorschau', { timeout: 15_000 })
+  await p2.locator('[data-rlnext]').click({ timeout: 15_000 })
 
-  // Abspielen: Songs nacheinander am Hauptgerät, Reihenfolge P1, P2 (Duell 1)
-  await host.locator('.listen').waitFor({ timeout: 15_000 })
-  const t1 = (await host.locator('.listen-song').textContent())!.trim()
-  await expect(host.locator('.listen .who b')).toHaveText(/P1|Spieler 1/)
-  await expect(fan.locator('[data-rvote="1"]')).toHaveClass(/now/, { timeout: 20_000 })
-  await expect(fan.locator('[data-rvote="1"]')).toContainText(t1)
-  await expect(fan.locator('[data-rvote="1"]')).toContainText('läuft gerade')
-  await expect(fan.locator('[data-rvote="1"]')).toContainText(/P1|Spieler 1/)
-  await expect(fan.locator('[data-rvote="2"]')).toContainText('gleich')
-  await SHOT(host, 'mac-18-handymodus-abspielen')
-  await SHOT(fan, 'handy-11-laeuft-gerade')
-  // Abstimmen geht schon während die Songs laufen
-  await fan.locator('[data-rvote="1"]').click()
-  await expect(host.locator('.queue .pill')).toContainText('1 Stimme', { timeout: 15_000 })
-
-  await host.locator('#listenNext').click()
-  await expect(host.locator('.listen .who b')).toHaveText(/P2|Spieler 2/)
-  const t2 = (await host.locator('.listen-song').textContent())!.trim()
-  await expect(p1.locator('[data-rvote="2"]')).toHaveClass(/now/, { timeout: 20_000 })
-  await expect(p1.locator('[data-rvote="2"]')).toContainText(t2)
-  await expect(p1.locator('[data-rvote="1"]')).toContainText(t1)
-  await p1.locator('[data-rvote="2"]').click()
-  await expect(host.locator('.queue .pill')).toContainText('2 Stimmen', { timeout: 15_000 })
-  await SHOT(p1, 'handy-12-abstimmen')
-
-  // Danach: Entscheidung wie gewohnt am Hauptgerät, die Stimmen bleiben
-  await host.locator('#listenNext').click()
+  // Versus: nur die gewählten Songs, jetzt abstimmen; man sieht, wer wofür gestimmt hat
   await host.locator('.duelhead').waitFor({ timeout: 15_000 })
-  await expect(host.locator('#voteClose')).toContainText('2 Stimmen')
-  await SHOT(host, 'mac-19-handymodus-entscheidung')
+  await expect(host.locator('.dcard .links')).toHaveCount(0)
+  await expect(host.locator('.dcard').nth(0)).toContainText(t1)
+  await expect(host.locator('.dcard').nth(1)).toContainText(t2)
+  await fan.locator('[data-rvote="1"]').click({ timeout: 30_000 })
+  await p1.locator('[data-rvote="2"]').click({ timeout: 30_000 })
+  await expect(host.locator('#voteClose')).toContainText('2 Stimmen', { timeout: 15_000 })
+  await expect(host.locator('[data-voters="1"]')).toContainText('1 Publikum', { timeout: 15_000 })
+  await expect(host.locator('[data-voters="2"]')).toContainText(/P1|Spieler 1/, { timeout: 15_000 })
+  await expect(fan.locator('[data-rvote="2"] .r-voter')).toContainText(/P1|Spieler 1/, { timeout: 15_000 })
+  await SHOT(host, 'mac-19-handymodus-versus')
+  await SHOT(p1, 'handy-13-abstimmen')
 
   await hostCtx.close()
 })

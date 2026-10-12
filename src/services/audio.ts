@@ -109,10 +109,37 @@ export function stopAudio() {
       // ignorieren
     }
   }
+  pausedKey = null
   playing = null
   lastCover = ''
   beat = false
   notify()
+}
+
+/** Anhalten, ohne die Stelle zu verlieren (Handy-Modus: Pause beim Aufdecken). */
+let pausedKey: string | null = null
+export function pauseAudio() {
+  if (!audio || !playing) return
+  try {
+    audio.pause()
+  } catch {
+    // ignorieren
+  }
+  pausedKey = playing
+  playing = null
+  beat = false
+  notify()
+}
+/** An der angehaltenen Stelle weiterspielen; false, wenn dieser Song nicht angehalten war. */
+export function resumeAudio(key: string): boolean {
+  if (!audio || pausedKey !== key) return false
+  const el = audio
+  el.play().catch(() => toastFn('Vorschau konnte nicht starten.'))
+  pausedKey = null
+  playing = key
+  startAmbience()
+  notify()
+  return true
 }
 
 export function play(url: string, key: string, cover?: string) {

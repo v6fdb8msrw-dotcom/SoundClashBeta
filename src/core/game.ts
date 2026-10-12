@@ -86,6 +86,7 @@ export type Action =
   | { type: 'pickTimeUp'; track: Track | null }
   | { type: 'phoneReady'; p: number; on?: boolean }
   | { type: 'listenNext' }
+  | { type: 'listenPlay' }
   | { type: 'win'; p: number }
   | { type: 'advance' }
   | { type: 'bump'; p: number; d: number }
@@ -313,7 +314,7 @@ export function reduce(state: State, action: Action, env: Env, GEN: Genres): { s
 function normalize(S: State) {
   if (!BGS.some((b) => b[0] === S.bg)) S.bg = 'mosaic'
   setBodyTheme(S.theme)
-  if ((S.screen === 'duel' || S.screen === 'listen') && S.audience && !S.votePhase) {
+  if (S.screen === 'duel' && S.audience && !S.votePhase) {
     S.tally = {}
     for (let q = 1; q <= S.players; q++) S.tally[q] = 0
     S.votePhase = 'tally'
@@ -506,14 +507,14 @@ function advance(S: State, c: Ctx) {
 }
 
 /**
- * Handy-Modus: Songs des Duells nacheinander auf dem Hauptgerät abspielen.
- * Wer anfängt, rückt jedes Duell eins weiter (1-2-3, 2-3-1, 3-1-2 …).
+ * Handy-Modus: Spieler für Spieler deckt seinen Song auf (Play am Handy), er läuft auf dem Hauptgerät.
+ * Wer anfängt, rückt jedes Duell eins weiter (1-2-3, 2-3-1, 3-1-2 …). Danach der Versus-Screen.
  */
 function startListen(S: State, c: Ctx) {
   stopAudio(c)
   const ps = parts(S)
   const r = ps.length ? S.duel % ps.length : 0
-  S.listen = { order: ps.slice(r).concat(ps.slice(0, r)), idx: 0 }
+  S.listen = { order: ps.slice(r).concat(ps.slice(0, r)), idx: 0, shown: false, paused: false }
   S.screen = 'listen'
 }
 
@@ -929,7 +930,20 @@ function apply(S: State, a: Action, c: Ctx) {
       if (S.screen !== 'listen' || !S.listen) return
       stopAudio(c)
       S.listen.idx++
+      S.listen.shown = false
+      S.listen.paused = false
       if (S.listen.idx >= S.listen.order.length) S.screen = 'duel'
+      return
+    }
+    case 'listenPlay': {
+      // Aufdecken (erstes Play), danach Pause / weiter abspielen
+      if (S.screen !== 'listen' || !S.listen) return
+      if (!S.listen.shown) {
+        S.listen.shown = true
+        S.listen.paused = false
+        return
+      }
+      S.listen.paused = !S.listen.paused
       return
     }
     case 'pickNext':

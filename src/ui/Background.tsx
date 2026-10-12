@@ -10,9 +10,8 @@ import { BANDS, onVisFrame, vis } from './visual'
 import { Vinyl } from './Vinyl'
 
 /**
- * Hintergrund wie im Original wählbar: Künstler-Mosaik, Plattenspieler, Mosaik + Plattenspieler,
- * Aurora (Beat), Aurora + Plattenspieler. Neu gestaltet: schwebende 3D-Wand, Holo-Raster,
- * Lichtkegel, Plattenspieler mit Frequenz-Ring.
+ * Hintergrund wählbar wie im Original (Künstler-Mosaik, Plattenspieler, Mosaik + Plattenspieler,
+ * Aurora, Aurora + Plattenspieler) plus neu: Mosaik (wandernd), Bühne (Lichtkegel), Neon-Horizont.
  */
 
 let seed = Math.random()
@@ -34,45 +33,111 @@ export function coverForKey(S: State, key: string | null): string {
   return a ? picBigOf(a) || picOf(a) : ''
 }
 
-/**
- * Künstler-Mosaik: Reihen von Künstlerbildern ziehen langsam nach links, jede Reihe mit eigenen
- * Künstlern und eigenem Tempo – so tauchen ständig neue Gesichter auf.
- */
-function Wall({ S, beat }: { S: State; beat: boolean }) {
-  const [, force] = useState(0)
+/** Gemischte Künstlerbilder (fester Zufall pro Sitzung, neu mit „bgSeed“). */
+function useWallPics(n: number, dep: string) {
+  const [v, force] = useState(0)
   useEffect(() => bus.on('bgSeed', () => force((x) => x + 1)), [])
-  const dense = S.bg !== 'walldeck'
-  const rowH = dense ? 118 : 150
-  const rows = Math.max(4, Math.ceil((typeof window !== 'undefined' ? window.innerHeight : 900) / (rowH + 8)) + 2)
-  const perRow = 26
-  const lines = useMemo(() => {
+  return useMemo(() => {
     let x = Math.floor(seed * 1e6)
     const rnd = () => {
       x = (x * 1103515245 + 12345) & 0x7fffffff
       return x / 0x7fffffff
     }
-    const pics = wallPics.slice().sort(() => rnd() - 0.5)
-    return Array.from({ length: rows }, (_, r) => pics.slice((r * perRow) % pics.length, ((r * perRow) % pics.length) + perRow))
+    return wallPics
+      .slice()
+      .sort(() => rnd() - 0.5)
+      .slice(0, n)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [S.bg, seed, rows])
-  const ref = useRef<HTMLDivElement>(null)
+  }, [dep, n, v])
+}
+
+function useLevelVar(ref: React.RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (env.reduce) return
     return onVisFrame(() => {
       if (ref.current) ref.current.style.setProperty('--lvl', String(vis.level.toFixed(3)))
     })
-  }, [])
+  }, [ref])
+}
+
+const OFF: Record<string, number> = { setup: 0, bracket: -8, draft: -16, songs: -26, pick: -26, duel: -36, round: -48, final: -60 }
+
+/** Künstler-Mosaik wie vorher: geneigte Wand, die langsam schwebt und im Beat pulsiert. */
+function Wall({ S, beat }: { S: State; beat: boolean }) {
+  const cfg = S.bg === 'walldeck' ? { n: 60, size: 140, op: 0.4, im: 0.5 } : { n: 120, size: 78, op: 0.55, im: 0.6 }
+  const pics = useWallPics(cfg.n, S.bg)
+  const ref = useRef<HTMLDivElement>(null)
+  useLevelVar(ref)
   return (
-    <div className="wall-stage">
-      <div id="wall" ref={ref} className={(beat ? 'beat ' : '') + (dense ? 'dense' : 'wide')} style={{ ['--rowh' as string]: rowH + 'px', opacity: dense ? 0.5 : 0.38 }}>
+    <div className="wall-stage" style={{ ['--shift' as string]: (OFF[S.screen] || 0) + 'px' }}>
+      <div
+        id="wall"
+        ref={ref}
+        className={beat ? 'beat' : ''}
+        style={{ gridTemplateColumns: `repeat(auto-fill,minmax(${cfg.size}px,1fr))`, gridAutoRows: cfg.size + 'px', opacity: cfg.op }}
+      >
+        {pics.map((u, i) => (
+          <img key={u + i} src={u} alt="" loading="lazy" style={{ ['--i' as string]: i, ['--im' as string]: cfg.im }} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Mosaik (wandernd): Reihen von Künstlerbildern ziehen langsam nach links, jede Reihe mit eigenen
+ * Künstlern und eigenem Tempo – so tauchen ständig neue Gesichter auf.
+ */
+function FlowWall({ beat }: { beat: boolean }) {
+  const rowH = 118
+  const rows = Math.max(4, Math.ceil((typeof window !== 'undefined' ? window.innerHeight : 900) / (rowH + 8)) + 2)
+  const perRow = 26
+  const pics = useWallPics(rows * perRow, 'flow')
+  const lines = Array.from({ length: rows }, (_, r) => pics.slice((r * perRow) % Math.max(1, pics.length), ((r * perRow) % Math.max(1, pics.length)) + perRow))
+  const ref = useRef<HTMLDivElement>(null)
+  useLevelVar(ref)
+  return (
+    <div className="flow-stage">
+      <div id="flowwall" ref={ref} className={beat ? 'beat' : ''} style={{ ['--rowh' as string]: rowH + 'px' }}>
         {lines.map((line, r) => (
           <div className="wall-row" key={r} style={{ ['--dur' as string]: 140 + ((r * 37) % 90) + 's', ['--delay' as string]: -((r * 23) % 60) + 's' }}>
             {line.concat(line).map((u, i) => (
-              <img key={i} src={u} alt="" loading="lazy" style={{ ['--i' as string]: i % perRow }} />
+              <img key={i} src={u} alt="" loading="lazy" />
             ))}
           </div>
         ))}
       </div>
+    </div>
+  )
+}
+
+/** Bühne: Lichtkegel in den Album-Farben schwenken durch Dunst, im Beat heller. */
+function StageLights({ beat }: { beat: boolean }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useLevelVar(ref)
+  return (
+    <div className={'scene-stage' + (beat ? ' beat' : '')} ref={ref}>
+      <div className="haze" />
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <i key={i} className={'beam b' + i} />
+      ))}
+      <div className="floor" />
+    </div>
+  )
+}
+
+/** Neon-Horizont: Sonne mit Streifen, Raster-Boden läuft auf einen zu. */
+function Horizon({ beat }: { beat: boolean }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useLevelVar(ref)
+  return (
+    <div className={'scene-horizon' + (beat ? ' beat' : '')} ref={ref}>
+      <div className="sky" />
+      <div className="sun" />
+      <div className="ground">
+        <div className="grid" />
+      </div>
+      <div className="mist" />
     </div>
   )
 }
@@ -162,7 +227,6 @@ function Deck({ S, over }: { S: State; over: boolean }) {
   return (
     <div id="deck" className={(playing ? 'spinning-song ' : '') + (over ? 'over-wall' : '')} aria-hidden>
       <canvas className="deck-ring" ref={ring} />
-      <div className="deck-plinth" />
       <Vinyl cover={cover} spinning className="deck-vinyl" />
       <div className="tonearm">
         <div className="base" />
@@ -184,6 +248,9 @@ export function Background({ S }: { S: State }) {
     <div className={'bg bg-' + S.bg} aria-hidden>
       <div className="bg-base" />
       {wallOn ? <Wall S={S} beat={pulse} /> : null}
+      {S.bg === 'flow' ? <FlowWall beat={pulse} /> : null}
+      {S.bg === 'stage' ? <StageLights beat={pulse} /> : null}
+      {S.bg === 'horizon' ? <Horizon beat={pulse} /> : null}
       {isAU ? <Aurora theme={S.theme} /> : null}
       <div id="tint" />
       <div id="veil" className={'veil-' + S.bg} />

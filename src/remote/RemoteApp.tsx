@@ -215,20 +215,19 @@ function MyLineup({ V, me }: { V: HostView; me: number }) {
 function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; avatars: Record<number, string> }) {
   const total = Object.values(V.tally || {}).reduce((a, b) => a + b, 0) || 1
   const done = V.votePhase === 'result'
-  const canVote = V.audience && V.votePhase === 'tally'
+  // Abgestimmt wird im Versus-Screen (Handy-Modus: erst wenn alle Songs aufgedeckt sind)
+  const canVote = V.screen === 'duel' && V.audience && V.votePhase === 'tally'
   const i = V.sd ? 0 : V.duel
-  const listen = V.screen === 'listen' && V.listen ? V.listen : null
-  const order = listen ? listen.order : V.parts
   return (
     <section className="r-vote">
-      {order.map((p, k) => {
+      {V.parts.map((p) => {
         const a = viewArtist(V, p, V.duel) || ''
         const so = (V.songs[p] || [])[i]
         const v = V.tally[p] || 0
         const pct = Math.round((v / total) * 100)
         const mine = mineVote === p
         const now = V.nowPlaying === p
-        const upcoming = listen ? k > listen.idx : false
+        const who = (V.voters || {})[p] || []
         return (
           <motion.button
             key={p}
@@ -259,8 +258,6 @@ function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; 
                   </span>
                   läuft gerade
                 </span>
-              ) : upcoming ? (
-                <span className="r-soon">gleich</span>
               ) : null}
             </span>
             <span className="r-vbody">
@@ -271,6 +268,22 @@ function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; 
               </span>
               {V.audience ? <span className="r-pct">{pct}%</span> : null}
             </span>
+            {who.length ? (
+              <span className="r-voters">
+                {who.map((r, j) =>
+                  r === 'audience' ? (
+                    <span key={'a' + j} className="r-voter aud">
+                      🙋
+                    </span>
+                  ) : (
+                    <span key={r} className="r-voter" style={{ ['--pc' as string]: V.colors[r] }}>
+                      <Avatar src={avatars[r]} color={V.colors[r]} size={18} />
+                      {V.names[r - 1]}
+                    </span>
+                  ),
+                )}
+              </span>
+            ) : null}
             {mine ? <span className="r-mine">✓ Deine Stimme</span> : null}
           </motion.button>
         )
@@ -290,12 +303,145 @@ function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; 
   )
 }
 
+/** Kleines Rad am Handy: zeigt kurz, wie gedreht wurde (groß läuft es auf dem Hauptgerät). */
+const WHEEL_COLS = ['var(--primary)', 'var(--secondary)', 'var(--accent)']
+function MiniWheel({ V }: { V: HostView }) {
+  const sp = V.spin
+  const names = V.pool
+  const n = Math.max(2, sp?.n || names.length)
+  const seg = 360 / n
+  const [rot, setRot] = useState(0)
+  useEffect(() => {
+    if (!sp) return
+    const final = 360 * 5 + (360 - (sp.target * seg + seg / 2))
+    let r2 = 0
+    const r1 = requestAnimationFrame(() => (r2 = requestAnimationFrame(() => setRot(final))))
+    return () => (cancelAnimationFrame(r1), cancelAnimationFrame(r2))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sp?.target, sp?.n])
+  const R = 100
+  const fs = Math.max(5, Math.min(11, 150 / n))
+  return (
+    <div className="r-wheel">
+      <i className="r-wptr" aria-hidden />
+      <svg viewBox="0 0 200 200" style={{ transform: `rotate(${rot}deg)` }} aria-hidden>
+        {Array.from({ length: n }, (_, i) => {
+          const a0 = ((i * seg - 90) * Math.PI) / 180,
+            a1 = (((i + 1) * seg - 90) * Math.PI) / 180
+          const d = `M${R} ${R} L${R + R * Math.cos(a0)} ${R + R * Math.sin(a0)} A${R} ${R} 0 ${seg > 180 ? 1 : 0} 1 ${R + R * Math.cos(a1)} ${R + R * Math.sin(a1)} Z`
+          const label = (names[i] || '').length > 13 ? names[i].slice(0, 12) + '…' : names[i] || ''
+          return (
+            <g key={i}>
+              <path d={d} fill={WHEEL_COLS[i % 3]} fillOpacity={0.5 + 0.25 * ((i * 7) % 3)} stroke="rgba(0,0,0,.45)" strokeWidth={0.6} />
+              {n <= 30 ? (
+                <text transform={`rotate(${i * seg + seg / 2 - 90} ${R} ${R})`} x={190} y={R} textAnchor="end" dominantBaseline="middle" fontSize={fs} fontWeight={700} fill="#140805">
+                  {label}
+                </text>
+              ) : null}
+            </g>
+          )
+        })}
+        <circle cx={R} cy={R} r={18} fill="#140805" stroke="rgba(255,255,255,.25)" />
+      </svg>
+    </div>
+  )
+}
+
+/** Aufdecken am Handy: wer dran ist, drückt Play und „Weiter“; alle sehen, was gerade läuft. */
+function RevealPhone({ V, me, avatars }: { V: HostView; me: number; avatars: Record<number, string> }) {
+  const L = V.listen!
+  const cur = L.order[L.idx]
+  const i = V.sd ? 0 : V.duel
+  const so = (V.songs[cur] || [])[i]
+  const a = viewArtist(V, cur, V.duel) || ''
+  const mine = me === cur
+  const last = L.idx + 1 >= L.order.length
+  const playingNow = L.shown && !L.paused
+  const label = (V.sd ? 'Sudden Death' : 'Platz #' + (V.duel + 1)) + ' · Song ' + (L.idx + 1) + ' von ' + L.order.length
+  return (
+    <>
+      <Hero
+        color={V.colors[cur]}
+        kicker={label}
+        pulse={mine && !L.shown}
+        title={mine ? (L.shown ? 'Dein Song läuft' : 'Du bist dran!') : L.shown ? <>{V.names[cur - 1]}s Song läuft</> : <>{V.names[cur - 1]} deckt auf …</>}
+        sub={mine && !L.shown ? 'Drück Play – dein Song läuft groß auf dem Hauptgerät.' : undefined}
+      >
+        <div className="r-draw">
+          <Vinyl cover={L.shown || mine ? so?.cover || undefined : undefined} spinning={playingNow} size={mine ? 170 : 130} color={V.colors[cur]} />
+        </div>
+        <p className="r-songline">
+          <b>{L.shown || mine ? so?.title || 'Kein Song gewählt' : 'Noch geheim'}</b>
+          <small>{a}</small>
+        </p>
+        {mine ? (
+          <div className="r-revealctl">
+            <motion.button className={'r-play' + (playingNow ? ' on' : '')} data-rreveal whileTap={{ scale: 0.94 }} onClick={() => (vib(30), ask({ t: 'reveal' }))}>
+              {!L.shown ? '▶ Song abspielen' : L.paused ? '▶ Weiter abspielen' : '⏸ Pause'}
+            </motion.button>
+            {L.shown ? (
+              <button className="r-ghost" data-rlnext onClick={() => (vib(20), ask({ t: 'listenNext' }))}>
+                {last ? 'Fertig – zum Versus →' : 'Weiter – nächster Spieler →'}
+              </button>
+            ) : null}
+            {L.shown ? <p className="r-hint">Nach 30 Sekunden geht es automatisch weiter.</p> : null}
+          </div>
+        ) : null}
+      </Hero>
+      <section className="r-card r-queue">
+        <p className="r-kicker">Reihenfolge</p>
+        {L.order.map((q, k) => {
+          const qso = (V.songs[q] || [])[i]
+          const open = k < L.idx || (k === L.idx && L.shown) || q === me
+          const now = k === L.idx && playingNow
+          return (
+            <div key={q} className={'r-qrow' + (k === L.idx ? ' cur' : '') + (k < L.idx ? ' done' : '')} style={{ ['--pc' as string]: V.colors[q] }} data-rq={q}>
+              <Avatar src={avatars[q]} color={V.colors[q]} size={34} />
+              <span className="r-meta">
+                <b>
+                  {V.names[q - 1]}
+                  {q === me ? ' (du)' : ''}
+                </b>
+                <small>{open ? '♫ ' + (qso?.title || 'kein Song') : 'noch geheim'}</small>
+              </span>
+              {now ? (
+                <span className="r-now">
+                  <span className="r-eq" aria-hidden>
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  läuft gerade
+                </span>
+              ) : (
+                <span className="r-soon">{k < L.idx ? 'gehört' : k > L.idx ? 'gleich' : L.shown ? 'pausiert' : 'deckt auf'}</span>
+              )}
+            </div>
+          )
+        })}
+        <p className="r-hint">Abgestimmt wird, wenn alle Songs gelaufen sind.</p>
+      </section>
+    </>
+  )
+}
+
 function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; avatars: Record<number, string> }) {
   const p = typeof me === 'number' ? me : 0
   const mine = getClient().mine
   const mineVote = mine && mine.key === V.duelKey ? mine.vote : null
   void code
   if (V.screen === 'draft') {
+    if (V.spin && V.pool.length > 1) {
+      const who = V.drawer
+      return (
+        <Hero color={V.colors[who]} kicker={who === p ? 'Du drehst' : 'Künstler ziehen'} title={who === p ? 'Das Rad dreht …' : <>{V.names[who - 1]} dreht …</>} sub="Groß zu sehen auf dem Hauptgerät">
+          <div className="r-wheelwrap">
+            <MiniWheel V={V} />
+          </div>
+        </Hero>
+      )
+    }
     if (V.pending && V.pending.player === p) {
       const free = (V.sameArtist ? V.lineup[1] : V.lineup[p]) || []
       return (
@@ -420,15 +566,15 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
   if (V.screen === 'songs' && p && !(V.sd && !V.sdArt?.[p])) {
     return <SongsAll V={V} me={p} />
   }
-  if (V.screen === 'listen' || V.screen === 'duel') {
-    const L = V.listen
+  if (V.screen === 'listen' && V.listen) return <RevealPhone V={V} me={p} avatars={avatars} />
+  if (V.screen === 'duel') {
     const nowP = V.nowPlaying
     return (
       <>
         <Hero
           color={nowP ? V.colors[nowP] : 'var(--primary)'}
-          kicker={(V.sd ? 'Sudden Death' : 'Platz #' + (V.duel + 1) + ' · ' + V.slotPts[V.duel] + ' PTS') + (V.screen === 'listen' && L ? ' · Song ' + (L.idx + 1) + '/' + L.order.length : '')}
-          title={nowP ? <>♫ {V.names[nowP - 1]}s Song läuft</> : V.screen === 'listen' ? (L && L.idx === 0 ? 'Alle haben gewählt' : 'Gleich geht’s weiter') : V.votePhase === 'result' ? 'Abstimmung beendet' : 'Wer hat den besseren Song?'}
+          kicker={(V.phoneMode ? 'Versus · ' : '') + (V.sd ? 'Sudden Death' : 'Platz #' + (V.duel + 1) + ' · ' + V.slotPts[V.duel] + ' PTS')}
+          title={nowP ? <>♫ {V.names[nowP - 1]}s Song läuft</> : V.votePhase === 'result' ? 'Abstimmung beendet' : V.audience && V.phoneMode ? 'Jetzt abstimmen!' : 'Wer hat den besseren Song?'}
           sub={nowP ? (V.songs[nowP] || [])[V.sd ? 0 : V.duel]?.title : undefined}
         >
           {nowP ? (
@@ -509,7 +655,6 @@ function SongsAll({ V, me }: { V: HostView; me: number }) {
 export function RemoteApp({ code }: { code: string }) {
   const st = useSyncExternalStore(subscribeClient, getClient, getClient)
   const [pickRole, setPickRole] = useState(false)
-  const [tab, setTab] = useState<'now' | 'lineup'>('now')
   const lastHot = useRef('')
   useEffect(() => connect(code), [code])
   useLayoutEffect(() => {
@@ -525,17 +670,20 @@ export function RemoteApp({ code }: { code: string }) {
           ? 'spin'
           : V.screen === 'pick' && (V.phoneMode ? V.parts.includes(me) && !V.ready[me] : V.pickOrder[V.pickIdx] === me)
             ? 'pick' + V.duel
-            : ''
+            : V.screen === 'listen' && V.listen && V.listen.order[V.listen.idx] === me && !V.listen.shown
+              ? 'reveal' + V.duel + '-' + V.listen.idx
+              : ''
       : ''
   useEffect(() => {
     if (hot && hot !== lastHot.current) {
       vib([30, 40, 30])
-      setTab('now')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     lastHot.current = hot
   }, [hot])
   const isPlayer = V && typeof me === 'number' && me <= V.players
-  const showTabs = isPlayer && ['draft', 'pick', 'songs', 'listen', 'duel', 'round'].includes(V!.screen)
+  // „Mein Line-up“ steht immer unten – so sieht man jederzeit, wer als Nächstes kommt
+  const showLineup = isPlayer && ['draft', 'pick', 'songs', 'listen', 'duel', 'round', 'final'].includes(V!.screen)
 
   return (
     <div className="remote">
@@ -569,18 +717,8 @@ export function RemoteApp({ code }: { code: string }) {
         ) : (
           <motion.main key="main" className="r-main" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             {st.status === 'lost' ? <p className="r-warn">Verbindung zum Hauptgerät unterbrochen – warte auf Wiederverbindung …</p> : null}
-            {showTabs ? (
-              <div className="r-tabs" role="tablist">
-                <button role="tab" aria-selected={tab === 'now'} className={tab === 'now' ? 'on' : ''} onClick={() => setTab('now')}>
-                  Jetzt
-                  {hot ? <i className="r-dot" /> : null}
-                </button>
-                <button role="tab" aria-selected={tab === 'lineup'} className={tab === 'lineup' ? 'on' : ''} onClick={() => setTab('lineup')}>
-                  Mein Line-up
-                </button>
-              </div>
-            ) : null}
-            {showTabs && tab === 'lineup' ? <MyLineup V={V} me={me as number} /> : <Turn code={code} V={V} me={me} avatars={st.avatars} />}
+            <Turn code={code} V={V} me={me} avatars={st.avatars} />
+            {showLineup ? <MyLineup V={V} me={me as number} /> : null}
           </motion.main>
         )}
       </AnimatePresence>

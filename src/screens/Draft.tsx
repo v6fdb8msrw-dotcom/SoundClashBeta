@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { dispatch, env } from '../app/store'
 import { drawer, filled, N, pcol, picks, placedN, pname, pts, sameArt, wins } from '../core/game'
 import type { State } from '../core/types'
@@ -108,7 +108,10 @@ function Reveal({ S, pl }: { S: State; pl: number }) {
   )
 }
 
-/** Handy-Modus: Rad groß, darunter die Plätze des Spielers am Zug, die anderen klein. */
+/**
+ * Handy-Modus: In der Mitte groß das Spielfeld des Spielers am Zug, darunter klein die der anderen.
+ * Gedreht wird am Handy; das Rad wird dafür groß eingeblendet und verschwindet nach der Enthüllung.
+ */
 function CineDraft({ S }: { S: State }) {
   const online = useOnline()
   const pl = S.pending ? S.pending.player : drawer(S),
@@ -117,9 +120,35 @@ function CineDraft({ S }: { S: State }) {
   const placed = placedN(S)
   const filled1 = filled(S, 1)
   const others = Array.from({ length: S.players }, (_, j) => j + 1).filter((p) => p !== pl)
+  // Rad einblenden, solange gedreht wird, und danach kurz für die Enthüllung
+  const [wheelOn, setWheelOn] = useState(!!S.spin)
+  const spinning = !!S.spin
+  const lastPlaced = useRef(placed)
+  useEffect(() => {
+    if (spinning) {
+      setWheelOn(true)
+      return
+    }
+    if (lastPlaced.current !== placed) {
+      lastPlaced.current = placed
+      setWheelOn(false)
+      return
+    }
+    const t = setTimeout(() => setWheelOn(false), env.reduce ? 500 : 2300)
+    return () => clearTimeout(t)
+  }, [spinning, placed])
+  const status = phone
+    ? S.spin
+      ? 'dreht das Rad …'
+      : S.pending
+        ? '📱 setzt den Künstler am Handy'
+        : '📱 dreht am Handy'
+    : S.pending
+      ? '↓ Platz wählen ' + (sameArt(S) ? 'im gemeinsamen Grid' : 'in der Spalte')
+      : 'Handy nicht verbunden – hier drehen'
   return (
-    <div className="cine-draft" style={{ ['--pc' as string]: c }}>
-      <div className="dhead" style={{ width: '100%' }}>
+    <div className="cine-draft2" style={{ ['--pc' as string]: c }}>
+      <div className="dhead">
         <div className="pills">
           <span className="pill">
             Runde <b>{S.round}</b>
@@ -127,47 +156,96 @@ function CineDraft({ S }: { S: State }) {
           <span className="pill">
             Pick <b>{sameArt(S) ? Math.min(filled1 + 1, N(S)) + ' / ' + N(S) : Math.min(placed + 1, picks(S)) + ' / ' + picks(S)}</b>
           </span>
-          <span className="pill turnpill" style={{ borderColor: c, ['--pc' as string]: c }}>
-            Am Zug: <b style={{ color: c }}>{pname(S, pl)}</b>
+          <span className="pill">
+            Im Topf <b>{S.pool.length}</b>
           </span>
         </div>
       </div>
-      <div className={'stage cine-wheel' + (phone ? ' remote' : '')} style={{ ['--pc' as string]: c }}>
-        <Wheel S={S} revealing={!!S.pending}>
-          <Presence>{S.pending ? <Reveal key={S.pending.artist + placed} S={S} pl={pl} /> : null}</Presence>
-        </Wheel>
-      </div>
-      {phone ? (
-        <motion.p className="phonehint" key={(S.pending ? 'p' : 's') + placed} initial={env.reduce ? false : { y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-          📱 {pname(S, pl)} {S.spin ? 'dreht …' : S.pending ? 'setzt den Künstler am Handy' : 'dreht am Handy'}
-        </motion.p>
-      ) : S.pending ? (
-        <p className="askplace" style={{ color: c }}>
-          ↓ {pname(S, pl)}, wähle einen Platz {sameArt(S) ? 'im gemeinsamen Grid' : 'in deiner Spalte'}
-        </p>
-      ) : (
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={pl}
+          className="cd-turn"
+          initial={env.reduce ? false : { opacity: 0, y: -24, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={env.reduce ? undefined : { opacity: 0, y: 24, filter: 'blur(10px)' }}
+          transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
+        >
+          <AvImg S={S} p={pl} className="cd-av" />
+          <div className="cd-who">
+            <p className="kicker">Am Zug</p>
+            <h2 className="cd-name">{pname(S, pl)}</h2>
+            <p className="phonehint">{status}</p>
+          </div>
+          <AnimatePresence>
+            {S.pending && !wheelOn ? (
+              <motion.div
+                key={S.pending.artist}
+                className="cd-pending"
+                initial={env.reduce ? false : { opacity: 0, scale: 0.6, rotate: -8 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={env.reduce ? undefined : { opacity: 0, scale: 0.7, y: 60 }}
+                transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+              >
+                <ArtImg n={S.pending.artist} />
+                <span>
+                  <small>gezogen</small>
+                  <b>{S.pending.artist}</b>
+                </span>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+        </motion.div>
+      </AnimatePresence>
+      <div className="cine-active">{sameArt(S) ? <SharedGrid S={S} pl={pl} c={c} ro={phone} /> : <Cluster S={S} p={pl} pl={pl} ro={phone} />}</div>
+      {!phone && !S.pending ? (
         <Btn className="spinbtn" id="spinBtn" disabled={!!S.spin} onClick={() => dispatch({ type: 'spin' })}>
           {S.pool.length === 1 ? 'Letzten Künstler ziehen →' : 'Rad drehen · [space]'}
         </Btn>
-      )}
-      <div className="cine-active">
-        {sameArt(S) ? <SharedGrid S={S} pl={pl} c={c} ro={phone} /> : <Cluster S={S} p={pl} pl={pl} ro={phone} />}
-      </div>
+      ) : null}
       {!sameArt(S) ? (
         <div className="cine-others">
           {others.map((p) => (
-            <div key={p} className="mini-cluster" style={{ ['--pc' as string]: pcol(S, p) }}>
-              <AvImg S={S} p={p} />
-              <span className="nm">{pname(S, p)}</span>
-              <span className="mini-slots" aria-label={filled(S, p) + ' von ' + N(S)}>
+            <div key={p} className="mini-grid" style={{ ['--pc' as string]: pcol(S, p) }}>
+              <div className="mg-head">
+                <AvImg S={S} p={p} />
+                <span className="nm">{pname(S, p)}</span>
+                <small>
+                  {filled(S, p)}/{N(S)}
+                </small>
+              </div>
+              <div className="mg-slots">
                 {(S.lineup[p] || []).map((x, i) => (
-                  <i key={i} className={x ? 'on' : ''} />
+                  <span key={i} className={'mg-slot' + (x ? ' on' : '') + (pts(S, i + 1) === 2 ? ' two' : '')} title={x || 'Platz ' + (i + 1)}>
+                    {x ? <ArtImg n={x} /> : <i>{i + 1}</i>}
+                  </span>
                 ))}
-              </span>
+              </div>
             </div>
           ))}
         </div>
       ) : null}
+      <AnimatePresence>
+        {wheelOn ? (
+          <motion.div key="wheel" className="wheel-overlay" initial={env.reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={env.reduce ? undefined : { opacity: 0 }} transition={{ duration: 0.35 }}>
+            <motion.div
+              className="wo-inner"
+              initial={env.reduce ? false : { scale: 0.55, rotate: -25, opacity: 0 }}
+              animate={{ scale: 1, rotate: 0, opacity: 1 }}
+              exit={env.reduce ? undefined : { scale: 1.12, opacity: 0, filter: 'blur(12px)' }}
+              transition={{ type: 'spring', stiffness: 130, damping: 18 }}
+            >
+              <p className="wo-kicker" style={{ color: c }}>
+                {pname(S, pl)} {S.pending ? 'hat gezogen' : 'dreht'}
+              </p>
+              <div className="stage cine-wheel phonectl" style={{ ['--pc' as string]: c }}>
+                <Wheel S={S} revealing={!!S.pending}>
+                  <Presence>{S.pending ? <Reveal key={S.pending.artist + placed} S={S} pl={pl} /> : null}</Presence>
+                </Wheel>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   )
 }

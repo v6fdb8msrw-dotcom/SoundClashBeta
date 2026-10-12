@@ -326,34 +326,42 @@ Referenzen (`tests/golden/neu/`), alles andere weiter mit dem Original.
   Optionen unter „Mehr Optionen“. Farbe, Hintergrund, Ton, Spielanleitung und Spielstand liegen im
   Menü oben rechts. Alle Funktionen sind erhalten.
 - Gestaltung: Die Platten sind echte Schallplatten (Rillen, Glanz, Cover als Etikett mit Mittelloch)
-  und drehen ruhiger. Das Künstler-Mosaik im Hintergrund zieht langsam nach links, neue Künstler
-  rücken nach. Die Album-Farbschemas bleiben.
+  und drehen ruhiger. Hintergründe: die fünf des Originals (Künstler-Mosaik wie vorher, Plattenspieler
+  ohne hellen Sockel, Mosaik + Plattenspieler, Aurora, Aurora + Plattenspieler) plus neu
+  **Mosaik (wandernd)**, **Bühne (Lichtkegel)** und **Neon-Horizont**. Die Album-Farbschemas bleiben.
 
 ## 11. Handy-Modus (Tims Vorgabe, 12.10.2026)
 
-In der Einrichtung gibt es **„Spielweise“**: **„Nur Hauptgerät“** (alles wie bisher, Abschnitte 2.1–2.9
-unverändert) oder **„📱 Mit Handys“**. Die Wahl wird mit den Einstellungen gespeichert (`phoneMode`).
-Im Handy-Modus bedienen die Spieler alles am eigenen Handy, das Hauptgerät (z. B. MacBook) zeigt die
-große, „kinoartige“ Ansicht und spielt die Musik. Punkte, Wertung, Sieger, Sudden Death, Serie und
-Turnier bleiben genau wie im Original.
+In der Einrichtung steht **„Wie wird gesteuert?“**: **„🖥 An diesem Gerät“** (alles wie bisher,
+Abschnitte 2.1–2.9 unverändert) oder **„📱 Mit den Handys“**. Die Wahl wird mit den Einstellungen
+gespeichert (`phoneMode`). Im Handy-Modus steuern die Spieler alles am eigenen Handy, das Hauptgerät
+(z. B. MacBook) ist die große, „kinoartige“ Bühne und spielt die Musik. Punkte, Wertung, Sieger,
+Sudden Death, Serie und Turnier bleiben genau wie im Original. Zwischen den Szenen gibt es kurze
+Kino-Überblendungen (schwarze Blenden mit Titelkarte, z. B. „Runde 1“, „P2 ist dran“, „VS“).
 
-1. **Koppeln:** In der Einrichtung erscheinen QR-Code, Spielcode und pro Spieler „verbunden/wartet“.
-   Zuschauer können jederzeit dazukommen, auch mitten in der Runde (kleiner QR-Code unten rechts).
-2. **Ziehen:** gleiche Reihenfolge und Regeln wie in 2.3. Wer dran ist, dreht und setzt am Handy.
-   Das Hauptgerät zeigt groß das Rad, darunter die Plätze des Spielers am Zug und klein die der anderen.
-   Ist das Handy des Spielers nicht verbunden, geht es wie gewohnt am Hauptgerät weiter.
+1. **Koppeln:** In der Einrichtung erscheinen QR-Code, Spielcode, der Verbindungslink (kopieren/teilen)
+   und pro Spieler „verbunden/wartet“. Zuschauer können jederzeit dazukommen, auch mitten in der Runde
+   (kleiner QR-Code unten rechts).
+2. **Ziehen:** gleiche Reihenfolge und Regeln wie in 2.3. Am Hauptgerät steht oben groß der Spieler am
+   Zug mit seinem Spielfeld, darunter klein die Spielfelder der anderen. Wer dran ist, hat am Handy nur
+   den Knopf zum Drehen; dann wird das Rad groß am Hauptgerät eingeblendet und klein am Handy gezeigt.
+   Nach der Enthüllung verschwindet das Rad, der Spieler setzt den Künstler am Handy.
+   Ist sein Handy nicht verbunden, wird wie gewohnt am Hauptgerät gedreht und gesetzt.
 3. **Songwahl „Vor jedem Duell“:** Alle Teilnehmer wählen **gleichzeitig** am Handy und tippen
    „Fertig“ (danach noch änderbar). Das Hauptgerät zeigt nur Kacheln „P1 wählt …“ / „✓ bereit“, keine
    Songs. Fallback: „am Hauptgerät wählen“ pro Spieler und „Nicht warten – mit den gewählten Songs weiter“.
    **„Alle vorab“:** Jeder wählt alle seine Songs am Handy und tippt „Fertig“.
-4. **Abspielen (neu):** Wenn alle fertig sind, laufen die Songs des Duells **nacheinander** am
-   Hauptgerät, jeweils automatisch **30 Sekunden** (endet die Hörprobe früher, geht es früher weiter;
-   ohne Hörprobe 6 Sekunden). Groß zu sehen: Platte mit Cover, Titel, Künstler und „gewählt von“.
-   „Nächster Song ⏭“ springt weiter, „Pause“ hält an.
+4. **Aufdecken (neu):** Wenn alle gewählt haben („Alle haben gewählt“), ist Spieler für Spieler dran.
+   Am Hauptgerät steht groß nur dieser Spieler mit Künstler und verdeckter Platte („Noch geheim“).
+   Er drückt am Handy **Play**: Titel und Cover erscheinen, der Song läuft am Hauptgerät (30-Sek-Vorschau).
+   Am Handy gibt es Pause/weiter abspielen und **„Weiter“**. Nach 30 Sekunden (oder wenn die Vorschau
+   endet; ohne Vorschau nach 8 Sekunden) ist automatisch der Nächste dran.
    **Reihenfolge:** Sie rückt mit jedem Duell um eins weiter (Duell 1: P1, P2, P3 · Duell 2: P2, P3, P1 · …).
    Das Hin und Her (Schlange) gibt es im Handy-Modus nur noch beim Ziehen der Künstler.
-5. **Abstimmen:** Schon während die Songs laufen, stimmt jedes Handy ab. Das Handy zeigt alle Songs
-   mit „P2 hat gewählt“, Cover, Titel und Künstler; der laufende Song ist mit „▶ läuft gerade“ markiert,
-   noch nicht gespielte Songs bleiben bis dahin geheim („Überraschung …“).
-6. **Entscheidung:** Nach dem letzten Song folgt der gewohnte Duell-Bildschirm (2.6): Abstimmung
-   schließen, Sieger bestätigen, Stimmengleichheit, Sudden Death – alles wie gehabt.
+5. **Versus:** Wenn alle aufgedeckt haben, kommt der Duell-Bildschirm (2.6) – aber nur mit den gewählten
+   Songs (ohne „30 Sek“, Spotify und YouTube). **Erst jetzt wird abgestimmt**, am Handy. Unter jedem
+   Song steht, wer per Handy dafür gestimmt hat (Spieler mit Bild und Name, Zuschauer als „🙋 n Publikum“,
+   Stimmen vom Hauptgerät als „🖥 +n“). Abstimmung schließen, Sieger bestätigen, Stimmengleichheit,
+   Sudden Death – alles wie gehabt.
+6. **Handy:** „Dein Line-up“ steht immer unten (Plätze, Künstler, Songs, „jetzt“). Beim Aufdecken sehen
+   alle die Reihenfolge, was gerade läuft („läuft gerade“) und welche Songs noch geheim sind.

@@ -222,10 +222,10 @@ export function Setup({ S }: { S: State }) {
         <p className="lede">Blind ranken. Song für Song. Bis einer krönt.</p>
       </div>
       <section className="card scard" data-card="mode">
-        <Seg id="phoneMode" label="Spielweise" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[{ v: '0', t: 'Nur Hauptgerät' }, { v: '1', t: '📱 Mit Handys' }]} />
+        <Seg id="phoneMode" label="Wie wird gesteuert?" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[{ v: '0', t: '🖥 An diesem Gerät' }, { v: '1', t: '📱 Mit den Handys' }]} />
         <p className="hint" style={{ textAlign: 'left', margin: '10px 0 0' }}>
           {S.phoneMode
-            ? 'Jeder spielt am eigenen Handy: drehen, setzen und Songs wählen. Dieses Gerät zeigt das Spiel groß und spielt die Musik.'
+            ? 'Jeder steuert am eigenen Handy: drehen, setzen, Songs wählen, aufdecken und abstimmen. Dieses Gerät ist die große Bühne und spielt die Musik.'
             : 'Alles wird an diesem Gerät gespielt. Handys können trotzdem zum Abstimmen dazukommen (📱 oben).'}
         </p>
         {S.phoneMode ? <PairPanel /> : null}
