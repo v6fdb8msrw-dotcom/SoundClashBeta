@@ -6,7 +6,7 @@ import { expect, test } from '@playwright/test'
  */
 test('PWA · installierbar, eigener Scope, startet offline', async ({ page, context, baseURL }) => {
   await page.goto('')
-  await page.locator('[data-go="setup"]').waitFor()
+  await page.locator('#startBtn').waitFor()
   const sw = await page.evaluate(async () => {
     const reg = await navigator.serviceWorker.ready
     return { scope: reg.scope, active: !!reg.active }
@@ -36,8 +36,7 @@ test('PWA · installierbar, eigener Scope, startet offline', async ({ page, cont
   await page.waitForTimeout(1500)
   await context.setOffline(true)
   await page.reload()
-  await expect(page.locator('[data-go="setup"]')).toBeVisible()
-  await page.locator('[data-go="setup"]').click()
+  await expect(page.locator('#startBtn')).toBeVisible()
   await expect(page.locator('#alist [data-add]').first()).toBeVisible()
   await expect(page.locator('#startBtn')).toBeVisible()
   const fontsOk = await page.evaluate(async () => {

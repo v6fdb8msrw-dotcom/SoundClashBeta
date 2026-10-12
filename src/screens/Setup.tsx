@@ -6,7 +6,7 @@ import { dispatch, env } from '../app/store'
 import { avatarPool, isT, pcol, picks, pname, tSize, type PickId } from '../core/game'
 import type { State } from '../core/types'
 import { GEN, ak, fansOf, realName } from '../services/catalog'
-import { ArtImg, AvImg, Btn, Presence, Sel, type Opt } from '../ui/primitives'
+import { ArtImg, AvImg, Btn, Presence, Seg, Sel, type Opt } from '../ui/primitives'
 import { Warn } from '../ui/Warn'
 
 const pick = (id: PickId) => (v: string) => dispatch({ type: 'pick', id, v })
@@ -123,12 +123,18 @@ function ArtistList({ S }: { S: State }) {
 
 function PlayersCard({ S }: { S: State }) {
   const pool = avatarPool(S)
+  const [open, setOpen] = useState<number | null>(null)
   const rows = []
   for (let p = 1; p <= S.players; p++) {
     rows.push(
-      <motion.div className="prow" key={p} layout initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }} style={{ ['--pc' as string]: pcol(S, p) }}>
+      <div className={'prow' + (open === p ? ' open' : '')} key={p} style={{ ['--pc' as string]: pcol(S, p) }}>
         <div className="ptop">
-          <AvImg S={S} p={p} className="pav" />
+          <button type="button" className="pav-btn" data-avtoggle={p} aria-expanded={open === p} onClick={() => setOpen(open === p ? null : p)} title="Avatar ändern">
+            <AvImg S={S} p={p} className="pav" />
+            <span className="pav-edit" aria-hidden>
+              ✎
+            </span>
+          </button>
           <NameInput data-nm={p} value={pname(S, p)} onValue={(v) => dispatch({ type: 'name', p, value: v })} aria-label={'Name Spieler ' + p} />
         </div>
         <div className="avgrid" style={{ ['--ac' as string]: pcol(S, p) }}>
@@ -136,7 +142,7 @@ function PlayersCard({ S }: { S: State }) {
             let tk = false
             for (let q = 1; q <= S.players; q++) if (q !== p && S.avatar[q] === a) tk = true
             return (
-              <button type="button" key={i} data-av={p} data-i={i} className={S.avatar[p] === a ? 'on' : ''} disabled={tk} onClick={() => dispatch({ type: 'avatar', p, i })}>
+              <button type="button" key={i} data-av={p} data-i={i} className={S.avatar[p] === a ? 'on' : ''} disabled={tk} onClick={() => (dispatch({ type: 'avatar', p, i }), setOpen(null))}>
                 <img src={a} alt="" loading="lazy" />
               </button>
             )
@@ -145,186 +151,149 @@ function PlayersCard({ S }: { S: State }) {
             +
           </button>
         </div>
-      </motion.div>,
+      </div>,
     )
   }
   return (
-    <div className="card scard" data-card="players">
-      <p className="eyebrow" style={{ marginBottom: 14 }}>
-        — avatar &amp; farbe wählen
-      </p>
-      {rows}
-    </div>
+    <section className="card scard" data-card="players">
+      <div className="cardhead">
+        <h2 style={{ margin: 0 }}>Spieler</h2>
+      </div>
+      <Seg id="players" label="Wie viele?" value={S.players} onPick={pick('players')} opts={[2, 3, 4, 5, 6].map((v) => ({ v, t: String(v) }))} />
+      <div className="plist">{rows}</div>
+    </section>
   )
 }
 
 function RosterCard({ S }: { S: State }) {
   const pool = avatarPool(S)
+  const [open, setOpen] = useState<number | null>(null)
   return (
-    <div className="card scard" data-card="players">
-      <p className="eyebrow" style={{ marginBottom: 14 }}>
-        — kader ({tSize(S)} spieler)
-      </p>
-      {S.T!.roster.map((r, i) => (
-        <div className="prow" key={i} style={{ ['--pc' as string]: r.col }}>
-          <div className="ptop">
-            <img className="pav" src={r.av} alt="" style={{ ['--pc' as string]: r.col }} />
-            <NameInput data-tn={i} value={r.name} onValue={(v) => dispatch({ type: 'tName', i, value: v })} aria-label={'Name Kaderplatz ' + (i + 1)} />
+    <section className="card scard" data-card="players">
+      <div className="cardhead">
+        <h2 style={{ margin: 0 }}>Kader</h2>
+        <span className="kader-n">{tSize(S)} Spieler · Turnierbaum</span>
+      </div>
+      <div className="plist">
+        {S.T!.roster.map((r, i) => (
+          <div className={'prow' + (open === i ? ' open' : '')} key={i} style={{ ['--pc' as string]: r.col }}>
+            <div className="ptop">
+              <button type="button" className="pav-btn" data-tavtoggle={i} aria-expanded={open === i} onClick={() => setOpen(open === i ? null : i)} title="Avatar ändern">
+                <img className="pav" src={r.av} alt="" style={{ ['--pc' as string]: r.col }} />
+                <span className="pav-edit" aria-hidden>
+                  ✎
+                </span>
+              </button>
+              <NameInput data-tn={i} value={r.name} onValue={(v) => dispatch({ type: 'tName', i, value: v })} aria-label={'Name Kaderplatz ' + (i + 1)} />
+            </div>
+            <div className="avgrid" style={{ ['--ac' as string]: r.col }}>
+              {pool.map((a, j) => {
+                const tk = pool.length >= tSize(S) && S.T!.roster.some((o, k) => k !== i && o.av === a)
+                return (
+                  <button type="button" key={j} data-tav={i} data-i={j} className={r.av === a ? 'on' : ''} disabled={tk} onClick={() => (dispatch({ type: 'tAvatar', i, j }), setOpen(null))}>
+                    <img src={a} alt="" loading="lazy" />
+                  </button>
+                )
+              })}
+              <button type="button" className="upav" data-tup={i} title="Eigenes Bild hochladen" onClick={() => uploadAvatar(-1 - i)}>
+                +
+              </button>
+            </div>
           </div>
-          <div className="avgrid" style={{ ['--ac' as string]: r.col }}>
-            {pool.map((a, j) => {
-              const tk = pool.length >= tSize(S) && S.T!.roster.some((o, k) => k !== i && o.av === a)
-              return (
-                <button type="button" key={j} data-tav={i} data-i={j} className={r.av === a ? 'on' : ''} disabled={tk} onClick={() => dispatch({ type: 'tAvatar', i, j })}>
-                  <img src={a} alt="" loading="lazy" />
-                </button>
-              )
-            })}
-            <button type="button" className="upav" data-tup={i} title="Eigenes Bild hochladen" onClick={() => uploadAvatar(-1 - i)}>
-              +
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   )
 }
 
 export function Setup({ S }: { S: State }) {
-  const swipe = useRef<{ x: number; y: number } | null>(null)
   const need = picks(S)
+  const [adv, setAdv] = useState(false)
   const genreOpts: Opt[] = Object.keys(GEN).map((k) => ({ v: k, t: GEN[k].label }))
-  const tabs: [State['setupTab'], React.ReactNode][] = [
-    ['cfg', 'Einstellungen'],
-    ['players', isT(S) ? 'Kader' : 'Spieler'],
-    [
-      'pool',
-      <>
-        Künstler <span className="cnt">{S.pool.length}</span>
-      </>,
-    ],
-  ]
   return (
-    <>
-      <button className="backlink" data-go="home" onClick={() => dispatch({ type: 'go', to: 'home' })}>
-        ← Menü
-      </button>
+    <div className="setup">
       <Warn S={S} />
       <div className="setup-head">
-        <div>
-          <p className="eyebrow">— neues match</p>
-          <h2 className="display">
-            Sound <em>Clash</em>
-          </h2>
-          <p className="lede">Blind ranken. Song für Song. Bis einer krönt.</p>
-        </div>
-        <div className="sparkle" aria-hidden>
-          ✦
-        </div>
+        <p className="eyebrow">— neues match</p>
+        <h2 className="display">
+          Sound <em>Clash</em>
+        </h2>
+        <p className="lede">Blind ranken. Song für Song. Bis einer krönt.</p>
       </div>
-      <div className="setuptabs" role="tablist">
-        {tabs.map(([k, t]) => (
-          <button key={k} role="tab" aria-selected={S.setupTab === k} className={'stab' + (S.setupTab === k ? ' on' : '')} data-stab={k} onClick={() => dispatch({ type: 'setupTab', tab: k })}>
-            {S.setupTab === k ? <motion.span layoutId="stab-ind" className="stab-ind" transition={{ type: 'spring', stiffness: 420, damping: 34 }} /> : null}
-            <span className="stab-t">{t}</span>
-          </button>
-        ))}
-      </div>
-      <div
-        className="grid2 setupgrid"
-        data-tab={S.setupTab}
-        onTouchStart={(e) => (swipe.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
-        onTouchEnd={(e) => {
-          // iPhone: seitlich wischen wechselt zwischen Einstellungen, Spieler und Künstler
-          const s0 = swipe.current
-          swipe.current = null
-          if (!s0 || !window.matchMedia('(max-width:720px)').matches) return
-          const t = e.changedTouches[0],
-            dx = t.clientX - s0.x,
-            dy = t.clientY - s0.y
-          if (Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.6) return
-          if ((e.target as HTMLElement).closest('.alist, .avgrid, .selmenu, input')) return
-          const order: State['setupTab'][] = ['cfg', 'players', 'pool']
-          const k = order.indexOf(S.setupTab) + (dx < 0 ? 1 : -1)
-          if (k >= 0 && k < order.length) dispatch({ type: 'setupTab', tab: order[k] })
-        }}
-      >
-        <div>
-          <div className="card scard" data-card="cfg">
-            <div className="g2">
-              <Sel id="mode" label="Spielart" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Clash (alle gegen alle)' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
-              {isT(S) ? (
-                <Sel id="_x" label="Spieler" value={String(tSize(S))} onPick={pick('_x')} opts={[{ v: String(tSize(S)), t: tSize(S) + ' (Turnierbaum)' }]} />
-              ) : (
-                <Sel id="players" label="Spieler" value={S.players} onPick={pick('players')} opts={[2, 3, 4, 5, 6].map((v) => ({ v, t: String(v) }))} />
-              )}
-              <Sel id="size" label="Songs pro Spieler" value={S.size} onPick={pick('size')} opts={[5, 7, 10, 15].map((v) => ({ v, t: String(v) }))} />
-              <Sel id="series" label="Spielmodus" value={S.series} onPick={pick('series')} opts={[{ v: 'single', t: 'Einzelrunde' }, { v: 'bo3', t: 'Best of 3' }, { v: 'bo5', t: 'Best of 5' }]} />
-              <Sel id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
-              <Sel id="sameArtist" label="Spielmodus" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Normal — jeder eigene Künstler' }, { v: '1', t: 'Gleicher Künstler für alle' }]} />
-              <Sel id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam antippen' }, { v: '1', t: 'Publikum stimmt ab' }]} />
-              <Sel id="pickSec" label="Pick-Timer (optional)" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Aus' }, { v: '30', t: '30 Sek' }, { v: '45', t: '45 Sek' }, { v: '60', t: '60 Sek' }]} />
-              <Sel id="ambience" label="Album-Wand-Puls" value={S.ambience ? '1' : '0'} onPick={pick('ambience')} opts={[{ v: '1', t: 'An — Wand pulsiert zum Song' }, { v: '0', t: 'Aus' }]} />
-              <Sel id="autoScroll" label="Auto-Scroll (Desktop)" value={S.autoScroll ? '1' : '0'} onPick={pick('autoScroll')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
-            </div>
-          </div>
-          {isT(S) ? <RosterCard S={S} /> : <PlayersCard S={S} />}
+      {isT(S) ? <RosterCard S={S} /> : <PlayersCard S={S} />}
+      <section className="card scard" data-card="cfg">
+        <div className="cardhead">
+          <h2 style={{ margin: 0 }}>Regeln</h2>
         </div>
-        <div data-card="pool">
-          <div className="card pool-card">
-            <div className="cardhead">
-              <h2 style={{ margin: 0 }}>Künstler-Topf</h2>
-              <motion.span className="pill" key={S.pool.length} initial={{ scale: 1.25 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 500, damping: 18 }}>
-                ♪ <b>{S.pool.length}</b> im Topf
-              </motion.span>
-            </div>
-            <div className="g2" style={{ marginBottom: 16 }}>
-              <Sel id="genre" label="Genre wählen" value={S.genre || ''} onPick={pick('genre')} opts={genreOpts} />
-              <div className="field">
-                <label htmlFor="asearch">Künstler suchen…</label>
-                <div className="searchwrap">
-                  <span className="mag" aria-hidden>
-                    ⌕
-                  </span>
-                  <input key={S.genre} type="text" id="asearch" placeholder="Künstler suchen…" autoComplete="off" onChange={(e) => onSearch(e.target.value, S.genre)} />
-                </div>
-              </div>
-            </div>
-            <ArtistList S={S} />
-            {S.pool.length ? (
-              <>
-                <p className="kicker" style={{ margin: '20px 0 8px' }}>
-                  Im Topf · {S.pool.length}
-                </p>
-                <div className="alist pool-list" style={{ maxHeight: 230 }}>
-                  <Presence>
-                    {S.pool.map((a) => (
-                      <motion.div className="arow" key={a} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={env.reduce ? undefined : { opacity: 0, scale: 0.85, transition: { duration: 0.14 } }}>
-                        <ArtImg n={a} />
-                        <span className="meta">
-                          <span className="nm">{a}</span>
-                          <span className="sub">Artist</span>
-                        </span>
-                        <button className="act rm" data-rm={a} onClick={() => dispatch({ type: 'poolRemove', name: a })} aria-label={'Entfernen: ' + a}>
-                          ✕
-                        </button>
-                      </motion.div>
-                    ))}
-                  </Presence>
-                </div>
-              </>
-            ) : null}
-          </div>
-          <div className="startbar">
-            <span className="hint" style={{ margin: 0, textAlign: 'left' }}>
-              Mindestens {need} Künstler in den Topf legen.
-            </span>
-            <Btn id="startBtn" className={S.pool.length >= need ? 'ready' : ''} disabled={S.pool.length < need} onClick={() => dispatch({ type: 'start' })}>
-              Match starten →
-            </Btn>
+        <div className="g2">
+          <Seg id="size" label="Songs pro Spieler" value={S.size} onPick={pick('size')} opts={[5, 7, 10, 15].map((v) => ({ v, t: String(v) }))} />
+          <Seg id="series" label="Spielmodus" value={S.series} onPick={pick('series')} opts={[{ v: 'single', t: 'Einzelrunde' }, { v: 'bo3', t: 'Best of 3' }, { v: 'bo5', t: 'Best of 5' }]} />
+          <Seg id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
+          <Seg id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam antippen' }, { v: '1', t: 'Publikum stimmt ab' }]} />
+        </div>
+        <button type="button" className={'advtoggle' + (adv ? ' on' : '')} id="advToggle" aria-expanded={adv} onClick={() => setAdv((a) => !a)}>
+          Mehr Optionen <span className="chev">▾</span>
+        </button>
+        <div className={'adv' + (adv ? ' open' : '')} aria-hidden={!adv}>
+          <div className="g2">
+            <Sel id="mode" label="Spielart" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Clash (alle gegen alle)' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
+            <Sel id="sameArtist" label="Künstler" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Normal \u2014 jeder eigene K\u00fcnstler' }, { v: '1', t: 'Gleicher K\u00fcnstler f\u00fcr alle' }]} />
+            <Seg id="pickSec" label="Pick-Timer" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Aus' }, { v: '30', t: '30 Sek' }, { v: '45', t: '45 Sek' }, { v: '60', t: '60 Sek' }]} />
+            <Seg id="ambience" label="Album-Wand-Puls" value={S.ambience ? '1' : '0'} onPick={pick('ambience')} opts={[{ v: '1', t: 'An — Wand pulsiert zum Song' }, { v: '0', t: 'Aus' }]} />
+            <Seg id="autoScroll" label="Auto-Scroll (Desktop)" value={S.autoScroll ? '1' : '0'} onPick={pick('autoScroll')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
+            {isT(S) ? <Sel id="_x" label="Spieler" value={String(tSize(S))} onPick={pick('_x')} opts={[{ v: String(tSize(S)), t: tSize(S) + ' (Turnierbaum)' }]} /> : null}
           </div>
         </div>
+      </section>
+      <section className="card pool-card" data-card="pool">
+        <div className="cardhead">
+          <h2 style={{ margin: 0 }}>Künstler-Topf</h2>
+          <motion.span className="pill" key={S.pool.length} initial={env.reduce ? false : { scale: 1.25 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 500, damping: 18 }}>
+            ♪ <b>{S.pool.length}</b> im Topf
+          </motion.span>
+        </div>
+        <div className="g2" style={{ marginBottom: 14 }}>
+          <Sel id="genre" label="Genre wählen" value={S.genre || ''} onPick={pick('genre')} opts={genreOpts} />
+          <div className="field">
+            <label htmlFor="asearch">Künstler suchen…</label>
+            <div className="searchwrap">
+              <span className="mag" aria-hidden>
+                ⌕
+              </span>
+              <input key={S.genre} type="text" id="asearch" placeholder="Künstler suchen…" autoComplete="off" onChange={(e) => onSearch(e.target.value, S.genre)} />
+            </div>
+          </div>
+        </div>
+        <ArtistList S={S} />
+        {S.pool.length ? (
+          <>
+            <p className="kicker" style={{ margin: '18px 0 8px' }}>
+              Im Topf · {S.pool.length}
+            </p>
+            <div className="poolchips">
+              <Presence>
+                {S.pool.map((a) => (
+                  <motion.span className="pchip-pool" key={a} layout={!env.reduce} initial={env.reduce ? false : { opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={env.reduce ? undefined : { opacity: 0, scale: 0.7, transition: { duration: 0.12 } }}>
+                    <ArtImg n={a} />
+                    <span className="nm">{a}</span>
+                    <button className="act rm" data-rm={a} onClick={() => dispatch({ type: 'poolRemove', name: a })} aria-label={'Entfernen: ' + a}>
+                      ✕
+                    </button>
+                  </motion.span>
+                ))}
+              </Presence>
+            </div>
+          </>
+        ) : null}
+      </section>
+      <div className="startbar">
+        <span className="hint" style={{ margin: 0, textAlign: 'left' }}>
+          Mindestens {need} Künstler in den Topf legen.
+        </span>
+        <Btn id="startBtn" className={S.pool.length >= need ? 'ready' : ''} disabled={S.pool.length < need} onClick={() => dispatch({ type: 'start' })}>
+          Match starten →
+        </Btn>
       </div>
-    </>
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 import { bus } from '../app/bus'
-import { pcol, pname, score, winnerRecords, wins } from '../core/game'
+import { pcol, pname, roundScore, winnerRecords, wins } from '../core/game'
 import type { State } from '../core/types'
 import { picBigOf, picOf } from '../services/catalog'
 
@@ -46,7 +46,7 @@ function shareImg(S: State): HTMLCanvasElement {
   x.font = 'italic 700 64px Georgia,serif'
   x.fillText('Sound Clash', 540, 130)
   const rk: { p: number; w: number; s: number }[] = []
-  for (let p = 1; p <= S.players; p++) rk.push({ p, w: wins(S, p), s: score(S, p) })
+  for (let p = 1; p <= S.players; p++) rk.push({ p, w: wins(S, p), s: roundScore(S, p) })
   rk.sort((a, b) => b.w - a.w || b.s - a.s)
   const champ = rk[0]
   x.fillStyle = mu
@@ -99,8 +99,7 @@ function shareImg(S: State): HTMLCanvasElement {
         x.fill()
         x.fillStyle = mu
         x.font = '600 20px Manrope,Arial'
-        // Original: (r.artist||"").slice(0,10) – bei der SD-Platte ist artist der Wert true (siehe MECHANIK.md)
-        x.fillText(((r.artist || '') as unknown as string).slice(0, 10), px + size / 2, sy + size / 2)
+        x.fillText(String(r.artist || '').slice(0, 10), px + size / 2, sy + size / 2)
       }
       x.strokeStyle = pcol(S, r.p)
       x.lineWidth = 3
@@ -174,7 +173,7 @@ export function share(S: State) {
 function doShare(S: State) {
   const cv = shareImg(S),
     ls: string[] = []
-  for (let p = 1; p <= S.players; p++) ls.push(pname(S, p) + ': ' + wins(S, p) + ' Runden · ' + score(S, p) + ' pts')
+  for (let p = 1; p <= S.players; p++) ls.push(pname(S, p) + ': ' + wins(S, p) + ' Runden · ' + roundScore(S, p) + ' pts')
   const text = '🏆 Sound Clash — Endstand\n' + ls.join(' · ')
   cv.toBlob(async (b) => {
     if (!b) return

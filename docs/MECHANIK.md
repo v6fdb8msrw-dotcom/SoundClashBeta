@@ -291,23 +291,37 @@ Hintergründe: Künstler-Mosaik, Plattenspieler, Mosaik + Plattenspieler, Aurora
 Aurora + Plattenspieler. Themes: Silk Sonic, Graduation, IGOR, SOS, Long. Live. A$AP, After Hours,
 Blonde, Currents, Nectar, Warm Lime, Sky Mint, Emerald, Ultra Violet.
 
-## 9. Auffälligkeiten im Original (bewusst unverändert)
+## 9. Korrekturen gegenüber dem Original (von Tim freigegeben, 12.10.2026)
 
-1. **Turnier verbraucht den Topf:** Jedes Match zieht seine Künstler aus demselben Topf. Mit nur der
-   geforderten Mindestzahl ist der Topf ab dem zweiten Match leer und das Rad steht („Topf ist leer“).
-   Für 3 Matches (Turnier 4) braucht es 3 × 2 × N Künstler.
-2. **Turnier mit Best of 3/5:** „Nächste Runde“ führt ins Setup; „Match starten“ legt dort einen
-   neuen Turnierbaum an.
-3. **Nach Sudden Death** zeigt der Rundenbildschirm nur die SD-Punkte („Von 1“) und im Rückblick nur
-   die SD-Zeile; der Endstand vergleicht ebenfalls diese Punkte.
-4. **Auto-Scroll** wird geladen, aber nie gespeichert (nach Neustart wieder „An“). Pick-Timer ebenso.
-5. **Sudden Death bei 3+ Spielern:** nur die Gleichstehenden spielen; im Rückblick erscheinen die
-   anderen ohne Zeilen.
-6. Der Regeltext erwähnt „Respins“, die es im Spiel nicht gibt.
-7. Startet das Spiel mit gespeichertem Turniermodus, aber ohne passend großen gespeicherten Kader,
-   bekommt der neue Kader die Farben für das Standard-Theme (Silk Sonic), bis das Theme gewechselt wird.
-8. **Sudden-Death-Platte:** In „Die Platten des Abends“ trägt die entscheidende SD-Platte als Künstler
-   den Wert `true` (Code: `artist:S.sd`). Ohne Songtitel steht dort deshalb „true“. Beim Teilen-Bild
-   führt eine solche Platte ohne Cover zu einem Fehler, das Bild wird dann nicht erstellt.
-9. Sudden Death bei gemeinsamer Abstimmung mit Gleichstand: Die Auswahlknöpfe zeigen alle Spieler,
-   auch die, die im Sudden Death nicht antreten.
+Beim Umbau fielen Fehler im Original auf. Tim hat entschieden: Sie sollen **richtig** sein.
+Die neue Fassung weicht deshalb genau an diesen Stellen ab. Die Tests vergleichen dort mit eigenen
+Referenzen (`tests/golden/neu/`), alles andere weiter mit dem Original.
+
+1. **Turnier-Topf:** Beim Turnierstart wird der Topf gemerkt. Jedes Match startet wieder mit diesem
+   vollen Topf. Vorher war er nach dem ersten Match leer und das Rad stand.
+2. **Turnier mit Best of 3/5:** „Nächste Runde“ spielt dieselbe Paarung direkt weiter
+   (voller Turnier-Topf, Toast „Neue Runde — gleiche Paarung, voller Topf.“). Vorher ging es ins Setup,
+   und „Match starten“ legte einen neuen Turnierbaum an.
+3. **Punkte nach Sudden Death:** Rundenpunkte = reguläre Punkte + Sudden-Death-Punkt; „Von“ = N + Doppelplätze + 1.
+   Das gilt für Duell-Kopf, Rundenbildschirm, Endstand, Teilen-Bild, Rivalität und den Sieger eines
+   Turnier-Matches. Der Rückblick zeigt die ganze Runde plus die SD-Zeile. Wer die Runde gewinnt,
+   entscheidet weiterhin das Sudden-Death-Duell.
+4. **Sudden-Death-Platte:** In „Die Platten des Abends“ steht jetzt der SD-Künstler (vorher „true“).
+   Das Teilen-Bild bricht nicht mehr ab.
+5. **Pick-Timer und Auto-Scroll** werden gespeichert (`pickSec`, `autoScroll` in den Einstellungen).
+6. **Spielanleitung** korrigiert: keine „Respins“, richtige Angaben zu Farbe und Hintergrund, 30 Kategorien,
+   die *letzten* Plätze zählen doppelt, Sudden Death wie tatsächlich gespielt.
+7. **Hinweistexte** sprechen nicht mehr von „Vorschau im Chat / Datei herunterladen“.
+8. **Stimmengleichheit im Sudden Death:** Die Auswahlknöpfe zeigen nur noch die Spieler, die antreten.
+9. **Kaderfarben** passen nach dem Laden zum gespeicherten Theme.
+10. **Doppeltipp-Schutz:** Nach „… gewinnt →“ sind die Duellkarten während des Ausblendens (0,9 s)
+    gesperrt, sodass ein Doppeltipp kein Duell überspringt.
+
+## 10. Oberfläche (Tims Vorgaben, 12.10.2026)
+
+- Es gibt nur noch **Sound Clash**. Die App startet direkt in der Sound-Clash-Einrichtung, das Logo
+  führt dorthin zurück. **Guess the Song, Timeline Masters, Jahrzehnt-Duell und Sing it Back** sind
+  ausgeblendet: Die Logik bleibt im Code (`src/core/game.ts`), die Bildschirme liegen ungenutzt in `src/screens/`.
+- Die Einrichtung ist vereinfacht. Spieler, Regeln und Künstler-Topf stehen untereinander, seltene
+  Optionen unter „Mehr Optionen“. Farbe, Hintergrund, Ton, Spielanleitung und Spielstand liegen im
+  Menü oben rechts. Alle Funktionen sind erhalten.

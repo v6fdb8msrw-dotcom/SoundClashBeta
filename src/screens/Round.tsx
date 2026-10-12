@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { dispatch, env } from '../app/store'
-import { isT, leader, pcol, pname, score, target, totalPts, wins } from '../core/game'
+import { isT, leader, pcol, pname, roundMax, roundScore, target, wins } from '../core/game'
 import type { State } from '../core/types'
 import { AvImg, Btn, Tilt } from '../ui/primitives'
 import { CountUp, Recap } from './Results'
@@ -8,7 +8,7 @@ import { CountUp, Recap } from './Results'
 /** Rundenende (roundScreen im Original). */
 export function Round({ S }: { S: State }) {
   const sc: { p: number; s: number }[] = []
-  for (let p = 1; p <= S.players; p++) sc.push({ p, s: score(S, p) })
+  for (let p = 1; p <= S.players; p++) sc.push({ p, s: roundScore(S, p) })
   const mx = Math.max(...sc.map((x) => x.s)),
     w = sc.find((x) => x.s === mx)!.p,
     ld = leader(S)
@@ -36,11 +36,11 @@ export function Round({ S }: { S: State }) {
               <div className="stats">
                 <div>
                   <div className="k">Punkte diese Runde</div>
-                  <CountUp className="v hi" to={score(S, p)} k={'rp' + p} />
+                  <CountUp className="v hi" to={roundScore(S, p)} k={'rp' + p} />
                 </div>
                 <div>
                   <div className="k">Von</div>
-                  <div className="v">{S.sd ? 1 : totalPts(S)}</div>
+                  <div className="v">{roundMax(S)}</div>
                 </div>
                 <div>
                   <div className="k">Rundensiege</div>

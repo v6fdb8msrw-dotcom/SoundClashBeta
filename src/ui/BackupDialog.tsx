@@ -53,7 +53,7 @@ export function BackupDialog({ onClose }: { onClose: () => void }) {
     reloadRivalry()
     // Einstellungen neu laden; eine laufende Partie endet, deshalb zurück zum Start
     dispatch({ type: 'load', saved: loadSettings() })
-    if (getState().screen !== 'home') dispatch({ type: 'go', to: 'home' })
+    if (getState().screen !== 'setup') dispatch({ type: 'go', to: 'setup' })
     bus.emit('toast', 'Spielstand übernommen.')
     onClose()
   }

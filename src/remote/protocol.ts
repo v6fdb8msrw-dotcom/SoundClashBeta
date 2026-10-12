@@ -1,4 +1,4 @@
-import { drawer, N, parts, pcol, pickOrder, pname, pts, score, target, wins } from '../core/game'
+import { drawer, N, parts, pcol, pickOrder, pname, pts, roundScore, target, wins } from '../core/game'
 import type { State, Track } from '../core/types'
 import { picOf } from '../services/catalog'
 
@@ -77,7 +77,7 @@ export function buildView(S: State): HostView {
   const pics: Record<string, string> = {}
   for (const p of players) {
     colors[p] = pcol(S, p)
-    scores[p] = score(S, p)
+    scores[p] = roundScore(S, p)
     w[p] = wins(S, p)
     songs[p] = (S.songs[p] || []).map((so) => (so ? { title: so.title, cover: so.cover, dur: so.dur } : null))
     for (const a of S.lineup[p] || []) if (a) pics[a] = picOf(a)

@@ -8,7 +8,7 @@ test('Turnier · 4 Spieler · Kader umbenennen · drei Matches bis zum Turniersi
   app.record('speicher-nach-modus', await app.stored())
   await app.page.locator('[data-tn="0"]').fill('Anna')
   await app.page.locator('[data-tn="3"]').fill('Ben')
-  await app.page.locator('[data-tav="1"][data-i="4"]').click()
+  await app.rosterAvatar(1, 4)
   await app.select('genre', 'uk')
   await app.page.waitForTimeout(100)
   // Hinweis: Das Original verbraucht den Topf pro Match. Für drei Matches braucht es 30 Künstler.

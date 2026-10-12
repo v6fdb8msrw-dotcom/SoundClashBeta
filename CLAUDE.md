@@ -12,9 +12,18 @@ Deezer-Aufrufe dürfen sich **nicht** ändern – auch nicht „nebenbei verbess
 Fehler des Originals sind in `docs/MECHANIK.md` aufgelistet und bleiben, bis Tim etwas anderes sagt.
 Gestaltung und Animationen dürfen sich ändern.
 
+Ausnahme: Die von Tim freigegebenen Korrekturen in `docs/MECHANIK.md` §9 (Turnier-Topf, Punkte nach
+Sudden Death, gespeicherter Pick-Timer usw.). Weitere Abweichungen nur nach ausdrücklicher Freigabe.
+
 Prüfen: Die Verhaltenstests (`tests/*.spec.ts`) spielen dieselben Abläufe gegen Original und neue
-Fassung und vergleichen mit den Referenzen in `tests/golden` (erzeugt vom Original). Jede Änderung
-muss danach weiterhin grün sein.
+Fassung. Das Original wird mit `tests/golden` verglichen, die neue Fassung mit `tests/golden/neu`.
+Diese Referenzen unterscheiden sich vom Original nur durch die freigegebenen Korrekturen. Jede
+Änderung muss danach weiterhin grün sein.
+
+Nur **Sound Clash** ist sichtbar (Tims Wunsch): Start direkt in der Einrichtung. Guess the Song,
+Timeline, Jahrzehnt-Duell und Sing it Back sind ausgeblendet (Logik in `src/core`, Bildschirme ungenutzt
+in `src/screens`, Tests dafür nur gegen das Original). Das Interface soll schlicht bleiben (wie Muscle
+Studio): wenige Knöpfe, Menü oben rechts, seltene Optionen unter „Mehr Optionen“.
 
 ## Aufbau
 
@@ -36,7 +45,8 @@ Logik-Fluss: Oberfläche → `dispatch(action)` → `reduce()` in `src/core/game
 `env.rng`/`env.now`) → neuer Zustand + Effektliste → `runFx()` in `src/app/store.ts`.
 Damit die Tests beide Fassungen bedienen können, behält die neue Oberfläche die ids, `data-*`-Attribute
 und Klassennamen des Originals für Bedienelemente und Ergebnisanzeigen (z. B. `#startBtn`, `data-pl`,
-`.recap .rrow`). Diese nicht umbenennen.
+`.recap .rrow`). Diese nicht umbenennen. Der Testtreiber öffnet Menü, „Mehr Optionen“ und
+Avatar-Auswahl bei Bedarf selbst (`reveal()` in `tests/helpers/driver.ts`).
 
 ## Befehle
 
@@ -50,6 +60,7 @@ npx playwright test --project=neu      # nur gegen die neue Fassung
 npx playwright test --project=pwa      # Service Worker, Manifest, Offline-Start
 SHOTS=1 npx playwright test tests/screenshots.spec.ts --project=neu   # Bildschirmfotos nach docs/screenshots
 UPDATE_GOLDEN=1 npx playwright test --project=legacy                  # Referenzen neu aus dem Original
+UPDATE_GOLDEN_NEU=1 npx playwright test --project=neu                 # Referenzen der neuen Fassung (nur nach Freigabe!)
 npm run icons        # App-Icons aus public/logo.svg
 ```
 

@@ -41,7 +41,6 @@ test('Begleiter · koppeln, vom Handy drehen, setzen, Song wählen und abstimmen
   await host.locator('.modal-x').click()
 
   // Match vorbereiten
-  await host.locator('[data-go="setup"]').click()
   for (let i = 0; i < 10; i++) await host.locator('#alist [data-add]').filter({ hasText: '+' }).first().click()
   await host.locator('#startBtn').click()
 

@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
 import { dispatch, env } from '../app/store'
-import { parts, pcol, pname, pts, sameArt, score, sdArt, voteTotal } from '../core/game'
+import { parts, pcol, pname, pts, roundScore, sameArt, sdArt, voteTotal } from '../core/game'
 import type { State } from '../core/types'
 import { play } from '../services/audio'
 import { picBigOf, picOf } from '../services/catalog'
@@ -155,8 +155,8 @@ export function Duel({ S }: { S: State }) {
           {Array.from({ length: S.players }, (_, j) => j + 1).map((p) => (
             <span key={p} className="pill score" style={{ borderColor: pcol(S, p) }}>
               {pname(S, p)}:{' '}
-              <motion.b key={score(S, p)} initial={env.reduce ? false : { scale: 1.6, color: '#fff' }} animate={{ scale: 1, color: 'var(--text)' }}>
-                {score(S, p)}
+              <motion.b key={roundScore(S, p)} initial={env.reduce ? false : { scale: 1.6, color: '#fff' }} animate={{ scale: 1, color: 'var(--text)' }}>
+                {roundScore(S, p)}
               </motion.b>
             </span>
           ))}
@@ -205,7 +205,7 @@ export function Duel({ S }: { S: State }) {
                 <span className="hint" style={{ width: '100%', margin: '0 0 8px' }}>
                   Stimmengleichheit — tippt gemeinsam:
                 </span>
-                {Array.from({ length: S.players }, (_, j) => j + 1).map((q) => (
+                {parts(S).map((q) => (
                   <Btn key={q} style={{ background: pcol(S, q), color: '#160806' }} data-vwin={q} onClick={() => dispatch({ type: 'vwin', p: q })}>
                     {pname(S, q)}
                   </Btn>

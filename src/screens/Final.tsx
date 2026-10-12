@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { dispatch, env } from '../app/store'
-import { isT, pcol, pname, score, wins } from '../core/game'
+import { isT, pcol, pname, roundScore, wins } from '../core/game'
 import { roundLabel } from '../core/constants'
 import type { State } from '../core/types'
 import { AvImg, Btn } from '../ui/primitives'
@@ -68,7 +68,7 @@ export function Final({ S }: { S: State }) {
     )
   }
   const rk: { p: number; w: number; s: number }[] = []
-  for (let p = 1; p <= S.players; p++) rk.push({ p, w: wins(S, p), s: score(S, p) })
+  for (let p = 1; p <= S.players; p++) rk.push({ p, w: wins(S, p), s: roundScore(S, p) })
   rk.sort((a, b) => b.w - a.w || b.s - a.s)
   const w = rk[0].p
   return (

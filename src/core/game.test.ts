@@ -68,3 +68,40 @@ describe('Gleichstand → Sudden Death', () => {
     expect(S.regularWinners!.map((r) => r.p)).toEqual([1, 1, 1, 2, 2])
   })
 })
+
+describe('Turnier (auf Tims Wunsch korrigiert)', () => {
+  function tourney(series: string) {
+    let S = run(initialState(), { type: 'load', saved: null }, { type: 'go', to: 'setup' }, { type: 'pick', id: 'mode', v: 't4' }, { type: 'pick', id: 'series', v: series })
+    for (const n of GEN.uk.artists!.slice(0, 10)) S = run(S, { type: 'poolToggle', name: n })
+    return run(S, { type: 'start' })
+  }
+  function playMatch(S: State, winner: number) {
+    S = run(S, { type: 'tGo' })
+    while (S.screen === 'draft') {
+      S = run(S, { type: 'spin' }, { type: 'land' })
+      S = run(S, { type: 'place', pos: S.lineup[S.pending!.player].indexOf(null) })
+    }
+    for (let d = 0; d < 5; d++) S = run(S, { type: 'pickNext' }, { type: 'pickNext' }, { type: 'win', p: d === 4 ? winner : d % 2 ? 2 : 1 })
+    return S
+  }
+  it('jedes Match zieht aus dem vollen Topf', () => {
+    let S = tourney('single')
+    expect(S.T!.pool).toHaveLength(10)
+    S = playMatch(S, 1)
+    expect(S.screen).toBe('round')
+    S = run(S, { type: 'tNext' })
+    expect(S.screen).toBe('bracket')
+    S = run(S, { type: 'tGo' })
+    expect(S.pool).toHaveLength(10)
+  })
+  it('Best of 3 im Turnier spielt die nächste Runde direkt weiter', () => {
+    let S = tourney('bo3')
+    S = playMatch(S, 1)
+    expect(S.screen).toBe('round')
+    S = run(S, { type: 'nextRound' })
+    expect(S.screen).toBe('draft')
+    expect(S.round).toBe(2)
+    expect(S.pool).toHaveLength(10)
+    expect(S.T!.r).toBe(0)
+  })
+})

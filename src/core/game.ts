@@ -144,7 +144,7 @@ export function initialState(): State {
     songMode: 'perduel', sameArtist: false, pickIdx: 0, audience: true, tally: {}, votePhase: null, voteWinner: null, eras: 'off', eraMap: [],
     setupTab: 'cfg',
     mode: 'clash', T: null,
-    lineup: {}, songs: {}, winners: [], used: {}, pending: null, duel: 0, wins: {}, round: 1, sd: null, sdArt: null, regularWinners: null,
+    lineup: {}, songs: {}, winners: [], used: {}, pending: null, duel: 0, wins: {}, round: 1, sd: null, sdArt: null, regularWinners: null, regular: null,
     warnOff: false, colors: null, spin: null,
   }
 }
@@ -224,6 +224,12 @@ export function score(S: State, p: number) {
   for (let i = 0; i < S.winners.length; i++) if (S.winners[i] === p) s += S.sd ? 1 : pts(S, i + 1)
   return s
 }
+/** Punkte der ganzen Runde: reguläre Punkte plus Sudden-Death-Punkt (auf Tims Wunsch korrigiert). */
+export function roundScore(S: State, p: number) {
+  return S.sd && S.regular ? (S.regular.scores[p] || 0) + score(S, p) : score(S, p)
+}
+/** Erreichbare Punkte der Runde (mit Sudden Death +1). */
+export const roundMax = (S: State) => N(S) + twoC(S, N(S)) + (S.sd ? 1 : 0)
 export const voteTotal = (S: State) => Object.values(S.tally || {}).reduce((a, b) => a + b, 0)
 export function ready(S: State) {
   const n = S.sd ? 1 : N(S)
@@ -253,7 +259,7 @@ export function winnerRecords(S: State): WinnerRecord[] {
     const p = S.winners[0]
     if (p) {
       const so = (S.songs[p] || [])[0] || {}
-      out.push({ pos: out.length + 1, p, artist: S.sd, song: so, sd: true })
+      out.push({ pos: out.length + 1, p, artist: sdArt(S, p) || '', song: so, sd: true })
     }
     return out
   }
@@ -342,6 +348,8 @@ function loadMatch(S: State, c: Ctx) {
   S.wins = {}
   S.round = 1
   resetRound(S, c)
+  // Jedes Match zieht aus dem vollen Turnier-Topf (vorher war der Topf nach dem 1. Match leer)
+  if (S.T!.pool) S.pool = S.T!.pool.slice()
 }
 
 function matchDone(S: State, c: Ctx, winnerP: number) {
@@ -396,6 +404,7 @@ function resetRound(S: State, c: Ctx) {
   S.sd = null
   S.sdArt = null
   S.regularWinners = null
+  S.regular = null
   for (let p = 1; p <= S.players; p++) {
     S.lineup[p] = new Array(n).fill(null)
     S.songs[p] = new Array(n).fill(null)
@@ -506,6 +515,9 @@ function finishRound(S: State, c: Ctx) {
     if (!cand.length) cand = S.pool.length ? S.pool.slice() : gl
     // Reguläre Sieger-Songs sichern, SOLANGE S.sd noch null ist
     S.regularWinners = winnerRecords(S)
+    const regScores: Record<number, number> = {}
+    for (let p = 1; p <= S.players; p++) regScores[p] = score(S, p)
+    S.regular = { winners: S.winners.slice(), songs: JSON.parse(JSON.stringify(S.songs)), scores: regScores }
     S.sdArt = {}
     if (sameArt(S)) {
       const one = cand[Math.floor(c.env.rng() * cand.length)]
@@ -689,11 +701,6 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       if (['upfront', 'perduel'].includes(d.songMode as string)) S.songMode = d.songMode as State['songMode']
       if (typeof d.sameArtist === 'boolean') S.sameArtist = d.sameArtist
       if (['clash', 't4', 't8', 't16'].includes(d.mode as string)) S.mode = d.mode as State['mode']
-      if (isT(S)) {
-        newTourney(S, false)
-        if (Array.isArray(d.roster) && d.roster.length === tSize(S)) S.T!.roster = d.roster
-        S.players = 2
-      }
       if (typeof d.audience === 'boolean') S.audience = d.audience
       const anyD = d as Record<string, unknown>
       if (typeof anyD.autoScroll === 'boolean') S.autoScroll = anyD.autoScroll
@@ -703,6 +710,15 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       if (!BGS.some((b) => b[0] === S.bg)) S.bg = 'mosaic'
       if (!THEMES.some((t) => t[0] === S.theme)) S.theme = 'silksonic'
       if (Array.isArray(d.pool)) S.pool = d.pool
+      if ([0, 30, 45, 60].includes(d.pickSec as number)) S.pickSec = d.pickSec as number
+      if (isT(S)) {
+        // Kaderfarben passend zum geladenen Theme berechnen
+        setBodyTheme(S.theme)
+        resetColorCache()
+        newTourney(S, false)
+        if (Array.isArray(d.roster) && d.roster.length === tSize(S)) S.T!.roster = d.roster
+        S.players = 2
+      }
     } catch {
       // wie im Original: fehlerhafte Daten werden ignoriert
     }
@@ -719,6 +735,7 @@ export function savedSettings(S: State): SavedSettings {
     series: S.series, muted: S.muted, ambience: S.ambience, theme: S.theme, bg: S.bg, genre: S.genre, pool: S.pool,
     warnOff: S.warnOff, songMode: S.songMode, sameArtist: S.sameArtist, custom: S.custom, audience: S.audience,
     mode: S.mode, roster: S.T ? S.T.roster : null,
+    autoScroll: S.autoScroll, pickSec: S.pickSec,
   }
 }
 
@@ -774,6 +791,7 @@ function apply(S: State, a: Action, c: Ctx) {
       c.fx.push({ t: 'ac' })
       if (isT(S)) {
         newTourney(S, true)
+        S.T!.pool = S.pool.slice()
         S.screen = 'bracket'
       } else {
         resetRound(S, c)
@@ -915,6 +933,16 @@ function apply(S: State, a: Action, c: Ctx) {
 
     /* ---- Runde / Endstand ---- */
     case 'nextRound': {
+      if (isT(S) && S.T) {
+        // Turnier mit Best of 3/5: gleiche Paarung spielt die nächste Runde direkt weiter
+        S.round++
+        S.pool = (S.T.pool || S.pool).slice()
+        resetRound(S, c)
+        save(c)
+        S.screen = 'draft'
+        toast(c, 'Neue Runde — gleiche Paarung, voller Topf.')
+        return
+      }
       S.round++
       for (let p = 1; p <= S.players; p++)
         (S.lineup[p] || []).forEach((x) => {
@@ -938,7 +966,7 @@ function apply(S: State, a: Action, c: Ctx) {
       sound(c, 'winSound')
       if (!isT(S) && S.players === 2) {
         const rk: { p: number; w: number; s: number }[] = []
-        for (let q = 1; q <= 2; q++) rk.push({ p: q, w: wins(S, q), s: score(S, q) })
+        for (let q = 1; q <= 2; q++) rk.push({ p: q, w: wins(S, q), s: roundScore(S, q) })
         rk.sort((x, y) => y.w - x.w || y.s - x.s)
         const draw = rk[0].w === rk[1].w && rk[0].s === rk[1].s
         c.fx.push({ t: 'rivalry', winner: pname(S, rk[0].p), loser: pname(S, rk[1].p), draw })
@@ -949,7 +977,7 @@ function apply(S: State, a: Action, c: Ctx) {
     }
     case 'tNext': {
       const sc: { p: number; s: number }[] = []
-      for (let q = 1; q <= S.players; q++) sc.push({ p: q, s: score(S, q) })
+      for (let q = 1; q <= S.players; q++) sc.push({ p: q, s: roundScore(S, q) })
       const mx = Math.max(...sc.map((x) => x.s))
       return matchDone(S, c, sc.find((x) => x.s === mx)!.p)
     }
@@ -1011,7 +1039,7 @@ function apply(S: State, a: Action, c: Ctx) {
       const pool = a.pool
       if (!pool || pool.length < 6) {
         g.loading = false
-        g.err = 'Zu wenige Songs gefunden. Läuft Deezer? Im Chat-Preview ist die Songsuche gesperrt — lad die Datei runter und öffne sie per Doppelklick im Browser.'
+        g.err = 'Zu wenige Songs gefunden. Prüf die Internetverbindung – Deezer muss erreichbar sein.'
         return
       }
       const total = g.players * g.rounds
@@ -1118,7 +1146,7 @@ function apply(S: State, a: Action, c: Ctx) {
       const pool = a.pool
       if (!pool || pool.length < 3) {
         s.loading = false
-        s.err = 'Zu wenige Songs gefunden. Läuft Deezer? Im Chat-Preview ist die Songsuche gesperrt — lad die Datei runter und öffne sie im Browser.'
+        s.err = 'Zu wenige Songs gefunden. Prüf die Internetverbindung – Deezer muss erreichbar sein.'
         return
       }
       const total = s.players * s.rounds
@@ -1188,7 +1216,7 @@ function apply(S: State, a: Action, c: Ctx) {
       const pool = a.pool
       if (!pool || pool.length < t.players + 3) {
         t.loading = false
-        t.err = 'Zu wenige Songs mit bekanntem Jahr gefunden — probier andere/mehr Kategorien. (Deezer muss erreichbar sein: Datei lokal öffnen.)'
+        t.err = 'Zu wenige Songs mit bekanntem Jahr gefunden — probier andere/mehr Kategorien. (Deezer muss erreichbar sein.)'
         return
       }
       t.deck = pool

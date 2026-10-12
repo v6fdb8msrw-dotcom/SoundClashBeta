@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from 'motion/react'
 import { useEffect, useRef, useSyncExternalStore } from 'react'
 import { dispatch, env } from '../app/store'
-import { N, pcol, pname, pts, score, sdArt, winnerRecords } from '../core/game'
+import { N, pcol, pname, pts, roundScore, sdArt, winnerRecords } from '../core/game'
 import type { State } from '../core/types'
 import { play } from '../services/audio'
 import { picBigOf, picOf } from '../services/catalog'
@@ -37,19 +37,24 @@ export function CountUp({ to, k, className }: { to: number; k: string; className
 
 export function Recap({ S, titel }: { S: State; titel: string }) {
   if (!S.lineup || !S.lineup[1]) return null
-  const n = S.sd ? 1 : N(S)
+  // Nach einem Sudden Death: erst die reguläre Runde, dann die Sudden-Death-Zeile
+  const reg = S.sd && S.regular ? S.regular : null
+  const n = S.sd && !reg ? 1 : N(S)
   const cols = []
   for (let p = 1; p <= S.players; p++) {
     const rows = []
+    const lines: { i: number; a: string | null; won: boolean; pt: number; title?: string; sd: boolean }[] = []
     for (let i = 0; i < n; i++) {
-      const a = S.sd ? sdArt(S, p) : S.lineup[p][i]
+      if (reg) lines.push({ i, a: S.lineup[p][i], won: reg.winners[i] === p, pt: pts(S, i + 1), title: (reg.songs[p] || [])[i]?.title, sd: false })
+      else lines.push({ i, a: S.sd ? sdArt(S, p) : S.lineup[p][i], won: S.winners[i] === p, pt: S.sd ? 1 : pts(S, i + 1), title: (S.songs[p] || [])[i]?.title, sd: !!S.sd })
+    }
+    if (reg && sdArt(S, p)) lines.push({ i: n, a: sdArt(S, p), won: S.winners[0] === p, pt: 1, title: (S.songs[p] || [])[0]?.title, sd: true })
+    for (const { i, a, won, pt, title, sd } of lines) {
       if (!a) continue
-      const won = S.winners[i] === p,
-        pt = S.sd ? 1 : pts(S, i + 1)
-      const so = (S.songs[p] || [])[i] || ({} as { title?: string })
+      const so = { title }
       rows.push(
         <div className={'rrow ' + (won ? 'won' : 'lost')} key={i}>
-          <span className="rp">{S.sd ? 'SD' : '#' + (i + 1)}</span>
+          <span className="rp">{sd ? 'SD' : '#' + (i + 1)}</span>
           <ArtImg n={a} className="ra" />
           <span className="rm">
             <span className="rn">{a}</span>
@@ -64,7 +69,7 @@ export function Recap({ S, titel }: { S: State; titel: string }) {
         <div className="rh">
           <AvImg S={S} p={p} />
           <span className="nm">{pname(S, p)}</span>
-          <span className="tot">{score(S, p)}</span>
+          <span className="tot">{roundScore(S, p)}</span>
         </div>
         {rows}
       </div>,

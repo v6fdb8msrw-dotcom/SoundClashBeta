@@ -72,7 +72,7 @@ export class App {
 
   async open() {
     await this.page.goto('')
-    await this.page.locator('[data-go="setup"]').waitFor()
+    await this.page.locator('[data-go="setup"], #startBtn').first().waitFor()
     // Startbild abwarten (Original: 1 s bei reduzierter Bewegung)
     await this.page.waitForFunction(() => !document.getElementById('splash'), null, { timeout: 8000 }).catch(() => undefined)
   }
@@ -86,13 +86,69 @@ export class App {
   }
 
   async go(where: string) {
+    // Neue Fassung startet direkt in Sound Clash (kein Moduswahl-Bildschirm)
+    if (where === 'setup') {
+      await this.page.locator('[data-go="setup"], #startBtn').first().waitFor()
+      if (!(await this.page.locator('[data-go="setup"]').count())) return
+    }
     await this.click(`[data-go="${where}"]`)
   }
 
-  /** Auswahlfeld öffnen und Wert wählen (Original: .sel mit data-tg/data-op). */
+  /**
+   * Neue Fassung: Farbe/Hintergrund/Ton liegen im Menü, seltene Optionen unter „Mehr Optionen“,
+   * Avatare klappen beim Antippen auf. Macht das Element sichtbar, bevor geklickt wird.
+   */
+  async reveal(sel: string) {
+    const el = this.page.locator(sel).first()
+    await el.waitFor({ state: 'attached' })
+    // Menü und „Mehr Optionen“ nach ihrem Zustand prüfen (beim Schließen bleibt das Menü kurz sichtbar)
+    const inMenu = (await this.page.locator(`#menuSheet ${sel}`).count()) > 0
+    const inAdv = (await this.page.locator(`.adv ${sel}`).count()) > 0
+    if (!inMenu && !inAdv && (await el.isVisible())) return false
+    let menu = false
+    if (await this.page.locator(`#menuSheet ${sel}`).count()) {
+      const b = this.page.locator('#menuBtn')
+      if ((await b.getAttribute('aria-expanded')) !== 'true') await b.click()
+      menu = true
+    }
+    if (await this.page.locator(`.adv ${sel}`).count()) {
+      const t = this.page.locator('#advToggle')
+      if ((await t.getAttribute('aria-expanded')) !== 'true') await t.click()
+    }
+    return menu
+  }
+  async closeMenu() {
+    const b = this.page.locator('#menuBtn')
+    if ((await b.count()) && (await b.getAttribute('aria-expanded')) === 'true') await b.click()
+  }
+
+  /** Auswahlfeld öffnen und Wert wählen (Original: .sel mit data-tg/data-op; neu teils Segment-Schalter). */
   async select(id: string, value: string | number) {
-    await this.page.locator(`[data-tg="${id}"]`).first().click()
+    const tg = this.page.locator(`[data-tg="${id}"]`)
+    if (await tg.count()) {
+      await this.reveal(`[data-tg="${id}"]`)
+      await tg.first().click()
+    } else await this.reveal(`[data-op="${id}"][data-v="${value}"]`)
     await this.page.locator(`[data-op="${id}"][data-v="${value}"]`).first().click()
+    await this.closeMenu()
+  }
+
+  /** Knopf aus Kopfleiste/Menü (z. B. #soundBtn, #backupBtn). */
+  async tool(sel: string) {
+    await this.reveal(sel)
+    await this.page.locator(sel).first().click()
+  }
+
+  /** Avatar für Spieler p wählen (neu: Avatar antippen klappt die Auswahl auf). */
+  async avatar(p: number, i: number) {
+    const sel = `[data-av="${p}"][data-i="${i}"]`
+    if (!(await this.page.locator(sel).isVisible()) && (await this.page.locator(`[data-avtoggle="${p}"]`).count())) await this.page.locator(`[data-avtoggle="${p}"]`).click()
+    await this.page.locator(sel).click()
+  }
+  async rosterAvatar(k: number, j: number) {
+    const sel = `[data-tav="${k}"][data-i="${j}"]`
+    if (!(await this.page.locator(sel).isVisible()) && (await this.page.locator(`[data-tavtoggle="${k}"]`).count())) await this.page.locator(`[data-tavtoggle="${k}"]`).click()
+    await this.page.locator(sel).click()
   }
 
   /** Die ersten n Künstler aus der aktuellen Genre-Liste in den Topf legen. */
@@ -337,8 +393,17 @@ export class App {
       writeFileSync(file, json)
       return
     }
-    expect(existsSync(file), `Referenz ${name} fehlt – zuerst gegen das Original laufen lassen`).toBe(true)
-    const golden = JSON.parse(readFileSync(file, 'utf8'))
+    // Neue Fassung: eigene Referenz nur dort, wo Tim Korrekturen am Original freigegeben hat
+    // (tests/golden/neu, Unterschiede zur Original-Referenz in docs/MECHANIK.md §9 beschrieben).
+    const neuFile = new URL(`../golden/neu/${name}.json`, import.meta.url)
+    if (this.target === 'neu' && process.env.UPDATE_GOLDEN_NEU) {
+      mkdirSync(new URL('../golden/neu/', import.meta.url), { recursive: true })
+      writeFileSync(neuFile, json)
+      return
+    }
+    const ref = this.target === 'neu' && existsSync(neuFile) ? neuFile : file
+    expect(existsSync(ref), `Referenz ${name} fehlt – zuerst gegen das Original laufen lassen`).toBe(true)
+    const golden = JSON.parse(readFileSync(ref, 'utf8'))
     expect(JSON.parse(json)).toEqual(golden)
   }
 }

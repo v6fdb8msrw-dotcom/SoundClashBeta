@@ -32,7 +32,7 @@ export default defineConfig({
   },
   projects: [
     { name: 'legacy', use: { baseURL: `http://127.0.0.1:${PORT}/legacy/index.html` }, testIgnore: /(pwa|neu|screenshots|begleiter)\.spec\.ts/ },
-    { name: 'neu', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/`, serviceWorkers: 'block' }, testIgnore: /pwa\.spec\.ts/ },
+    { name: 'neu', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/`, serviceWorkers: 'block' }, testIgnore: /(pwa|minigames)\.spec\.ts/ },
     { name: 'pwa', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/`, serviceWorkers: 'allow' }, testMatch: /pwa\.spec\.ts/ },
   ],
 })

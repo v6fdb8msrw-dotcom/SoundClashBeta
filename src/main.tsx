@@ -30,6 +30,7 @@ import './styles/components.css'
 import './styles/screens.css'
 import './styles/games.css'
 import './styles/remote.css'
+import './styles/simple.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 

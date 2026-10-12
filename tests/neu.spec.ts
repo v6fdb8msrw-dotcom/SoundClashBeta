@@ -29,7 +29,7 @@ test('Übernahme · Spielstand aus dem Original wird kopiert, alte und Muscle-St
 
   // 2) Neue Fassung öffnen
   await page.goto('/SoundClashBeta/')
-  await page.locator('[data-go="setup"]').waitFor()
+  await page.locator('#startBtn').waitFor()
   const after = await page.evaluate(() => ({ ...localStorage }))
   expect(after['soundclash.app.settings']).toBe(before['soundclash.v5'])
   expect(after['soundclash.app.rivalry']).toBe(before['soundclash.rivalry'])
@@ -39,7 +39,6 @@ test('Übernahme · Spielstand aus dem Original wird kopiert, alte und Muscle-St
 
   // 3) Oberfläche zeigt die übernommenen Einstellungen
   await expect(page.locator('body')).toHaveAttribute('data-theme', 'sos')
-  await page.locator('[data-go="setup"]').click()
   await expect(page.locator('[data-nm="1"]')).toHaveValue('Tim')
   await expect(page.locator('[data-nm="3"]')).toHaveValue('P3')
   await expect(page.locator('[data-op="songMode"][aria-selected="true"]')).toHaveText('Alle vorab')
@@ -54,7 +53,7 @@ test('Übernahme · Spielstand aus dem Original wird kopiert, alte und Muscle-St
 
   // 5) Zweiter Start überschreibt den neuen Stand nicht mehr mit dem alten
   await page.reload()
-  await page.locator('[data-go="setup"]').click()
+  await page.locator('#startBtn').waitFor()
   await expect(page.locator('[data-op="size"][aria-selected="true"]')).toHaveText('7')
 })
 
@@ -68,7 +67,7 @@ test('Spielstand · Export als Datei und Import auf „einem anderen Gerät“',
   await app.addArtists(2)
   await page.evaluate(() => localStorage.setItem('soundclash.app.rivalry', JSON.stringify({ 'anna|p2': { a: 'anna', b: 'p2', aw: 1, bw: 0, draws: 0, last: 1 } })))
 
-  await page.locator('#backupBtn').click()
+  await app.tool('#backupBtn')
   const dl = page.waitForEvent('download')
   await page.locator('#exportBtn').click()
   const file = await (await dl).path()
@@ -84,13 +83,15 @@ test('Spielstand · Export als Datei und Import auf „einem anderen Gerät“',
   const other = await context.browser()!.newContext({ serviceWorkers: 'block' })
   const p2 = await other.newPage()
   await p2.goto(page.url())
-  await p2.locator('[data-go="setup"]').waitFor()
+  await p2.locator('#startBtn').waitFor()
   await p2.evaluate(() => localStorage.setItem('soundclash.app.rivalry', JSON.stringify({ 'anna|p2': { a: 'anna', b: 'p2', aw: 0, bw: 3, draws: 0, last: 5 }, 'x|y': { a: 'x', b: 'y', aw: 1, bw: 1, draws: 0, last: 2 } })))
+  await expect(p2.locator('.modal-back')).toHaveCount(0)
+  await p2.locator('#menuBtn').click()
+  await expect(p2.locator('#menuSheet')).toHaveClass(/open/)
   await p2.locator('#backupBtn').click()
   await p2.locator('#importFile').setInputFiles(file!)
   await expect(p2.locator('#importPreview')).toContainText('2 Künstler im Topf')
   await p2.locator('#importConfirm').click()
-  await p2.locator('[data-go="setup"]').click()
   await expect(p2.locator('[data-nm="1"]')).toHaveValue('Anna')
   await expect(p2.locator('[data-op="series"][aria-selected="true"]')).toHaveText('Best of 3')
   await expect(p2.locator('[data-rm]')).toHaveCount(2)
@@ -100,6 +101,9 @@ test('Spielstand · Export als Datei und Import auf „einem anderen Gerät“',
   expect(riv['x|y']).toBeTruthy()
 
   // kaputte Datei wird abgelehnt
+  await expect(p2.locator('.modal-back')).toHaveCount(0)
+  await p2.locator('#menuBtn').click()
+  await expect(p2.locator('#menuSheet')).toHaveClass(/open/)
   await p2.locator('#backupBtn').click()
   await p2.locator('#importFile').setInputFiles({ name: 'falsch.json', mimeType: 'application/json', buffer: Buffer.from('{"app":"muscle-studio","format":1}') })
   await expect(p2.locator('.modal .warn')).toContainText('nicht aus Sound Clash')

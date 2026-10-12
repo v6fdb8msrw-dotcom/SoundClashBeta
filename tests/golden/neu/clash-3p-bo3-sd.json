@@ -1,0 +1,2196 @@
+[
+ {
+  "label": "setup",
+  "data": {
+   "settings": {
+    "players": 3,
+    "names": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:b6bb1194dd",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 5,
+    "series": "bo3",
+    "muted": false,
+    "ambience": true,
+    "theme": "silksonic",
+    "bg": "mosaic",
+    "genre": "deutschrap",
+    "pool": [
+     "Sido",
+     "Cro",
+     "Capital Bra",
+     "RAF Camora",
+     "Kontra K",
+     "Kollegah",
+     "Bushido",
+     "Apache 207",
+     "Bonez MC",
+     "Alligatoah",
+     "Ufo361",
+     "Farid Bang",
+     "Nimo",
+     "Kay One",
+     "Loredana"
+    ],
+    "warnOff": false,
+    "songMode": "upfront",
+    "sameArtist": false,
+    "custom": [],
+    "audience": false,
+    "mode": "clash",
+    "roster": null,
+    "autoScroll": true,
+    "pickSec": 0
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ },
+ {
+  "label": "draft-1",
+  "data": [
+   {
+    "step": 0,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 1 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Apache 207",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 1,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 2 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Bonez MC",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 2,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 3 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Bushido",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 3,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 4 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00100",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Alligatoah",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 4,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 5 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kollegah",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 5,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 6 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01001",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Ufo361",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 6,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 7 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01001",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kontra K",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 7,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 8 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11010",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01001",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Farid Bang",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 8,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 9 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11010",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01011",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "RAF Camora",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 9,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 10 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11010",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01011",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Nimo",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 10,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 11 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11010",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01011",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Capital Bra",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 11,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 12 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11010",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11011",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kay One",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 12,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 13 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11011",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11011",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Cro",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 13,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 14 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11011",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Loredana",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 14,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 15 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Letzten Künstler ziehen →"
+    },
+    "reveal": {
+     "artist": "Sido",
+     "to": "→ P3"
+    }
+   }
+  ]
+ },
+ {
+  "label": "songs-leer",
+  "data": {
+   "cols": [
+    {
+     "nm": "P1",
+     "cards": [
+      "#1|Apache 207|",
+      "#2|Ufo361|",
+      "#3|Cro|",
+      "#4|Kontra K|",
+      "#5 ×2|Kay One|"
+     ]
+    },
+    {
+     "nm": "P2",
+     "cards": [
+      "#1|Capital Bra|",
+      "#2|Bonez MC|",
+      "#3|Loredana|",
+      "#4|Farid Bang|",
+      "#5 ×2|Kollegah|"
+     ]
+    },
+    {
+     "nm": "P3",
+     "cards": [
+      "#1|Sido|",
+      "#2|Nimo|",
+      "#3|Bushido|",
+      "#4|RAF Camora|",
+      "#5 ×2|Alligatoah|"
+     ]
+    }
+   ],
+   "toBattle": true,
+   "skip": true
+  }
+ },
+ {
+  "label": "songs-voll",
+  "data": {
+   "cols": [
+    {
+     "nm": "P1",
+     "cards": [
+      "#1|Apache 207|Roller",
+      "#2|Ufo361|Scheiß auf eure Party",
+      "#3|Cro|Nie mehr",
+      "#4|Kontra K|Nur für Dich",
+      "#5 ×2|Kay One|Keep Calm (feat. Emory)"
+     ]
+    },
+    {
+     "nm": "P2",
+     "cards": [
+      "#1|Capital Bra|Neymar",
+      "#2|Bonez MC|Ohne mein Team",
+      "#3|Loredana|BALLADE",
+      "#4|Farid Bang|Mein Lieblingssong",
+      "#5 ×2|Kollegah|Du bist Boss"
+     ]
+    },
+    {
+     "nm": "P3",
+     "cards": [
+      "#1|Sido|PUZZLETEIL",
+      "#2|Nimo|2011",
+      "#3|Bushido|Sonnenbank Flavour",
+      "#4|RAF Camora|Blaues Licht",
+      "#5 ×2|Alligatoah|PARTNER IN CRIME (feat. Tarek K.I.Z)"
+     ]
+    }
+   ],
+   "toBattle": false,
+   "skip": false
+  }
+ },
+ {
+  "label": "duell",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #1 · ×1",
+     "P1: 0",
+     "P2: 0",
+     "P3: 0"
+    ],
+    "big": "#1 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Apache 207",
+      "song": "Roller",
+      "dur": "2:38",
+      "links": [
+       "https://open.spotify.com/search/Apache%20207%20Roller",
+       "https://www.youtube.com/results?search_query=Apache%20207%20Roller"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Capital Bra",
+      "song": "Neymar",
+      "dur": "4:24",
+      "links": [
+       "https://open.spotify.com/search/Capital%20Bra%20Neymar",
+       "https://www.youtube.com/results?search_query=Capital%20Bra%20Neymar"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Sido",
+      "song": "PUZZLETEIL",
+      "dur": "2:47",
+      "links": [
+       "https://open.spotify.com/search/Sido%20PUZZLETEIL",
+       "https://www.youtube.com/results?search_query=Sido%20PUZZLETEIL"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #2 · ×1",
+     "P1: 1",
+     "P2: 0",
+     "P3: 0"
+    ],
+    "big": "#2 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Ufo361",
+      "song": "Scheiß auf eure Party",
+      "dur": "3:40",
+      "links": [
+       "https://open.spotify.com/search/Ufo361%20Schei%C3%9F%20auf%20eure%20Party",
+       "https://www.youtube.com/results?search_query=Ufo361%20Schei%C3%9F%20auf%20eure%20Party"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Bonez MC",
+      "song": "Ohne mein Team",
+      "dur": "3:09",
+      "links": [
+       "https://open.spotify.com/search/Bonez%20MC%20Ohne%20mein%20Team",
+       "https://www.youtube.com/results?search_query=Bonez%20MC%20Ohne%20mein%20Team"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Nimo",
+      "song": "2011",
+      "dur": "3:50",
+      "links": [
+       "https://open.spotify.com/search/Nimo%202011",
+       "https://www.youtube.com/results?search_query=Nimo%202011"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #3 · ×1",
+     "P1: 1",
+     "P2: 1",
+     "P3: 0"
+    ],
+    "big": "#3 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Cro",
+      "song": "Nie mehr",
+      "dur": "3:04",
+      "links": [
+       "https://open.spotify.com/search/Cro%20Nie%20mehr",
+       "https://www.youtube.com/results?search_query=Cro%20Nie%20mehr"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Loredana",
+      "song": "BALLADE",
+      "dur": "2:35",
+      "links": [
+       "https://open.spotify.com/search/Loredana%20BALLADE",
+       "https://www.youtube.com/results?search_query=Loredana%20BALLADE"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Bushido",
+      "song": "Sonnenbank Flavour",
+      "dur": "3:40",
+      "links": [
+       "https://open.spotify.com/search/Bushido%20Sonnenbank%20Flavour",
+       "https://www.youtube.com/results?search_query=Bushido%20Sonnenbank%20Flavour"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #4 · ×1",
+     "P1: 1",
+     "P2: 2",
+     "P3: 0"
+    ],
+    "big": "#4 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Kontra K",
+      "song": "Nur für Dich",
+      "dur": "3:12",
+      "links": [
+       "https://open.spotify.com/search/Kontra%20K%20Nur%20f%C3%BCr%20Dich",
+       "https://www.youtube.com/results?search_query=Kontra%20K%20Nur%20f%C3%BCr%20Dich"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Farid Bang",
+      "song": "Mein Lieblingssong",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Farid%20Bang%20Mein%20Lieblingssong",
+       "https://www.youtube.com/results?search_query=Farid%20Bang%20Mein%20Lieblingssong"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "RAF Camora",
+      "song": "Blaues Licht",
+      "dur": "2:24",
+      "links": [
+       "https://open.spotify.com/search/RAF%20Camora%20Blaues%20Licht",
+       "https://www.youtube.com/results?search_query=RAF%20Camora%20Blaues%20Licht"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #5 · ×2",
+     "P1: 1",
+     "P2: 3",
+     "P3: 0"
+    ],
+    "big": "#5 · 2 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Kay One",
+      "song": "Keep Calm (feat. Emory)",
+      "dur": "4:43",
+      "links": [
+       "https://open.spotify.com/search/Kay%20One%20Keep%20Calm%20(feat.%20Emory)",
+       "https://www.youtube.com/results?search_query=Kay%20One%20Keep%20Calm%20(feat.%20Emory)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Kollegah",
+      "song": "Du bist Boss",
+      "dur": "2:43",
+      "links": [
+       "https://open.spotify.com/search/Kollegah%20Du%20bist%20Boss",
+       "https://www.youtube.com/results?search_query=Kollegah%20Du%20bist%20Boss"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Alligatoah",
+      "song": "PARTNER IN CRIME (feat. Tarek K.I.Z)",
+      "dur": "3:30",
+      "links": [
+       "https://open.spotify.com/search/Alligatoah%20PARTNER%20IN%20CRIME%20(feat.%20Tarek%20K.I.Z)",
+       "https://www.youtube.com/results?search_query=Alligatoah%20PARTNER%20IN%20CRIME%20(feat.%20Tarek%20K.I.Z)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "toasts-sd",
+  "data": [
+   "Gleichstand! Sudden Death: jeder kriegt einen Zufalls-Künstler"
+  ]
+ },
+ {
+  "label": "songs-sd",
+  "data": {
+   "cols": [
+    {
+     "nm": "P1",
+     "cards": [
+      "SD|Ali Bumaye|"
+     ]
+    },
+    {
+     "nm": "P2",
+     "cards": [
+      "SD|Fler|"
+     ]
+    }
+   ],
+   "toBattle": true,
+   "skip": true
+  }
+ },
+ {
+  "label": "duell-sd",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Sudden Death",
+     "P1: 3",
+     "P2: 3",
+     "P3: 0"
+    ],
+    "big": "Sudden Death",
+    "lede": "wer holt den besseren Song?",
+    "cards": [
+     {
+      "artist": "Ali Bumaye",
+      "song": "Sex ohne Grund (feat. Shindy)",
+      "dur": "3:07",
+      "links": [
+       "https://open.spotify.com/search/Ali%20Bumaye%20Sex%20ohne%20Grund%20(feat.%20Shindy)",
+       "https://www.youtube.com/results?search_query=Ali%20Bumaye%20Sex%20ohne%20Grund%20(feat.%20Shindy)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Fler",
+      "song": "Swagger",
+      "dur": "2:37",
+      "links": [
+       "https://open.spotify.com/search/Fler%20Swagger",
+       "https://www.youtube.com/results?search_query=Fler%20Swagger"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "runde-1",
+  "data": {
+   "kicker": "Runde 1 · Endstand",
+   "title": "P2 ✦",
+   "stats": [
+    {
+     "nm": "P1",
+     "lead": false,
+     "v": [
+      "3",
+      "7",
+      "0/2"
+     ]
+    },
+    {
+     "nm": "P2",
+     "lead": true,
+     "v": [
+      "4",
+      "7",
+      "1/2"
+     ]
+    },
+    {
+     "nm": "P3",
+     "lead": false,
+     "v": [
+      "0",
+      "7",
+      "0/2"
+     ]
+    }
+   ],
+   "recap": [
+    {
+     "nm": "P1",
+     "tot": "3",
+     "rows": [
+      "#1|Apache 207|Roller|+1|won",
+      "#2|Ufo361|Scheiß auf eure Party|—|lost",
+      "#3|Cro|Nie mehr|—|lost",
+      "#4|Kontra K|Nur für Dich|—|lost",
+      "#5|Kay One|Keep Calm (feat. Emory)|+2|won",
+      "SD|Ali Bumaye|Sex ohne Grund (feat. Shindy)|—|lost"
+     ]
+    },
+    {
+     "nm": "P2",
+     "tot": "4",
+     "rows": [
+      "#1|Capital Bra|Neymar|—|lost",
+      "#2|Bonez MC|Ohne mein Team|+1|won",
+      "#3|Loredana|BALLADE|+1|won",
+      "#4|Farid Bang|Mein Lieblingssong|+1|won",
+      "#5|Kollegah|Du bist Boss|—|lost",
+      "SD|Fler|Swagger|+1|won"
+     ]
+    },
+    {
+     "nm": "P3",
+     "tot": "0",
+     "rows": [
+      "#1|Sido|PUZZLETEIL|—|lost",
+      "#2|Nimo|2011|—|lost",
+      "#3|Bushido|Sonnenbank Flavour|—|lost",
+      "#4|RAF Camora|Blaues Licht|—|lost",
+      "#5|Alligatoah|PARTNER IN CRIME (feat. Tarek K.I.Z)|—|lost"
+     ]
+    }
+   ],
+   "buttons": [
+    "Nächste Runde →"
+   ]
+  }
+ },
+ {
+  "label": "toasts-runde2",
+  "data": [
+   "Gleichstand! Sudden Death: jeder kriegt einen Zufalls-Künstler",
+   "Neue Runde — Topf prüfen und starten."
+  ]
+ },
+ {
+  "label": "topf-runde2",
+  "data": "♪ 15 im Topf"
+ },
+ {
+  "label": "draft-2",
+  "data": [
+   {
+    "step": 0,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 1 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "0/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Sido",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 1,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 2 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "0/5 Plätze · 1 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Cro",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 2,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 3 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "1/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00100",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Nimo",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 3,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 4 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "1/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00100",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00001",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kontra K",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 4,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 5 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "1/5 Plätze · 1 W",
+       "on": true,
+       "taken": "00100",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01001",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kollegah",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 5,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 6 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "2/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01001",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kay One",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 6,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 7 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11000",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "2/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01001",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Bushido",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 7,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 8 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "2/5 Plätze · 1 W",
+       "on": true,
+       "taken": "00101",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01001",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Ufo361",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 8,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 9 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "3/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01001",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Farid Bang",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 9,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 10 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "3/5 Plätze · 1 W",
+       "on": false,
+       "taken": "00111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Capital Bra",
+     "to": "→ P3"
+    }
+   },
+   {
+    "step": 10,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 11 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "3/5 Plätze · 1 W",
+       "on": true,
+       "taken": "00111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "RAF Camora",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 11,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 12 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "4/5 Plätze · 1 W",
+       "on": false,
+       "taken": "10111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Apache 207",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 12,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 13 / 15",
+      "Am Zug: P1"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11011",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "4/5 Plätze · 1 W",
+       "on": false,
+       "taken": "10111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Alligatoah",
+     "to": "→ P1"
+    }
+   },
+   {
+    "step": 13,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 14 / 15",
+      "Am Zug: P2"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "4/5 Plätze · 1 W",
+       "on": true,
+       "taken": "10111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Bonez MC",
+     "to": "→ P2"
+    }
+   },
+   {
+    "step": 14,
+    "before": {
+     "pills": [
+      "Runde 2",
+      "Pick 15 / 15",
+      "Am Zug: P3"
+     ],
+     "clusters": [
+      {
+       "name": "P1",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "P2",
+       "st": "5/5 Plätze · 1 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "P3",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Letzten Künstler ziehen →"
+    },
+    "reveal": {
+     "artist": "Loredana",
+     "to": "→ P3"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-r2",
+  "data": [
+   {
+    "pills": [
+     "Runde 2",
+     "Platz #1 · ×1",
+     "P1: 0",
+     "P2: 0",
+     "P3: 0"
+    ],
+    "big": "#1 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Sido",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Sido%20",
+       "https://www.youtube.com/results?search_query=Sido%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "RAF Camora",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/RAF%20Camora%20",
+       "https://www.youtube.com/results?search_query=RAF%20Camora%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Loredana",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Loredana%20",
+       "https://www.youtube.com/results?search_query=Loredana%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell-r2",
+  "data": [
+   {
+    "pills": [
+     "Runde 2",
+     "Platz #2 · ×1",
+     "P1: 0",
+     "P2: 1",
+     "P3: 0"
+    ],
+    "big": "#2 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Kay One",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Kay%20One%20",
+       "https://www.youtube.com/results?search_query=Kay%20One%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Bonez MC",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Bonez%20MC%20",
+       "https://www.youtube.com/results?search_query=Bonez%20MC%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Kontra K",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Kontra%20K%20",
+       "https://www.youtube.com/results?search_query=Kontra%20K%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell-r2",
+  "data": [
+   {
+    "pills": [
+     "Runde 2",
+     "Platz #3 · ×1",
+     "P1: 0",
+     "P2: 2",
+     "P3: 0"
+    ],
+    "big": "#3 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Alligatoah",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Alligatoah%20",
+       "https://www.youtube.com/results?search_query=Alligatoah%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Cro",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Cro%20",
+       "https://www.youtube.com/results?search_query=Cro%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Farid Bang",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Farid%20Bang%20",
+       "https://www.youtube.com/results?search_query=Farid%20Bang%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell-r2",
+  "data": [
+   {
+    "pills": [
+     "Runde 2",
+     "Platz #4 · ×1",
+     "P1: 0",
+     "P2: 2",
+     "P3: 1"
+    ],
+    "big": "#4 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Apache 207",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Apache%20207%20",
+       "https://www.youtube.com/results?search_query=Apache%20207%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Ufo361",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Ufo361%20",
+       "https://www.youtube.com/results?search_query=Ufo361%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Capital Bra",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Capital%20Bra%20",
+       "https://www.youtube.com/results?search_query=Capital%20Bra%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "duell-r2",
+  "data": [
+   {
+    "pills": [
+     "Runde 2",
+     "Platz #5 · ×2",
+     "P1: 0",
+     "P2: 2",
+     "P3: 2"
+    ],
+    "big": "#5 · 2 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Bushido",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Bushido%20",
+       "https://www.youtube.com/results?search_query=Bushido%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P1 gewinnt →"
+     },
+     {
+      "artist": "Kollegah",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Kollegah%20",
+       "https://www.youtube.com/results?search_query=Kollegah%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P2 gewinnt →"
+     },
+     {
+      "artist": "Nimo",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Nimo%20",
+       "https://www.youtube.com/results?search_query=Nimo%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "P3 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "runde-2",
+  "data": {
+   "kicker": "Runde 2 · Endstand",
+   "title": "P2 ✦",
+   "stats": [
+    {
+     "nm": "P1",
+     "lead": false,
+     "v": [
+      "0",
+      "6",
+      "0/2"
+     ]
+    },
+    {
+     "nm": "P2",
+     "lead": true,
+     "v": [
+      "4",
+      "6",
+      "2/2"
+     ]
+    },
+    {
+     "nm": "P3",
+     "lead": false,
+     "v": [
+      "2",
+      "6",
+      "0/2"
+     ]
+    }
+   ],
+   "recap": [
+    {
+     "nm": "P1",
+     "tot": "0",
+     "rows": [
+      "#1|Sido|—|—|lost",
+      "#2|Kay One|—|—|lost",
+      "#3|Alligatoah|—|—|lost",
+      "#4|Apache 207|—|—|lost",
+      "#5|Bushido|—|—|lost"
+     ]
+    },
+    {
+     "nm": "P2",
+     "tot": "4",
+     "rows": [
+      "#1|RAF Camora|—|+1|won",
+      "#2|Bonez MC|—|+1|won",
+      "#3|Cro|—|—|lost",
+      "#4|Ufo361|—|—|lost",
+      "#5|Kollegah|—|+2|won"
+     ]
+    },
+    {
+     "nm": "P3",
+     "tot": "2",
+     "rows": [
+      "#1|Loredana|—|—|lost",
+      "#2|Kontra K|—|—|lost",
+      "#3|Farid Bang|—|+1|won",
+      "#4|Capital Bra|—|+1|won",
+      "#5|Nimo|—|—|lost"
+     ]
+    }
+   ],
+   "buttons": [
+    "Endstand ansehen →"
+   ]
+  }
+ },
+ {
+  "label": "final",
+  "data": {
+   "kicker": "Sieger",
+   "win": "P2",
+   "ranks": [
+    "1P22 Rundensiege · 4 pts🏆",
+    "2P30 Rundensiege · 2 pts",
+    "3P10 Rundensiege · 0 pts"
+   ],
+   "crate": [
+    "RAF CamoraRAF CamoraPlatz #1 · P2",
+    "Bonez MCBonez MCPlatz #2 · P2",
+    "Farid BangFarid BangPlatz #3 · P3",
+    "Capital BraCapital BraPlatz #4 · P3",
+    "KollegahKollegahPlatz #5 · P2"
+   ],
+   "crateHint": "5 Sieger-Songs · antippen spielt 30 Sek & legt die Platte auf",
+   "rivalry": "",
+   "rivalrySummary": "",
+   "recap": [
+    [
+     "#1|Sido|—|—",
+     "#2|Kay One|—|—",
+     "#3|Alligatoah|—|—",
+     "#4|Apache 207|—|—",
+     "#5|Bushido|—|—"
+    ],
+    [
+     "#1|RAF Camora|—|+1",
+     "#2|Bonez MC|—|+1",
+     "#3|Cro|—|—",
+     "#4|Ufo361|—|—",
+     "#5|Kollegah|—|+2"
+    ],
+    [
+     "#1|Loredana|—|—",
+     "#2|Kontra K|—|—",
+     "#3|Farid Bang|—|+1",
+     "#4|Capital Bra|—|+1",
+     "#5|Nimo|—|—"
+    ]
+   ],
+   "buttons": [
+    "⇪ Teilen",
+    "↻ Neues Match"
+   ]
+  }
+ },
+ {
+  "label": "speicher",
+  "data": {
+   "settings": {
+    "players": 3,
+    "names": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:b6bb1194dd",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 5,
+    "series": "bo3",
+    "muted": false,
+    "ambience": true,
+    "theme": "silksonic",
+    "bg": "mosaic",
+    "genre": "deutschrap",
+    "pool": [],
+    "warnOff": false,
+    "songMode": "upfront",
+    "sameArtist": false,
+    "custom": [],
+    "audience": false,
+    "mode": "clash",
+    "roster": null,
+    "autoScroll": true,
+    "pickSec": 0
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ }
+]

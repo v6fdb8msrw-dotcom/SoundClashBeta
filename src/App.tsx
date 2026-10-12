@@ -4,19 +4,13 @@ import { bus } from './app/bus'
 import { dispatch, env, getState, useGame } from './app/store'
 import type { State } from './core/types'
 import { Bracket } from './screens/Bracket'
-import { Decade } from './screens/Decade'
 import { Draft } from './screens/Draft'
 import { Duel } from './screens/Duel'
 import { Final } from './screens/Final'
-import { GuessPlay, GuessSetup } from './screens/Guess'
-import { Home } from './screens/Home'
 import { Pick } from './screens/Pick'
 import { Round } from './screens/Round'
 import { Setup } from './screens/Setup'
-import { SingPlay, SingSetup } from './screens/Sing'
 import { Songs } from './screens/Songs'
-import { Soon } from './screens/Soon'
-import { TimelinePlay, TimelineSetup } from './screens/Timeline'
 import { configureAudio } from './services/audio'
 import { dz } from './services/deezer'
 import { resumeHost } from './remote/host'
@@ -40,6 +34,8 @@ function boot() {
   configureAudio({ toast: (m) => bus.emit('toast', m), ambience: () => getState().ambience })
   migrateLegacy()
   dispatch({ type: 'load', saved: loadSettings() })
+  // Nur Sound Clash: direkt in den Sound-Clash-Start (Guess the Song und Timeline sind vorerst ausgeblendet)
+  dispatch({ type: 'go', to: 'setup' })
   loadRivalry()
   // Deezer einmal antesten (bestimmt die Warnung)
   dz('search/artist', { q: 'drake', limit: 1 }).catch(() => undefined)
@@ -59,10 +55,6 @@ function screenKey(S: State): string {
 
 function ScreenView({ S }: { S: State }): ReactNode {
   switch (S.screen) {
-    case 'home':
-      return <Home />
-    case 'setup':
-      return <Setup S={S} />
     case 'bracket':
       return <Bracket S={S} />
     case 'draft':
@@ -75,25 +67,11 @@ function ScreenView({ S }: { S: State }): ReactNode {
       return <Duel S={S} />
     case 'round':
       return <Round S={S} />
-    case 'gssetup':
-      return <GuessSetup S={S} />
-    case 'gsplay':
-      return <GuessPlay S={S} />
-    case 'sbsetup':
-      return <SingSetup S={S} />
-    case 'sbplay':
-      return <SingPlay S={S} />
-    case 'tlsetup':
-      return <TimelineSetup S={S} />
-    case 'tlplay':
-      return <TimelinePlay S={S} />
-    case 'ddplay':
-    case 'ddsetup':
-      return <Decade S={S} />
-    case 'soon':
-      return <Soon S={S} />
-    default:
+    case 'final':
       return <Final S={S} />
+    // Start und alles andere: Sound-Clash-Einrichtung
+    default:
+      return <Setup S={S} />
   }
 }
 

@@ -222,3 +222,27 @@ export function Presence({ children, mode }: { children: ReactNode; mode?: 'wait
     </AnimatePresence>
   )
 }
+
+/**
+ * Segment-Schalter (statt Aufklappliste) für kurze Auswahlen. Gleiche data-Attribute wie das
+ * Auswahlfeld (data-op, data-v, aria-selected), damit Tests und Bedienung gleich bleiben.
+ */
+export function Seg({ id, label, value, opts, onPick }: { id: string; label: string; value: string | number; opts: Opt[]; onPick: (v: string) => void }) {
+  const reduce = useReducedMotion()
+  return (
+    <div className="field">
+      <label>{label}</label>
+      <div className="seg" role="radiogroup" aria-label={label} data-seg={id}>
+        {opts.map((o) => {
+          const on = String(o.v) === String(value)
+          return (
+            <button key={String(o.v)} type="button" role="radio" data-op={id} data-v={String(o.v)} aria-selected={on} aria-checked={on} className={on ? 'on' : ''} onClick={() => onPick(String(o.v))}>
+              {on ? <motion.span layoutId={reduce ? undefined : 'seg-' + id} className="seg-ind" transition={{ type: 'spring', stiffness: 500, damping: 36 }} /> : null}
+              <span className="seg-t">{o.t}</span>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}

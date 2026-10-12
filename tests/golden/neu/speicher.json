@@ -1,0 +1,343 @@
+[
+ {
+  "label": "frisch",
+  "data": {
+   "theme": "igor",
+   "sound": "🔇",
+   "sel": {
+    "mode": "Clash (alle gegen alle)",
+    "players": "2",
+    "size": "5",
+    "series": "Einzelrunde",
+    "songMode": "Vor jedem Duell",
+    "sameArtist": "Normal — jeder eigene Künstler",
+    "audience": "Publikum stimmt ab",
+    "pickSec": "Aus",
+    "ambience": "An — Wand pulsiert zum Song",
+    "autoScroll": "An",
+    "genre": "R&B",
+    "bg": "Aurora (Beat)",
+    "theme": "IGOR"
+   },
+   "names": [
+    "P1",
+    "P2"
+   ],
+   "avatarOn": [
+    "1:0",
+    "2:1"
+   ],
+   "pool": [],
+   "poolPill": "♪ 0 im Topf",
+   "start": true,
+   "hint": "Mindestens 10 Künstler in den Topf legen."
+  }
+ },
+ {
+  "label": "suche",
+  "data": [
+   "Drake",
+   "Drake",
+   "Drake",
+   "Drake",
+   "Nick Drake",
+   "Drake Milligan",
+   "Drake Mccain",
+   "DRAKE D.N",
+   "Drake Bell",
+   "Drake White",
+   "Rowan Drake",
+   "Christopher Drake"
+  ]
+ },
+ {
+  "label": "vor-neustart",
+  "data": {
+   "theme": "igor",
+   "sound": "🔇",
+   "sel": {
+    "mode": "Clash (alle gegen alle)",
+    "players": "4",
+    "size": "10",
+    "series": "Best of 5",
+    "songMode": "Alle vorab",
+    "sameArtist": "Gleicher Künstler für alle",
+    "audience": "Gemeinsam antippen",
+    "pickSec": "45 Sek",
+    "ambience": "Aus",
+    "autoScroll": "Aus",
+    "genre": "Latin",
+    "bg": "Aurora (Beat)",
+    "theme": "IGOR"
+   },
+   "names": [
+    "Tim",
+    "Lea",
+    "P3",
+    "P4"
+   ],
+   "avatarOn": [
+    "1:7",
+    "2:1",
+    "3:2",
+    "4:3"
+   ],
+   "pool": [
+    "Shakira",
+    "Maluma",
+    "Bad Bunny",
+    "Drake"
+   ],
+   "poolPill": "♪ 4 im Topf",
+   "start": true,
+   "hint": "Mindestens 40 Künstler in den Topf legen."
+  }
+ },
+ {
+  "label": "speicher",
+  "data": {
+   "settings": {
+    "players": 4,
+    "names": [
+     "Tim",
+     "Lea",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:77ed0bf35b",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 10,
+    "series": "bo5",
+    "muted": true,
+    "ambience": false,
+    "theme": "igor",
+    "bg": "aurora",
+    "genre": "latin",
+    "pool": [
+     "Shakira",
+     "Maluma",
+     "Bad Bunny",
+     "Drake"
+    ],
+    "warnOff": false,
+    "songMode": "upfront",
+    "sameArtist": true,
+    "custom": [],
+    "audience": false,
+    "mode": "clash",
+    "roster": null,
+    "autoScroll": false,
+    "pickSec": 45
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ },
+ {
+  "label": "nach-neustart",
+  "data": {
+   "theme": "igor",
+   "sound": "🔇",
+   "sel": {
+    "mode": "Clash (alle gegen alle)",
+    "players": "4",
+    "size": "10",
+    "series": "Best of 5",
+    "songMode": "Alle vorab",
+    "sameArtist": "Gleicher Künstler für alle",
+    "audience": "Gemeinsam antippen",
+    "pickSec": "45 Sek",
+    "ambience": "Aus",
+    "autoScroll": "Aus",
+    "genre": "Latin",
+    "bg": "Aurora (Beat)",
+    "theme": "IGOR"
+   },
+   "names": [
+    "Tim",
+    "Lea",
+    "P3",
+    "P4"
+   ],
+   "avatarOn": [
+    "1:7",
+    "2:1",
+    "3:2",
+    "4:3"
+   ],
+   "pool": [
+    "Shakira",
+    "Maluma",
+    "Bad Bunny",
+    "Drake"
+   ],
+   "poolPill": "♪ 4 im Topf",
+   "start": true,
+   "hint": "Mindestens 40 Künstler in den Topf legen."
+  }
+ },
+ {
+  "label": "speicher-nach-neustart",
+  "data": {
+   "settings": {
+    "players": 4,
+    "names": [
+     "Tim",
+     "Lea",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:77ed0bf35b",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 10,
+    "series": "bo5",
+    "muted": true,
+    "ambience": false,
+    "theme": "igor",
+    "bg": "aurora",
+    "genre": "latin",
+    "pool": [
+     "Shakira",
+     "Maluma",
+     "Bad Bunny",
+     "Drake"
+    ],
+    "warnOff": false,
+    "songMode": "upfront",
+    "sameArtist": true,
+    "custom": [],
+    "audience": false,
+    "mode": "clash",
+    "roster": null,
+    "autoScroll": false,
+    "pickSec": 45
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ },
+ {
+  "label": "turnier-nach-neustart",
+  "data": [
+   "Spieler 1",
+   "Spieler 2",
+   "Spieler 3",
+   "Spieler 4",
+   "Spieler 5",
+   "Kim",
+   "Spieler 7",
+   "Spieler 8"
+  ]
+ },
+ {
+  "label": "speicher-turnier",
+  "data": {
+   "settings": {
+    "players": 2,
+    "names": [
+     "Tim",
+     "Lea",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:77ed0bf35b",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 10,
+    "series": "bo5",
+    "muted": true,
+    "ambience": false,
+    "theme": "igor",
+    "bg": "aurora",
+    "genre": "latin",
+    "pool": [
+     "Shakira",
+     "Maluma",
+     "Bad Bunny",
+     "Drake"
+    ],
+    "warnOff": false,
+    "songMode": "upfront",
+    "sameArtist": true,
+    "custom": [],
+    "audience": false,
+    "mode": "t8",
+    "roster": [
+     {
+      "name": "Spieler 1",
+      "av": "data:b6bb1194dd",
+      "col": "#de1c39"
+     },
+     {
+      "name": "Spieler 2",
+      "av": "data:d3828dc1a0",
+      "col": "#007aa3"
+     },
+     {
+      "name": "Spieler 3",
+      "av": "data:65fc4a0268",
+      "col": "#167f3d"
+     },
+     {
+      "name": "Spieler 4",
+      "av": "data:5f31670aa0",
+      "col": "#936d14"
+     },
+     {
+      "name": "Spieler 5",
+      "av": "data:04ab0531a7",
+      "col": "#9c3efa"
+     },
+     {
+      "name": "Kim",
+      "av": "data:5c807830df",
+      "col": "#0c8076"
+     },
+     {
+      "name": "Spieler 7",
+      "av": "data:90a5b66143",
+      "col": "#c24d00"
+     },
+     {
+      "name": "Spieler 8",
+      "av": "data:77ed0bf35b",
+      "col": "#db117a"
+     }
+    ],
+    "autoScroll": false,
+    "pickSec": 45
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ }
+]

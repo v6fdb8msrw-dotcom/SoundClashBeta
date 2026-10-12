@@ -52,6 +52,8 @@ export interface Tourney {
   r: number
   m: number
   champ: number | null
+  /** Künstler-Topf beim Turnierstart – jedes Match zieht aus einem vollen Topf. */
+  pool?: string[]
 }
 
 export interface WinnerRecord {
@@ -167,6 +169,8 @@ export interface State {
   sd: true | null
   sdArt: Record<number, string> | null
   regularWinners: WinnerRecord[] | null
+  /** Stand der regulären Runde, bevor der Sudden Death begann (Punkte, Sieger, Songs). */
+  regular: { winners: (number | null)[]; songs: Record<number, (Song | null)[]>; scores: Record<number, number> } | null
   warnOff: boolean
   colors: Record<number, string> | null
   /** Laufende Raddrehung: Zielsegment (im Original die Variablen spinning/tg). */
@@ -197,6 +201,8 @@ export interface SavedSettings {
   audience: boolean
   mode: string
   roster: RosterEntry[] | null
+  autoScroll?: boolean
+  pickSec?: number
 }
 
 export interface Rivalry {

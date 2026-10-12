@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { dispatch } from '../app/store'
 import { BGS, THEMES } from '../core/constants'
 import type { State } from '../core/types'
@@ -7,16 +7,31 @@ import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
 import { Sel } from './primitives'
 
-/** Kopfleiste: Logo (→ Startbildschirm), Spielanleitung, Hintergrund, Ton, Farbe, Spielstand. */
+/**
+ * Kopfleiste, bewusst schlicht: Logo (→ Sound-Clash-Start), Handys koppeln und ein Menü.
+ * Im Menü: Farbe, Hintergrund, Ton, Spielanleitung, Spielstand. Alle Funktionen bleiben erhalten.
+ */
 export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
+  const [menu, setMenu] = useState(false)
   const [rules, setRules] = useState(false)
   const [backup, setBackup] = useState(false)
   const [pair, setPair] = useState(false)
   const host = useHost()
+  useEffect(() => {
+    if (!menu) return
+    const close = () => setMenu(false)
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setMenu(false)
+    document.addEventListener('click', close)
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('click', close)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [menu])
   return (
     <>
       <header className={'brand' + (shrink ? ' shrink' : '')} role="banner">
-        <div className="brand-home" onClick={() => dispatch({ type: 'brand' })} title="Zum Startbildschirm">
+        <div className="brand-home" onClick={() => dispatch({ type: 'go', to: 'setup' })} title="Zum Start">
           <div className="logo" aria-hidden>
             <span className="logo-disc" />
             <span className="logo-bolt" />
@@ -25,27 +40,50 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
             <h1>
               Sound <em>Clash</em>
             </h1>
-            <p>Blind ranken. Song für Song. Bis einer krönt.</p>
           </div>
         </div>
         <nav className="topbar" aria-label="Werkzeuge">
           <div className="tools">
-            <button className={'tool' + (rules ? ' on' : '')} id="rulesBtn" onClick={() => setRules((r) => !r)} aria-expanded={rules}>
-              <span aria-hidden>ⓘ</span> <span className="tool-t">Spielanleitung</span>
+            <button className={'tool' + (host.code ? ' on' : '')} id="pairBtn" onClick={() => setPair(true)} title="Handys per QR-Code koppeln">
+              <svg className="ico" viewBox="0 0 24 24" aria-hidden>
+                <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+              {host.code ? <span className="tool-n">{host.phones.length}</span> : null}
             </button>
-            <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} slbl={<span className="slbl">Hintergrund</span>} className="tsel" />
-            <button className="tool icon" id="soundBtn" title="Ton" onClick={() => dispatch({ type: 'toggleMute' })}>
-              {S.muted ? '🔇' : '🔊'}
-            </button>
-            <Sel id="theme" value={S.theme} opts={THEMES.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'theme', v })} slbl={<span className="slbl">Farbe</span>} className="tsel" />
-            <button className={'tool' + (host.code ? ' on' : '')} id="pairBtn" onClick={() => setPair(true)} title="Handys per QR-Code koppeln (abstimmen, eigenes Line-up)">
-              <span aria-hidden>📱</span> <span className="tool-t">{host.code ? host.phones.length + ' gekoppelt' : 'Handys'}</span>
-            </button>
-            <button className="tool" id="backupBtn" onClick={() => setBackup(true)} title="Spielstand sichern oder übernehmen">
-              <span aria-hidden>⇅</span> <span className="tool-t">Spielstand</span>
+            <button className={'tool' + (menu ? ' on' : '')} id="menuBtn" aria-expanded={menu} aria-controls="menuSheet" onClick={(e) => (e.stopPropagation(), setMenu((m) => !m))} title="Menü">
+              <span className="burger" aria-hidden>
+                <i />
+                <i />
+                <i />
+              </span>
             </button>
           </div>
         </nav>
+        <div className={'menusheet' + (menu ? ' open' : '')} id="menuSheet" onClick={(e) => e.stopPropagation()} aria-hidden={!menu}>
+          <div className="ms-row">
+            <span className="ms-l">Farbe</span>
+            <Sel id="theme" value={S.theme} opts={THEMES.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'theme', v })} />
+          </div>
+          <div className="ms-row">
+            <span className="ms-l">Hintergrund</span>
+            <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} />
+          </div>
+          <div className="ms-row">
+            <span className="ms-l">Ton</span>
+            <button className="tool" id="soundBtn" title="Ton" onClick={() => dispatch({ type: 'toggleMute' })}>
+              {S.muted ? '🔇' : '🔊'}
+            </button>
+          </div>
+          <div className="ms-btns">
+            <button className={'tool' + (rules ? ' on' : '')} id="rulesBtn" onClick={() => (setRules((r) => !r), setMenu(false))} aria-expanded={rules}>
+              ⓘ Spielanleitung
+            </button>
+            <button className="tool" id="backupBtn" onClick={() => (setBackup(true), setMenu(false))} title="Spielstand sichern oder übernehmen">
+              ⇅ Spielstand
+            </button>
+          </div>
+        </div>
       </header>
       <AnimatePresence initial={false}>
         {rules ? (
@@ -97,22 +135,22 @@ function Rules() {
       <h3>1 · Einrichten</h3>
       <p>
         <b>Spieler:</b> 2–6, je mit Avatar und Farbe — über <b>+</b> lädst du eigene Bilder hoch. <b>Songs pro Spieler:</b> 5, 7, 10 oder 15. <b>Spielmodus:</b> Einzelrunde, Best of 3 oder Best of 5.{' '}
-        <b>Respins:</b> 0, 1 oder 2 pro Spieler und Runde. <b>Songwahl:</b> alle vorab oder vor jedem Duell.
+        <b>Songwahl:</b> alle vorab oder vor jedem Duell. Unter „Mehr Optionen“: Turnier, gleicher Künstler für alle, Pick-Timer.
       </p>
       <p>
-        Oben rechts: <b>Hintergrund</b> im Stil berühmter Alben (Silk Sonic, Graduation, IGOR, SOS …) und die <b>Wand</b> dahinter (Album-Wand, Genre-Wand, Mosaik, dezent oder aus).
+        Im Menü oben rechts: <b>Farbe</b> im Stil berühmter Alben (Silk Sonic, Graduation, IGOR, SOS …) und der <b>Hintergrund</b> (Künstler-Mosaik, Plattenspieler, Aurora).
       </p>
       <h3>2 · Künstler-Topf</h3>
       <p>
-        Wähl ein <b>Genre</b> — 22 Stück, von R&amp;B über Deutschrap bis Schlager. Ein Klick auf <b>+</b> legt den Künstler in den Topf. Über die Suche findest du jeden weiteren Künstler.
+        Wähl ein <b>Genre</b> — 30 Kategorien, von R&amp;B über Deutschrap bis Schlager und Jahrzehnten. Ein Klick auf <b>+</b> legt den Künstler in den Topf. Über die Suche findest du jeden weiteren Künstler.
       </p>
       <h3>3 · Ziehen</h3>
       <p>
-        Reihum am Rad drehen (oder <b>Leertaste</b>). Die Reihenfolge ist ein <b>Snake-Draft</b> (1-2…2-1), damit niemand bevorteilt wird. Wer den Künstler nicht will, nutzt einen <b>Respin</b>.
+        Reihum am Rad drehen (oder <b>Leertaste</b>). Die Reihenfolge ist ein <b>Snake-Draft</b> (1-2…2-1), damit niemand bevorteilt wird.
       </p>
       <h3>4 · Blind ranken</h3>
       <p>
-        Setz jeden gezogenen Künstler <b>sofort</b> auf einen freien Platz — ohne zu wissen, was noch kommt. Die <b>obersten Plätze zählen doppelt</b> (×2).
+        Setz jeden gezogenen Künstler <b>sofort</b> auf einen freien Platz — ohne zu wissen, was noch kommt. Die <b>letzten Plätze zählen doppelt</b> (×2).
       </p>
       <h3>5 · Songs wählen</h3>
       <p>
@@ -129,7 +167,7 @@ function Rules() {
       </p>
       <h3>7 · Gleichstand</h3>
       <p>
-        Steht es unentschieden, gibt es <b>Sudden Death</b>: Alle bekommen <b>denselben</b> zufälligen Künstler aus dem Genre. Wer den besseren Song holt, gewinnt.
+        Steht es unentschieden, gibt es <b>Sudden Death</b>: Jeder Gleichstehende bekommt einen zufälligen Künstler aus dem Genre (bei „Gleicher Künstler für alle“ denselben). Wer den besseren Song holt, bekommt einen Punkt dazu und gewinnt die Runde.
       </p>
       <h3>8 · Serie &amp; Teilen</h3>
       <p>

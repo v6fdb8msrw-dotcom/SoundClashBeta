@@ -191,15 +191,8 @@ export function Background({ S }: { S: State }) {
       {isAU ? <Aurora theme={S.theme} /> : null}
       <div id="tint" />
       <div id="veil" className={'veil-' + S.bg} />
-      <div className="holo-grid" />
-      <div className="light-beams">
-        <i />
-        <i />
-        <i />
-      </div>
       {deckOn ? <Deck S={S} over={S.bg === 'walldeck' || S.bg === 'auroradeck'} /> : null}
       <div id="grain" />
-      <div className="scan" />
     </div>
   )
 }
