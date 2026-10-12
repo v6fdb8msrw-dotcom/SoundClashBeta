@@ -1,0 +1,1188 @@
+[
+ {
+  "label": "setup",
+  "data": {
+   "turn": "",
+   "line": [],
+   "gaps": 0,
+   "others": [],
+   "reveal": "",
+   "ryear": "",
+   "tag": "",
+   "help": "",
+   "next": "",
+   "title": "Timeline Masters",
+   "lede": "Erkenne den Song an der 30-Sek-Vorschau und sortiere ihn ins richtige Jahr ein. Wer zuerst 5 Karten korrekt platziert, gewinnt.",
+   "win": [],
+   "dd": ""
+  }
+ },
+ {
+  "label": "zug-0",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P21/52002"
+    ],
+    "reveal": "TimeOasis",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P21/52002"
+    ],
+    "reveal": "TimeOasis · 2022",
+    "ryear": "2022",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-1",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 1/5 Karten",
+    "line": [
+     "2002 Can't Stop"
+    ],
+    "gaps": 2,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Need YouOasis",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "2002"
+    ],
+    "dd": ""
+   },
+   "g": 1,
+   "after": {
+    "turn": "P2 ist dran · 2/5 Karten",
+    "line": [
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 3,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Need YouOasis · 2024",
+    "ryear": "2024",
+    "tag": "✓ Richtig einsortiert!",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-2",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P22/520022024"
+    ],
+    "reveal": "Thank YouAlanis Morissette",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P22/520022024"
+    ],
+    "reveal": "Thank YouAlanis Morissette · 2005",
+    "ryear": "2005",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-3",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 2/5 Karten",
+    "line": [
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 3,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Everybody (Backstreet's Back)Backstreet Boys",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Everybody (Backstreet's Back)Backstreet Boys · 1997",
+    "ryear": "1997",
+    "tag": "✓ Richtig einsortiert!",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-4",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Without YouMariah Carey",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Without YouMariah Carey · 2001",
+    "ryear": "2001",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-5",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "All I Want for Christmas Is YouMariah Carey",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 3,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "All I Want for Christmas Is YouMariah Carey · 1994",
+    "ryear": "1994",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-6",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "I'm AliveCéline Dion",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "I'm AliveCéline Dion · 2004",
+    "ryear": "2004",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-7",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "It's All Coming Back to Me NowCéline Dion",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 1,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "It's All Coming Back to Me NowCéline Dion · 1996",
+    "ryear": "1996",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-8",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Higher LoveKygo",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Higher LoveKygo · 2019",
+    "ryear": "2019",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-9",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "I Will Always Love YouWhitney Houston",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 3,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "I Will Always Love YouWhitney Houston · 2000",
+    "ryear": "2000",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-10",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "California Love2Pac",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "California Love2Pac · 1998",
+    "ryear": "1998",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-11",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Gimme MoreBritney Spears",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 1,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Gimme MoreBritney Spears · 2007",
+    "ryear": "2007",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-12",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "...Baby One More TimeBritney Spears",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "...Baby One More TimeBritney Spears · 1999",
+    "ryear": "1999",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-13",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "CreepRadiohead",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 3,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "CreepRadiohead · 1993",
+    "ryear": "1993",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-14",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Can't StopRed Hot Chili Peppers",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Can't StopRed Hot Chili Peppers · 2002",
+    "ryear": "2002",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-15",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "TimeOasis",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 1,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "TimeOasis · 2022",
+    "ryear": "2022",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-16",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Need YouOasis",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Need YouOasis · 2024",
+    "ryear": "2024",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-17",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Thank YouAlanis Morissette",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 3,
+   "after": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Thank YouAlanis Morissette · 2005",
+    "ryear": "2005",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-18",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Everybody (Backstreet's Back)Backstreet Boys",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P23/5199720022024"
+    ],
+    "reveal": "Everybody (Backstreet's Back)Backstreet Boys · 1997",
+    "ryear": "1997",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-19",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 3/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 4,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Without YouMariah Carey",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 1,
+   "after": {
+    "turn": "P2 ist dran · 4/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2001 Without You",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 5,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "Without YouMariah Carey · 2001",
+    "ryear": "2001",
+    "tag": "✓ Richtig einsortiert!",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2001",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-20",
+  "data": {
+   "before": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P24/51997200120022024"
+    ],
+    "reveal": "All I Want for Christmas Is YouMariah Carey",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   },
+   "g": 0,
+   "after": {
+    "turn": "P1 ist dran · 1/5 Karten",
+    "line": [
+     "1993 Creep"
+    ],
+    "gaps": 2,
+    "others": [
+     "P24/51997200120022024"
+    ],
+    "reveal": "All I Want for Christmas Is YouMariah Carey · 1994",
+    "ryear": "1994",
+    "tag": "✗ Daneben — fliegt raus",
+    "help": "",
+    "next": "Nächster Spieler →",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1993"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "zug-21",
+  "data": {
+   "before": {
+    "turn": "P2 ist dran · 4/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2001 Without You",
+     "2002 Can't Stop",
+     "2024 Need You"
+    ],
+    "gaps": 5,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "I'm AliveCéline Dion",
+    "ryear": "?",
+    "tag": "",
+    "help": "Tippe die Lücke (+), in welches Jahr der Song gehört.",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2001",
+     "2002",
+     "2024"
+    ],
+    "dd": ""
+   },
+   "g": 3,
+   "after": {
+    "turn": "P2 ist dran · 5/5 Karten",
+    "line": [
+     "1997 Everybody (Backstreet's Back)",
+     "2001 Without You",
+     "2002 Can't Stop",
+     "2004 I'm Alive",
+     "2024 Need You"
+    ],
+    "gaps": 6,
+    "others": [
+     "P11/51993"
+    ],
+    "reveal": "I'm AliveCéline Dion · 2004",
+    "ryear": "2004",
+    "tag": "✓ Richtig einsortiert!",
+    "help": "",
+    "next": "🏆 Sieg ansehen",
+    "title": "",
+    "lede": "",
+    "win": [
+     "1997",
+     "2001",
+     "2002",
+     "2004",
+     "2024"
+    ],
+    "dd": ""
+   }
+  }
+ },
+ {
+  "label": "sieg",
+  "data": {
+   "turn": "",
+   "line": [],
+   "gaps": 0,
+   "others": [],
+   "reveal": "",
+   "ryear": "",
+   "tag": "",
+   "help": "",
+   "next": "",
+   "title": "P2 gewinnt!",
+   "lede": "5 Karten korrekt in die Zeitachse einsortiert. 🏆",
+   "win": [
+    "1997",
+    "2001",
+    "2002",
+    "2004",
+    "2024"
+   ],
+   "dd": ""
+  }
+ }
+]

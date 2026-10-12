@@ -1,0 +1,2828 @@
+[
+ {
+  "label": "speicher-nach-modus",
+  "data": {
+   "settings": {
+    "players": 2,
+    "names": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:b6bb1194dd",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 5,
+    "series": "single",
+    "muted": false,
+    "ambience": true,
+    "theme": "silksonic",
+    "bg": "mosaic",
+    "genre": "rnb",
+    "pool": [],
+    "warnOff": false,
+    "songMode": "perduel",
+    "sameArtist": false,
+    "custom": [],
+    "audience": false,
+    "mode": "t4",
+    "roster": [
+     {
+      "name": "Spieler 1",
+      "av": "data:b6bb1194dd",
+      "col": "#E5344E"
+     },
+     {
+      "name": "Spieler 2",
+      "av": "data:d3828dc1a0",
+      "col": "#33CCFF"
+     },
+     {
+      "name": "Spieler 3",
+      "av": "data:65fc4a0268",
+      "col": "#22C55E"
+     },
+     {
+      "name": "Spieler 4",
+      "av": "data:5f31670aa0",
+      "col": "#E5B23C"
+     }
+    ]
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ },
+ {
+  "label": "baum-0",
+  "data": {
+   "kicker": "Turnier · 4 Spieler",
+   "title": "Halbfinale",
+   "ranks": [
+    "AnnavsSpieler 2jetzt",
+    "Spieler 3vsBen"
+   ],
+   "go": "Anna vs Spieler 2 starten →"
+  }
+ },
+ {
+  "label": "draft-0",
+  "data": [
+   {
+    "step": 0,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 1 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Yxng Bane",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 1,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 2 / 10",
+      "Am Zug: Spieler 2"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Bugzy Malone",
+     "to": "→ Spieler 2"
+    }
+   },
+   {
+    "step": 2,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 3 / 10",
+      "Am Zug: Spieler 2"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Wiley",
+     "to": "→ Spieler 2"
+    }
+   },
+   {
+    "step": 3,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 4 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10000",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01010",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Michael Kiwanuka",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 4,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 5 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10001",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01010",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "AJ Tracey",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 5,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 6 / 10",
+      "Am Zug: Spieler 2"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10011",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01010",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Dizzee Rascal",
+     "to": "→ Spieler 2"
+    }
+   },
+   {
+    "step": 6,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 7 / 10",
+      "Am Zug: Spieler 2"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10011",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11010",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Aitch",
+     "to": "→ Spieler 2"
+    }
+   },
+   {
+    "step": 7,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 8 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10011",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11011",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Professor Green",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 8,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 9 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10111",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11011",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "FKA twigs",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 9,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 10 / 10",
+      "Am Zug: Spieler 2"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "Spieler 2",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11011",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Skepta",
+     "to": "→ Spieler 2"
+    }
+   }
+  ]
+ },
+ {
+  "label": "wahl-0-0",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #1 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Annawählt… [on]",
+      "Spieler 2Dizzee Rascal"
+     ],
+     "who": "Anna",
+     "artist": "Yxng Bane",
+     "badge": "#1",
+     "tlabel": "Top Tracks",
+     "tracks": [],
+     "next": "Erst einen Song wählen"
+    },
+    "action": "keine-tracks"
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #1 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Anna✓ gewählt",
+      "Spieler 2wählt… [on]"
+     ],
+     "who": "Spieler 2",
+     "artist": "Dizzee Rascal",
+     "badge": "#1",
+     "tlabel": "Top Tracks",
+     "tracks": [],
+     "next": "Erst einen Song wählen"
+    },
+    "action": "keine-tracks"
+   }
+  ]
+ },
+ {
+  "label": "duell-0-0",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #1 · ×1",
+     "Anna: 0",
+     "Spieler 2: 0"
+    ],
+    "big": "#1 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Yxng Bane",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Yxng%20Bane%20",
+       "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Dizzee Rascal",
+      "song": "Kein Song gewählt",
+      "dur": "",
+      "links": [
+       "https://open.spotify.com/search/Dizzee%20Rascal%20",
+       "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 2 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-0-1",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #2 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Spieler 2wählt… [on]",
+      "AnnaFKA twigs"
+     ],
+     "who": "Spieler 2",
+     "artist": "Bugzy Malone",
+     "badge": "#2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Ordinary People (feat. JP Cooper)",
+      "Need No One (feat. VICI)",
+      "Tears",
+      "Die By The Gun",
+      "Lean"
+     ],
+     "next": "Need No One (feat. VICI) bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #2 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Spieler 2✓ gewählt",
+      "Annawählt… [on]"
+     ],
+     "who": "Anna",
+     "artist": "FKA twigs",
+     "badge": "#2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "killer",
+      "Two Weeks",
+      "viscus",
+      "darjeeling (feat jorja smith & unknown t)",
+      "Sushi"
+     ],
+     "next": "viscus bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-0-1",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #2 · ×1",
+     "Anna: 1",
+     "Spieler 2: 0"
+    ],
+    "big": "#2 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "FKA twigs",
+      "song": "viscus",
+      "dur": "3:40",
+      "links": [
+       "https://open.spotify.com/search/FKA%20twigs%20viscus",
+       "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Bugzy Malone",
+      "song": "Need No One (feat. VICI)",
+      "dur": "2:37",
+      "links": [
+       "https://open.spotify.com/search/Bugzy%20Malone%20Need%20No%20One%20(feat.%20VICI)",
+       "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Need%20No%20One%20(feat.%20VICI)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 2 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-0-2",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #3 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Annawählt… [on]",
+      "Spieler 2Skepta"
+     ],
+     "who": "Anna",
+     "artist": "Professor Green",
+     "badge": "#3",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Read All About It",
+      "I Need You Tonight",
+      "NEED U NOW",
+      "Bad Decisions",
+      "Spinning Out"
+     ],
+     "next": "NEED U NOW bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #3 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Anna✓ gewählt",
+      "Spieler 2wählt… [on]"
+     ],
+     "who": "Spieler 2",
+     "artist": "Skepta",
+     "badge": "#3",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Victory Lap",
+      "DANGER DANGER",
+      "Gut Genug (with Skepta & Blumengarten)",
+      "Victory Lap Five",
+      "That's Not Me"
+     ],
+     "next": "Victory Lap bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-0-2",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #3 · ×1",
+     "Anna: 1",
+     "Spieler 2: 1"
+    ],
+    "big": "#3 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Professor Green",
+      "song": "NEED U NOW",
+      "dur": "3:22",
+      "links": [
+       "https://open.spotify.com/search/Professor%20Green%20NEED%20U%20NOW",
+       "https://www.youtube.com/results?search_query=Professor%20Green%20NEED%20U%20NOW"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Skepta",
+      "song": "Victory Lap",
+      "dur": "2:45",
+      "links": [
+       "https://open.spotify.com/search/Skepta%20Victory%20Lap",
+       "https://www.youtube.com/results?search_query=Skepta%20Victory%20Lap"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 2 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-0-3",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #4 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Spieler 2wählt… [on]",
+      "AnnaAJ Tracey"
+     ],
+     "who": "Spieler 2",
+     "artist": "Wiley",
+     "badge": "#4",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Boasty",
+      "Cash in My Pocket (feat. Daniel Merriweather)",
+      "Wearing My Rolex",
+      "Can You Hear Me? (ayayaya) (feat. Skepta, JME & Ms D)",
+      "Wot Do U Call It?"
+     ],
+     "next": "Boasty bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #4 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Spieler 2✓ gewählt",
+      "Annawählt… [on]"
+     ],
+     "who": "Anna",
+     "artist": "AJ Tracey",
+     "badge": "#4",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "BORN SPINNER",
+      "Thiago Silva",
+      "Rain",
+      "Ladbroke Grove",
+      "Joga Bonito"
+     ],
+     "next": "Thiago Silva bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-0-3",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #4 · ×1",
+     "Anna: 2",
+     "Spieler 2: 1"
+    ],
+    "big": "#4 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "AJ Tracey",
+      "song": "Thiago Silva",
+      "dur": "3:21",
+      "links": [
+       "https://open.spotify.com/search/AJ%20Tracey%20Thiago%20Silva",
+       "https://www.youtube.com/results?search_query=AJ%20Tracey%20Thiago%20Silva"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Wiley",
+      "song": "Boasty",
+      "dur": "2:57",
+      "links": [
+       "https://open.spotify.com/search/Wiley%20Boasty",
+       "https://www.youtube.com/results?search_query=Wiley%20Boasty"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 2 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-0-4",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #5 · ×2",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Annawählt… [on]",
+      "Spieler 2Aitch"
+     ],
+     "who": "Anna",
+     "artist": "Michael Kiwanuka",
+     "badge": "#5 ×2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Summer Clothes",
+      "Rolling",
+      "Home Again",
+      "Cold Little Heart",
+      "Love & Hate"
+     ],
+     "next": "Rolling bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #5 · ×2",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Anna✓ gewählt",
+      "Spieler 2wählt… [on]"
+     ],
+     "who": "Spieler 2",
+     "artist": "Aitch",
+     "badge": "#5 ×2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "RMB (Ring My Bell)",
+      "Bamba",
+      "Baddies",
+      "PSYCHO",
+      "RMB (Ring My Bell) - German Remix"
+     ],
+     "next": "Baddies bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-0-4",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #5 · ×2",
+     "Anna: 2",
+     "Spieler 2: 2"
+    ],
+    "big": "#5 · 2 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Michael Kiwanuka",
+      "song": "Rolling",
+      "dur": "2:51",
+      "links": [
+       "https://open.spotify.com/search/Michael%20Kiwanuka%20Rolling",
+       "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Rolling"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Aitch",
+      "song": "Baddies",
+      "dur": "2:18",
+      "links": [
+       "https://open.spotify.com/search/Aitch%20Baddies",
+       "https://www.youtube.com/results?search_query=Aitch%20Baddies"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 2 gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "runde-0",
+  "data": {
+   "kicker": "Runde 1 · Endstand",
+   "title": "Anna ✦",
+   "stats": [
+    {
+     "nm": "Anna",
+     "lead": true,
+     "v": [
+      "4",
+      "6",
+      "1/1"
+     ]
+    },
+    {
+     "nm": "Spieler 2",
+     "lead": false,
+     "v": [
+      "2",
+      "6",
+      "0/1"
+     ]
+    }
+   ],
+   "recap": [
+    {
+     "nm": "Anna",
+     "tot": "4",
+     "rows": [
+      "#1|Yxng Bane|—|+1|won",
+      "#2|FKA twigs|viscus|—|lost",
+      "#3|Professor Green|NEED U NOW|+1|won",
+      "#4|AJ Tracey|Thiago Silva|—|lost",
+      "#5|Michael Kiwanuka|Rolling|+2|won"
+     ]
+    },
+    {
+     "nm": "Spieler 2",
+     "tot": "2",
+     "rows": [
+      "#1|Dizzee Rascal|—|—|lost",
+      "#2|Bugzy Malone|Need No One (feat. VICI)|+1|won",
+      "#3|Skepta|Victory Lap|—|lost",
+      "#4|Wiley|Boasty|+1|won",
+      "#5|Aitch|Baddies|—|lost"
+     ]
+    }
+   ],
+   "buttons": [
+    "Anna steigt auf →"
+   ]
+  }
+ },
+ {
+  "label": "baum-1",
+  "data": {
+   "kicker": "Turnier · 4 Spieler",
+   "title": "Halbfinale",
+   "ranks": [
+    "Anna🏆vsSpieler 2",
+    "Spieler 3vsBenjetzt"
+   ],
+   "go": "Spieler 3 vs Ben starten →"
+  }
+ },
+ {
+  "label": "draft-1",
+  "data": [
+   {
+    "step": 0,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 1 / 10",
+      "Am Zug: Spieler 3"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Kate Nash",
+     "to": "→ Spieler 3"
+    }
+   },
+   {
+    "step": 1,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 2 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01000",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Yungblud",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 2,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 3 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01000",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00100",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Russ Millions",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 3,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 4 / 10",
+      "Am Zug: Spieler 3"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01000",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "The 1975",
+     "to": "→ Spieler 3"
+    }
+   },
+   {
+    "step": 4,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 5 / 10",
+      "Am Zug: Spieler 3"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01001",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Not3s",
+     "to": "→ Spieler 3"
+    }
+   },
+   {
+    "step": 5,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 6 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "J Hus",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 6,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 7 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01101",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Tion Wayne",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 7,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 8 / 10",
+      "Am Zug: Spieler 3"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11001",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Central Cee",
+     "to": "→ Spieler 3"
+    }
+   },
+   {
+    "step": 8,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 9 / 10",
+      "Am Zug: Spieler 3"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "11011",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Chip",
+     "to": "→ Spieler 3"
+    }
+   },
+   {
+    "step": 9,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 10 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Spieler 3",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Jorja Smith",
+     "to": "→ Ben"
+    }
+   }
+  ]
+ },
+ {
+  "label": "wahl-1-0",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #1 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Spieler 3wählt… [on]",
+      "BenJorja Smith"
+     ],
+     "who": "Spieler 3",
+     "artist": "Not3s",
+     "badge": "#1",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Fine Line",
+      "My Lover",
+      "Aladdin",
+      "Boom Bam (feat. Young T & Bugsey)",
+      "Complicated"
+     ],
+     "next": "Fine Line bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #1 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Spieler 3✓ gewählt",
+      "Benwählt… [on]"
+     ],
+     "who": "Ben",
+     "artist": "Jorja Smith",
+     "badge": "#1",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "The One",
+      "Blue Lights",
+      "Backwards",
+      "Jet Lag",
+      "On My Mind (Jorja Smith X Preditah)"
+     ],
+     "next": "Blue Lights bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-1-0",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #1 · ×1",
+     "Spieler 3: 0",
+     "Ben: 0"
+    ],
+    "big": "#1 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Not3s",
+      "song": "Fine Line",
+      "dur": "3:31",
+      "links": [
+       "https://open.spotify.com/search/Not3s%20Fine%20Line",
+       "https://www.youtube.com/results?search_query=Not3s%20Fine%20Line"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 3 gewinnt →"
+     },
+     {
+      "artist": "Jorja Smith",
+      "song": "Blue Lights",
+      "dur": "4:10",
+      "links": [
+       "https://open.spotify.com/search/Jorja%20Smith%20Blue%20Lights",
+       "https://www.youtube.com/results?search_query=Jorja%20Smith%20Blue%20Lights"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-1-1",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #2 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Benwählt… [on]",
+      "Spieler 3Kate Nash"
+     ],
+     "who": "Ben",
+     "artist": "J Hus",
+     "badge": "#2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Did You See",
+      "Who Told You (feat. Drake)",
+      "Gold",
+      "SLAUGHTER",
+      "Play Play (feat. Burna Boy)"
+     ],
+     "next": "Who Told You (feat. Drake) bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #2 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Ben✓ gewählt",
+      "Spieler 3wählt… [on]"
+     ],
+     "who": "Spieler 3",
+     "artist": "Kate Nash",
+     "badge": "#2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Foundations",
+      "Nicest Thing",
+      "Mouthwash",
+      "Merry Happy",
+      "Skeleton Song"
+     ],
+     "next": "Mouthwash bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-1-1",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #2 · ×1",
+     "Spieler 3: 0",
+     "Ben: 1"
+    ],
+    "big": "#2 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Kate Nash",
+      "song": "Mouthwash",
+      "dur": "5:01",
+      "links": [
+       "https://open.spotify.com/search/Kate%20Nash%20Mouthwash",
+       "https://www.youtube.com/results?search_query=Kate%20Nash%20Mouthwash"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 3 gewinnt →"
+     },
+     {
+      "artist": "J Hus",
+      "song": "Who Told You (feat. Drake)",
+      "dur": "3:29",
+      "links": [
+       "https://open.spotify.com/search/J%20Hus%20Who%20Told%20You%20(feat.%20Drake)",
+       "https://www.youtube.com/results?search_query=J%20Hus%20Who%20Told%20You%20(feat.%20Drake)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-1-2",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #3 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Spieler 3wählt… [on]",
+      "BenYungblud"
+     ],
+     "who": "Spieler 3",
+     "artist": "Chip",
+     "badge": "#3",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Coward",
+      "GTTB",
+      "Mains",
+      "Notorious",
+      "Jumanji Remix"
+     ],
+     "next": "Mains bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #3 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Spieler 3✓ gewählt",
+      "Benwählt… [on]"
+     ],
+     "who": "Ben",
+     "artist": "Yungblud",
+     "badge": "#3",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "parents",
+      "Zombie",
+      "I Think I'm OKAY",
+      "I Was Made For Lovin’ You",
+      "Lowlife"
+     ],
+     "next": "parents bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-1-2",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #3 · ×1",
+     "Spieler 3: 1",
+     "Ben: 1"
+    ],
+    "big": "#3 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Chip",
+      "song": "Mains",
+      "dur": "3:50",
+      "links": [
+       "https://open.spotify.com/search/Chip%20Mains",
+       "https://www.youtube.com/results?search_query=Chip%20Mains"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 3 gewinnt →"
+     },
+     {
+      "artist": "Yungblud",
+      "song": "parents",
+      "dur": "2:52",
+      "links": [
+       "https://open.spotify.com/search/Yungblud%20parents",
+       "https://www.youtube.com/results?search_query=Yungblud%20parents"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-1-3",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #4 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Benwählt… [on]",
+      "Spieler 3Central Cee"
+     ],
+     "who": "Ben",
+     "artist": "Tion Wayne",
+     "badge": "#4",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Forever (feat. Shallipopi)",
+      "Saxo",
+      "Body",
+      "Lowkey (LDN Drift) [feat. Takura]",
+      "Night Away (Dance)"
+     ],
+     "next": "Forever (feat. Shallipopi) bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #4 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Ben✓ gewählt",
+      "Spieler 3wählt… [on]"
+     ],
+     "who": "Spieler 3",
+     "artist": "Central Cee",
+     "badge": "#4",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "BAND4BAND",
+      "Doja",
+      "Sprinter",
+      "LET GO",
+      "Did It First"
+     ],
+     "next": "Doja bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-1-3",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #4 · ×1",
+     "Spieler 3: 1",
+     "Ben: 2"
+    ],
+    "big": "#4 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Central Cee",
+      "song": "Doja",
+      "dur": "1:37",
+      "links": [
+       "https://open.spotify.com/search/Central%20Cee%20Doja",
+       "https://www.youtube.com/results?search_query=Central%20Cee%20Doja"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 3 gewinnt →"
+     },
+     {
+      "artist": "Tion Wayne",
+      "song": "Forever (feat. Shallipopi)",
+      "dur": "2:35",
+      "links": [
+       "https://open.spotify.com/search/Tion%20Wayne%20Forever%20(feat.%20Shallipopi)",
+       "https://www.youtube.com/results?search_query=Tion%20Wayne%20Forever%20(feat.%20Shallipopi)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-1-4",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #5 · ×2",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Spieler 3wählt… [on]",
+      "BenRuss Millions"
+     ],
+     "who": "Spieler 3",
+     "artist": "The 1975",
+     "badge": "#5 ×2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "About You",
+      "Somebody Else",
+      "Robbers",
+      "Chocolate",
+      "Guys"
+     ],
+     "next": "Somebody Else bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #5 · ×2",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Spieler 3✓ gewählt",
+      "Benwählt… [on]"
+     ],
+     "who": "Ben",
+     "artist": "Russ Millions",
+     "badge": "#5 ×2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Hans Kazan",
+      "Body",
+      "Reggae & Calypso (Russ Millions x Buni x YV)",
+      "Reggae & Calypso (Russ Millions x SwitchOTR x YV)",
+      "SHAKE IT"
+     ],
+     "next": "Reggae & Calypso (Russ Millions x Buni x YV) bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-1-4",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #5 · ×2",
+     "Spieler 3: 2",
+     "Ben: 2"
+    ],
+    "big": "#5 · 2 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "The 1975",
+      "song": "Somebody Else",
+      "dur": "5:48",
+      "links": [
+       "https://open.spotify.com/search/The%201975%20Somebody%20Else",
+       "https://www.youtube.com/results?search_query=The%201975%20Somebody%20Else"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Spieler 3 gewinnt →"
+     },
+     {
+      "artist": "Russ Millions",
+      "song": "Reggae & Calypso (Russ Millions x Buni x YV)",
+      "dur": "2:21",
+      "links": [
+       "https://open.spotify.com/search/Russ%20Millions%20Reggae%20%26%20Calypso%20(Russ%20Millions%20x%20Buni%20x%20YV)",
+       "https://www.youtube.com/results?search_query=Russ%20Millions%20Reggae%20%26%20Calypso%20(Russ%20Millions%20x%20Buni%20x%20YV)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "runde-1",
+  "data": {
+   "kicker": "Runde 1 · Endstand",
+   "title": "Ben ✦",
+   "stats": [
+    {
+     "nm": "Spieler 3",
+     "lead": false,
+     "v": [
+      "2",
+      "6",
+      "0/1"
+     ]
+    },
+    {
+     "nm": "Ben",
+     "lead": true,
+     "v": [
+      "4",
+      "6",
+      "1/1"
+     ]
+    }
+   ],
+   "recap": [
+    {
+     "nm": "Spieler 3",
+     "tot": "2",
+     "rows": [
+      "#1|Not3s|Fine Line|—|lost",
+      "#2|Kate Nash|Mouthwash|+1|won",
+      "#3|Chip|Mains|—|lost",
+      "#4|Central Cee|Doja|+1|won",
+      "#5|The 1975|Somebody Else|—|lost"
+     ]
+    },
+    {
+     "nm": "Ben",
+     "tot": "4",
+     "rows": [
+      "#1|Jorja Smith|Blue Lights|+1|won",
+      "#2|J Hus|Who Told You (feat. Drake)|—|lost",
+      "#3|Yungblud|parents|+1|won",
+      "#4|Tion Wayne|Forever (feat. Shallipopi)|—|lost",
+      "#5|Russ Millions|Reggae & Calypso (Russ Millions x Buni x YV)|+2|won"
+     ]
+    }
+   ],
+   "buttons": [
+    "Ben steigt auf →"
+   ]
+  }
+ },
+ {
+  "label": "baum-2",
+  "data": {
+   "kicker": "Turnier · 4 Spieler",
+   "title": "Finale",
+   "ranks": [
+    "Anna🏆vsSpieler 2",
+    "Spieler 3vsBen🏆",
+    "AnnavsBenjetzt"
+   ],
+   "go": "Anna vs Ben starten →"
+  }
+ },
+ {
+  "label": "draft-2",
+  "data": [
+   {
+    "step": 0,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 1 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "0/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Digga D",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 1,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 2 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00100",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "0/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00000",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Stormzy",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 2,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 3 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "1/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00100",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00010",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Headie One",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 3,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 4 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "1/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00100",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00011",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Tinie Tempah",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 4,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 5 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10100",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "2/5 Plätze · 0 W",
+       "on": false,
+       "taken": "00011",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Little Simz",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 5,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 6 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10110",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "2/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00011",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Lily Allen",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 6,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 7 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "3/5 Plätze · 0 W",
+       "on": false,
+       "taken": "10110",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "00111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Fredo",
+     "to": "→ Ben"
+    }
+   },
+   {
+    "step": 7,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 8 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "3/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10110",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Arctic Monkeys",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 8,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 9 / 10",
+      "Am Zug: Anna"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "10111",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "4/5 Plätze · 0 W",
+       "on": false,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Rad drehen · [space]"
+    },
+    "reveal": {
+     "artist": "Lethal Bizzle",
+     "to": "→ Anna"
+    }
+   },
+   {
+    "step": 9,
+    "before": {
+     "pills": [
+      "Runde 1",
+      "Pick 10 / 10",
+      "Am Zug: Ben"
+     ],
+     "clusters": [
+      {
+       "name": "Anna",
+       "st": "5/5 Plätze · 0 W",
+       "on": false,
+       "taken": "11111",
+       "two": "00001"
+      },
+      {
+       "name": "Ben",
+       "st": "4/5 Plätze · 0 W",
+       "on": true,
+       "taken": "01111",
+       "two": "00001"
+      }
+     ],
+     "ask": "",
+     "spinLabel": "Letzten Künstler ziehen →"
+    },
+    "reveal": {
+     "artist": "Lana Del Rey",
+     "to": "→ Ben"
+    }
+   }
+  ]
+ },
+ {
+  "label": "wahl-2-0",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #1 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Annawählt… [on]",
+      "BenLana Del Rey"
+     ],
+     "who": "Anna",
+     "artist": "Tinie Tempah",
+     "badge": "#1",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Girls Like (feat. Zara Larsson)",
+      "Written in the Stars (feat. Eric Turner)",
+      "Pass Out",
+      "Miami 2 Ibiza",
+      "Invincible (feat. Kelly Rowland)"
+     ],
+     "next": "Girls Like (feat. Zara Larsson) bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #1 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Anna✓ gewählt",
+      "Benwählt… [on]"
+     ],
+     "who": "Ben",
+     "artist": "Lana Del Rey",
+     "badge": "#1",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Cinnamon Girl",
+      "Summertime Sadness",
+      "Born To Die",
+      "Young And Beautiful",
+      "Say Yes To Heaven"
+     ],
+     "next": "Summertime Sadness bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-2-0",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #1 · ×1",
+     "Anna: 0",
+     "Ben: 0"
+    ],
+    "big": "#1 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Tinie Tempah",
+      "song": "Girls Like (feat. Zara Larsson)",
+      "dur": "3:16",
+      "links": [
+       "https://open.spotify.com/search/Tinie%20Tempah%20Girls%20Like%20(feat.%20Zara%20Larsson)",
+       "https://www.youtube.com/results?search_query=Tinie%20Tempah%20Girls%20Like%20(feat.%20Zara%20Larsson)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Lana Del Rey",
+      "song": "Summertime Sadness",
+      "dur": "4:25",
+      "links": [
+       "https://open.spotify.com/search/Lana%20Del%20Rey%20Summertime%20Sadness",
+       "https://www.youtube.com/results?search_query=Lana%20Del%20Rey%20Summertime%20Sadness"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-2-1",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #2 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Benwählt… [on]",
+      "AnnaLethal Bizzle"
+     ],
+     "who": "Ben",
+     "artist": "Fredo",
+     "badge": "#2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Funky Friday",
+      "Ay Caramba",
+      "Damn",
+      "I’m Back",
+      "Birthday"
+     ],
+     "next": "Ay Caramba bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #2 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Ben✓ gewählt",
+      "Annawählt… [on]"
+     ],
+     "who": "Anna",
+     "artist": "Lethal Bizzle",
+     "badge": "#2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Fester Skank",
+      "Mr.",
+      "Flex",
+      "Enough is Enough (feat. Lethal Bizzle & Jme)",
+      "Round Here"
+     ],
+     "next": "Flex bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-2-1",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #2 · ×1",
+     "Anna: 1",
+     "Ben: 0"
+    ],
+    "big": "#2 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Lethal Bizzle",
+      "song": "Flex",
+      "dur": "2:54",
+      "links": [
+       "https://open.spotify.com/search/Lethal%20Bizzle%20Flex",
+       "https://www.youtube.com/results?search_query=Lethal%20Bizzle%20Flex"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Fredo",
+      "song": "Ay Caramba",
+      "dur": "3:31",
+      "links": [
+       "https://open.spotify.com/search/Fredo%20Ay%20Caramba",
+       "https://www.youtube.com/results?search_query=Fredo%20Ay%20Caramba"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-2-2",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #3 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Annawählt… [on]",
+      "BenLily Allen"
+     ],
+     "who": "Anna",
+     "artist": "Digga D",
+     "badge": "#3",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Next Up",
+      "Next Up",
+      "Gotcha",
+      "Stay Inside",
+      "Quincy Promes"
+     ],
+     "next": "Gotcha bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #3 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Anna✓ gewählt",
+      "Benwählt… [on]"
+     ],
+     "who": "Ben",
+     "artist": "Lily Allen",
+     "badge": "#3",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "Not Fair",
+      "Fuck You",
+      "Smile",
+      "Hard out Here",
+      "Pussy Palace"
+     ],
+     "next": "Not Fair bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-2-2",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #3 · ×1",
+     "Anna: 1",
+     "Ben: 1"
+    ],
+    "big": "#3 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Digga D",
+      "song": "Gotcha",
+      "dur": "3:19",
+      "links": [
+       "https://open.spotify.com/search/Digga%20D%20Gotcha",
+       "https://www.youtube.com/results?search_query=Digga%20D%20Gotcha"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Lily Allen",
+      "song": "Not Fair",
+      "dur": "3:21",
+      "links": [
+       "https://open.spotify.com/search/Lily%20Allen%20Not%20Fair",
+       "https://www.youtube.com/results?search_query=Lily%20Allen%20Not%20Fair"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-2-3",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #4 · ×1",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Benwählt… [on]",
+      "AnnaLittle Simz"
+     ],
+     "who": "Ben",
+     "artist": "Stormzy",
+     "badge": "#4",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "BACKBONE",
+      "Good Goodbye (feat. Pusha T and Stormzy)",
+      "24 Hours",
+      "Own It (feat. Ed Sheeran & Burna Boy)",
+      "Clash"
+     ],
+     "next": "BACKBONE bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #4 · ×1",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Ben✓ gewählt",
+      "Annawählt… [on]"
+     ],
+     "who": "Anna",
+     "artist": "Little Simz",
+     "badge": "#4",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "WE PRAY",
+      "Point and Kill",
+      "Gorilla",
+      "Woman",
+      "WE PRAY"
+     ],
+     "next": "Point and Kill bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-2-3",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #4 · ×1",
+     "Anna: 2",
+     "Ben: 1"
+    ],
+    "big": "#4 · 1 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Little Simz",
+      "song": "Point and Kill",
+      "dur": "3:05",
+      "links": [
+       "https://open.spotify.com/search/Little%20Simz%20Point%20and%20Kill",
+       "https://www.youtube.com/results?search_query=Little%20Simz%20Point%20and%20Kill"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Stormzy",
+      "song": "BACKBONE",
+      "dur": "2:46",
+      "links": [
+       "https://open.spotify.com/search/Stormzy%20BACKBONE",
+       "https://www.youtube.com/results?search_query=Stormzy%20BACKBONE"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "wahl-2-4",
+  "data": [
+   {
+    "k": 0,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #5 · ×2",
+      "Wahl 1 / 2"
+     ],
+     "chips": [
+      "Annawählt… [on]",
+      "BenHeadie One"
+     ],
+     "who": "Anna",
+     "artist": "Arctic Monkeys",
+     "badge": "#5 ×2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "505",
+      "Do I Wanna Know?",
+      "Why'd You Only Call Me When You're High?",
+      "R U Mine?",
+      "No. 1 Party Anthem"
+     ],
+     "next": "Do I Wanna Know? bestätigen →"
+    }
+   },
+   {
+    "k": 1,
+    "facts": {
+     "pills": [
+      "Runde 1",
+      "Platz #5 · ×2",
+      "Wahl 2 / 2"
+     ],
+     "chips": [
+      "Anna✓ gewählt",
+      "Benwählt… [on]"
+     ],
+     "who": "Ben",
+     "artist": "Headie One",
+     "badge": "#5 ×2",
+     "tlabel": "Top Tracks",
+     "tracks": [
+      "10von10",
+      "Life Lessons",
+      "Ain't It Different (feat. AJ Tracey & Stormzy)",
+      "Both",
+      "Ain't It Different (feat. AJ Tracey, Stormzy & Luciano)"
+     ],
+     "next": "Ain't It Different (feat. AJ Tracey & Stormzy) bestätigen →"
+    }
+   }
+  ]
+ },
+ {
+  "label": "duell-2-4",
+  "data": [
+   {
+    "pills": [
+     "Runde 1",
+     "Platz #5 · ×2",
+     "Anna: 2",
+     "Ben: 2"
+    ],
+    "big": "#5 · 2 PTS",
+    "lede": "",
+    "cards": [
+     {
+      "artist": "Arctic Monkeys",
+      "song": "Do I Wanna Know?",
+      "dur": "4:32",
+      "links": [
+       "https://open.spotify.com/search/Arctic%20Monkeys%20Do%20I%20Wanna%20Know%3F",
+       "https://www.youtube.com/results?search_query=Arctic%20Monkeys%20Do%20I%20Wanna%20Know%3F"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Anna gewinnt →"
+     },
+     {
+      "artist": "Headie One",
+      "song": "Ain't It Different (feat. AJ Tracey & Stormzy)",
+      "dur": "3:18",
+      "links": [
+       "https://open.spotify.com/search/Headie%20One%20Ain't%20It%20Different%20(feat.%20AJ%20Tracey%20%26%20Stormzy)",
+       "https://www.youtube.com/results?search_query=Headie%20One%20Ain%27t%20It%20Different%20(feat.%20AJ%20Tracey%20%26%20Stormzy)"
+      ],
+      "pct": "",
+      "res": "",
+      "win": "Ben gewinnt →"
+     }
+    ],
+    "rowButtons": []
+   }
+  ]
+ },
+ {
+  "label": "runde-2",
+  "data": {
+   "kicker": "Runde 1 · Endstand",
+   "title": "Anna ✦",
+   "stats": [
+    {
+     "nm": "Anna",
+     "lead": true,
+     "v": [
+      "4",
+      "6",
+      "1/1"
+     ]
+    },
+    {
+     "nm": "Ben",
+     "lead": false,
+     "v": [
+      "2",
+      "6",
+      "0/1"
+     ]
+    }
+   ],
+   "recap": [
+    {
+     "nm": "Anna",
+     "tot": "4",
+     "rows": [
+      "#1|Tinie Tempah|Girls Like (feat. Zara Larsson)|+1|won",
+      "#2|Lethal Bizzle|Flex|—|lost",
+      "#3|Digga D|Gotcha|+1|won",
+      "#4|Little Simz|Point and Kill|—|lost",
+      "#5|Arctic Monkeys|Do I Wanna Know?|+2|won"
+     ]
+    },
+    {
+     "nm": "Ben",
+     "tot": "2",
+     "rows": [
+      "#1|Lana Del Rey|Summertime Sadness|—|lost",
+      "#2|Fredo|Ay Caramba|+1|won",
+      "#3|Lily Allen|Not Fair|—|lost",
+      "#4|Stormzy|BACKBONE|+1|won",
+      "#5|Headie One|Ain't It Different (feat. AJ Tracey & Stormzy)|—|lost"
+     ]
+    }
+   ],
+   "buttons": [
+    "Anna steigt auf →"
+   ]
+  }
+ },
+ {
+  "label": "final",
+  "data": {
+   "kicker": "Turniersieger",
+   "win": "Anna",
+   "ranks": [
+    "Anna🏆vsSpieler 2",
+    "Spieler 3vsBen🏆",
+    "Anna🏆vsBen"
+   ],
+   "crate": [
+    "Girls Like (feat. Zara Larsson)Tinie TempahPlatz #1 · Anna",
+    "Ay CarambaFredoPlatz #2 · Ben",
+    "GotchaDigga DPlatz #3 · Anna",
+    "BACKBONEStormzyPlatz #4 · Ben",
+    "Do I Wanna Know?Arctic MonkeysPlatz #5 · Anna"
+   ],
+   "crateHint": "5 Sieger-Songs · antippen spielt 30 Sek & legt die Platte auf",
+   "rivalry": "",
+   "rivalrySummary": "",
+   "recap": [
+    [
+     "#1|Tinie Tempah|Girls Like (feat. Zara Larsson)|+1",
+     "#2|Lethal Bizzle|Flex|—",
+     "#3|Digga D|Gotcha|+1",
+     "#4|Little Simz|Point and Kill|—",
+     "#5|Arctic Monkeys|Do I Wanna Know?|+2"
+    ],
+    [
+     "#1|Lana Del Rey|Summertime Sadness|—",
+     "#2|Fredo|Ay Caramba|+1",
+     "#3|Lily Allen|Not Fair|—",
+     "#4|Stormzy|BACKBONE|+1",
+     "#5|Headie One|Ain't It Different (feat. AJ Tracey & Stormzy)|—"
+    ]
+   ],
+   "buttons": [
+    "↻ Neues Turnier"
+   ]
+  }
+ },
+ {
+  "label": "baum-final",
+  "data": [
+   "Anna🏆vsSpieler 2",
+   "Spieler 3vsBen🏆",
+   "Anna🏆vsBen"
+  ]
+ },
+ {
+  "label": "speicher",
+  "data": {
+   "settings": {
+    "players": 2,
+    "names": [
+     "Anna",
+     "Ben",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:b6bb1194dd",
+     "2": "data:5f31670aa0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 5,
+    "series": "single",
+    "muted": false,
+    "ambience": true,
+    "theme": "silksonic",
+    "bg": "mosaic",
+    "genre": "uk",
+    "pool": [],
+    "warnOff": false,
+    "songMode": "perduel",
+    "sameArtist": false,
+    "custom": [],
+    "audience": false,
+    "mode": "t4",
+    "roster": [
+     {
+      "name": "Anna",
+      "av": "data:b6bb1194dd",
+      "col": "#E5344E"
+     },
+     {
+      "name": "Spieler 2",
+      "av": "data:04ab0531a7",
+      "col": "#33CCFF"
+     },
+     {
+      "name": "Spieler 3",
+      "av": "data:65fc4a0268",
+      "col": "#22C55E"
+     },
+     {
+      "name": "Ben",
+      "av": "data:5f31670aa0",
+      "col": "#E5B23C"
+     }
+    ]
+   },
+   "rivalry": null,
+   "keys": [
+    "soundclash.v5"
+   ]
+  }
+ }
+]

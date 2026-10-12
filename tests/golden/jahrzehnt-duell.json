@@ -1,0 +1,1238 @@
+[
+ {
+  "label": "setup",
+  "data": {
+   "turn": "",
+   "line": [],
+   "gaps": 0,
+   "others": [],
+   "reveal": "",
+   "ryear": "",
+   "tag": "",
+   "help": "",
+   "next": "",
+   "title": "Timeline Masters",
+   "lede": "Zwei Teams, abwechselnd. Ein Song läuft — dein Team rät das Jahrzehnt. Richtig = Punkt, daneben darf das andere Team klauen. Wer zuerst 5 Punkte hat, gewinnt.",
+   "win": [],
+   "dd": ""
+  }
+ },
+ {
+  "label": "runde-0",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 100:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Just Can't Get EnoughDepeche Mode",
+    "ryear": "1983",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (80er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Just Can't Get EnoughDepeche Mode",
+    "ryear": "1983",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (80er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   }
+  }
+ },
+ {
+  "label": "runde-1",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Ordinary WorldDuran Duran",
+    "ryear": "1993",
+    "tag": "✗ Beide daneben — war 90er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   }
+  }
+ },
+ {
+  "label": "runde-2",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "What's Love Got to Do with ItTina Turner",
+    "ryear": "1988",
+    "tag": "✗ Beide daneben — war 80er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   }
+  }
+ },
+ {
+  "label": "runde-3",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "You Can't Hurry LovePhil Collins",
+    "ryear": "1982",
+    "tag": "✗ Beide daneben — war 80er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   }
+  }
+ },
+ {
+  "label": "runde-4",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "I Still Haven't Found What I'm Looking ForU2",
+    "ryear": "1990",
+    "tag": "✗ Beide daneben — war 90er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   }
+  }
+ },
+ {
+  "label": "runde-5",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "With Or Without YouU2",
+    "ryear": "2006",
+    "tag": "✗ Beide daneben — war 00er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   }
+  }
+ },
+ {
+  "label": "runde-6",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:0Team 20"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Purple RainPrince",
+    "ryear": "2017",
+    "tag": "✓ Team 2 schnappt sich den Punkt! (10er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-7",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "FaithGeorge Michael",
+    "ryear": "1987",
+    "tag": "✗ Beide daneben — war 80er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-8",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Higher LoveKygo",
+    "ryear": "2019",
+    "tag": "✗ Beide daneben — war 10er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-9",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "I Will Always Love YouWhitney Houston",
+    "ryear": "2000",
+    "tag": "✗ Beide daneben — war 00er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-10",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Like a PrayerMadonna",
+    "ryear": "1989",
+    "tag": "✗ Beide daneben — war 80er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-11",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 111:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "La Isla BonitaMadonna",
+    "ryear": "1986",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (80er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-12",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "You Give Love A Bad NameBon Jovi",
+    "ryear": "2001",
+    "tag": "✗ Beide daneben — war 00er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-13",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Livin' On A PrayerBon Jovi",
+    "ryear": "1998",
+    "tag": "✗ Beide daneben — war 90er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-14",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 122:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Beat ItMichael Jackson",
+    "ryear": "2009",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (00er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Beat ItMichael Jackson",
+    "ryear": "2009",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (00er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-15",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Billie JeanMichael Jackson",
+    "ryear": "2008",
+    "tag": "✗ Beide daneben — war 00er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-16",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Just Can't Get EnoughDepeche Mode",
+    "ryear": "1983",
+    "tag": "✗ Beide daneben — war 80er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-17",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Ordinary WorldDuran Duran",
+    "ryear": "1993",
+    "tag": "✗ Beide daneben — war 90er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-18",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 133:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "What's Love Got to Do with ItTina Turner",
+    "ryear": "1988",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (80er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "What's Love Got to Do with ItTina Turner",
+    "ryear": "1988",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (80er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-19",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "You Can't Hurry LovePhil Collins",
+    "ryear": "1982",
+    "tag": "✗ Beide daneben — war 80er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   }
+  }
+ },
+ {
+  "label": "runde-20",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:1Team 21"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "I Still Haven't Found What I'm Looking ForU2",
+    "ryear": "1990",
+    "tag": "✓ Team 2 schnappt sich den Punkt! (90er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   }
+  }
+ },
+ {
+  "label": "runde-21",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "With Or Without YouU2",
+    "ryear": "2006",
+    "tag": "✗ Beide daneben — war 00er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   }
+  }
+ },
+ {
+  "label": "runde-22",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "Purple RainPrince",
+    "ryear": "2017",
+    "tag": "✗ Beide daneben — war 10er",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   }
+  }
+ },
+ {
+  "label": "runde-23",
+  "data": {
+   "a": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 2 — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   },
+   "b": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "",
+    "ryear": "",
+    "tag": "",
+    "help": "Team 1 klaut — aus welchem Jahrzehnt ist der Song?",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 144:2Team 22"
+   },
+   "c": {
+    "turn": "",
+    "line": [],
+    "gaps": 0,
+    "others": [],
+    "reveal": "FaithGeorge Michael",
+    "ryear": "1987",
+    "tag": "✓ Team 1 schnappt sich den Punkt! (80er)",
+    "help": "",
+    "next": "",
+    "title": "",
+    "lede": "",
+    "win": [],
+    "dd": "Team 155:2Team 22"
+   }
+  }
+ },
+ {
+  "label": "sieg",
+  "data": {
+   "turn": "",
+   "line": [],
+   "gaps": 0,
+   "others": [],
+   "reveal": "",
+   "ryear": "",
+   "tag": "",
+   "help": "",
+   "next": "",
+   "title": "Team 1 gewinnt!",
+   "lede": "5 : 2 🏆",
+   "win": [],
+   "dd": ""
+  }
+ }
+]

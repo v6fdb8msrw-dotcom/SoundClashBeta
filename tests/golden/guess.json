@@ -1,0 +1,307 @@
+[
+ {
+  "label": "setup-leer",
+  "data": {
+   "chipsOn": [],
+   "opts": [
+    "5",
+    "Easy"
+   ],
+   "hint": "Easy — die Hits, die jeder kennt. · Mehrere Kategorien wählbar.",
+   "bar": "Wähl mind. eine Kategorie",
+   "disabled": true
+  }
+ },
+ {
+  "label": "setup",
+  "data": {
+   "chipsOn": [
+    "R&B"
+   ],
+   "opts": [
+    "3",
+    "Medium"
+   ],
+   "hint": "Medium — solide Bekanntheit. · Mehrere Kategorien wählbar.",
+   "bar": "R&B",
+   "disabled": false
+  }
+ },
+ {
+  "label": "spiel1-runde0",
+  "data": {
+   "meta": [
+    "Runde 1 / 3",
+    "0 Pkt"
+   ],
+   "steps": "12:cur 10: 8: 6: 5: 3: 1:",
+   "hint": "Aktuell 12 Punkte · daneben oder überspringen = mehr hören, weniger Punkte",
+   "play": "▶ Anspielen · 0.2s",
+   "skip": "Mehr hören / überspringen →",
+   "reveal": [],
+   "next": "",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel1-aufloesung0",
+  "data": {
+   "meta": [
+    "Runde 1 / 3",
+    "0 Pkt"
+   ],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [
+    "✗ Daneben",
+    "Don't Stop The Music",
+    "Rihanna",
+    "0 Punkte"
+   ],
+   "next": "Nächster Song →",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel1-runde1",
+  "data": {
+   "meta": [
+    "Runde 2 / 3",
+    "0 Pkt"
+   ],
+   "steps": "12:cur 10: 8: 6: 5: 3: 1:",
+   "hint": "Aktuell 12 Punkte · daneben oder überspringen = mehr hören, weniger Punkte",
+   "play": "▶ Anspielen · 0.2s",
+   "skip": "Mehr hören / überspringen →",
+   "reveal": [],
+   "next": "",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel1-aufloesung1",
+  "data": {
+   "meta": [
+    "Runde 2 / 3",
+    "0 Pkt"
+   ],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [
+    "✗ Daneben",
+    "We Found Love",
+    "Rihanna",
+    "0 Punkte"
+   ],
+   "next": "Nächster Song →",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel1-runde2",
+  "data": {
+   "meta": [
+    "Runde 3 / 3",
+    "0 Pkt"
+   ],
+   "steps": "12:cur 10: 8: 6: 5: 3: 1:",
+   "hint": "Aktuell 12 Punkte · daneben oder überspringen = mehr hören, weniger Punkte",
+   "play": "▶ Anspielen · 0.2s",
+   "skip": "Mehr hören / überspringen →",
+   "reveal": [],
+   "next": "",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel1-aufloesung2",
+  "data": {
+   "meta": [
+    "Runde 3 / 3",
+    "0 Pkt"
+   ],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [
+    "✗ Daneben",
+    "Umbrella",
+    "Rihanna",
+    "0 Punkte"
+   ],
+   "next": "Ergebnis →",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel1-ergebnis",
+  "data": {
+   "meta": [],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [],
+   "next": "",
+   "result": "0 Punkte",
+   "resultLede": "3 Runden · R&B"
+  }
+ },
+ {
+  "label": "spiel2-falsch-suche",
+  "data": [
+   "Bohemian RhapsodyQueen",
+   "Bohemian RhapsodyQueen",
+   "Bohemian RhapsodyQueen",
+   "Bohemian RhapsodyThe Braids",
+   "Bohemian RhapsodyAngelina Jordan",
+   "Bohemian Rhapsody (feat. The White Buffalo, Billy Valentine & Franky Perez)The Forest Rangers",
+   "Bohemian RhapsodyJudson Mancebo",
+   "Bohemian RhapsodyPentatonix"
+  ]
+ },
+ {
+  "label": "spiel2-nach-falsch",
+  "data": {
+   "meta": [
+    "Runde 1 / 3",
+    "0 Pkt"
+   ],
+   "steps": "12:used 10:cur 8: 6: 5: 3: 1:",
+   "hint": "Aktuell 10 Punkte · daneben oder überspringen = mehr hören, weniger Punkte",
+   "play": "▶ Anspielen · 0.5s",
+   "skip": "Mehr hören / überspringen →",
+   "reveal": [],
+   "next": "",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel2-richtig-suche",
+  "data": [
+   "Don't Stop The MusicRihanna",
+   "Don’t Stop The MusicMeshell Ndegeocello",
+   "Don't Stop The Music (Slowed)Ed Marquis",
+   "Don't Stop The MusicJamie Cullum",
+   "Don't Stop The MusicNOVAX",
+   "Don't Stop The MusicCharles B",
+   "Don't Stop The MusicBeauz",
+   "Don't Stop The MusicEd Marquis"
+  ]
+ },
+ {
+  "label": "spiel2-richtig",
+  "data": {
+   "meta": [
+    "Runde 1 / 3",
+    "8 Pkt"
+   ],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [
+    "✓ Richtig!",
+    "Don't Stop The Music",
+    "Rihanna",
+    "+8 Punkte"
+   ],
+   "next": "Nächster Song →",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel2-r2-suche",
+  "data": [
+   "We Found LoveRihanna",
+   "We Found LoveRihanna",
+   "We Found LoveRihanna",
+   "We Found Love (feat. Calvin Harris)Rihanna Cover Band",
+   "We Found LoveRihanna",
+   "We Found LoveRihanna",
+   "We Found LoveRihanna",
+   "We Found Love (Acoustic Tribute to Rihanna) [feat. Corey Gray]Jake Coco"
+  ]
+ },
+ {
+  "label": "spiel2-r2",
+  "data": {
+   "meta": [
+    "Runde 2 / 3",
+    "20 Pkt"
+   ],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [
+    "✓ Richtig!",
+    "We Found Love",
+    "Rihanna",
+    "+12 Punkte"
+   ],
+   "next": "Nächster Song →",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel2-r3-kurz",
+  "data": ""
+ },
+ {
+  "label": "spiel2-r3",
+  "data": {
+   "meta": [
+    "Runde 3 / 3",
+    "20 Pkt"
+   ],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [
+    "✗ Daneben",
+    "Umbrella",
+    "Rihanna",
+    "0 Punkte"
+   ],
+   "next": "Ergebnis →",
+   "result": "",
+   "resultLede": ""
+  }
+ },
+ {
+  "label": "spiel2-ergebnis",
+  "data": {
+   "meta": [],
+   "steps": "",
+   "hint": "",
+   "play": "",
+   "skip": "",
+   "reveal": [],
+   "next": "",
+   "result": "20 Punkte",
+   "resultLede": "3 Runden · R&B"
+  }
+ },
+ {
+  "label": "toasts",
+  "data": [
+   "Daneben — hör nochmal rein."
+  ]
+ }
+]
