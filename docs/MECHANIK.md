@@ -274,7 +274,8 @@ Beim Laden wird geprüft: players 2–6, size ∈ {5,7,10,15}, series/songMode/m
 bekannt (sonst mosaic/silksonic), genre vorhanden, custom max. 12 Strings; Turnier-Kader nur bei
 passender Größe. Nicht gespeichert: Pick-Timer, Auto-Scroll, laufende Partie.
 
-**Neu:** eigene Schlüssel mit Präfix `soundclash.app.` (siehe CLAUDE.md). Alte Werte werden beim
+**Neu:** eigene Schlüssel mit Präfix `soundclash.app.` (siehe CLAUDE.md). Der neue Handy-Begleiter
+(docs/HANDY-BEGLEITER.md) ändert keine Regel: Er löst nur dieselben Aktionen aus wie ein Tippen am Hauptgerät. Alte Werte werden beim
 ersten Start übernommen, die alten Schlüssel bleiben unangetastet. Muscle-Studio-Schlüssel werden nie gelesen oder geändert.
 
 ## 8. Klänge und Effekte (Teil des Spielgefühls)
@@ -303,8 +304,8 @@ Blonde, Currents, Nectar, Warm Lime, Sky Mint, Emerald, Ultra Violet.
 5. **Sudden Death bei 3+ Spielern:** nur die Gleichstehenden spielen; im Rückblick erscheinen die
    anderen ohne Zeilen.
 6. Der Regeltext erwähnt „Respins“, die es im Spiel nicht gibt.
-7. Spielerfarben im Turniermodus können beim Start mit gespeichertem Turnier und anderem Theme
-   gegen das Standard-Theme berechnet sein, bis das Theme gewechselt wird.
+7. Startet das Spiel mit gespeichertem Turniermodus, aber ohne passend großen gespeicherten Kader,
+   bekommt der neue Kader die Farben für das Standard-Theme (Silk Sonic), bis das Theme gewechselt wird.
 8. **Sudden-Death-Platte:** In „Die Platten des Abends“ trägt die entscheidende SD-Platte als Künstler
    den Wert `true` (Code: `artist:S.sd`). Ohne Songtitel steht dort deshalb „true“. Beim Teilen-Bild
    führt eine solche Platte ohne Cover zu einem Fehler, das Bild wird dann nicht erstellt.

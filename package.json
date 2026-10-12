@@ -28,13 +28,16 @@
     "@fontsource/syne": "^5.3.0",
     "immer": "^11.1.21",
     "motion": "^14.1.0",
+    "qrcode": "^1.5.4",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
+    "trystero": "^0.26.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0",
     "@types/node": "^24.19.2",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vite-pwa/assets-generator": "^2.0.0",

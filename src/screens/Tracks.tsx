@@ -63,7 +63,7 @@ export function Tracks({ S, p, i, artist }: { S: State; p: number; i: number; ar
       return (
         <motion.div
           key={k + t.id}
-          className={'trk ' + (fit === false ? 'bad' : '') + (isSel ? ' sel' : '')}
+          className={'trk ' + (fit === false ? 'bad' : '') + (isSel ? ' picked' : '')}
           data-pick={p + '_' + i + '_' + j}
           onClick={(e) => {
             if ((e.target as HTMLElement).closest('[data-pv2]')) return

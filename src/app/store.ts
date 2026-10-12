@@ -14,7 +14,6 @@ import { spinAnim } from './wheelAnim'
 /**
  * Laufzeit: hält den Spielzustand, schickt Aktionen durch die reine Spiellogik (core/game.ts)
  * und führt danach die Effekte aus (Klang, Speichern, Deezer-Laden, Animationen …).
- * Für Mehrspieler kommt später genau hier die Netzwerkschicht dazu (docs/MULTIPLAYER.md).
  */
 
 export const env: Env = defaultEnv()

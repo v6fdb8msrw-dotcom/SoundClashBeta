@@ -19,6 +19,7 @@ import { Soon } from './screens/Soon'
 import { TimelinePlay, TimelineSetup } from './screens/Timeline'
 import { configureAudio } from './services/audio'
 import { dz } from './services/deezer'
+import { resumeHost } from './remote/host'
 import { loadRivalry } from './services/rivalry'
 import { configureSfx } from './services/sfx'
 import { loadSettings, migrateLegacy } from './services/storage'
@@ -42,6 +43,8 @@ function boot() {
   loadRivalry()
   // Deezer einmal antesten (bestimmt die Warnung)
   dz('search/artist', { q: 'drake', limit: 1 }).catch(() => undefined)
+  // Handy-Kopplung nach einem Neuladen fortsetzen (nur wenn sie vorher aktiv war)
+  resumeHost()
 }
 boot()
 

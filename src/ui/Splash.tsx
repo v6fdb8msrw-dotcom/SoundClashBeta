@@ -2,18 +2,18 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { env } from '../app/store'
 
-/** Titelmoment beim Öffnen: Platte läuft an, Titel baut sich auf. Antippen überspringt. */
+/** Titelmoment beim Öffnen: Platte läuft an, Titel baut sich auf. Blockiert keine Eingaben. */
 export function Splash() {
   const [on, setOn] = useState(true)
   useEffect(() => {
-    const t = setTimeout(() => setOn(false), env.reduce ? 500 : 1900)
+    const t = setTimeout(() => setOn(false), env.reduce ? 300 : 1700)
     return () => clearTimeout(t)
   }, [])
   const letters = 'Sound Clash'.split('')
   return (
     <AnimatePresence>
       {on ? (
-        <motion.div id="splash" key="splash" aria-hidden onClick={() => setOn(false)} exit={{ opacity: 0, scale: 1.04, filter: 'blur(12px)' }} transition={{ duration: 0.45, ease: 'easeOut' }}>
+        <motion.div id="splash" key="splash" aria-hidden exit={{ opacity: 0, scale: 1.04, filter: 'blur(12px)' }} transition={{ duration: env.reduce ? 0 : 0.45, ease: 'easeOut' }}>
           <div className="sp-deck">
             <motion.div className="sp-ring" initial={{ scale: 0.6, opacity: 0, rotate: -90 }} animate={{ scale: 1, opacity: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 120, damping: 16 }} />
             <motion.div className="sp-disc" initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 140, damping: 14, delay: 0.1 }}>

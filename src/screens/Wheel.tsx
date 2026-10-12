@@ -146,6 +146,7 @@ export function Wheel({ S, revealing, children }: { S: State; revealing: boolean
   const ref = useRef<HTMLCanvasElement>(null)
   const sRef = useRef(S)
   const ptr = useAnimationControls()
+  const flickStart = useRef<{ x: number; y: number; t: number } | null>(null)
   sRef.current = S
   useLayoutEffect(() => drawWheel(ref.current, S))
   useEffect(() => {
@@ -171,7 +172,24 @@ export function Wheel({ S, revealing, children }: { S: State; revealing: boolean
   return (
     <div className={'wheelbox' + (revealing ? ' revealing' : '') + (S.spin ? ' spinning' : '')}>
       <motion.div className="ptr" animate={ptr} aria-hidden />
-      <canvas id="wheel" ref={ref} width={600} height={600} aria-label={'Glücksrad mit ' + S.pool.length + ' Künstlern'} />
+      <canvas
+        id="wheel"
+        ref={ref}
+        width={600}
+        height={600}
+        aria-label={'Glücksrad mit ' + S.pool.length + ' Künstlern – wischen oder SPIN tippen'}
+        onPointerDown={(e) => (flickStart.current = { x: e.clientX, y: e.clientY, t: performance.now() })}
+        onPointerUp={(e) => {
+          // Wisch-Geste: kräftig über das Rad ziehen = drehen (wie der Knopf)
+          const f = flickStart.current
+          flickStart.current = null
+          if (!f) return
+          const d = Math.hypot(e.clientX - f.x, e.clientY - f.y),
+            dt = performance.now() - f.t
+          if (d > 40 && dt < 700) dispatch({ type: 'spin' })
+        }}
+        style={{ touchAction: 'pan-y' }}
+      />
       <button className="hub" id="wheelHub" title="Rad drehen" onClick={() => dispatch({ type: 'spin' })}>
         SPIN
       </button>

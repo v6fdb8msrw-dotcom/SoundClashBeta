@@ -51,10 +51,12 @@ test('Live · Deezer-Hörprobe spielt wirklich · Links führen zur Suche', asyn
   const card = page.locator('#app .dcard').first()
   await card.waitFor()
   const links = await card.locator('a.lnk').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).href))
-  expect(links).toEqual([
-    'https://open.spotify.com/search/' + encodeURIComponent(artist + ' ' + title),
-    'https://www.youtube.com/results?search_query=' + encodeURIComponent(artist + ' ' + title),
-  ])
+  // Erwartung durch den URL-Parser des Browsers schicken (er schreibt z. B. ' in der Abfrage als %27)
+  const expected = await page.evaluate(
+    (u) => u.map((x) => new URL(x).href),
+    ['https://open.spotify.com/search/' + encodeURIComponent(artist + ' ' + title), 'https://www.youtube.com/results?search_query=' + encodeURIComponent(artist + ' ' + title)],
+  )
+  expect(links).toEqual(expected)
   // 30-Sek-Knopf im Duell spielt ebenfalls
   await card.locator('[data-pv3]').click()
   await page.waitForFunction(() => (window as unknown as { __media: HTMLMediaElement[] }).__media.some((m) => !m.paused && m.currentTime > 1), null, { timeout: 20000 })

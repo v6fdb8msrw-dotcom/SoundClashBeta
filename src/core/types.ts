@@ -1,7 +1,6 @@
 /**
  * Spielzustand – reine, serialisierbare Daten (JSON-fähig).
  * Feldnamen entsprechen dem Zustand `S` des Originals, damit die Logik 1:1 lesbar bleibt.
- * Später kann der Host diesen Zustand per WebRTC an alle Mitspieler senden (docs/MULTIPLAYER.md).
  */
 
 export type Screen =

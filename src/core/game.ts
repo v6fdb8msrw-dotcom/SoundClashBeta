@@ -10,7 +10,7 @@ import type { PoolSong, SavedSettings, Song, State, Track, WinnerRecord } from '
  * Aufbau: `reduce(state, action, env)` liefert den neuen Zustand und eine Liste von Effekten
  * (Klänge, Toasts, Speichern, Laden bei Deezer …), die die Oberfläche danach ausführt.
  * Die Funktionen unten heißen wie im Original und arbeiten auf einem Entwurf `S` (immer).
- * Zufall und Uhrzeit kommen aus `env`, damit der Ablauf testbar und später netzwerkfähig ist.
+ * Zufall und Uhrzeit kommen aus `env`, damit die Abläufe testbar bleiben.
  *
  * WICHTIG: Regeln hier nicht „verbessern“. Jede Abweichung vom Original ist ein Fehler.
  */

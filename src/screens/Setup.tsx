@@ -191,6 +191,7 @@ function RosterCard({ S }: { S: State }) {
 }
 
 export function Setup({ S }: { S: State }) {
+  const swipe = useRef<{ x: number; y: number } | null>(null)
   const need = picks(S)
   const genreOpts: Opt[] = Object.keys(GEN).map((k) => ({ v: k, t: GEN[k].label }))
   const tabs: [State['setupTab'], React.ReactNode][] = [
@@ -229,7 +230,25 @@ export function Setup({ S }: { S: State }) {
           </button>
         ))}
       </div>
-      <div className="grid2 setupgrid" data-tab={S.setupTab}>
+      <div
+        className="grid2 setupgrid"
+        data-tab={S.setupTab}
+        onTouchStart={(e) => (swipe.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
+        onTouchEnd={(e) => {
+          // iPhone: seitlich wischen wechselt zwischen Einstellungen, Spieler und Künstler
+          const s0 = swipe.current
+          swipe.current = null
+          if (!s0 || !window.matchMedia('(max-width:720px)').matches) return
+          const t = e.changedTouches[0],
+            dx = t.clientX - s0.x,
+            dy = t.clientY - s0.y
+          if (Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.6) return
+          if ((e.target as HTMLElement).closest('.alist, .avgrid, .selmenu, input')) return
+          const order: State['setupTab'][] = ['cfg', 'players', 'pool']
+          const k = order.indexOf(S.setupTab) + (dx < 0 ? 1 : -1)
+          if (k >= 0 && k < order.length) dispatch({ type: 'setupTab', tab: order[k] })
+        }}
+      >
         <div>
           <div className="card scard" data-card="cfg">
             <div className="g2">

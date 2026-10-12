@@ -4,41 +4,49 @@ import { dispatch } from '../app/store'
 import { BGS, THEMES } from '../core/constants'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
+import { PairDialog, useHost } from './PairDialog'
 import { Sel } from './primitives'
 
 /** Kopfleiste: Logo (→ Startbildschirm), Spielanleitung, Hintergrund, Ton, Farbe, Spielstand. */
 export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
   const [rules, setRules] = useState(false)
   const [backup, setBackup] = useState(false)
+  const [pair, setPair] = useState(false)
+  const host = useHost()
   return (
     <>
-      <header className={'brand' + (shrink ? ' shrink' : '')} onClick={() => dispatch({ type: 'brand' })} role="banner">
-        <div className="logo" aria-hidden>
-          <span className="logo-disc" />
-          <span className="logo-bolt" />
+      <header className={'brand' + (shrink ? ' shrink' : '')} role="banner">
+        <div className="brand-home" onClick={() => dispatch({ type: 'brand' })} title="Zum Startbildschirm">
+          <div className="logo" aria-hidden>
+            <span className="logo-disc" />
+            <span className="logo-bolt" />
+          </div>
+          <div className="brand-text">
+            <h1>
+              Sound <em>Clash</em>
+            </h1>
+            <p>Blind ranken. Song für Song. Bis einer krönt.</p>
+          </div>
         </div>
-        <div className="brand-text">
-          <h1>
-            Sound <em>Clash</em>
-          </h1>
-          <p>Blind ranken. Song für Song. Bis einer krönt.</p>
-        </div>
+        <nav className="topbar" aria-label="Werkzeuge">
+          <div className="tools">
+            <button className={'tool' + (rules ? ' on' : '')} id="rulesBtn" onClick={() => setRules((r) => !r)} aria-expanded={rules}>
+              <span aria-hidden>ⓘ</span> <span className="tool-t">Spielanleitung</span>
+            </button>
+            <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} slbl={<span className="slbl">Hintergrund</span>} className="tsel" />
+            <button className="tool icon" id="soundBtn" title="Ton" onClick={() => dispatch({ type: 'toggleMute' })}>
+              {S.muted ? '🔇' : '🔊'}
+            </button>
+            <Sel id="theme" value={S.theme} opts={THEMES.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'theme', v })} slbl={<span className="slbl">Farbe</span>} className="tsel" />
+            <button className={'tool' + (host.code ? ' on' : '')} id="pairBtn" onClick={() => setPair(true)} title="Handys per QR-Code koppeln (abstimmen, eigenes Line-up)">
+              <span aria-hidden>📱</span> <span className="tool-t">{host.code ? host.phones.length + ' gekoppelt' : 'Handys'}</span>
+            </button>
+            <button className="tool" id="backupBtn" onClick={() => setBackup(true)} title="Spielstand sichern oder übernehmen">
+              <span aria-hidden>⇅</span> <span className="tool-t">Spielstand</span>
+            </button>
+          </div>
+        </nav>
       </header>
-      <nav className="topbar" aria-label="Werkzeuge">
-        <div className="tools">
-          <button className={'tool' + (rules ? ' on' : '')} id="rulesBtn" onClick={() => setRules((r) => !r)} aria-expanded={rules}>
-            <span aria-hidden>ⓘ</span> <span className="tool-t">Spielanleitung</span>
-          </button>
-          <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} slbl={<span className="slbl">Hintergrund</span>} className="tsel" />
-          <button className="tool icon" id="soundBtn" title="Ton" onClick={() => dispatch({ type: 'toggleMute' })}>
-            {S.muted ? '🔇' : '🔊'}
-          </button>
-          <Sel id="theme" value={S.theme} opts={THEMES.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'theme', v })} slbl={<span className="slbl">Farbe</span>} className="tsel" />
-          <button className="tool" id="backupBtn" onClick={() => setBackup(true)} title="Spielstand sichern oder übernehmen">
-            <span aria-hidden>⇅</span> <span className="tool-t">Spielstand</span>
-          </button>
-        </div>
-      </nav>
       <AnimatePresence initial={false}>
         {rules ? (
           <motion.section
@@ -54,6 +62,7 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
         ) : null}
       </AnimatePresence>
       <AnimatePresence>{backup ? <BackupDialog onClose={() => setBackup(false)} /> : null}</AnimatePresence>
+      <AnimatePresence>{pair ? <PairDialog onClose={() => setPair(false)} /> : null}</AnimatePresence>
     </>
   )
 }
