@@ -1,0 +1,173 @@
+import { MotionConfig, motion } from 'motion/react'
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { bus } from './app/bus'
+import { dispatch, env, getState, useGame } from './app/store'
+import type { State } from './core/types'
+import { Bracket } from './screens/Bracket'
+import { Decade } from './screens/Decade'
+import { Draft } from './screens/Draft'
+import { Duel } from './screens/Duel'
+import { Final } from './screens/Final'
+import { GuessPlay, GuessSetup } from './screens/Guess'
+import { Home } from './screens/Home'
+import { Pick } from './screens/Pick'
+import { Round } from './screens/Round'
+import { Setup } from './screens/Setup'
+import { SingPlay, SingSetup } from './screens/Sing'
+import { Songs } from './screens/Songs'
+import { Soon } from './screens/Soon'
+import { TimelinePlay, TimelineSetup } from './screens/Timeline'
+import { configureAudio } from './services/audio'
+import { dz } from './services/deezer'
+import { loadRivalry } from './services/rivalry'
+import { configureSfx } from './services/sfx'
+import { loadSettings, migrateLegacy } from './services/storage'
+import { Background } from './ui/Background'
+import { Fx } from './ui/Fx'
+import { Presence, setOpenSel } from './ui/primitives'
+import { Splash } from './ui/Splash'
+import { Toast } from './ui/Toast'
+import { TopBar } from './ui/TopBar'
+import { UpdatePrompt } from './ui/UpdatePrompt'
+
+/* ---- Start: Speicher übernehmen, Einstellungen laden (wie init() im Original) ---- */
+let booted = false
+function boot() {
+  if (booted) return
+  booted = true
+  configureSfx(() => getState().muted, env.reduce)
+  configureAudio({ toast: (m) => bus.emit('toast', m), ambience: () => getState().ambience })
+  migrateLegacy()
+  dispatch({ type: 'load', saved: loadSettings() })
+  loadRivalry()
+  // Deezer einmal antesten (bestimmt die Warnung)
+  dz('search/artist', { q: 'drake', limit: 1 }).catch(() => undefined)
+}
+boot()
+
+function screenKey(S: State): string {
+  if (S.screen === 'pick') return `pick-${S.round}-${S.sd ? 'sd' : S.duel}-${S.pickIdx}`
+  if (S.screen === 'duel') return `duel-${S.round}-${S.sd ? 'sd' : S.duel}`
+  if (S.screen === 'draft') return `draft-${S.round}-${S.T ? S.T.r + '-' + S.T.m : ''}`
+  if (S.screen === 'bracket') return `bracket-${S.T ? S.T.r + '-' + S.T.m : ''}`
+  if (S.screen === 'gsplay') return `gs-${S.gs?.ridx ?? 0}-${S.gs?.loading ? 'l' : ''}`
+  return S.screen
+}
+
+function ScreenView({ S }: { S: State }): ReactNode {
+  switch (S.screen) {
+    case 'home':
+      return <Home />
+    case 'setup':
+      return <Setup S={S} />
+    case 'bracket':
+      return <Bracket S={S} />
+    case 'draft':
+      return <Draft S={S} />
+    case 'songs':
+      return <Songs S={S} />
+    case 'pick':
+      return <Pick S={S} />
+    case 'duel':
+      return <Duel S={S} />
+    case 'round':
+      return <Round S={S} />
+    case 'gssetup':
+      return <GuessSetup S={S} />
+    case 'gsplay':
+      return <GuessPlay S={S} />
+    case 'sbsetup':
+      return <SingSetup S={S} />
+    case 'sbplay':
+      return <SingPlay S={S} />
+    case 'tlsetup':
+      return <TimelineSetup S={S} />
+    case 'tlplay':
+      return <TimelinePlay S={S} />
+    case 'ddplay':
+    case 'ddsetup':
+      return <Decade S={S} />
+    case 'soon':
+      return <Soon S={S} />
+    default:
+      return <Final S={S} />
+  }
+}
+
+export default function App() {
+  const S = useGame()
+  const [shrink, setShrink] = useState(false)
+  const scroller = useRef(0)
+
+  useLayoutEffect(() => {
+    document.body.setAttribute('data-theme', S.theme)
+  }, [S.theme])
+
+  useEffect(() => {
+    const close = () => setOpenSel(null)
+    const key = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenSel(null)
+      if (e.code !== 'Space' && e.key !== ' ') return
+      const t = e.target as HTMLElement | null,
+        tag = ((t && t.tagName) || '').toLowerCase()
+      if (tag === 'input' || tag === 'textarea' || tag === 'button' || (t && t.isContentEditable)) return
+      if (getState().screen !== 'draft') return
+      e.preventDefault()
+      dispatch({ type: 'spin' })
+    }
+    const scroll = () => {
+      const y = window.pageYOffset || document.documentElement.scrollTop || 0
+      if (scroller.current === 0 && y > 80) {
+        scroller.current = 1
+        setShrink(true)
+      } else if (scroller.current === 1 && y < 20) {
+        scroller.current = 0
+        setShrink(false)
+      }
+    }
+    document.addEventListener('click', close)
+    document.addEventListener('keydown', key)
+    window.addEventListener('scroll', scroll, { passive: true })
+    return () => {
+      document.removeEventListener('click', close)
+      document.removeEventListener('keydown', key)
+      window.removeEventListener('scroll', scroll)
+    }
+  }, [])
+
+  // Neuer Bildschirm: nach oben scrollen (das Original baute die Seite komplett neu)
+  const key = screenKey(S)
+  const lastScreen = useRef(S.screen)
+  useEffect(() => {
+    if (lastScreen.current !== S.screen) {
+      lastScreen.current = S.screen
+      if (S.screen !== 'draft') window.scrollTo({ top: 0, behavior: env.reduce ? 'auto' : 'smooth' })
+    }
+  }, [S.screen])
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <Background S={S} />
+      <Fx />
+      <Toast />
+      <Splash />
+      <div className="wrap">
+        <TopBar S={S} shrink={shrink} />
+        <Presence mode="wait">
+          <motion.main
+            id="app"
+            key={key}
+            data-screen={S.screen}
+            className={'screen screen-' + S.screen}
+            initial={env.reduce ? false : { opacity: 0, y: 26, scale: 0.985, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transitionEnd: { filter: 'none' }, transition: { type: 'spring', stiffness: 260, damping: 30, mass: 0.9 } }}
+            exit={env.reduce ? { opacity: 1, transition: { duration: 0 } } : { opacity: 0, y: -14, scale: 0.99, filter: 'blur(8px)', transition: { duration: 0.16, ease: 'easeIn' } }}
+          >
+            <ScreenView S={S} />
+          </motion.main>
+        </Presence>
+      </div>
+      <UpdatePrompt />
+    </MotionConfig>
+  )
+}

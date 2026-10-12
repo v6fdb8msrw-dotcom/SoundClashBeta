@@ -1,0 +1,50 @@
+/* Album-Themes aus dem Original (Farben + Schriften vom Cover). Werte unverändert übernommen.
+   Darüber liegen die neuen, abgeleiteten Tokens für das futuristische Interface. */
+:root,[data-theme="silksonic"]{--bg:#190A07;--bg-2:#241110;--surface:#2C1512;--surface-2:#3D1F19;--primary:#E8B44A;--primary-soft:#F5D488;--secondary:#A81C2E;--accent:#F7EAD2;--text:#FFF4E2;--muted:#B69683;--border:rgba(232,180,74,.22);--stage-glow:rgba(232,180,74,.30);--font-display:'DM Serif Display',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.025em;--wall-filter:sepia(.55) saturate(1.35) contrast(1.05);--wall-tint:rgba(232,180,74,.34);--wall-blend:color}
+[data-theme="graduation"]{--bg:#210947;--bg-2:#2C0D5C;--surface:#37116E;--surface-2:#491A88;--primary:#FF2D9B;--primary-soft:#FF86C8;--secondary:#7B5CFF;--accent:#FFD84D;--text:#FFF0FA;--muted:#AC94D4;--border:rgba(255,45,155,.26);--stage-glow:rgba(255,45,155,.34);--font-display:'Bungee',system-ui,sans-serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.01em;--wall-filter:saturate(1.6) contrast(1.12);--wall-tint:rgba(255,45,155,.42);--wall-blend:color}
+[data-theme="igor"]{--bg:#F0CFC6;--bg-2:#E6BBB0;--surface:#FCE6DE;--surface-2:#F2C9BE;--primary:#D81E63;--primary-soft:#FF4E8D;--secondary:#141414;--accent:#7A2545;--text:#25090F;--muted:#8A5560;--border:rgba(216,30,99,.28);--stage-glow:rgba(216,30,99,.24);--font-display:'Syne',system-ui,sans-serif;--font-body:'DM Sans',system-ui,sans-serif;--tr:-.03em;color-scheme:light;--wall-filter:saturate(.45) brightness(1.2) contrast(.92);--wall-tint:rgba(216,30,99,.38);--wall-blend:color}
+[data-theme="sos"]{--bg:#050D18;--bg-2:#091624;--surface:#0D1F31;--surface-2:#142E44;--primary:#7FB0CC;--primary-soft:#B4D6E8;--secondary:#31607F;--accent:#DCE9F1;--text:#EEF6FC;--muted:#7B93A6;--border:rgba(127,176,204,.22);--stage-glow:rgba(127,176,204,.24);--font-display:'Instrument Serif',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(.3) contrast(.95) brightness(.9);--wall-tint:rgba(90,150,190,.52);--wall-blend:color}
+[data-theme="llasap"]{--bg:#070707;--bg-2:#0F0F0F;--surface:#151515;--surface-2:#212121;--primary:#EAE6DD;--primary-soft:#FFFFFF;--secondary:#C4161C;--accent:#C4161C;--text:#FFFFFF;--muted:#7B7B7B;--border:rgba(234,230,221,.16);--stage-glow:rgba(196,22,28,.26);--font-display:'Space Grotesk',system-ui,sans-serif;--font-body:'Space Mono',ui-monospace,monospace;--tr:-.02em;--wall-filter:grayscale(1) contrast(1.25) brightness(.9);--wall-tint:rgba(196,22,28,.26);--wall-blend:color}
+[data-theme="afterhours"]{--bg:#12060A;--bg-2:#1E080D;--surface:#280A12;--surface-2:#3A0E1A;--primary:#FF2038;--primary-soft:#FF6377;--secondary:#E01030;--accent:#F5C518;--text:#FFEDEF;--muted:#B07984;--border:rgba(255,32,56,.26);--stage-glow:rgba(255,32,56,.34);--font-display:'Anton',system-ui,sans-serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.01em;--wall-filter:saturate(1.4) contrast(1.15) brightness(.85);--wall-tint:rgba(255,32,56,.40);--wall-blend:color}
+[data-theme="blonde"]{--bg:#0B1A0E;--bg-2:#102614;--surface:#15321B;--surface-2:#1D4425;--primary:#5FD48A;--primary-soft:#A0E9BD;--secondary:#2E8B57;--accent:#EAF7EE;--text:#EDF9F0;--muted:#7FA98C;--border:rgba(95,212,138,.22);--stage-glow:rgba(95,212,138,.26);--font-display:'Fraunces',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(.7) contrast(1.02) brightness(.95);--wall-tint:rgba(95,212,138,.34);--wall-blend:color}
+[data-theme="warmlime"]{--bg:#20280F;--bg-2:#2F3A1D;--surface:#3A4626;--surface-2:#4A5A30;--primary:#CFFF74;--primary-soft:#E2FFA8;--secondary:#A8D94A;--accent:#CFFF74;--text:#F4FBE4;--muted:#A6B583;--border:rgba(207,255,116,.24);--stage-glow:rgba(207,255,116,.30);--font-display:'Space Grotesk',system-ui,sans-serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(1.1) contrast(1.05) brightness(.9);--wall-tint:rgba(207,255,116,.30);--wall-blend:color}
+[data-theme="skymint"]{--bg:#1B1D22;--bg-2:#25272C;--surface:#2F3238;--surface-2:#3C4047;--primary:#B8F7E4;--primary-soft:#D8FBF1;--secondary:#7FD9C4;--accent:#B8F7E4;--text:#EAFBF6;--muted:#8FA39E;--border:rgba(184,247,228,.22);--stage-glow:rgba(184,247,228,.26);--font-display:'Space Grotesk',system-ui,sans-serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(.85) contrast(1.05) brightness(.92);--wall-tint:rgba(184,247,228,.28);--wall-blend:color}
+[data-theme="emerald"]{--bg:#053E2F;--bg-2:#064E3B;--surface:#0A5D47;--surface-2:#0E6E55;--primary:#F8E7C9;--primary-soft:#FFF3DE;--secondary:#E8CFA0;--accent:#F8E7C9;--text:#FBF3E4;--muted:#8CB3A4;--border:rgba(248,231,201,.22);--stage-glow:rgba(248,231,201,.26);--font-display:'Fraunces',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(.9) contrast(1.04) brightness(.9);--wall-tint:rgba(6,78,59,.42);--wall-blend:color}
+[data-theme="ultraviolet"]{--bg:#22083D;--bg-2:#2E0A52;--surface:#3A1266;--surface-2:#4A1C80;--primary:#FFD6A5;--primary-soft:#FFE7CA;--secondary:#C77DFF;--accent:#6A00F4;--text:#F6ECFF;--muted:#A98CC4;--border:rgba(255,214,165,.22);--stage-glow:rgba(150,60,255,.34);--font-display:'Anton',system-ui,sans-serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.01em;--wall-filter:saturate(1.3) contrast(1.1) brightness(.85);--wall-tint:rgba(106,0,244,.40);--wall-blend:color}
+[data-theme="currents"]{--bg:#0C1922;--bg-2:#10222E;--surface:#153040;--surface-2:#1D4254;--primary:#FF7A6B;--primary-soft:#FFB3A6;--secondary:#2FD0C6;--accent:#FFD9A0;--text:#F2FBFF;--muted:#89AEBC;--border:rgba(255,122,107,.24);--stage-glow:rgba(47,208,198,.30);--font-display:'DM Serif Display',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(1.3) hue-rotate(-6deg);--wall-tint:rgba(47,208,198,.30);--wall-blend:color}
+[data-theme="nectar"]{--bg:#160913;--bg-2:#21101D;--surface:#2B1527;--surface-2:#3E1F37;--primary:#E85C9A;--primary-soft:#F7A8CE;--secondary:#7C4DFF;--accent:#F3D9E8;--text:#FCEFF6;--muted:#B58AA6;--border:rgba(232,92,154,.24);--stage-glow:rgba(124,77,255,.32);--font-display:'DM Serif Display',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--tr:-.02em;--wall-filter:saturate(1.25);--wall-tint:rgba(232,92,154,.30);--wall-blend:color}
+
+/* auf body, damit die abgeleiteten Werte das aktive Theme sehen */
+body {
+  --font-hand: 'Caveat', cursive;
+  --font-hud: 'Chakra Petch', 'Manrope', system-ui, sans-serif;
+  /* abgeleitete Flächen und Linien */
+  --glass: color-mix(in srgb, var(--surface) 58%, transparent);
+  --glass-2: color-mix(in srgb, var(--surface-2) 66%, transparent);
+  --glass-hi: color-mix(in srgb, var(--text) 9%, transparent);
+  --line: color-mix(in srgb, var(--primary) 24%, transparent);
+  --line-soft: color-mix(in srgb, var(--text) 10%, transparent);
+  --neon: var(--primary);
+  --neon-2: var(--secondary);
+  --neon-3: var(--accent);
+  --on-neon: var(--bg);
+  --grad-neon: linear-gradient(120deg, var(--primary), var(--primary-soft) 45%, var(--accent));
+  --grad-edge: linear-gradient(135deg, color-mix(in srgb, var(--primary) 70%, transparent), transparent 35%, transparent 65%, color-mix(in srgb, var(--secondary) 70%, transparent));
+  --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.28);
+  --shadow-2: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 30px 80px rgba(0, 0, 0, 0.6);
+  --radius: 18px;
+  --radius-lg: 26px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+body[data-theme='igor'] {
+  --glass: color-mix(in srgb, var(--surface) 72%, transparent);
+  --glass-hi: color-mix(in srgb, #fff 45%, transparent);
+  --shadow-2: 0 18px 50px rgba(80, 20, 40, 0.18);
+  --shadow-3: 0 30px 80px rgba(80, 20, 40, 0.22);
+}

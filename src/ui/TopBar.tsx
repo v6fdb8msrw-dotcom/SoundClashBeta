@@ -1,0 +1,131 @@
+import { AnimatePresence, motion } from 'motion/react'
+import { useState } from 'react'
+import { dispatch } from '../app/store'
+import { BGS, THEMES } from '../core/constants'
+import type { State } from '../core/types'
+import { BackupDialog } from './BackupDialog'
+import { Sel } from './primitives'
+
+/** Kopfleiste: Logo (→ Startbildschirm), Spielanleitung, Hintergrund, Ton, Farbe, Spielstand. */
+export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
+  const [rules, setRules] = useState(false)
+  const [backup, setBackup] = useState(false)
+  return (
+    <>
+      <header className={'brand' + (shrink ? ' shrink' : '')} onClick={() => dispatch({ type: 'brand' })} role="banner">
+        <div className="logo" aria-hidden>
+          <span className="logo-disc" />
+          <span className="logo-bolt" />
+        </div>
+        <div className="brand-text">
+          <h1>
+            Sound <em>Clash</em>
+          </h1>
+          <p>Blind ranken. Song für Song. Bis einer krönt.</p>
+        </div>
+      </header>
+      <nav className="topbar" aria-label="Werkzeuge">
+        <div className="tools">
+          <button className={'tool' + (rules ? ' on' : '')} id="rulesBtn" onClick={() => setRules((r) => !r)} aria-expanded={rules}>
+            <span aria-hidden>ⓘ</span> <span className="tool-t">Spielanleitung</span>
+          </button>
+          <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} slbl={<span className="slbl">Hintergrund</span>} className="tsel" />
+          <button className="tool icon" id="soundBtn" title="Ton" onClick={() => dispatch({ type: 'toggleMute' })}>
+            {S.muted ? '🔇' : '🔊'}
+          </button>
+          <Sel id="theme" value={S.theme} opts={THEMES.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'theme', v })} slbl={<span className="slbl">Farbe</span>} className="tsel" />
+          <button className="tool" id="backupBtn" onClick={() => setBackup(true)} title="Spielstand sichern oder übernehmen">
+            <span aria-hidden>⇅</span> <span className="tool-t">Spielstand</span>
+          </button>
+        </div>
+      </nav>
+      <AnimatePresence initial={false}>
+        {rules ? (
+          <motion.section
+            className="rules open"
+            id="rules"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 28 }}
+          >
+            <Rules />
+          </motion.section>
+        ) : null}
+      </AnimatePresence>
+      <AnimatePresence>{backup ? <BackupDialog onClose={() => setBackup(false)} /> : null}</AnimatePresence>
+    </>
+  )
+}
+
+/** Regeltext wie im Original. */
+function Rules() {
+  return (
+    <div className="card rules-card">
+      <div className="quickstart">
+        <h3 style={{ marginTop: 0 }}>⚡ In 10 Sekunden</h3>
+        <ol>
+          <li>
+            <b>Spieler &amp; Genre</b> wählen, Künstler in den Topf.
+          </li>
+          <li>
+            Reihum <b>Rad drehen</b> → Künstler <b>blind</b> auf einen Platz setzen.
+          </li>
+          <li>
+            Pro Platz euren <b>besten Song</b> wählen, reinhören, <b>Sieger tippen</b>.
+          </li>
+          <li>
+            Meiste Punkte = <b>Clash gewonnen</b> 🏆
+          </li>
+        </ol>
+        <p className="qs-note">Reicht zum Loslegen — die Details stehen unten.</p>
+      </div>
+      <h3>Ziel</h3>
+      <p>
+        Jeder baut eine Aufstellung aus ausgelosten Künstlern. Danach tretet ihr Platz für Platz an: Jeder wählt seinen besten Song des jeweiligen Künstlers, ihr hört rein und kürt den Sieger. Wer die
+        meisten Punkte hat, gewinnt den Clash.
+      </p>
+      <h3>1 · Einrichten</h3>
+      <p>
+        <b>Spieler:</b> 2–6, je mit Avatar und Farbe — über <b>+</b> lädst du eigene Bilder hoch. <b>Songs pro Spieler:</b> 5, 7, 10 oder 15. <b>Spielmodus:</b> Einzelrunde, Best of 3 oder Best of 5.{' '}
+        <b>Respins:</b> 0, 1 oder 2 pro Spieler und Runde. <b>Songwahl:</b> alle vorab oder vor jedem Duell.
+      </p>
+      <p>
+        Oben rechts: <b>Hintergrund</b> im Stil berühmter Alben (Silk Sonic, Graduation, IGOR, SOS …) und die <b>Wand</b> dahinter (Album-Wand, Genre-Wand, Mosaik, dezent oder aus).
+      </p>
+      <h3>2 · Künstler-Topf</h3>
+      <p>
+        Wähl ein <b>Genre</b> — 22 Stück, von R&amp;B über Deutschrap bis Schlager. Ein Klick auf <b>+</b> legt den Künstler in den Topf. Über die Suche findest du jeden weiteren Künstler.
+      </p>
+      <h3>3 · Ziehen</h3>
+      <p>
+        Reihum am Rad drehen (oder <b>Leertaste</b>). Die Reihenfolge ist ein <b>Snake-Draft</b> (1-2…2-1), damit niemand bevorteilt wird. Wer den Künstler nicht will, nutzt einen <b>Respin</b>.
+      </p>
+      <h3>4 · Blind ranken</h3>
+      <p>
+        Setz jeden gezogenen Künstler <b>sofort</b> auf einen freien Platz — ohne zu wissen, was noch kommt. Die <b>obersten Plätze zählen doppelt</b> (×2).
+      </p>
+      <h3>5 · Songs wählen</h3>
+      <p>
+        Zwei Modi: <b>„Alle vorab"</b> — jeder wählt alle Songs auf einmal. Oder <b>„Vor jedem Duell"</b> — direkt vor jedem Battle wählt einer nach dem anderen, und die Reihenfolge dreht sich jedes Mal
+        um (erst P1, dann P2 → Battle → dann P2, dann P1 → Battle …). Das bringt Taktik rein: Wer zuletzt wählt, weiß, was er schlagen muss.
+      </p>
+      <p>
+        Bis zu 50 Top-Tracks stehen bereit, jeder mit <b>30-Sek-Vorschau</b>. Die Suche fragt live bei Deezer nach — findet also auch Deep Cuts. Und wenn ein Song gar nicht auffindbar ist:{' '}
+        <b>„Song nicht dabei? Von Hand eintragen"</b> — Titel eintippen, fertig. Ohne Vorschau, aber Spotify und YouTube führen im Battle direkt hin.
+      </p>
+      <h3>6 · Battle</h3>
+      <p>
+        Platz gegen Platz. Beide Songs anhören — als Vorschau, oder in voller Länge über die <b>Spotify</b>- und <b>YouTube</b>-Links. Dann tippt ihr, wer gewinnt.
+      </p>
+      <h3>7 · Gleichstand</h3>
+      <p>
+        Steht es unentschieden, gibt es <b>Sudden Death</b>: Alle bekommen <b>denselben</b> zufälligen Künstler aus dem Genre. Wer den besseren Song holt, gewinnt.
+      </p>
+      <h3>8 · Serie &amp; Teilen</h3>
+      <p>
+        Bei Best of 3/5 zählt jeder Rundensieg. Der Endstand lässt sich als Bild <b>teilen</b>.
+      </p>
+    </div>
+  )
+}

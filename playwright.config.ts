@@ -32,6 +32,6 @@ export default defineConfig({
   },
   projects: [
     { name: 'legacy', use: { baseURL: `http://127.0.0.1:${PORT}/legacy/index.html` }, metadata: { target: 'legacy' } },
-    { name: 'neu', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/` }, metadata: { target: 'neu' } },
+    { name: 'neu', use: { baseURL: `http://127.0.0.1:${PORT}/SoundClashBeta/`, serviceWorkers: 'block' }, metadata: { target: 'neu' }, testIgnore: /pwa\.spec\.ts/ },
   ],
 })

@@ -309,7 +309,12 @@ export class App {
       }
       return target === 'legacy'
         ? { settings: get('soundclash.v5'), rivalry: get('soundclash.rivalry'), keys }
-        : { settings: get('soundclash.app.settings'), rivalry: get('soundclash.app.rivalry'), keys }
+        : {
+            settings: get('soundclash.app.settings'),
+            rivalry: get('soundclash.app.rivalry'),
+            // neue Schlüssel für den Vergleich auf die alten Namen abbilden; alles andere bleibt sichtbar
+            keys: keys.map((k) => ({ 'soundclash.app.settings': 'soundclash.v5', 'soundclash.app.rivalry': 'soundclash.rivalry' })[k] ?? k).sort(),
+          }
     }, this.target)
   }
 
