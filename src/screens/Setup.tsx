@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { getList, hasList, listVersion, loadGenre, onSearch, showMore, subscribeList } from '../app/artistList'
 import { bus } from '../app/bus'
-import { dispatch, env } from '../app/store'
+import { dispatch, env, getState } from '../app/store'
 import { avatarPool, isT, pcol, picks, pname, tSize, type PickId } from '../core/game'
 import type { State } from '../core/types'
 import { GEN, ak, fansOf, realName } from '../services/catalog'
@@ -156,11 +156,14 @@ function PlayersCard({ S }: { S: State }) {
     )
   }
   return (
-    <section className="card scard" data-card="players">
-      <div className="cardhead">
-        <h2 style={{ margin: 0 }}>Spieler</h2>
+    <section className="sm-block" data-card="players">
+      <div className="sm-title">
+        <span className="sm-n">1</span>
+        <h2>Spieler</h2>
+        <div className="sm-count">
+          <Seg id="players" label="Wie viele?" value={S.players} onPick={pick('players')} opts={[2, 3, 4, 5, 6].map((v) => ({ v, t: String(v) }))} />
+        </div>
       </div>
-      <Seg id="players" label="Wie viele?" value={S.players} onPick={pick('players')} opts={[2, 3, 4, 5, 6].map((v) => ({ v, t: String(v) }))} />
       <div className="plist">{rows}</div>
     </section>
   )
@@ -170,9 +173,10 @@ function RosterCard({ S }: { S: State }) {
   const pool = avatarPool(S)
   const [open, setOpen] = useState<number | null>(null)
   return (
-    <section className="card scard" data-card="players">
-      <div className="cardhead">
-        <h2 style={{ margin: 0 }}>Kader</h2>
+    <section className="sm-block" data-card="players">
+      <div className="sm-title">
+        <span className="sm-n">1</span>
+        <h2>Kader</h2>
         <span className="kader-n">{tSize(S)} Spieler · Turnierbaum</span>
       </div>
       <div className="plist">
@@ -207,62 +211,77 @@ function RosterCard({ S }: { S: State }) {
   )
 }
 
+/** Schnellstart-Standard (wie beim allerersten Start). */
+const DEFAULTS: [PickId, string][] = [
+  ['mode', 'clash'],
+  ['size', '5'],
+  ['series', 'single'],
+  ['songMode', 'perduel'],
+  ['audience', '1'],
+  ['sameArtist', '0'],
+  ['pickSec', '0'],
+  ['ambience', '1'],
+  ['autoScroll', '1'],
+]
+const current = (S: State): Record<string, string> => ({
+  mode: S.mode,
+  size: String(S.size),
+  series: S.series,
+  songMode: S.songMode,
+  audience: S.audience ? '1' : '0',
+  sameArtist: S.sameArtist ? '1' : '0',
+  pickSec: String(S.pickSec || 0),
+  ambience: S.ambience ? '1' : '0',
+  autoScroll: S.autoScroll ? '1' : '0',
+})
+const SERIES: Record<string, string> = { single: 'Einzelrunde', bo3: 'Best of 3', bo5: 'Best of 5' }
+
+/**
+ * Einrichtung, minimalistisch: Spieler (1) und Künstler-Topf (2) sind immer sichtbar und müssen
+ * gewählt werden. Die Regeln stehen als eine Zeile mit dem Schnellstart-Standard und klappen auf.
+ */
 export function Setup({ S }: { S: State }) {
   const need = picks(S)
+  const [rules, setRules] = useState(false)
   const [adv, setAdv] = useState(false)
   const genreOpts: Opt[] = Object.keys(GEN).map((k) => ({ v: k, t: GEN[k].label }))
+  const cur = current(S)
+  const isDefault = DEFAULTS.every(([k, v]) => cur[k] === v)
+  const summary = [S.size + ' Songs', SERIES[S.series] || S.series, S.songMode === 'upfront' ? 'Alle vorab' : 'Vor jedem Duell', S.audience ? 'Publikum stimmt ab' : 'Gemeinsam antippen']
+  if (isT(S)) summary.unshift('Turnier · ' + tSize(S) + ' Spieler')
+  if (S.sameArtist) summary.push('Gleicher Künstler')
+  if (S.pickSec) summary.push('Timer ' + S.pickSec + ' s')
+  const ready = S.pool.length >= need
   return (
-    <div className="setup">
+    <div className="setup setup-min">
       <Warn S={S} />
       <div className="setup-head">
-        <p className="eyebrow">— neues match</p>
         <h2 className="display">
           Sound <em>Clash</em>
         </h2>
         <p className="lede">Blind ranken. Song für Song. Bis einer krönt.</p>
       </div>
-      <section className="card scard" data-card="mode">
+      <section className="sm-mode" data-card="mode">
         <Seg id="phoneMode" label="Wie wird gesteuert?" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[{ v: '0', t: '🖥 An diesem Gerät' }, { v: '1', t: '📱 Mit den Handys' }]} />
-        <p className="hint" style={{ textAlign: 'left', margin: '10px 0 0' }}>
-          {S.phoneMode
-            ? 'Jeder steuert am eigenen Handy: drehen, setzen, Songs wählen, aufdecken und abstimmen. Dieses Gerät ist die große Bühne und spielt die Musik.'
-            : 'Alles wird an diesem Gerät gespielt. Handys können trotzdem zum Abstimmen dazukommen (📱 oben).'}
-        </p>
-        {S.phoneMode ? <PairPanel /> : null}
+        {S.phoneMode ? (
+          <>
+            <p className="hint sm-hint">Jeder steuert am eigenen Handy: drehen, setzen, Songs wählen, aufdecken und abstimmen. Dieses Gerät ist die große Bühne und spielt die Musik.</p>
+            <PairPanel />
+          </>
+        ) : null}
       </section>
       {isT(S) ? <RosterCard S={S} /> : <PlayersCard S={S} />}
-      <section className="card scard" data-card="cfg">
+      <section className="sm-block pool-card" data-card="pool">
         <div className="cardhead">
-          <h2 style={{ margin: 0 }}>Regeln</h2>
-        </div>
-        <div className="g2">
-          <Seg id="size" label="Songs pro Spieler" value={S.size} onPick={pick('size')} opts={[5, 7, 10, 15].map((v) => ({ v, t: String(v) }))} />
-          <Seg id="series" label="Spielmodus" value={S.series} onPick={pick('series')} opts={[{ v: 'single', t: 'Einzelrunde' }, { v: 'bo3', t: 'Best of 3' }, { v: 'bo5', t: 'Best of 5' }]} />
-          <Seg id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
-          <Seg id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam antippen' }, { v: '1', t: 'Publikum stimmt ab' }]} />
-        </div>
-        <button type="button" className={'advtoggle' + (adv ? ' on' : '')} id="advToggle" aria-expanded={adv} onClick={() => setAdv((a) => !a)}>
-          Mehr Optionen <span className="chev">▾</span>
-        </button>
-        <div className={'adv' + (adv ? ' open' : '')} aria-hidden={!adv}>
-          <div className="g2">
-            <Sel id="mode" label="Spielart" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Clash (alle gegen alle)' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
-            <Sel id="sameArtist" label="Künstler" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Normal \u2014 jeder eigene K\u00fcnstler' }, { v: '1', t: 'Gleicher K\u00fcnstler f\u00fcr alle' }]} />
-            <Seg id="pickSec" label="Pick-Timer" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Aus' }, { v: '30', t: '30 Sek' }, { v: '45', t: '45 Sek' }, { v: '60', t: '60 Sek' }]} />
-            <Seg id="ambience" label="Album-Wand-Puls" value={S.ambience ? '1' : '0'} onPick={pick('ambience')} opts={[{ v: '1', t: 'An — Wand pulsiert zum Song' }, { v: '0', t: 'Aus' }]} />
-            <Seg id="autoScroll" label="Auto-Scroll (Desktop)" value={S.autoScroll ? '1' : '0'} onPick={pick('autoScroll')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
-            {isT(S) ? <Sel id="_x" label="Spieler" value={String(tSize(S))} onPick={pick('_x')} opts={[{ v: String(tSize(S)), t: tSize(S) + ' (Turnierbaum)' }]} /> : null}
+          <div className="sm-title">
+            <span className="sm-n">2</span>
+            <h2>Künstler-Topf</h2>
           </div>
-        </div>
-      </section>
-      <section className="card pool-card" data-card="pool">
-        <div className="cardhead">
-          <h2 style={{ margin: 0 }}>Künstler-Topf</h2>
-          <motion.span className="pill" key={S.pool.length} initial={env.reduce ? false : { scale: 1.25 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 500, damping: 18 }}>
+          <motion.span className={'pill' + (ready ? ' full' : '')} key={S.pool.length} initial={env.reduce ? false : { scale: 1.25 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 500, damping: 18 }}>
             ♪ <b>{S.pool.length}</b> im Topf
           </motion.span>
         </div>
-        <div className="g2" style={{ marginBottom: 14 }}>
+        <div className="sm-find">
           <Sel id="genre" label="Genre wählen" value={S.genre || ''} onPick={pick('genre')} opts={genreOpts} />
           <div className="field">
             <label htmlFor="asearch">Künstler suchen…</label>
@@ -296,11 +315,58 @@ export function Setup({ S }: { S: State }) {
           </>
         ) : null}
       </section>
+      <section className={'sm-rules' + (rules ? ' open' : '')} data-card="cfg">
+        <button type="button" className="sm-summary" id="rulesToggle" aria-expanded={rules} onClick={() => setRules((r) => !r)}>
+          <span className="sm-sumhead">
+            Regeln
+            {isDefault ? <span className="sm-badge">Schnellstart</span> : null}
+          </span>
+          <span className="sm-sumtxt">{summary.join(' · ')}</span>
+          <span className="chev" aria-hidden>
+            ▾
+          </span>
+        </button>
+        <div className={'rules-body' + (rules ? ' open' : '')} aria-hidden={!rules}>
+          <div className="g2">
+            <Seg id="size" label="Songs pro Spieler" value={S.size} onPick={pick('size')} opts={[5, 7, 10, 15].map((v) => ({ v, t: String(v) }))} />
+            <Seg id="series" label="Spielmodus" value={S.series} onPick={pick('series')} opts={[{ v: 'single', t: 'Einzelrunde' }, { v: 'bo3', t: 'Best of 3' }, { v: 'bo5', t: 'Best of 5' }]} />
+            <Seg id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
+            <Seg id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam antippen' }, { v: '1', t: 'Publikum stimmt ab' }]} />
+          </div>
+          <button type="button" className={'advtoggle' + (adv ? ' on' : '')} id="advToggle" aria-expanded={adv} onClick={() => setAdv((a) => !a)}>
+            Mehr Optionen <span className="chev">▾</span>
+          </button>
+          <div className={'adv' + (adv ? ' open' : '')} aria-hidden={!adv}>
+            <div className="g2">
+              <Sel id="mode" label="Spielart" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Clash (alle gegen alle)' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
+              <Sel id="sameArtist" label="Künstler" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Normal \u2014 jeder eigene K\u00fcnstler' }, { v: '1', t: 'Gleicher K\u00fcnstler f\u00fcr alle' }]} />
+              <Seg id="pickSec" label="Pick-Timer" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Aus' }, { v: '30', t: '30 Sek' }, { v: '45', t: '45 Sek' }, { v: '60', t: '60 Sek' }]} />
+              <Seg id="ambience" label="Album-Wand-Puls" value={S.ambience ? '1' : '0'} onPick={pick('ambience')} opts={[{ v: '1', t: 'An — Wand pulsiert zum Song' }, { v: '0', t: 'Aus' }]} />
+              <Seg id="autoScroll" label="Auto-Scroll (Desktop)" value={S.autoScroll ? '1' : '0'} onPick={pick('autoScroll')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
+              {isT(S) ? <Sel id="_x" label="Spieler" value={String(tSize(S))} onPick={pick('_x')} opts={[{ v: String(tSize(S)), t: tSize(S) + ' (Turnierbaum)' }]} /> : null}
+            </div>
+          </div>
+          <div className="sm-reset">
+            {isDefault ? (
+              <span className="hint">Das ist der Schnellstart-Standard.</span>
+            ) : (
+              <button type="button" className="lnk" id="rulesReset" onClick={() => DEFAULTS.forEach(([k, v]) => current(getState())[k] !== v && dispatch({ type: 'pick', id: k, v }))}>
+                ↺ Auf Schnellstart-Standard zurücksetzen
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
       <div className="startbar">
-        <span className="hint" style={{ margin: 0, textAlign: 'left' }}>
-          Mindestens {need} Künstler in den Topf legen.
-        </span>
-        <Btn id="startBtn" className={S.pool.length >= need ? 'ready' : ''} disabled={S.pool.length < need} onClick={() => dispatch({ type: 'start' })}>
+        <div className="sm-ready">
+          <span className="hint" style={{ margin: 0, textAlign: 'left' }}>
+            Mindestens {need} Künstler in den Topf legen.
+          </span>
+          <span className="sm-progress" aria-hidden>
+            <i style={{ width: Math.min(100, (S.pool.length / Math.max(1, need)) * 100) + '%' }} />
+          </span>
+        </div>
+        <Btn id="startBtn" className={ready ? 'ready' : ''} disabled={!ready} onClick={() => dispatch({ type: 'start' })}>
           Match starten →
         </Btn>
       </div>

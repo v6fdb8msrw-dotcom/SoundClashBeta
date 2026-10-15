@@ -426,80 +426,6 @@
   color: var(--muted);
 }
 
-/* ---------- Ziehen im Handy-Modus: Rad groß, Spieler am Zug darunter ---------- */
-.cine-draft {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-.cine-draft .dhead {
-  margin-bottom: 0;
-}
-.cine-draft .wheelbox {
-  width: min(460px, 80vw, max(300px, 100dvh - 470px));
-}
-.cine-draft .hub {
-  pointer-events: none;
-}
-.cine-draft .phonehint {
-  font-family: var(--font-hud);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: var(--pc, var(--primary));
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.cine-active {
-  width: min(760px, 100%);
-}
-.cine-active .pcluster {
-  opacity: 1;
-}
-.cine-others {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-.mini-cluster {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px 8px 8px;
-  border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--pc) 35%, var(--line-soft));
-  background: color-mix(in srgb, var(--surface) 60%, transparent);
-}
-.mini-cluster img {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-.mini-cluster .nm {
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--pc);
-}
-.mini-slots {
-  display: flex;
-  gap: 3px;
-}
-.mini-slots i {
-  width: 10px;
-  height: 18px;
-  border-radius: 3px;
-  background: color-mix(in srgb, var(--text) 12%, transparent);
-}
-.mini-slots i.on {
-  background: var(--pc);
-}
-
 /* ---------- Duell: laufendes Cover als echte Platte ---------- */
 .coverwrap .vinyl {
   position: absolute;
@@ -526,10 +452,3 @@
   }
 }
 
-.cine-wheel.phonectl .hub {
-  pointer-events: none;
-}
-.cine-wheel {
-  padding: 8px;
-  border-radius: 32px;
-}

@@ -104,12 +104,18 @@ export class App {
     // Menü und „Mehr Optionen“ nach ihrem Zustand prüfen (beim Schließen bleibt das Menü kurz sichtbar)
     const inMenu = (await this.page.locator(`#menuSheet ${sel}`).count()) > 0
     const inAdv = (await this.page.locator(`.adv ${sel}`).count()) > 0
-    if (!inMenu && !inAdv && (await el.isVisible())) return false
+    // neue Fassung: Regeln sind als eine Zeile eingeklappt (#rulesToggle)
+    const inRules = (await this.page.locator(`.rules-body ${sel}`).count()) > 0
+    if (!inMenu && !inAdv && !inRules && (await el.isVisible())) return false
     let menu = false
     if (await this.page.locator(`#menuSheet ${sel}`).count()) {
       const b = this.page.locator('#menuBtn')
       if ((await b.getAttribute('aria-expanded')) !== 'true') await b.click()
       menu = true
+    }
+    if (inRules) {
+      const r = this.page.locator('#rulesToggle')
+      if ((await r.getAttribute('aria-expanded')) !== 'true') await r.click()
     }
     if (await this.page.locator(`.adv ${sel}`).count()) {
       const t = this.page.locator('#advToggle')

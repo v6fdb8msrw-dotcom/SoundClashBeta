@@ -5,6 +5,7 @@ import { onWheelFrame, wheel } from '../app/wheelAnim'
 import { mixHex } from '../core/colors'
 import { GENRE_HUE, WCOL } from '../core/constants'
 import type { State } from '../core/types'
+import { tvZoom } from '../services/display'
 
 /**
  * Glücksrad: Segmentfarben wie im Original (Theme-Farben, Richtung Genre-Ton gemischt),
@@ -19,7 +20,8 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
   if (!cv) return
   const ctx = cv.getContext('2d')
   if (!ctx) return
-  const dpr = Math.min(2.5, window.devicePixelRatio || 1),
+  // Fernseher-Modus vergrößert per CSS-Zoom: Zeichenfläche entsprechend schärfer anlegen
+  const dpr = Math.min(5, (window.devicePixelRatio || 1) * tvZoom()),
     W = cv.clientWidth || 400
   if (cv.width !== Math.round(W * dpr)) {
     cv.width = Math.round(W * dpr)
@@ -43,19 +45,36 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
     : base
   const primary = cssVar('--primary'),
     surf = cssVar('--surface-2')
-  // Außenring
+  const font = cssVar('--font-body') || 'system-ui,sans-serif'
+  const tone = (a: string, b: string, t: number) => {
+    try {
+      return mixHex(a, b, t)
+    } catch {
+      return a
+    }
+  }
+  // Außenring: metallischer Rahmen in der Album-Farbe mit Glanz von oben links
   ctx.save()
   ctx.shadowColor = primary
-  ctx.shadowBlur = 22
+  ctx.shadowBlur = 26
   ctx.beginPath()
-  ctx.arc(cx, cy, R + 9, 0, Math.PI * 2)
-  ctx.fillStyle = surf
+  ctx.arc(cx, cy, R + 10, 0, Math.PI * 2)
+  const rim = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R)
+  rim.addColorStop(0, tone(primary, '#ffffff', 0.45))
+  rim.addColorStop(0.35, tone(primary, surf, 0.55))
+  rim.addColorStop(0.7, tone(surf, '#000000', 0.35))
+  rim.addColorStop(1, tone(primary, '#000000', 0.45))
+  ctx.fillStyle = rim
   ctx.fill()
   ctx.restore()
   ctx.beginPath()
-  ctx.arc(cx, cy, R + 9, 0, Math.PI * 2)
-  ctx.strokeStyle = primary
-  ctx.lineWidth = 2.5
+  ctx.arc(cx, cy, R + 1.5, 0, Math.PI * 2)
+  ctx.fillStyle = tone(surf, '#000000', 0.55)
+  ctx.fill()
+  ctx.beginPath()
+  ctx.arc(cx, cy, R + 10, 0, Math.PI * 2)
+  ctx.strokeStyle = tone(primary, '#ffffff', 0.25)
+  ctx.lineWidth = 1.5
   ctx.stroke()
   // LED-Pegs (30) – leuchten am Zeiger auf
   const PEGS = 30
@@ -75,7 +94,7 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
     ctx.fillStyle = 'rgba(255,255,255,.25)'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    ctx.font = '600 15px Manrope,sans-serif'
+    ctx.font = '600 15px ' + (cssVar('--font-body') || 'sans-serif')
     ctx.fillText('Topf ist leer', cx, cy)
     return
   }
@@ -106,8 +125,9 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
       ctx.fill()
       ctx.restore()
     }
-    ctx.strokeStyle = 'rgba(0,0,0,.45)'
-    ctx.lineWidth = 1.5
+    // feine helle Trennlinien statt dunkler Ränder
+    ctx.strokeStyle = 'rgba(255,255,255,.16)'
+    ctx.lineWidth = 1.2
     ctx.stroke()
     ctx.save()
     ctx.translate(cx, cy)
@@ -115,22 +135,26 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
     ctx.textAlign = 'right'
     ctx.textBaseline = 'middle'
     ctx.fillStyle = '#140805'
-    ctx.font = (i === wheel.hi ? '800 ' : '700 ') + fs + 'px Manrope,sans-serif'
+    ctx.font = (i === wheel.hi ? '800 ' : '700 ') + fs + 'px ' + font
     let l = S.pool[i]
     const mx = Math.max(6, Math.floor(26 - n * 0.32))
     if (l.length > mx) l = l.slice(0, mx - 1) + '…'
     ctx.fillText(l, R - 14, 0)
     ctx.restore()
   }
-  // Glanz (steht still, während sich das Rad dreht)
-  const sh = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R)
-  sh.addColorStop(0, 'rgba(255,255,255,.22)')
-  sh.addColorStop(0.35, 'rgba(255,255,255,0)')
-  sh.addColorStop(0.7, 'rgba(255,255,255,0)')
-  sh.addColorStop(1, 'rgba(255,255,255,.08)')
+  // Glas-Kuppel: weicher Lichtfleck oben links, leichte Vignette am Rand (steht still beim Drehen)
+  const sh = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.45, R * 0.05, cx - R * 0.2, cy - R * 0.25, R * 1.05)
+  sh.addColorStop(0, 'rgba(255,255,255,.26)')
+  sh.addColorStop(0.45, 'rgba(255,255,255,.04)')
+  sh.addColorStop(1, 'rgba(255,255,255,0)')
   ctx.beginPath()
   ctx.arc(cx, cy, R, 0, Math.PI * 2)
   ctx.fillStyle = sh
+  ctx.fill()
+  const vg = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R)
+  vg.addColorStop(0, 'rgba(0,0,0,0)')
+  vg.addColorStop(1, 'rgba(0,0,0,.28)')
+  ctx.fillStyle = vg
   ctx.fill()
   // Bewegungsunschärfe-Andeutung bei hoher Geschwindigkeit
   if (wheel.speed > 0.012 && !env.reduce) {

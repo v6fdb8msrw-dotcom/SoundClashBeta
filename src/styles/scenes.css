@@ -219,7 +219,7 @@
   left: 0;
   right: 0;
   height: 50.5vh;
-  background: linear-gradient(to bottom, #050507, #0b0b10);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 30%, #000), color-mix(in srgb, var(--bg) 55%, #000));
 }
 .sc-bar.top {
   top: 0;
@@ -228,7 +228,7 @@
 .sc-bar.bot {
   bottom: 0;
   transform-origin: bottom;
-  background: linear-gradient(to top, #050507, #0b0b10);
+  background: linear-gradient(to top, color-mix(in srgb, var(--bg) 30%, #000), color-mix(in srgb, var(--bg) 55%, #000));
 }
 .sc-line {
   position: absolute;
@@ -269,201 +269,6 @@
   text-transform: uppercase;
   color: var(--cc);
   translate: 0 30px;
-}
-
-/* ---------- Ziehen: Spielfeld groß, Rad als Einblendung ---------- */
-.cine-draft2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
-}
-.cine-draft2 .dhead {
-  width: 100%;
-  margin-bottom: 0;
-}
-.cd-turn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  min-height: 150px;
-  margin-top: 6px;
-  flex-wrap: wrap;
-}
-.cd-av {
-  width: 108px;
-  height: 108px;
-  border-radius: 32px;
-  object-fit: cover;
-  box-shadow:
-    0 0 0 3px var(--pc),
-    0 0 60px -6px var(--pc);
-}
-.cd-who .kicker {
-  margin: 0 0 6px;
-  color: var(--pc);
-}
-.cd-name {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(44px, 6vw, 76px);
-  line-height: 0.95;
-  letter-spacing: var(--tr);
-}
-.cd-who .phonehint {
-  margin: 10px 0 0;
-  font-family: var(--font-hud);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 13px;
-  color: var(--muted);
-}
-.cd-pending {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 20px 12px 12px;
-  margin-left: 18px;
-  border-radius: 24px;
-  border: 1px solid var(--pc);
-  background: color-mix(in srgb, var(--pc) 16%, var(--surface));
-  box-shadow: 0 20px 50px -18px var(--pc);
-}
-.cd-pending img {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 0 2px var(--pc);
-}
-.cd-pending small {
-  display: block;
-  font-family: var(--font-hud);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--pc);
-}
-.cd-pending b {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 28px;
-}
-.cine-draft2 .cine-active {
-  width: min(980px, 100%);
-}
-.cine-draft2 .cine-active .slots {
-  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
-  gap: 12px;
-}
-.cine-draft2 .cine-active .slot {
-  min-height: 112px;
-  padding: 18px 8px;
-}
-.cine-draft2 .cine-active .slot .n {
-  font-size: 17px;
-}
-.cine-draft2 .cine-active .slot .sart img {
-  width: 54px;
-  height: 54px;
-}
-.cine-draft2 .cine-others {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-.mini-grid {
-  padding: 10px 12px 12px;
-  border-radius: 18px;
-  border: 1px solid color-mix(in srgb, var(--pc) 35%, var(--line-soft));
-  background: color-mix(in srgb, var(--surface) 55%, transparent);
-  opacity: 0.85;
-}
-.mg-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.mg-head img {
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-.mg-head .nm {
-  font-weight: 700;
-  font-size: 13.5px;
-  color: var(--pc);
-}
-.mg-head small {
-  margin-left: auto;
-  font-family: var(--font-hud);
-  font-size: 11px;
-  color: var(--muted);
-}
-.mg-slots {
-  display: flex;
-  gap: 5px;
-}
-.mg-slot {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border: 1px dashed var(--line-soft);
-  font-family: var(--font-hud);
-  font-size: 11px;
-  color: var(--muted);
-}
-.mg-slot.two {
-  border-color: color-mix(in srgb, var(--primary) 60%, transparent);
-}
-.mg-slot.on {
-  border: 1px solid var(--pc);
-}
-.mg-slot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.mg-slot i {
-  font-style: normal;
-}
-.wheel-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(70% 70% at 50% 50%, color-mix(in srgb, var(--bg) 90%, transparent), color-mix(in srgb, var(--bg) 97%, #000));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-.wo-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.wo-kicker {
-  margin: 0;
-  font-family: var(--font-hud);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-}
-.wheel-overlay .wheelbox {
-  width: min(72vh, 640px, 88vw);
 }
 
 /* ---------- Aufdecken: Spieler für Spieler ---------- */
@@ -659,4 +464,470 @@
   .rv-title.hidden {
     animation: none;
   }
+}
+
+/* ---------- Normaler Modus: Wisch-Überblendung von links nach rechts ---------- */
+.phasewipe {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  overflow: hidden;
+}
+.pw-panel,
+.pw-ghost {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+/* Fläche in den Farben des gewählten Albums */
+.pw-panel {
+  background:
+    radial-gradient(70% 90% at 50% 50%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%),
+    radial-gradient(60% 80% at 0% 100%, color-mix(in srgb, var(--secondary) 22%, transparent), transparent 70%),
+    linear-gradient(105deg, color-mix(in srgb, var(--bg) 88%, var(--primary)), var(--bg-2) 55%, color-mix(in srgb, var(--bg) 90%, var(--secondary)));
+}
+/* durchscheinender Vorläufer: gibt Tiefe */
+.pw-ghost {
+  background: linear-gradient(105deg, color-mix(in srgb, var(--primary) 40%, transparent), color-mix(in srgb, var(--secondary) 35%, transparent));
+  opacity: 0.55;
+}
+/* leuchtende Kanten vorne und hinten */
+.pw-edge {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  width: 22vw;
+  filter: blur(22px);
+  opacity: 0.9;
+}
+.pw-edge.lead {
+  right: -11vw;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary) 85%, #fff) 45%, color-mix(in srgb, var(--secondary) 80%, transparent) 60%, transparent);
+}
+.pw-edge.trail {
+  left: -11vw;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--secondary) 70%, transparent) 40%, color-mix(in srgb, var(--primary) 80%, #fff) 55%, transparent);
+}
+.pw-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  color: var(--text);
+}
+.pw-title {
+  display: flex;
+  gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(46px, 7vw, 108px);
+  line-height: 1.02;
+  letter-spacing: var(--tr);
+  white-space: nowrap;
+}
+.pw-wmask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.04em 0 0.1em;
+}
+.pw-word {
+  display: inline-block;
+}
+.pw-title.pw-vs {
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(80px, 12vw, 180px);
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  text-shadow: 0 0 60px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+.pw-card small {
+  font-family: var(--font-hud);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.pw-num {
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: clamp(100px, 15vw, 220px);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--primary) 80%, transparent);
+  margin-bottom: -10px;
+}
+.pw-crown {
+  font-size: 58px;
+  line-height: 1;
+  filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--primary) 60%, transparent));
+}
+.pw-disc {
+  display: block;
+  margin-bottom: 4px;
+}
+.pw-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 18px;
+  margin-top: 4px;
+}
+.pw-eq i {
+  width: 4px;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--primary);
+  transform-origin: bottom;
+  animation: rEq 0.7s ease-in-out infinite;
+}
+.pw-eq i:nth-child(2) {
+  animation-delay: -0.2s;
+}
+.pw-eq i:nth-child(3) {
+  animation-delay: -0.45s;
+}
+.pw-eq i:nth-child(4) {
+  animation-delay: -0.1s;
+}
+.pw-eq i:nth-child(5) {
+  animation-delay: -0.35s;
+}
+@keyframes rEq {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- Rad: größer und edler; Spielfelder links und rechts ---------- */
+@media (min-width: 941px) {
+  .draftgrid.sides {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 18px 22px;
+  }
+  /* Rad-Feld so hoch wie die Spielfelder daneben – unten alles auf einer Linie, Rad mittig */
+  .draftgrid.sides > .draftstage {
+    grid-column: 2;
+    grid-row: var(--wr, 1);
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .draftgrid.sides > .pcluster {
+    grid-column: var(--gc, auto);
+    grid-row: var(--gr, auto);
+  }
+  .draftgrid.sides .draftstage .wheelbox {
+    width: min(540px, 36vw, calc(100vh - 290px));
+    min-width: 360px;
+  }
+  .draftgrid.solo .draftstage .wheelbox {
+    width: min(600px, 84vw, calc(100vh - 270px));
+  }
+  .draftgrid.solo {
+    max-width: 760px;
+  }
+}
+/* Längliche Felder: #1 … #5 untereinander (2 Spieler beide, ab 3 Spielern der Spieler am Zug rechts groß) */
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) {
+  display: flex;
+  flex-direction: column;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slots {
+  flex: 1;
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--srows, 5), minmax(46px, 1fr));
+  grid-auto-flow: column;
+  gap: 8px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  padding: 8px 16px;
+  text-align: left;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot .n {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 20px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster.on) .slot .n {
+  font-size: 24px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot.taken .n {
+  font-size: 16px;
+  font-weight: 700;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster.on) .slot.taken .n {
+  font-size: 19px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot .x {
+  margin-top: 0;
+  font-size: 12.5px;
+  flex: 0 0 auto;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot .sart {
+  left: 38%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 55%);
+  mask-image: linear-gradient(90deg, transparent, #000 55%);
+  opacity: 0.55;
+}
+.draftgrid.sides.focus > .pcluster.on {
+  animation: focusIn 0.5s var(--ease-out, ease-out);
+}
+@keyframes focusIn {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.98);
+  }
+}
+/* 3–4 Spieler: die anderen links als kompakte Felder */
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) {
+  padding: 10px 12px 12px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .pch {
+  margin-bottom: 6px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .pch img {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .pch .nm {
+  font-size: 16px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slots {
+  grid-template-rows: repeat(var(--srows, 5), minmax(24px, 1fr));
+  gap: 5px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot {
+  padding: 4px 12px;
+  border-radius: 10px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot .n {
+  font-size: 15px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot.taken .n {
+  font-size: 13.5px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot .x {
+  font-size: 11px;
+}
+/* 5–6 Spieler: die anderen links als Kachel-Leisten, nach unten verlängert – Künstlerfoto als Kachel,
+   Platznummer als kleines Abzeichen, Name unten; leere Plätze zeigen #n und ×1/×2 */
+.draftgrid.sides.focus.mini > .pcluster:not(.on) {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px 12px;
+  border-radius: 18px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch {
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch img {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch .nm {
+  font-size: 15px;
+  display: inline;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch .st {
+  margin-left: 8px;
+  font-size: 10.5px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slots {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--mcols, 5), minmax(0, 1fr));
+  grid-template-rows: none;
+  grid-auto-rows: minmax(70px, 1fr);
+  grid-auto-flow: row;
+  gap: 6px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot {
+  min-height: 0;
+  height: auto;
+  padding: 0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot .n {
+  flex: 0 0 auto;
+  font-size: 18px;
+  color: var(--muted);
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot .sart {
+  left: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot .x {
+  margin-top: 0;
+  font-size: 10px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken {
+  justify-content: flex-end;
+  border-color: color-mix(in srgb, var(--pc) 55%, transparent);
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken .sart {
+  opacity: 1;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), transparent 62%);
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken .n {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 5px 6px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: none;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken .x {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 9.5px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+}
+@media (min-width: 941px) {
+  .draftgrid.sides.focus.mini .draftstage .wheelbox {
+    width: min(520px, 34vw, calc(100vh - 290px));
+  }
+}
+@media (max-width: 940px) {
+  .draftgrid.sides > .draftstage {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+}
+.wheelbox .hub {
+  background:
+    radial-gradient(circle at 36% 28%, color-mix(in srgb, var(--primary) 30%, var(--surface-2)), var(--bg) 72%),
+    var(--bg);
+  border: 0;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--primary) 85%, #fff),
+    0 0 0 9px color-mix(in srgb, var(--bg) 70%, transparent),
+    0 0 0 10px color-mix(in srgb, var(--primary) 45%, transparent),
+    inset 0 -10px 24px rgba(0, 0, 0, 0.6),
+    inset 0 6px 14px color-mix(in srgb, #fff 12%, transparent),
+    0 0 46px -6px var(--primary);
+  color: var(--primary);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--primary) 60%, transparent);
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s;
+}
+.wheelbox .ptr {
+  top: -14px;
+  width: 38px;
+  height: 44px;
+  margin-left: -19px;
+  background: linear-gradient(180deg, #fff 0%, color-mix(in srgb, var(--primary) 70%, #fff) 45%, var(--primary) 100%);
+  clip-path: polygon(50% 100%, 6% 8%, 18% 0, 82% 0, 94% 8%);
+}
+.draftgrid.sides.focus {
+  row-gap: 12px;
+}
+
+/* ==========================================================================
+   Spielbildschirme ohne Scrollen (services: ui/Fit.tsx setzt data-fit und --fitH)
+   ========================================================================== */
+html[data-fit],
+html[data-fit] body {
+  overflow: hidden;
+}
+html[data-fit] .wrap {
+  padding-bottom: 18px;
+}
+.fitbox {
+  transform-origin: top center;
+}
+.fitbox.fit-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* Ziehen: Spielfeld füllt die Höhe, Kacheln enden unten bündig mit dem Bildschirm */
+.fitbox .draft-fit {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--fitH, auto);
+}
+.fitbox .draft-fit > .draftgrid {
+  flex: 1;
+}
+.fitbox .draft-fit > .dhead {
+  margin-bottom: 14px;
+}
+/* Rad passt sich der Höhe an */
+@media (min-width: 941px) {
+  .fitbox .draftgrid.sides .draftstage .wheelbox {
+    width: min(540px, 36vw / var(--tvz, 1), calc(var(--fitH, 900px) - 230px));
+    min-width: 300px;
+  }
+  .fitbox .draftgrid.sides.focus.mini .draftstage .wheelbox {
+    width: min(520px, 34vw / var(--tvz, 1), calc(var(--fitH, 900px) - 230px));
+  }
+}
+/* Aufdecken und Songwahl (Handy-Modus) mittig in der Höhe */
+.fitbox .rv,
+.fitbox .listen-wrap {
+  min-height: var(--fitH, auto);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Handy-Modus beim Ziehen: gleicher Rad-Bildschirm, gedreht und gesetzt wird am Handy */
+.draftstage .phonehint {
+  margin: 22px 0 6px;
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.draftstage.phonectl .hub {
+  pointer-events: none;
 }

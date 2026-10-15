@@ -19,10 +19,12 @@ import { drawer } from './core/game'
 import { loadRivalry } from './services/rivalry'
 import { configureSfx } from './services/sfx'
 import { loadSettings, migrateLegacy } from './services/storage'
+import { initScreen } from './services/display'
 import { Background } from './ui/Background'
 import { Fx } from './ui/Fx'
 import { Presence, setOpenSel } from './ui/primitives'
 import { SceneCut } from './ui/SceneCut'
+import { Fit } from './ui/Fit'
 import { Splash } from './ui/Splash'
 import { Toast } from './ui/Toast'
 import { TopBar } from './ui/TopBar'
@@ -36,6 +38,7 @@ function boot() {
   configureSfx(() => getState().muted, env.reduce)
   configureAudio({ toast: (m) => bus.emit('toast', m), ambience: () => getState().ambience })
   migrateLegacy()
+  initScreen()
   dispatch({ type: 'load', saved: loadSettings() })
   // Nur Sound Clash: direkt in den Sound-Clash-Start (Guess the Song und Timeline sind vorerst ausgeblendet)
   dispatch({ type: 'go', to: 'setup' })
@@ -56,6 +59,9 @@ function screenKey(S: State): string {
   if (S.screen === 'gsplay') return `gs-${S.gs?.ridx ?? 0}-${S.gs?.loading ? 'l' : ''}`
   return S.screen
 }
+
+/** Spielbildschirme ohne Scrollen (Tims Vorgabe); Start, Rundenende, Endstand und Turnierbaum scrollen. */
+const FIT = new Set<State['screen']>(['draft', 'pick', 'songs', 'duel', 'listen'])
 
 function ScreenView({ S }: { S: State }): ReactNode {
   switch (S.screen) {
@@ -154,7 +160,9 @@ export default function App() {
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transitionEnd: { filter: 'none' }, transition: { type: 'spring', stiffness: 260, damping: 30, mass: 0.9 } }}
             exit={env.reduce ? { opacity: 1, transition: { duration: 0 } } : { opacity: 0, y: -14, scale: 0.99, filter: 'blur(8px)', transition: { duration: 0.16, ease: 'easeIn' } }}
           >
-            <ScreenView S={S} />
+            <Fit on={FIT.has(S.screen)}>
+              <ScreenView S={S} />
+            </Fit>
           </motion.main>
         </Presence>
       </div>

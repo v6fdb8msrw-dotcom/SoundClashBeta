@@ -1,15 +1,16 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { dispatch } from '../app/store'
 import { BGS, THEMES } from '../core/constants'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
 import { Sel } from './primitives'
+import { getScreen, setScreen, subscribeScreen } from '../services/display'
 
 /**
  * Kopfleiste, bewusst schlicht: Logo (→ Sound-Clash-Start), Handys koppeln und ein Menü.
- * Im Menü: Farbe, Hintergrund, Ton, Spielanleitung, Spielstand. Alle Funktionen bleiben erhalten.
+ * Im Menü: Farbe, Hintergrund, Bildschirm (Laptop/Fernseher), Ton, Spielanleitung, Spielstand. Alle Funktionen bleiben erhalten.
  */
 export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
   const [menu, setMenu] = useState(false)
@@ -68,6 +69,10 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
           <div className="ms-row">
             <span className="ms-l">Hintergrund</span>
             <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} />
+          </div>
+          <div className="ms-row">
+            <span className="ms-l">Bildschirm</span>
+            <ScreenSwitch />
           </div>
           <div className="ms-row">
             <span className="ms-l">Ton</span>
@@ -173,6 +178,26 @@ function Rules() {
       <p>
         Bei Best of 3/5 zählt jeder Rundensieg. Der Endstand lässt sich als Bild <b>teilen</b>.
       </p>
+    </div>
+  )
+}
+
+/** Laptop / Fernseher: Fernseher vergrößert alles für die Couch (wird auf diesem Gerät gemerkt). */
+function ScreenSwitch() {
+  const m = useSyncExternalStore(subscribeScreen, getScreen, getScreen)
+  return (
+    <div className="seg ms-seg" role="radiogroup" aria-label="Bildschirm">
+      {(
+        [
+          ['laptop', '💻 Laptop'],
+          ['tv', '📺 Fernseher'],
+        ] as const
+      ).map(([v, t]) => (
+        <button key={v} type="button" role="radio" id={'screen-' + v} aria-checked={m === v} className={m === v ? 'on' : ''} onClick={() => setScreen(v)}>
+          {m === v ? <span className="seg-ind" /> : null}
+          <span className="seg-t">{t}</span>
+        </button>
+      ))}
     </div>
   )
 }

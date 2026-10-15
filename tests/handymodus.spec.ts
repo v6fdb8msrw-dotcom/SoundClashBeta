@@ -50,7 +50,7 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   await host.locator('#startBtn').click()
 
   // Ziehen: nur am Handy (am Hauptgerät gibt es keinen Dreh-Knopf, solange das Handy verbunden ist)
-  await host.locator('.cine-draft2 .phonehint').waitFor({ timeout: 30_000 })
+  await host.locator('.draftstage .phonehint').waitFor({ timeout: 30_000 })
   await expect(host.locator('#spinBtn')).toHaveCount(0)
   const phones = [p1, p2]
   let shotSpin = false
@@ -81,11 +81,9 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
           shotSpin = true
           await SHOT(ph, 'handy-7-drehen')
           await spin.click()
-          // Rad wird groß am Hauptgerät eingeblendet und klein am Handy gezeigt
+          // Am Handy dreht das Rad klein mit, am Hauptgerät steht es groß in der Mitte
           if (process.env.SHOTS) {
-            await host.locator('.wheel-overlay').waitFor({ timeout: 15_000 })
             await ph.locator('.r-wheel').waitFor({ timeout: 15_000 })
-            await host.screenshot({ path: 'docs/screenshots/mac-15b-handymodus-rad.jpg', type: 'jpeg', quality: 78, scale: 'css' })
             await ph.screenshot({ path: 'docs/screenshots/handy-7b-rad.jpg', type: 'jpeg', quality: 78, scale: 'css' })
           }
           acted = true

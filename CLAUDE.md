@@ -47,7 +47,16 @@ Logik-Fluss: Oberfläche → `dispatch(action)` → `reduce()` in `src/core/game
 Damit die Tests beide Fassungen bedienen können, behält die neue Oberfläche die ids, `data-*`-Attribute
 und Klassennamen des Originals für Bedienelemente und Ergebnisanzeigen (z. B. `#startBtn`, `data-pl`,
 `.recap .rrow`). Diese nicht umbenennen. Der Testtreiber öffnet Menü, „Mehr Optionen“ und
-Avatar-Auswahl bei Bedarf selbst (`reveal()` in `tests/helpers/driver.ts`).
+Avatar-Auswahl bei Bedarf selbst (`reveal()` in `tests/helpers/driver.ts`), ebenso die eingeklappte
+Regel-Zeile der Startseite (`#rulesToggle`, `.rules-body`).
+
+Startseite (Tims Vorgabe): ① Spieler und ② Künstler-Topf immer sichtbar, Regeln als eine Zeile zum
+Aufklappen mit Schnellstart-Standard. Fernseher-Modus: `src/services/display.ts` setzt `--tvz`, CSS
+zoomt `.wrap` (nicht die ganze Seite, sonst laufen `vw`-Maße über). Überblendungen zwischen den
+Spielphasen: `src/ui/SceneCut.tsx` (normaler Modus: Wisch von links nach rechts, Handy-Modus: Kino-Blenden).
+Spielbildschirme ohne Scrollen: `src/ui/Fit.tsx` (setzt `data-fit` am html und `--fitH`, verkleinert bei
+Bedarf per `zoom`); die Reihenfolge der `.pcluster` im DOM bleibt P1…Pn (Vergleichstests), angeordnet
+wird beim Ziehen nur per CSS-Raster (`--gc`/`--gr`).
 
 ## Befehle
 
@@ -98,6 +107,7 @@ Die Herkunft `v6fdb8msrw-dotcom.github.io` teilen sich Sound Clash und **Muscle 
 | `soundclash.app.settings` | Einstellungen, Namen, Avatare, Topf, Turnier-Kader (Format wie `save()` im Original, plus `pickSec`, `autoScroll`, `phoneMode`) |
 | `soundclash.app.rivalry` | Ewige Rivalität `{ "a|b": {a,b,aw,bw,draws,last} }` |
 | `soundclash.v5`, `soundclash.rivalry` | alte Schlüssel des Originals – nur lesen (einmalige Übernahme), nie ändern |
+| `soundclash.app.display` | Bildschirm „laptop“ oder „tv“ (nur dieses Gerät, nicht im Spielstand/Backup) |
 | `soundclash.app.pair` (sessionStorage) | Spielcode der Handy-Kopplung am Hauptgerät |
 | `soundclash.app.role.<CODE>` (sessionStorage) | gewählte Rolle auf dem Handy |
 
