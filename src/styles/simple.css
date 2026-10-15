@@ -39,6 +39,15 @@
 #wall {
   animation-duration: 90s;
 }
+/* Künstler-Mosaik (auch mit Plattenspieler und wandernd): Schleier deutlich lichter, sonst verschwindet
+   die Wand fast ganz. Oben und an den Rändern sieht man die Gesichter, zur Mitte hin bleibt es ruhig für den Text. */
+#veil.veil-mosaic,
+#veil.veil-walldeck,
+#veil.veil-flow {
+  background:
+    radial-gradient(760px 560px at 50% 52%, color-mix(in srgb, var(--bg) 62%, transparent), transparent 75%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 30%, transparent), color-mix(in srgb, var(--bg) 52%, transparent) 60%, color-mix(in srgb, var(--bg) 72%, transparent));
+}
 
 /* ---------- Kopfleiste: Logo, 📱, Menü ---------- */
 .brand {
