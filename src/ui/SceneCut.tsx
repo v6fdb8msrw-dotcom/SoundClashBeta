@@ -123,7 +123,8 @@ export function SceneCut({ S }: { S: State }) {
   )
 }
 
-const WIPE = 1.3
+/** Gesamtdauer der Wisch-Überblendung. Lang genug, dass man Titel und Untertitel in Ruhe lesen kann. */
+const WIPE = 2.8
 
 /**
  * Wisch-Überblendung von links nach rechts: eine Fläche in den Farben des gewählten Albums gleitet
@@ -135,38 +136,38 @@ function Wipe({ cut }: { cut: Cut }) {
   const words = cut.title.split(' ')
   return (
     <div className={'phasewipe pw-' + cut.kind} key={cut.key} aria-hidden>
-      <motion.div className="pw-ghost" initial={{ x: '-110%' }} animate={{ x: ['-110%', '0%', '0%', '110%'] }} transition={{ duration: WIPE, times: [0, 0.34, 0.6, 0.94], ease }} />
-      <motion.div className="pw-panel" initial={{ x: '-115%' }} animate={{ x: ['-115%', '0%', '0%', '115%'] }} transition={{ duration: WIPE, times: [0.04, 0.38, 0.62, 1], ease }}>
+      <motion.div className="pw-ghost" initial={{ x: '-110%' }} animate={{ x: ['-110%', '0%', '0%', '110%'] }} transition={{ duration: WIPE, times: [0, 0.18, 0.76, 0.95], ease }} />
+      <motion.div className="pw-panel" initial={{ x: '-115%' }} animate={{ x: ['-115%', '0%', '0%', '115%'] }} transition={{ duration: WIPE, times: [0.02, 0.2, 0.78, 1], ease }}>
         <span className="pw-edge lead" />
         <span className="pw-edge trail" />
       </motion.div>
-      <motion.div className="pw-card" initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 1, 0], x: [0, 0, 18, 120] }} transition={{ duration: WIPE, times: [0.3, 0.4, 0.66, 0.84], ease: 'easeInOut' }}>
+      <motion.div className="pw-card" initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 1, 0], x: [0, 0, 18, 120] }} transition={{ duration: WIPE, times: [0.14, 0.22, 0.74, 0.88], ease: 'easeInOut' }}>
         {cut.num ? (
-          <motion.span className="pw-num" initial={{ scale: 1.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: WIPE * 0.36, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}>
+          <motion.span className="pw-num" initial={{ scale: 1.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: WIPE * 0.18, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}>
             {cut.num}
           </motion.span>
         ) : null}
         {cut.kind === 'roll' ? (
-          <motion.span className="pw-disc" initial={{ x: -180, rotate: -270, opacity: 0 }} animate={{ x: 0, rotate: 0, opacity: 1 }} transition={{ delay: WIPE * 0.32, duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}>
+          <motion.span className="pw-disc" initial={{ x: -180, rotate: -270, opacity: 0 }} animate={{ x: 0, rotate: 0, opacity: 1 }} transition={{ delay: WIPE * 0.16, duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}>
             <Vinyl spinning size={84} />
           </motion.span>
         ) : null}
         {cut.kind === 'final' ? (
-          <motion.span className="pw-crown" initial={{ y: -40, rotate: -20, opacity: 0 }} animate={{ y: 0, rotate: 0, opacity: 1 }} transition={{ delay: WIPE * 0.36, type: 'spring', stiffness: 260, damping: 14 }}>
+          <motion.span className="pw-crown" initial={{ y: -40, rotate: -20, opacity: 0 }} animate={{ y: 0, rotate: 0, opacity: 1 }} transition={{ delay: WIPE * 0.18, type: 'spring', stiffness: 260, damping: 14 }}>
             👑
           </motion.span>
         ) : null}
         <b className={'pw-title' + (cut.kind === 'vs' ? ' pw-vs' : '')}>
           {words.map((w, i) => (
             <span className="pw-wmask" key={i}>
-              <motion.span className="pw-word" initial={{ y: '105%' }} animate={{ y: '0%' }} transition={{ delay: WIPE * 0.38 + i * 0.07, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}>
+              <motion.span className="pw-word" initial={{ y: '105%' }} animate={{ y: '0%' }} transition={{ delay: WIPE * 0.2 + i * 0.08, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}>
                 {w}
               </motion.span>
             </span>
           ))}
         </b>
         {cut.sub ? (
-          <motion.small initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: WIPE * 0.46, duration: 0.4 }}>
+          <motion.small initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: WIPE * 0.27, duration: 0.4 }}>
             {cut.sub}
           </motion.small>
         ) : null}
