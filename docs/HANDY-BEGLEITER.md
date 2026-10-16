@@ -14,7 +14,7 @@ In der Einrichtung unter **„Wie wird gesteuert?“**:
   werden (Abstimmen, Line-up, selbst drehen/setzen/wählen, wenn man dran ist).
 - **📱 Mit den Handys (Handy-Modus):** Die Spieler steuern alles am Handy, das Hauptgerät ist die große
   Bühne. QR-Code, Verbindungslink und „verbunden/wartet“ pro Spieler stehen direkt in der Einrichtung.
-  Ablauf: drehen am Handy (Rad groß am Hauptgerät, klein am Handy) → setzen am Handy → alle wählen
+  Ablauf: drehen am Handy (Rad nur groß am Hauptgerät, danach Künstler groß am Handy) → setzen am Handy → alle wählen
   ihren Song **gleichzeitig** und tippen „Fertig“ → **Spieler für Spieler aufdecken**: Play am Handy,
   der Song läuft am Hauptgerät (30 Sek, „Weiter“ geht früher; Reihenfolge rückt pro Duell um eins
   weiter) → **Versus**: jetzt am Handy abstimmen, am Hauptgerät sieht man, wer wofür gestimmt hat.
@@ -30,7 +30,8 @@ Runde zeigt das Hauptgerät dafür unten rechts einen kleinen QR-Code „Mit abs
 - **Abstimmen:** Im Duell („Publikum stimmt ab“) tippt jeder am eigenen Handy den besseren Song an.
   Jede Karte zeigt deutlich, **wer** den Song gewählt hat (Avatar, Name, „hat gewählt“), dazu Cover,
   Titel, Künstler und wer schon dafür gestimmt hat. Im Handy-Modus geht das erst im Versus-Screen.
-  Eine Stimme pro Handy und Duell, Wechsel jederzeit möglich. Am Hauptgerät zählt das genau wie
+  Eine Stimme pro Handy und Duell, Wechsel jederzeit möglich. Für den eigenen Song kann ein Spieler
+  nicht stimmen (Karte ausgegraut, „dein Song“). Am Hauptgerät zählt das genau wie
   „+1 Stimme“ (bzw. „−“ beim Wechsel). Abstimmung schließen und Sieger bestätigen bleibt am Hauptgerät.
 - **Eigenes Line-up:** Plätze, gezogene Künstler, gewählte Songs, ×2-Plätze und „jetzt“ – steht
   immer unten auf dem Handy.

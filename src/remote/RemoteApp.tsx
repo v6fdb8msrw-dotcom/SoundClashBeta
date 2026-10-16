@@ -212,7 +212,7 @@ function MyLineup({ V, me }: { V: HostView; me: number }) {
 }
 
 /** Abstimmen und „läuft gerade“: deutlich, wer welchen Song gewählt hat. */
-function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; avatars: Record<number, string> }) {
+function Vote({ V, me, mineVote, avatars }: { V: HostView; me: Role; mineVote: number | null; avatars: Record<number, string> }) {
   const total = Object.values(V.tally || {}).reduce((a, b) => a + b, 0) || 1
   const done = V.votePhase === 'result'
   // Abgestimmt wird im Versus-Screen (Handy-Modus: erst wenn alle Songs aufgedeckt sind)
@@ -228,17 +228,20 @@ function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; 
         const mine = mineVote === p
         const now = V.nowPlaying === p
         const who = (V.voters || {})[p] || []
+        // Für den eigenen Song kann man nicht stimmen (Tims Vorgabe)
+        const own = me === p
+        const can = canVote && !own
         return (
           <motion.button
             key={p}
             layout
-            className={'r-vbtn' + (mine ? ' mine' : '') + (now ? ' now' : '') + (done && V.voteWinner === p ? ' win' : '')}
+            className={'r-vbtn' + (mine ? ' mine' : '') + (own ? ' own' : '') + (now ? ' now' : '') + (done && V.voteWinner === p ? ' win' : '')}
             style={{ ['--pc' as string]: V.colors[p] }}
             data-rvote={p}
-            disabled={!canVote}
-            whileTap={canVote ? { scale: 0.97 } : undefined}
+            disabled={!can}
+            whileTap={can ? { scale: 0.97 } : undefined}
             onClick={() => {
-              if (!canVote) return
+              if (!can) return
               vib(25)
               ask({ t: 'vote', p, key: V.duelKey })
             }}
@@ -247,7 +250,7 @@ function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; 
             <span className="r-vtop">
               <Avatar src={avatars[p]} color={V.colors[p]} size={30} />
               <b className="r-vwho">{V.names[p - 1]}</b>
-              <span className="r-vlabel">hat gewählt</span>
+              <span className="r-vlabel">{own ? 'dein Song' : 'hat gewählt'}</span>
               {now ? (
                 <span className="r-now">
                   <span className="r-eq" aria-hidden>
@@ -297,53 +300,11 @@ function Vote({ V, mineVote, avatars }: { V: HostView; mineVote: number | null; 
               : 'Stimmengleichheit – entscheidet am Hauptgerät.'
             : mineVote
               ? 'Du kannst deine Stimme noch ändern.'
-              : 'Tippe auf deinen Favoriten – eine Stimme pro Handy.'}
+              : typeof me === 'number' && V.parts.includes(me)
+                ? 'Tippe auf deinen Favoriten – für deinen eigenen Song kannst du nicht stimmen.'
+                : 'Tippe auf deinen Favoriten – eine Stimme pro Handy.'}
       </p>
     </section>
-  )
-}
-
-/** Kleines Rad am Handy: zeigt kurz, wie gedreht wurde (groß läuft es auf dem Hauptgerät). */
-const WHEEL_COLS = ['var(--primary)', 'var(--secondary)', 'var(--accent)']
-function MiniWheel({ V }: { V: HostView }) {
-  const sp = V.spin
-  const names = V.pool
-  const n = Math.max(2, sp?.n || names.length)
-  const seg = 360 / n
-  const [rot, setRot] = useState(0)
-  useEffect(() => {
-    if (!sp) return
-    const final = 360 * 5 + (360 - (sp.target * seg + seg / 2))
-    let r2 = 0
-    const r1 = requestAnimationFrame(() => (r2 = requestAnimationFrame(() => setRot(final))))
-    return () => (cancelAnimationFrame(r1), cancelAnimationFrame(r2))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sp?.target, sp?.n])
-  const R = 100
-  const fs = Math.max(5, Math.min(11, 150 / n))
-  return (
-    <div className="r-wheel">
-      <i className="r-wptr" aria-hidden />
-      <svg viewBox="0 0 200 200" style={{ transform: `rotate(${rot}deg)` }} aria-hidden>
-        {Array.from({ length: n }, (_, i) => {
-          const a0 = ((i * seg - 90) * Math.PI) / 180,
-            a1 = (((i + 1) * seg - 90) * Math.PI) / 180
-          const d = `M${R} ${R} L${R + R * Math.cos(a0)} ${R + R * Math.sin(a0)} A${R} ${R} 0 ${seg > 180 ? 1 : 0} 1 ${R + R * Math.cos(a1)} ${R + R * Math.sin(a1)} Z`
-          const label = (names[i] || '').length > 13 ? names[i].slice(0, 12) + '…' : names[i] || ''
-          return (
-            <g key={i}>
-              <path d={d} fill={WHEEL_COLS[i % 3]} fillOpacity={0.5 + 0.25 * ((i * 7) % 3)} stroke="rgba(0,0,0,.45)" strokeWidth={0.6} />
-              {n <= 30 ? (
-                <text transform={`rotate(${i * seg + seg / 2 - 90} ${R} ${R})`} x={190} y={R} textAnchor="end" dominantBaseline="middle" fontSize={fs} fontWeight={700} fill="#140805">
-                  {label}
-                </text>
-              ) : null}
-            </g>
-          )
-        })}
-        <circle cx={R} cy={R} r={18} fill="#140805" stroke="rgba(255,255,255,.25)" />
-      </svg>
-    </div>
   )
 }
 
@@ -435,20 +396,16 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
     if (V.spin && V.pool.length > 1) {
       const who = V.drawer
       return (
-        <Hero color={V.colors[who]} kicker={who === p ? 'Du drehst' : 'Künstler ziehen'} title={who === p ? 'Das Rad dreht …' : <>{V.names[who - 1]} dreht …</>} sub="Groß zu sehen auf dem Hauptgerät">
-          <div className="r-wheelwrap">
-            <MiniWheel V={V} />
-          </div>
-        </Hero>
+        <Hero color={V.colors[who]} kicker={who === p ? 'Du drehst' : 'Künstler ziehen'} title={who === p ? 'Das Rad dreht …' : <>{V.names[who - 1]} dreht …</>} sub="Schau auf den großen Bildschirm" />
       )
     }
     if (V.pending && V.pending.player === p) {
       const free = (V.sameArtist ? V.lineup[1] : V.lineup[p]) || []
       return (
         <Hero color={V.colors[p]} kicker="Du bist dran · blind setzen" title={V.pending.artist} pulse>
-          <div className="r-draw">
+          <motion.div className="r-draw" key={V.pending.artist} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 18 }}>
             <ArtistPic V={V} name={V.pending.artist} size={110} round />
-          </div>
+          </motion.div>
           <p className="r-sub">Auf welchen Platz? Was noch kommt, weiß keiner.</p>
           <div className="r-slots">
             {free.map((a, i) => (
@@ -474,11 +431,16 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
     }
     const who = V.pending ? V.pending.player : V.drawer
     return (
-      <Hero color={V.colors[who]} kicker="Künstler ziehen" title={<>{V.names[who - 1]} ist am Zug</>} sub={V.pending ? 'gezogen: ' + V.pending.artist : V.spinning ? 'Das Rad dreht …' : 'Gleich wird gedreht.'}>
+      <Hero
+        color={V.colors[who]}
+        kicker={V.pending ? V.names[who - 1] + ' hat gezogen' : 'Künstler ziehen'}
+        title={V.pending ? V.pending.artist : <>{V.names[who - 1]} ist am Zug</>}
+        sub={V.pending ? 'setzt gerade blind auf einen Platz' : V.spinning ? 'Das Rad dreht …' : 'Gleich wird gedreht.'}
+      >
         {V.pending ? (
-          <div className="r-draw">
-            <ArtistPic V={V} name={V.pending.artist} size={84} round />
-          </div>
+          <motion.div className="r-draw" key={V.pending.artist} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 18 }}>
+            <ArtistPic V={V} name={V.pending.artist} size={110} round />
+          </motion.div>
         ) : null}
       </Hero>
     )
@@ -583,7 +545,7 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
             </div>
           ) : null}
         </Hero>
-        <Vote V={V} mineVote={mineVote} avatars={avatars} />
+        <Vote V={V} me={me} mineVote={mineVote} avatars={avatars} />
       </>
     )
   }

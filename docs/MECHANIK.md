@@ -370,8 +370,9 @@ Kino-Überblendungen (schwarze Blenden mit Titelkarte, z. B. „Runde 1“, „P
    (kleiner QR-Code unten rechts).
 2. **Ziehen:** gleiche Reihenfolge und Regeln wie in 2.3. Am Hauptgerät steht oben groß der Spieler am
    Zug mit seinem Spielfeld, darunter klein die Spielfelder der anderen. Wer dran ist, hat am Handy nur
-   den Knopf zum Drehen; dann wird das Rad groß am Hauptgerät eingeblendet und klein am Handy gezeigt.
-   Nach der Enthüllung verschwindet das Rad, der Spieler setzt den Künstler am Handy.
+   den Knopf zum Drehen; dann wird das Rad groß am Hauptgerät eingeblendet. Das Handy zeigt **kein Rad**
+   (Tims Vorgabe), nur „… dreht – schau auf den großen Bildschirm“. Steht das Rad, erscheint der gezogene
+   Künstler groß oben am Handy (bei allen); der Spieler setzt ihn am Handy.
    Ist sein Handy nicht verbunden, wird wie gewohnt am Hauptgerät gedreht und gesetzt.
 3. **Songwahl „Vor jedem Duell“:** Alle Teilnehmer wählen **gleichzeitig** am Handy und tippen
    „Fertig“ (danach noch änderbar). Das Hauptgerät zeigt nur Kacheln „P1 wählt …“ / „✓ bereit“, keine
@@ -389,5 +390,9 @@ Kino-Überblendungen (schwarze Blenden mit Titelkarte, z. B. „Runde 1“, „P
    Song steht, wer per Handy dafür gestimmt hat (Spieler mit Bild und Name, Zuschauer als „🙋 n Publikum“,
    Stimmen vom Hauptgerät als „🖥 +n“). Abstimmung schließen, Sieger bestätigen, Stimmengleichheit,
    Sudden Death – alles wie gehabt.
+   **Nicht für den eigenen Song (Tims Vorgabe):** Wer als Spieler gekoppelt ist, kann am Handy nicht für
+   seinen eigenen Song stimmen – die Karte ist ausgegraut („dein Song“), das Hauptgerät nimmt eine solche
+   Stimme auch nicht an. Gilt für jede Handy-Stimme (auch im klassischen Modus mit Handys); Zuschauer und
+   „+1 Stimme“ am Hauptgerät sind nicht betroffen.
 6. **Handy:** „Dein Line-up“ steht immer unten (Plätze, Künstler, Songs, „jetzt“). Beim Aufdecken sehen
    alle die Reihenfolge, was gerade läuft („läuft gerade“) und welche Songs noch geheim sind.

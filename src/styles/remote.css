@@ -835,6 +835,11 @@
   cursor: default;
   opacity: 1;
 }
+/* Eigener Song: sichtbar, aber nicht wählbar */
+.r-vbtn.own {
+  opacity: 0.55;
+  border-style: dashed;
+}
 .r-vbtn > *:not(.r-vfill) {
   position: relative;
 }
@@ -1028,44 +1033,6 @@
   .r-eq i {
     animation: none;
   }
-}
-
-/* Kleines Rad beim Drehen */
-.r-wheelwrap {
-  display: flex;
-  justify-content: center;
-  margin: 18px 0 4px;
-}
-.r-wheel {
-  position: relative;
-  width: min(250px, 66vw);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  padding: 6px;
-  background: color-mix(in srgb, var(--surface-2) 80%, #000);
-  box-shadow:
-    0 0 0 2px var(--pc),
-    0 0 40px -6px var(--pc);
-}
-.r-wheel svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  transition: transform 4.1s cubic-bezier(0.12, 0.62, 0.08, 1);
-}
-.r-wptr {
-  position: absolute;
-  left: 50%;
-  top: -10px;
-  z-index: 2;
-  width: 0;
-  height: 0;
-  margin-left: -11px;
-  border-left: 11px solid transparent;
-  border-right: 11px solid transparent;
-  border-top: 20px solid #fff;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
 }
 
 /* Aufdecken */

@@ -116,6 +116,8 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
   switch (m.t) {
     case 'vote':
       // Handy-Modus: abgestimmt wird erst im Versus-Screen, wenn alle Songs aufgedeckt sind
+      // Für den eigenen Song kann man nicht stimmen (Tims Vorgabe, MECHANIK §11)
+      if (m.p === role) return false
       return S.screen === 'duel' && S.audience && S.votePhase === 'tally' && m.key === duelKey(S) && (S.sd ? !!(S.sdArt && S.sdArt[m.p]) : m.p >= 1 && m.p <= S.players)
     case 'spin':
       return role !== 'audience' && S.screen === 'draft' && !S.pending && !S.spin && !allFull(S) && drawer(S) === role

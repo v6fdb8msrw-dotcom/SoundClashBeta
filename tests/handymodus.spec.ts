@@ -81,11 +81,8 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
           shotSpin = true
           await SHOT(ph, 'handy-7-drehen')
           await spin.click()
-          // Am Handy dreht das Rad klein mit, am Hauptgerät steht es groß in der Mitte
-          if (process.env.SHOTS) {
-            await ph.locator('.r-wheel').waitFor({ timeout: 15_000 })
-            await ph.screenshot({ path: 'docs/screenshots/handy-7b-rad.jpg', type: 'jpeg', quality: 78, scale: 'css' })
-          }
+          // Das Rad dreht nur am Hauptgerät; das Handy zeigt kein Rad (Tims Vorgabe)
+          await expect(ph.locator('.r-wheel')).toHaveCount(0)
           acted = true
           break
         }
