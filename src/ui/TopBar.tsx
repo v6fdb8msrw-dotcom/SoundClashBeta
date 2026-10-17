@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { dispatch } from '../app/store'
-import { BGS, THEMES } from '../core/constants'
+import { BG_DECK, BGS, THEMES, bgBase, bgHasDeck } from '../core/constants'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
@@ -68,7 +68,21 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
           </div>
           <div className="ms-row">
             <span className="ms-l">Hintergrund</span>
-            <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} />
+            <Sel id="bg" value={bgBase(S.bg)} opts={BGS.filter(([v]) => BG_DECK[v]).map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v: bgHasDeck(S.bg) ? BG_DECK[v] : v })} />
+          </div>
+          <div className="ms-row">
+            <span className="ms-l">Plattenspieler</span>
+            <button
+              className={'tool' + (bgHasDeck(S.bg) ? ' on' : '')}
+              id="deckBtn"
+              aria-pressed={bgHasDeck(S.bg)}
+              onClick={() => {
+                const base = bgBase(S.bg)
+                dispatch({ type: 'pick', id: 'bg', v: bgHasDeck(S.bg) ? base : BG_DECK[base] || 'deck' })
+              }}
+            >
+              💿 {bgHasDeck(S.bg) ? 'an' : 'aus'}
+            </button>
           </div>
           <div className="ms-row">
             <span className="ms-l">Bildschirm</span>

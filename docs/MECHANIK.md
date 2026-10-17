@@ -337,8 +337,8 @@ Referenzen (`tests/golden/neu/`), alles andere weiter mit dem Original.
   für Wort auf: „Das Rad entscheidet“ / „Wer zieht wen?“ / „Neue Runde, neues Glück“ (Ziehen),
   „Song Battle 1, 2, 3 …“ (mit „doppelte Punkte“ und „Das letzte Battle“), bei „Vor jedem Duell“
   danach kurz „VS“, „Plattenkiste“ (alle Songs vorab), „Sudden Death“, „Abpfiff“ (Rundenende),
-  „Die Krönung“ (Endstand), „Turnierbaum“. Im Handy-Modus bleiben die Kino-Blenden (§11), jetzt im
-  dunklen Farbton des Albums. Rein optisch, keine Wartezeit.
+  „Die Krönung“ (Endstand), „Turnierbaum“. Dauer 2,8 Sek, die Titelkarte ist gut 1 Sek komplett
+  lesbar. Der Handy-Modus nutzt dieselbe Überblendung (Tims Wunsch, §11). Rein optisch, keine Wartezeit.
 - Das Glücksrad ist größer (bis 540 px) und hat einen metallischen Rand in der Album-Farbe, feine helle
   Trennlinien, eine Glas-Kuppel und einen neuen Zeiger.
 - **Spielbildschirme ohne Scrollen** (Ziehen, Songwahl, Aufdecken, Duell – beide Modi): Das Spielfeld
@@ -351,10 +351,14 @@ Referenzen (`tests/golden/neu/`), alles andere weiter mit dem Original.
   die anderen links – bei 3–4 Spielern als kompakte Felder, bei 5–6 als Mini-Leisten mit kleinen
   Kacheln (Künstlerfoto, Platznummer, Name). Rad-Feld und Spielfelder enden unten auf einer Linie.
   Gleicher Künstler für alle: gemeinsames Feld unter dem Rad wie bisher.
-- Gestaltung: Die Platten sind echte Schallplatten (Rillen, Glanz, Cover als Etikett mit Mittelloch)
-  und drehen ruhiger. Hintergründe: die fünf des Originals (Künstler-Mosaik wie vorher, Plattenspieler
+- Gestaltung: Die Platten sind echte Schallplatten (Rillen, Glanz, Mittelloch) und drehen ruhiger.
+  Mit Cover sind es Picture-Discs: das Cover liegt über der ganzen Platte, nicht nur auf dem Etikett
+  (Tims Wunsch). Hintergründe: die fünf des Originals (Künstler-Mosaik wie vorher, Plattenspieler
   ohne hellen Sockel, Mosaik + Plattenspieler, Aurora, Aurora + Plattenspieler) plus neu
-  **Mosaik (wandernd)**, **Bühne (Lichtkegel)** und **Neon-Horizont**. Die Album-Farbschemas bleiben.
+  **Mosaik (wandernd)**, **Bühne (Lichtkegel)**, **Neon-Horizont**, **Klangwellen** und **Schlicht**.
+  Im Menü wählt man den Hintergrund und schaltet den **Plattenspieler** getrennt an oder aus – bei
+  jedem Hintergrund (gespeichert als ein Wert, z. B. „walldeck“, „wavesdeck“; „Schlicht“ + Plattenspieler
+  = „Plattenspieler“ des Originals). Die Album-Farbschemas bleiben.
 
 ## 11. Handy-Modus (Tims Vorgabe, 12.10.2026)
 
@@ -362,8 +366,8 @@ In der Einrichtung steht **„Wie wird gesteuert?“**: **„🖥 An diesem Ger�
 Abschnitte 2.1–2.9 unverändert) oder **„📱 Mit den Handys“**. Die Wahl wird mit den Einstellungen
 gespeichert (`phoneMode`). Im Handy-Modus steuern die Spieler alles am eigenen Handy, das Hauptgerät
 (z. B. MacBook) ist die große, „kinoartige“ Bühne und spielt die Musik. Punkte, Wertung, Sieger,
-Sudden Death, Serie und Turnier bleiben genau wie im Original. Zwischen den Szenen gibt es kurze
-Kino-Überblendungen (schwarze Blenden mit Titelkarte, z. B. „Runde 1“, „P2 ist dran“, „VS“).
+Sudden Death, Serie und Turnier bleiben genau wie im Original. Zwischen den Szenen gibt es dieselbe
+Wisch-Überblendung wie im normalen Modus, mit eigenen Karten wie „Alle haben gewählt“, „P2 ist dran“, „VS“.
 
 1. **Koppeln:** In der Einrichtung erscheinen QR-Code, Spielcode, der Verbindungslink (kopieren/teilen)
    und pro Spieler „verbunden/wartet“. Zuschauer können jederzeit dazukommen, auch mitten in der Runde

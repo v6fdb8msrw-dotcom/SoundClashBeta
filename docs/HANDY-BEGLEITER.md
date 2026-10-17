@@ -18,7 +18,7 @@ In der Einrichtung unter **„Wie wird gesteuert?“**:
   ihren Song **gleichzeitig** und tippen „Fertig“ → **Spieler für Spieler aufdecken**: Play am Handy,
   der Song läuft am Hauptgerät (30 Sek, „Weiter“ geht früher; Reihenfolge rückt pro Duell um eins
   weiter) → **Versus**: jetzt am Handy abstimmen, am Hauptgerät sieht man, wer wofür gestimmt hat.
-  Zwischen den Szenen kurze Kino-Überblendungen. Details in `docs/MECHANIK.md` §11.
+  Zwischen den Szenen dieselbe Wisch-Überblendung wie im normalen Modus. Details in `docs/MECHANIK.md` §11.
 
 ## Was der Handy-Begleiter kann
 

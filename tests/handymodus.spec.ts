@@ -115,11 +115,11 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
 
   // Aufdecken Spieler für Spieler: zuerst P1 (Duell 1). Abstimmen geht erst im Versus.
   if (process.env.SHOTS) {
-    // Kino-Überblendung „Alle haben gewählt“ mitten im Übergang
-    await host.locator('.scenecut').waitFor({ timeout: 15_000 })
-    await host.waitForTimeout(420)
+    // Wisch-Überblendung „Alle haben gewählt“ mitten im Übergang (wie im normalen Modus)
+    await host.locator('.phasewipe').waitFor({ timeout: 15_000 })
+    await host.waitForTimeout(1300)
     await host.screenshot({ path: 'docs/screenshots/mac-16b-ueberblendung.jpg', type: 'jpeg', quality: 78, scale: 'css' })
-    await host.waitForTimeout(1200)
+    await host.waitForTimeout(1600)
   }
   await host.locator('.rv').waitFor({ timeout: 15_000 })
   await expect(host.locator('.rv-who b')).toHaveText(/P1|Spieler 1/)

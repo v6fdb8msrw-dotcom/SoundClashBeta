@@ -37,7 +37,8 @@ src/ui/               Bausteine: Kopfleiste, Hintergrund, Partikel, Toast, Splas
 src/styles/           themes.css (Album-Themes), base, background, components, screens, games
 src/data/             catalog.json (Genres + Künstler-Cache), avatars.ts (eingebaute Avatare)
 src/remote/           Handy-Begleiter: host.ts (Hauptgerät), client.ts + RemoteApp.tsx (Handy), protocol.ts
-src/ui/Vinyl.tsx      realistische Schallplatte (Cover als Etikett); Hintergrund-Mosaik in Background.tsx
+src/ui/Vinyl.tsx      realistische Schallplatte (mit Cover als Picture-Disc); Hintergründe in Background.tsx,
+                      Plattenspieler je Hintergrund zuschaltbar (BG_DECK in core/constants.ts)
 tests/                Playwright-Verhaltenstests, aufgezeichnete Deezer-Antworten, Referenzen
 docs/                 MECHANIK.md, HANDY-BEGLEITER.md, BERICHT.md, screenshots/
 ```
@@ -53,7 +54,7 @@ Regel-Zeile der Startseite (`#rulesToggle`, `.rules-body`).
 Startseite (Tims Vorgabe): ① Spieler und ② Künstler-Topf immer sichtbar, Regeln als eine Zeile zum
 Aufklappen mit Schnellstart-Standard. Fernseher-Modus: `src/services/display.ts` setzt `--tvz`, CSS
 zoomt `.wrap` (nicht die ganze Seite, sonst laufen `vw`-Maße über). Überblendungen zwischen den
-Spielphasen: `src/ui/SceneCut.tsx` (normaler Modus: Wisch von links nach rechts, Handy-Modus: Kino-Blenden).
+Spielphasen: `src/ui/SceneCut.tsx` (Wisch von links nach rechts, in beiden Modi).
 Spielbildschirme ohne Scrollen: `src/ui/Fit.tsx` (setzt `data-fit` am html und `--fitH`, verkleinert bei
 Bedarf per `zoom`); die Reihenfolge der `.pcluster` im DOM bleibt P1…Pn (Vergleichstests), angeordnet
 wird beim Ziehen nur per CSS-Raster (`--gc`/`--gr`).
@@ -93,7 +94,7 @@ MECHANIK §11): Spieler steuern alles am Handy, das Hauptgerät ist die Bühne �
 `Draft.tsx` (Spielfeld groß, Rad als Einblendung), `src/screens/PhoneMode.tsx` (Kacheln bei der
 Songwahl, Bildschirm `listen` = Aufdecken Spieler für Spieler mit `listenPlay`/`listenNext`),
 Versus in `Duel.tsx` (ohne Links, mit „wer hat wofür gestimmt“ aus `voterRoles()` in `host.ts`),
-Kino-Überblendungen in `src/ui/SceneCut.tsx`. Die Wertung ist dieselbe wie im klassischen Modus.
+Überblendungen in `src/ui/SceneCut.tsx` (wie im normalen Modus). Die Wertung ist dieselbe wie im klassischen Modus.
 „An diesem Gerät“ bleibt exakt wie das Original. Klassennamen `.remote`/`.r-*` gehören der Handy-Seite –
 am Hauptgerät nicht verwenden.
 

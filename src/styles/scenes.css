@@ -3,11 +3,17 @@
    ========================================================================== */
 
 .bg-stage #tint,
-.bg-horizon #tint {
+.bg-horizon #tint,
+.bg-waves #tint,
+.bg-plain #tint {
   display: none;
 }
+#veil.veil-plain {
+  background: radial-gradient(1100px 780px at 50% 0%, color-mix(in srgb, var(--bg) 70%, transparent), color-mix(in srgb, var(--bg) 92%, transparent) 58%, var(--bg) 88%);
+}
 #veil.veil-stage,
-#veil.veil-horizon {
+#veil.veil-horizon,
+#veil.veil-waves {
   background: radial-gradient(1300px 900px at 50% 10%, transparent, color-mix(in srgb, var(--bg) 45%, transparent) 60%, color-mix(in srgb, var(--bg) 82%, transparent));
 }
 
@@ -205,70 +211,6 @@
   z-index: 1;
   pointer-events: none;
   background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
-}
-
-/* ---------- Überblendung zwischen den Szenen ---------- */
-.scenecut {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
-}
-.sc-bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50.5vh;
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 30%, #000), color-mix(in srgb, var(--bg) 55%, #000));
-}
-.sc-bar.top {
-  top: 0;
-  transform-origin: top;
-}
-.sc-bar.bot {
-  bottom: 0;
-  transform-origin: bottom;
-  background: linear-gradient(to top, color-mix(in srgb, var(--bg) 30%, #000), color-mix(in srgb, var(--bg) 55%, #000));
-}
-.sc-line {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 50%;
-  height: 2px;
-  margin-top: -1px;
-  background: linear-gradient(90deg, transparent, var(--cc), transparent);
-  box-shadow: 0 0 24px var(--cc);
-}
-.sc-title {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  translate: 0 -50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  text-align: center;
-  color: #fff;
-}
-.sc-title b {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(40px, 7vw, 96px);
-  line-height: 1;
-  text-shadow: 0 0 40px color-mix(in srgb, var(--cc) 60%, transparent);
-  translate: 0 -34px;
-}
-.sc-title small {
-  font-family: var(--font-hud);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--cc);
-  translate: 0 30px;
 }
 
 /* ---------- Aufdecken: Spieler für Spieler ---------- */
@@ -930,4 +872,12 @@ html[data-fit] .wrap {
 }
 .draftstage.phonectl .hub {
   pointer-events: none;
+}
+
+/* ---------- Klangwellen: leuchtende Linien, im Takt höher ---------- */
+#waves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }

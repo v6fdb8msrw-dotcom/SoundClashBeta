@@ -3,6 +3,7 @@ import { bus } from '../app/bus'
 import { env } from '../app/store'
 import { sdArt } from '../core/game'
 import type { State } from '../core/types'
+import { bgBase, bgHasDeck } from '../core/constants'
 import { lastCover } from '../services/audio'
 import { picBigOf, picOf, wallPics } from '../services/catalog'
 import { useAudio } from './primitives'
@@ -11,7 +12,8 @@ import { Vinyl } from './Vinyl'
 
 /**
  * Hintergrund wählbar wie im Original (Künstler-Mosaik, Plattenspieler, Mosaik + Plattenspieler,
- * Aurora, Aurora + Plattenspieler) plus neu: Mosaik (wandernd), Bühne (Lichtkegel), Neon-Horizont.
+ * Aurora, Aurora + Plattenspieler) plus neu: Mosaik (wandernd), Bühne (Lichtkegel), Neon-Horizont,
+ * Klangwellen, Schlicht – jeweils mit zuschaltbarem Plattenspieler.
  */
 
 let seed = Math.random()
@@ -188,6 +190,65 @@ function Aurora({ theme }: { theme: string }) {
   return <canvas id="aurora" ref={ref} aria-hidden />
 }
 
+/** Klangwellen: leuchtende Wellenlinien in den Album-Farben, im Takt der Musik höher und schneller. */
+function Waves({ theme }: { theme: string }) {
+  const ref = useRef<HTMLCanvasElement>(null)
+  useEffect(() => {
+    const c = ref.current
+    if (!c) return
+    const ctx = c.getContext('2d')!
+    const dpr = Math.min(2, window.devicePixelRatio || 1)
+    let W = 0,
+      H = 0
+    const fit = () => {
+      W = c.clientWidth
+      H = c.clientHeight
+      c.width = Math.round(W * dpr)
+      c.height = Math.round(H * dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    const cs = getComputedStyle(document.body)
+    const cols = [cs.getPropertyValue('--primary').trim() || '#e0a93b', cs.getPropertyValue('--secondary').trim() || '#c74b6b', cs.getPropertyValue('--accent').trim() || '#5aa9e6']
+    const lines = Array.from({ length: 7 }, (_, i) => ({ c: cols[i % 3], y: 0.5 + (i - 3) * 0.06, f: 1.4 + i * 0.37, sp: 0.18 + i * 0.045, ph: i * 1.7, a: 0.85 - Math.abs(i - 3) * 0.12 }))
+    const t0 = performance.now()
+    let raf = 0,
+      drive = 0
+    const frame = (now: number) => {
+      const t = (now - t0) / 1000
+      drive = drive * 0.9 + (vis.level * 1.6 + vis.beat * 0.35) * 0.1
+      ctx.clearRect(0, 0, W, H)
+      ctx.globalCompositeOperation = 'lighter'
+      for (const l of lines) {
+        const amp = H * (0.035 + drive * 0.12) * (1 + 0.3 * Math.sin(t * 0.4 + l.ph))
+        ctx.beginPath()
+        for (let x = 0; x <= W; x += 6) {
+          const u = x / W
+          const env = Math.sin(Math.PI * u) ** 1.4
+          const y = H * l.y + env * amp * (Math.sin(u * Math.PI * 2 * l.f + t * (l.sp + drive) * 2 + l.ph) + 0.35 * Math.sin(u * Math.PI * 7 * l.f - t * 1.3 + l.ph))
+          if (x === 0) ctx.moveTo(x, y)
+          else ctx.lineTo(x, y)
+        }
+        ctx.strokeStyle = l.c
+        ctx.globalAlpha = l.a * (0.75 + drive * 0.5)
+        ctx.lineWidth = 2.5
+        ctx.shadowColor = l.c
+        ctx.shadowBlur = 18
+        ctx.stroke()
+      }
+      ctx.globalAlpha = 1
+      ctx.shadowBlur = 0
+      ctx.globalCompositeOperation = 'source-over'
+      raf = env.reduce ? 0 : requestAnimationFrame(frame)
+    }
+    raf = requestAnimationFrame(frame)
+    return () => (cancelAnimationFrame(raf), window.removeEventListener('resize', fit))
+    // Farben neu lesen, wenn das Theme wechselt
+  }, [theme])
+  return <canvas id="waves" ref={ref} aria-hidden />
+}
+
 /** Plattenspieler von oben mit realistischer Platte (Cover als Label) und Frequenz-Ring. */
 function Deck({ S, over }: { S: State; over: boolean }) {
   const { playing } = useAudio()
@@ -240,21 +301,24 @@ function Deck({ S, over }: { S: State; over: boolean }) {
 
 export function Background({ S }: { S: State }) {
   const { beat } = useAudio()
-  const isAU = S.bg === 'aurora' || S.bg === 'auroradeck'
-  const deckOn = S.bg === 'deck' || S.bg === 'walldeck' || S.bg === 'auroradeck'
-  const wallOn = S.bg === 'mosaic' || S.bg === 'walldeck'
+  const base = bgBase(S.bg)
+  const deckOn = bgHasDeck(S.bg)
+  // Die Kombinationen aus dem Original (deck, walldeck, auroradeck) behalten ihr eigenes Aussehen,
+  // die neuen „+ Plattenspieler“-Varianten sehen aus wie ihr Grund-Hintergrund.
+  const look = S.bg === 'deck' || S.bg === 'walldeck' || S.bg === 'auroradeck' ? S.bg : base
   const pulse = beat && !env.reduce
   return (
-    <div className={'bg bg-' + S.bg} aria-hidden>
+    <div className={'bg bg-' + look} aria-hidden>
       <div className="bg-base" />
-      {wallOn ? <Wall S={S} beat={pulse} /> : null}
-      {S.bg === 'flow' ? <FlowWall beat={pulse} /> : null}
-      {S.bg === 'stage' ? <StageLights beat={pulse} /> : null}
-      {S.bg === 'horizon' ? <Horizon beat={pulse} /> : null}
-      {isAU ? <Aurora theme={S.theme} /> : null}
+      {base === 'mosaic' ? <Wall S={S} beat={pulse} /> : null}
+      {base === 'flow' ? <FlowWall beat={pulse} /> : null}
+      {base === 'stage' ? <StageLights beat={pulse} /> : null}
+      {base === 'horizon' ? <Horizon beat={pulse} /> : null}
+      {base === 'aurora' ? <Aurora theme={S.theme} /> : null}
+      {base === 'waves' ? <Waves theme={S.theme} /> : null}
       <div id="tint" />
-      <div id="veil" className={'veil-' + S.bg} />
-      {deckOn ? <Deck S={S} over={S.bg === 'walldeck' || S.bg === 'auroradeck'} /> : null}
+      <div id="veil" className={'veil-' + look} />
+      {deckOn ? <Deck S={S} over={S.bg !== 'deck'} /> : null}
       <div id="grain" />
     </div>
   )

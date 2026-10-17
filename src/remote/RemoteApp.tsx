@@ -136,17 +136,20 @@ function SongPicker({ V, me, i, artist }: { V: HostView; me: number; i: number; 
             return (
               <motion.div
                 key={k + t.id}
-                className={'r-trk' + (isSel ? ' on' : '')}
+                className={'r-trk' + (isSel ? ' on' : '') + (playing === k ? ' playing' : '')}
                 data-rpick={j}
                 onClick={() => (vib(15), ask({ t: 'pickSong', i, track: t }))}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: Math.min(j, 12) * 0.02 }}
               >
-                {cov ? <img src={cov} alt="" /> : <span className="r-pic ph">♪</span>}
+                <span className="r-rank">{String(j + 1).padStart(2, '0')}</span>
+                <span className="r-cov">{cov ? <img src={cov} alt="" /> : <span className="r-pic ph">♪</span>}</span>
                 <span className="r-meta">
                   <b>{t.title_short || t.title}</b>
-                  <small>{mmss(t.duration)}</small>
+                  <small>
+                    {artist} · {mmss(t.duration)}
+                  </small>
                 </span>
                 {isSel ? <span className="r-check">✓</span> : null}
                 <button
@@ -482,8 +485,9 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
             <section className="r-card">
               <SongPicker V={V} me={p} i={V.sd ? 0 : i} artist={a} />
               <div className="r-actions">
-                <button className="r-primary" data-rdone onClick={() => (stopAudio(), vib([20, 30, 20]), ask({ t: 'pickDone' }))}>
-                  {so ? '„' + so.title + '“ nehmen ✓' : 'Ohne Song fertig'}
+                <button className={'r-primary' + (so ? ' has' : '')} data-rdone onClick={() => (stopAudio(), vib([20, 30, 20]), ask({ t: 'pickDone' }))}>
+                  {so?.cover ? <img className="r-pcov" src={so.cover} alt="" /> : null}
+                  <span>{so ? '„' + so.title + '“ nehmen ✓' : 'Ohne Song fertig'}</span>
                 </button>
               </div>
             </section>

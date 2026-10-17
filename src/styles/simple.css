@@ -132,7 +132,7 @@
 }
 .ms-row {
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 108px 1fr;
   align-items: center;
   gap: 10px;
 }
@@ -141,9 +141,9 @@
 }
 .ms-l {
   font-family: var(--font-hud);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -651,7 +651,6 @@
 /* Fernseher: Inhalt vergrößern (Faktor --tvz aus services/display.ts) */
 html[data-screen='tv'] .wrap,
 html[data-screen='tv'] .toast,
-html[data-screen='tv'] .sc-title,
 html[data-screen='tv'] .pw-card {
   zoom: var(--tvz, 1);
 }
