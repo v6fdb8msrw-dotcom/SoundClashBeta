@@ -1,4 +1,4 @@
-import { drawer, N, parts, pcol, pickOrder, pname, pts, roundScore, target, wins } from '../core/game'
+import { drawer, isT, N, parts, pcol, pickOrder, pname, pts, roundScore, target, wins } from '../core/game'
 import type { State, Track } from '../core/types'
 import { picOf } from '../services/catalog'
 
@@ -28,6 +28,9 @@ export interface ViewSong {
 
 /** Was ein Handy vom Spiel sieht. */
 export interface HostView {
+  /** Favoriten-Modus im Setup: Handys wählen ihre Künstler selbst */
+  favMode?: boolean
+  favOwner?: Record<string, number>
   v: 1
   theme: string
   genre: string
@@ -143,7 +146,9 @@ export function buildView(S: State, extra: ViewExtra = { nowPlaying: null, onlin
     ready: S.ready,
     listen: S.listen,
     spin: S.spin ? { target: S.spin.target, n: S.spin.n } : null,
-    pool: S.screen === 'draft' ? S.pool.slice(0, 80) : [],
+    pool: S.screen === 'draft' || (S.screen === 'setup' && S.favMode) ? S.pool.slice(0, 120) : [],
+    favMode: S.screen === 'setup' && S.favMode && !isT(S),
+    favOwner: S.screen === 'setup' && S.favMode ? S.favOwner : {},
     nowPlaying: extra.nowPlaying,
     online: extra.online,
     voters: extra.voters,
@@ -165,6 +170,7 @@ export type PhoneMsg =
   | { t: 'pickDone'; on?: boolean }
   | { t: 'reveal' }
   | { t: 'listenNext' }
+  | { t: 'favToggle'; name: string }
 
 /** Antwort des Hosts an ein Handy (z. B. eigene Stimme). */
 export interface PhoneState {

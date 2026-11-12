@@ -5,6 +5,7 @@ import type { State } from '../core/types'
 import { audioVersion, beat, playing, subscribeAudio } from '../services/audio'
 import { picOf } from '../services/catalog'
 import { deezerVersion, subscribeDeezer } from '../services/deezer'
+import { ChevronDown, Music2 } from './icons'
 
 /* ------------------------------------------------------------------ */
 /* Abos auf Dienste                                                    */
@@ -41,6 +42,8 @@ export function useOpenSel() {
 export interface Opt {
   v: string | number
   t: string
+  /** Symbol vor dem Text (Segment-Schalter) */
+  i?: ReactNode
 }
 
 /** Auswahlfeld. `label` wird als Feldbeschriftung gezeigt; `slbl` statt Wert (Kopfleiste). */
@@ -72,7 +75,7 @@ export function Sel(props: { id: string; label?: string; value: string | number;
         {icon}
         {slbl ?? <span>{cur ? cur.t : '—'}</span>}
         <span className="chev" aria-hidden>
-          ▾
+          <ChevronDown />
         </span>
       </button>
       <div className={'selmenu' + (up ? ' up' : '')} role="listbox">
@@ -190,7 +193,7 @@ export function ArtImg({ n, className, style }: { n: string; className?: string;
     <img className={className || ''} src={u} alt="" loading="lazy" style={style} onError={hide} />
   ) : (
     <span className={'ph ' + (className || '')} style={style}>
-      ♪
+      <Music2 />
     </span>
   )
 }
@@ -238,7 +241,10 @@ export function Seg({ id, label, value, opts, onPick }: { id: string; label: str
           return (
             <button key={String(o.v)} type="button" role="radio" data-op={id} data-v={String(o.v)} aria-selected={on} aria-checked={on} className={on ? 'on' : ''} onClick={() => onPick(String(o.v))}>
               {on ? <motion.span layoutId={reduce ? undefined : 'seg-' + id} className="seg-ind" transition={{ type: 'spring', stiffness: 500, damping: 36 }} /> : null}
-              <span className="seg-t">{o.t}</span>
+              <span className="seg-t">
+                {o.i}
+                {o.t}
+              </span>
             </button>
           )
         })}

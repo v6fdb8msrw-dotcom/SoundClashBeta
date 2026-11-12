@@ -31,12 +31,27 @@ export function spinAnim(tg: number, n: number, reduce: boolean, land: () => voi
     ps = (Math.PI * 2) / PEGS
   let lp = Math.floor(wheel.rot / ps)
   let last = t0
+  // Bewegung in drei Phasen: kurz ausholen, kräftig drehen und weich ausrollen, minimal überschießen und einrasten
+  const WIND = reduce ? 0 : 280,
+    SETTLE = reduce ? 0 : 420,
+    back = reduce ? 0 : 0.22,
+    over = reduce ? 0 : Math.min(seg * 0.28, 0.07)
+  const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2)
+  const easeOutQuint = (x: number) => 1 - Math.pow(1 - x, 5)
   const frame = (t: number) => {
-    const p = Math.min(1, (t - t0) / dur),
-      e = 1 - Math.pow(1 - p, 3)
+    const el = t - t0
+    const all = WIND + dur + SETTLE
+    const p = Math.min(1, el / all)
     const prev = wheel.rot
-    wheel.rot = start + total * e
-    wheel.speed = (wheel.rot - prev) / Math.max(1, t - last)
+    if (el < WIND) wheel.rot = start - back * Math.sin((el / WIND) * Math.PI * 0.5) ** 2
+    else if (el < WIND + dur) {
+      const q = (el - WIND) / dur
+      wheel.rot = start - back * (1 - easeInOut(Math.min(1, q * 4))) + (total + over) * easeOutQuint(q)
+    } else {
+      const q = Math.min(1, (el - WIND - dur) / (SETTLE || 1))
+      wheel.rot = start + total + over * (1 - easeInOut(q))
+    }
+    wheel.speed = Math.abs(wheel.rot - prev) / Math.max(1, t - last)
     last = t
     const peg = Math.floor(wheel.rot / ps)
     if (peg !== lp) {
@@ -47,6 +62,7 @@ export function spinAnim(tg: number, n: number, reduce: boolean, land: () => voi
     draw()
     if (p < 1) requestAnimationFrame(frame)
     else {
+      wheel.rot = start + total
       wheel.speed = 0
       wheel.hi = tg
       draw()

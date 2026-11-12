@@ -9,6 +9,7 @@ import { ak } from '../services/catalog'
 import { MQ, TQ, onSongQuery, spot, trackList, trackYear, yt } from '../services/deezer'
 import { burstAt } from '../ui/Fx'
 import { Eq, useAudio, useDeezer } from '../ui/primitives'
+import { ExternalLink, Music2, Pause, Play, Search, Timer } from '../ui/icons'
 
 /**
  * Songwahl für ein Feld (tracksHTML im Original): Suchfeld, Top-Tracks bzw. Treffer mit
@@ -76,8 +77,8 @@ export function Tracks({ S, p, i, artist }: { S: State; p: number; i: number; ar
           {cov ? (
             <img src={cov} alt="" loading="lazy" />
           ) : (
-            <span className="ph" style={{ width: 44, height: 44, borderRadius: 7, background: 'var(--surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              ♪
+            <span className="ph">
+              <Music2 />
             </span>
           )}
           <span className="meta">
@@ -104,7 +105,7 @@ export function Tracks({ S, p, i, artist }: { S: State; p: number; i: number; ar
               play(t.preview || '', k, cov)
             }}
           >
-            {playing === k ? '⏸' : '▶'}
+            {playing === k ? <Pause /> : <Play />}
             <Eq on={playing === k} />
           </button>
         </motion.div>
@@ -115,13 +116,13 @@ export function Tracks({ S, p, i, artist }: { S: State; p: number; i: number; ar
     <>
       <div className="searchwrap">
         <span className="mag" aria-hidden>
-          ⌕
+          <Search />
         </span>
         <input type="text" placeholder="Song suchen…" data-tq={key} data-art={artist} defaultValue={TQ[key] || ''} autoComplete="off" onChange={(e) => onSongQuery(key, artist, e.target.value)} />
       </div>
       {era ? (
         <div className="erabar">
-          ⏳ Auflage für Platz #{i + 1}: {era.t}
+          <Timer size={15} /> Auflage für Platz #{i + 1}: {era.t}
         </div>
       ) : null}
       <p className="tlabel" id={'tlab_' + key}>
@@ -157,10 +158,10 @@ export function Tracks({ S, p, i, artist }: { S: State; p: number; i: number; ar
         </div>
         <div className="links" style={{ marginTop: 8 }}>
           <a className="lnk" href={spot(artist, mq.trim())} target="_blank" rel="noopener">
-            ↗ Auf Spotify suchen
+            <ExternalLink /> Auf Spotify suchen
           </a>
           <a className="lnk" href={yt(artist, mq.trim())} target="_blank" rel="noopener">
-            ↗ Auf YouTube suchen
+            <ExternalLink /> Auf YouTube suchen
           </a>
         </div>
         <p className="hint" style={{ textAlign: 'left', margin: '8px 0 0' }}>

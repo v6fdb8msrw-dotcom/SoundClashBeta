@@ -141,7 +141,7 @@ function shareImg(S: State): HTMLCanvasElement {
     x.textAlign = 'center'
     x.fillStyle = mu
     x.font = '500 26px Manrope,Arial,sans-serif'
-    x.fillText('Blind ranken. Song für Song. Bis einer krönt.', 540, 1300)
+    x.fillText('Wer hat den besseren Musikgeschmack?', 540, 1300)
   }
   return cv
 }

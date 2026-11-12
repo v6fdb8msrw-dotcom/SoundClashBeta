@@ -8,6 +8,7 @@ import { picBigOf, picOf } from '../services/catalog'
 import { getRivalry, rivalKey, rivalryVersion, subscribeRivalry } from '../services/rivalry'
 import { tone } from '../services/sfx'
 import { ArtImg, AvImg, useAudio } from '../ui/primitives'
+import { Pause, Play } from '../ui/icons'
 
 /** Bausteine für Runden- und Endstand: Zähler, Rückblick, Platten des Abends, Rivalität. */
 
@@ -130,7 +131,7 @@ export function Crate({ S }: { S: State }) {
               <div className="sleeve">
                 {cov ? <img src={cov} alt="" loading="lazy" /> : null}
                 <span className="spine" />
-                {r.song.preview ? <span className="lpplay">{on ? '⏸' : '▶'}</span> : null}
+                {r.song.preview ? <span className="lpplay">{on ? <Pause /> : <Play />}</span> : null}
               </div>
               <span className="cap">
                 <span className="t">{String(r.song.title || r.artist)}</span>
@@ -201,6 +202,33 @@ export function Rivalry({ S }: { S: State }) {
   )
 }
 
+/** Goldener Pokal (SVG mit Metallverlauf) */
+function TrophyCup() {
+  return (
+    <svg className="cup" viewBox="0 0 120 140" aria-hidden>
+      <defs>
+        <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stopColor="#fff6c9" />
+          <stop offset=".35" stopColor="#f5c84a" />
+          <stop offset=".7" stopColor="#c98a12" />
+          <stop offset="1" stopColor="#ffe08a" />
+        </linearGradient>
+        <linearGradient id="goldDark" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stopColor="#d79a1c" />
+          <stop offset="1" stopColor="#8a5a08" />
+        </linearGradient>
+      </defs>
+      <path d="M22 16h-10a10 10 0 0 0 0 20c4 10 10 16 18 18" fill="none" stroke="url(#gold)" strokeWidth="7" strokeLinecap="round" />
+      <path d="M98 16h10a10 10 0 0 1 0 20c-4 10-10 16-18 18" fill="none" stroke="url(#gold)" strokeWidth="7" strokeLinecap="round" />
+      <path d="M24 8h72v22c0 26-16 44-36 44S24 56 24 30z" fill="url(#gold)" />
+      <path d="M34 14h8v18c0 14 6 24 14 30-14-2-22-16-22-32z" fill="#fff" opacity=".45" />
+      <rect x="52" y="74" width="16" height="22" rx="3" fill="url(#goldDark)" />
+      <path d="M36 96h48l6 18H30z" fill="url(#gold)" />
+      <rect x="26" y="114" width="68" height="14" rx="4" fill="url(#goldDark)" />
+    </svg>
+  )
+}
+
 /** Pokal mit Lichtschweif. */
 export function Trophy() {
   const ref = useRef<HTMLDivElement>(null)
@@ -213,7 +241,7 @@ export function Trophy() {
       transition={{ type: 'spring', stiffness: 160, damping: 12, delay: 0.1 }}
     >
       <span className="trophy-rays" aria-hidden />
-      🏆
+      <TrophyCup />
     </motion.div>
   )
 }

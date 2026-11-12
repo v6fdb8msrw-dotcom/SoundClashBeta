@@ -54,7 +54,7 @@ export type Fx =
   | { t: 'spinAnim'; target: number; n: number }
 
 export type PickId =
-  | 'theme' | 'players' | 'size' | 'series' | 'genre' | 'songMode' | 'sameArtist' | 'mode' | '_x'
+  | 'theme' | 'players' | 'size' | 'series' | 'genre' | 'songMode' | 'sameArtist' | 'mode' | 'favMode' | '_x'
   | 'audience' | 'autoScroll' | 'pickSec' | 'ambience' | 'bg' | 'phoneMode'
 
 export type Action =
@@ -66,7 +66,8 @@ export type Action =
   | { type: 'name'; p: number; value: string }
   | { type: 'avatar'; p: number; i: number }
   | { type: 'uploadAvatar'; p: number; url: string }
-  | { type: 'poolToggle'; name: string }
+  | { type: 'poolToggle'; name: string; by?: number }
+  | { type: 'favTurn'; p: number }
   | { type: 'poolRemove'; name: string }
   | { type: 'setupTab'; tab: State['setupTab'] }
   | { type: 'start' }
@@ -143,8 +144,8 @@ export type Action =
 export function initialState(): State {
   return {
     screen: 'home', pendingMode: null, pickSec: 0, players: 2, names: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6'], avatar: {}, size: 5, series: 'single',
-    muted: false, ambience: true, autoScroll: true, theme: 'silksonic', bg: 'mosaic', genre: 'rnb', pool: [], custom: [],
-    songMode: 'perduel', sameArtist: false, pickIdx: 0, audience: true, tally: {}, votePhase: null, voteWinner: null, eras: 'off', eraMap: [],
+    muted: false, ambience: true, autoScroll: true, theme: 'main', bg: 'aura', genre: 'rnb', pool: [], custom: [],
+    songMode: 'perduel', sameArtist: false, favMode: false, favOwner: {}, favTurn: 1, pickIdx: 0, audience: true, tally: {}, votePhase: null, voteWinner: null, eras: 'off', eraMap: [],
     setupTab: 'cfg',
     mode: 'clash', T: null,
     lineup: {}, songs: {}, winners: [], used: {}, pending: null, duel: 0, wins: {}, round: 1, sd: null, sdArt: null, regularWinners: null, regular: null,
@@ -662,6 +663,11 @@ function pick(S: State, c: Ctx, id: PickId, v: string) {
       resetAll(S, c)
       save(c)
       return
+    case 'favMode':
+      S.favMode = v === '1'
+      S.favTurn = 1
+      save(c)
+      return
     case 'mode':
       S.mode = v as State['mode']
       S.colors = null
@@ -725,6 +731,8 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       if (BGS.some((b) => b[0] === d.bg)) S.bg = d.bg as string
       if (['upfront', 'perduel'].includes(d.songMode as string)) S.songMode = d.songMode as State['songMode']
       if (typeof d.sameArtist === 'boolean') S.sameArtist = d.sameArtist
+      if (typeof d.favMode === 'boolean') S.favMode = d.favMode
+      if (d.favOwner && typeof d.favOwner === 'object') S.favOwner = { ...d.favOwner }
       if (['clash', 't4', 't8', 't16'].includes(d.mode as string)) S.mode = d.mode as State['mode']
       if (typeof d.audience === 'boolean') S.audience = d.audience
       const anyD = d as Record<string, unknown>
@@ -732,8 +740,8 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       if (Array.isArray(d.custom)) S.custom = d.custom.filter((x) => typeof x === 'string').slice(0, 12)
       if (THEMES.some((t) => t[0] === d.theme)) S.theme = d.theme as string
       if (d.genre && c.GEN[d.genre]) S.genre = d.genre
-      if (!BGS.some((b) => b[0] === S.bg)) S.bg = 'mosaic'
-      if (!THEMES.some((t) => t[0] === S.theme)) S.theme = 'silksonic'
+      if (!BGS.some((b) => b[0] === S.bg)) S.bg = 'aura'
+      if (!THEMES.some((t) => t[0] === S.theme)) S.theme = 'main'
       if (Array.isArray(d.pool)) S.pool = d.pool
       if ([0, 30, 45, 60].includes(d.pickSec as number)) S.pickSec = d.pickSec as number
       if (typeof d.phoneMode === 'boolean') S.phoneMode = d.phoneMode
@@ -761,7 +769,7 @@ export function savedSettings(S: State): SavedSettings {
     series: S.series, muted: S.muted, ambience: S.ambience, theme: S.theme, bg: S.bg, genre: S.genre, pool: S.pool,
     warnOff: S.warnOff, songMode: S.songMode, sameArtist: S.sameArtist, custom: S.custom, audience: S.audience,
     mode: S.mode, roster: S.T ? S.T.roster : null,
-    autoScroll: S.autoScroll, pickSec: S.pickSec, phoneMode: S.phoneMode,
+    autoScroll: S.autoScroll, pickSec: S.pickSec, phoneMode: S.phoneMode, favMode: S.favMode, favOwner: S.favOwner,
   }
 }
 
@@ -801,13 +809,22 @@ function apply(S: State, a: Action, c: Ctx) {
     }
     case 'poolToggle': {
       const n = a.name
-      if (S.pool.some((x) => ak(x) === ak(n))) S.pool = S.pool.filter((x) => ak(x) !== ak(n))
-      else S.pool.push(n)
+      if (S.pool.some((x) => ak(x) === ak(n))) {
+        S.pool = S.pool.filter((x) => ak(x) !== ak(n))
+        delete S.favOwner[ak(n)]
+      } else {
+        S.pool.push(n)
+        if (S.favMode) S.favOwner[ak(n)] = a.by || S.favTurn
+      }
       save(c)
       return
     }
+    case 'favTurn':
+      if (a.p >= 1 && a.p <= S.players) S.favTurn = a.p
+      return
     case 'poolRemove':
       S.pool = S.pool.filter((x) => x !== a.name)
+      delete S.favOwner[ak(a.name)]
       save(c)
       return
     case 'setupTab':
@@ -862,7 +879,14 @@ function apply(S: State, a: Action, c: Ctx) {
         return
       }
       const n = S.pool.length
-      S.spin = { target: Math.floor(c.env.rng() * n), n }
+      let target = Math.floor(c.env.rng() * n)
+      // Favoriten-Modus: bevorzugt Künstler, die ein anderer Spieler mitgebracht hat
+      if (S.favMode) {
+        const me = drawer(S)
+        const foreign = S.pool.map((x, i) => (S.favOwner[ak(x)] && S.favOwner[ak(x)] !== me ? i : -1)).filter((i) => i >= 0)
+        if (foreign.length) target = foreign[target % foreign.length]
+      }
+      S.spin = { target, n }
       c.fx.push({ t: 'spinAnim', target: S.spin.target, n })
       return
     }

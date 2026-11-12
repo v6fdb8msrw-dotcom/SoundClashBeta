@@ -1,0 +1,15 @@
+/* Sound Clash 3 – „Album Glass“
+   Klar wie Apple Music, verspielt wie ein Partyspiel. Farben kommen aus den Album-Themes (themes.css),
+   Flächen sind Glas über einer lebendigen Aura, Bedienelemente sind weiche 3D-Kapseln. */
+@import './ui/tokens.css';
+@import './ui/base.css';
+@import './ui/shell.css';
+@import './ui/controls.css';
+@import './ui/background.css';
+@import './vinyl.css';
+@import './ui/setup.css';
+@import './ui/draft.css';
+@import './ui/play.css';
+@import './ui/results.css';
+@import './ui/overlays.css';
+@import './ui/phone.css';

@@ -6,6 +6,7 @@ import { play } from '../services/audio'
 import { ArtImg, AvImg, Btn, Eq, useAudio } from '../ui/primitives'
 import { Warn } from '../ui/Warn'
 import { Tracks } from './Tracks'
+import { Music2, Pause, Play, RefreshCw } from '../ui/icons'
 
 /** „Alle vorab“: jeder wählt zu jedem Platz einen Song (songsScreen im Original). */
 export function Songs({ S }: { S: State }) {
@@ -34,17 +35,17 @@ export function Songs({ S }: { S: State }) {
               </div>
               {ch ? (
                 <motion.div className="chosen" initial={env.reduce ? false : { scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 360, damping: 22 }}>
-                  {ch.cover ? <img src={ch.cover} alt="" /> : <span className="cph">♪</span>}
+                  {ch.cover ? <img src={ch.cover} alt="" /> : <span className="cph"><Music2 /></span>}
                   <span className="meta">
                     <span className="tt">{ch.title}</span>
                     <span className="td">{ch.dur}</span>
                   </span>
                   <button className={'iconbtn' + (playing === k ? ' on' : '')} data-pv={p + '_' + i} data-url={ch.preview} onClick={(e) => (e.stopPropagation(), play(ch.preview, k))} aria-label="Vorschau">
-                    {playing === k ? '⏸' : '▶'}
+                    {playing === k ? <Pause /> : <Play />}
                     <Eq on={playing === k} />
                   </button>
                   <button className="iconbtn" data-clr={p + '_' + i} onClick={() => dispatch({ type: 'clearSong', p, i })} aria-label="Song wechseln">
-                    ↻
+                    <RefreshCw />
                   </button>
                 </motion.div>
               ) : (

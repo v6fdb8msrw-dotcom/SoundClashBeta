@@ -1173,3 +1173,95 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Favoriten am Handy */
+.r-fav-search {
+  width: 100%;
+  height: 50px;
+  margin: 6px 0 12px;
+  padding: 0 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 16px;
+}
+.r-fav-list {
+  display: grid;
+  gap: 6px;
+  text-align: left;
+}
+.r-fav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid transparent;
+  text-align: left;
+  color: inherit;
+}
+.r-fav img,
+.r-fav-ph {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.1);
+  flex: none;
+}
+.r-fav span {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+}
+.r-fav b {
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.r-fav small {
+  font-size: 12px;
+  opacity: 0.6;
+}
+.r-fav i {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.12);
+}
+.r-fav.on {
+  border-color: var(--pc, var(--primary));
+}
+.r-fav.on i {
+  background: var(--pc, var(--primary));
+  color: #fff;
+}
+.r-fav:disabled {
+  opacity: 0.45;
+}
+.r-fav-mine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.r-fav-chip {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 650;
+}
+.r-fav-chip span {
+  opacity: 0.6;
+  margin-left: 4px;
+}

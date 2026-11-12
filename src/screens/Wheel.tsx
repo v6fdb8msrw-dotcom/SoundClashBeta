@@ -4,6 +4,7 @@ import { dispatch, env } from '../app/store'
 import { onWheelFrame, wheel } from '../app/wheelAnim'
 import { mixHex } from '../core/colors'
 import { GENRE_HUE, WCOL } from '../core/constants'
+import { picOf } from '../services/catalog'
 import type { State } from '../core/types'
 
 /**
@@ -13,6 +14,23 @@ import type { State } from '../core/types'
 
 function cssVar(name: string) {
   return getComputedStyle(document.body).getPropertyValue(name).trim() || '#888'
+}
+
+/** Künstlerbilder fürs Rad (einmal laden, danach neu zeichnen) */
+const segImgs = new Map<string, HTMLImageElement | null>()
+let redraw: (() => void) | null = null
+function segImage(name: string): HTMLImageElement | null {
+  if (segImgs.has(name)) return segImgs.get(name) || null
+  const u = picOf(name)
+  segImgs.set(name, null)
+  if (!u) return null
+  const im = new Image()
+  im.onload = () => {
+    segImgs.set(name, im)
+    redraw?.()
+  }
+  im.src = u
+  return null
 }
 
 export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
@@ -80,49 +98,70 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
     return
   }
   const seg = (Math.PI * 2) / n,
-    fs = Math.max(9, Math.min(17, 140 / n + 7))
+    fs = Math.max(10, Math.min(17, 150 / n + 7))
+  const withPics = n <= 24
   for (let i = 0; i < n; i++) {
     const a0 = wheel.rot + i * seg,
-      a1 = a0 + seg
+      a1 = a0 + seg,
+      mid = a0 + seg / 2
+    ctx.save()
     ctx.beginPath()
     ctx.moveTo(cx, cy)
     ctx.arc(cx, cy, R, a0, a1)
     ctx.closePath()
     ctx.fillStyle = cols[i % cols.length]
     ctx.fill()
-    // Tiefe: innen dunkler, außen heller
-    const g = ctx.createRadialGradient(cx, cy, R * 0.15, cx, cy, R)
-    g.addColorStop(0, 'rgba(0,0,0,.42)')
-    g.addColorStop(0.55, 'rgba(0,0,0,.06)')
-    g.addColorStop(0.92, 'rgba(255,255,255,.08)')
-    g.addColorStop(1, 'rgba(0,0,0,.25)')
+    // Künstlerbild im Segment (außen), darüber die Segmentfarbe als Schleier
+    const img = withPics ? segImage(S.pool[i]) : null
+    if (img) {
+      ctx.save()
+      ctx.clip()
+      const d = R * Math.min(1.1, 0.5 + 3.2 / n + 0.35)
+      const px = cx + Math.cos(mid) * R * 0.66,
+        py = cy + Math.sin(mid) * R * 0.66
+      ctx.translate(px, py)
+      ctx.rotate(mid + Math.PI / 2)
+      ctx.globalAlpha = 0.9
+      ctx.drawImage(img, -d / 2, -d / 2, d, d)
+      ctx.restore()
+      ctx.fillStyle = cols[i % cols.length]
+      ctx.globalAlpha = 0.42
+      ctx.fill()
+      ctx.globalAlpha = 1
+    }
+    const g = ctx.createRadialGradient(cx, cy, R * 0.12, cx, cy, R)
+    g.addColorStop(0, 'rgba(0,0,0,.55)')
+    g.addColorStop(0.5, 'rgba(0,0,0,.12)')
+    g.addColorStop(0.9, 'rgba(0,0,0,0)')
+    g.addColorStop(1, 'rgba(0,0,0,.3)')
     ctx.fillStyle = g
     ctx.fill()
     if (i === wheel.hi) {
-      ctx.save()
-      ctx.fillStyle = 'rgba(255,255,255,.38)'
-      ctx.shadowColor = '#fff'
-      ctx.shadowBlur = 30
+      ctx.fillStyle = 'rgba(255,255,255,.3)'
       ctx.fill()
-      ctx.restore()
     }
-    ctx.strokeStyle = 'rgba(0,0,0,.45)'
-    ctx.lineWidth = 1.5
+    ctx.strokeStyle = 'rgba(255,255,255,.22)'
+    ctx.lineWidth = 1.2
     ctx.stroke()
+    ctx.restore()
+    // Name: entlang des Radius, links gespiegelt, damit nichts kopfüber steht
     ctx.save()
     ctx.translate(cx, cy)
-    ctx.rotate(a0 + seg / 2)
-    ctx.textAlign = 'right'
+    ctx.rotate(mid)
+    const flip = Math.cos(mid) < 0
+    if (flip) ctx.rotate(Math.PI)
+    ctx.textAlign = flip ? 'left' : 'right'
     ctx.textBaseline = 'middle'
-    ctx.fillStyle = '#140805'
-    ctx.font = (i === wheel.hi ? '800 ' : '700 ') + fs + 'px Manrope,sans-serif'
+    ctx.font = (i === wheel.hi ? '800 ' : '700 ') + fs + 'px -apple-system,BlinkMacSystemFont,"SF Pro Text",Manrope,sans-serif'
+    ctx.fillStyle = '#fff'
+    ctx.shadowColor = 'rgba(0,0,0,.65)'
+    ctx.shadowBlur = 6
     let l = S.pool[i]
-    const mx = Math.max(6, Math.floor(26 - n * 0.32))
+    const mx = Math.max(6, Math.floor(24 - n * 0.3))
     if (l.length > mx) l = l.slice(0, mx - 1) + '…'
-    ctx.fillText(l, R - 14, 0)
+    ctx.fillText(l, flip ? -(R - 16) : R - 16, 0)
     ctx.restore()
   }
-  // Glanz (steht still, während sich das Rad dreht)
   const sh = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R)
   sh.addColorStop(0, 'rgba(255,255,255,.22)')
   sh.addColorStop(0.35, 'rgba(255,255,255,0)')
@@ -160,6 +199,7 @@ export function Wheel({ S, revealing, children }: { S: State; revealing: boolean
       }
     })
     const rs = () => drawWheel(ref.current, sRef.current)
+    redraw = rs
     window.addEventListener('resize', rs)
     // Schriften können nach dem ersten Zeichnen kommen
     void document.fonts?.ready.then(rs)

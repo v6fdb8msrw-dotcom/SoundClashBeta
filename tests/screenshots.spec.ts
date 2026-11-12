@@ -73,11 +73,12 @@ async function flow(page: Page, prefix: string, mobile: boolean) {
   // anderes Theme über das Menü
   await page.locator('.brand-home').click()
   await page.locator('#menuBtn').click()
-  await page.locator('[data-tg="theme"]').click()
   await page.locator('[data-op="theme"][data-v="graduation"]').click()
-  await page.locator('[data-tg="bg"]').click()
-  await page.locator('[data-op="bg"][data-v="auroradeck"]').click()
+  await page.locator('[data-op="bg"][data-v="shapes"]').click()
+  await page.waitForTimeout(400)
+  await shot(page, prefix + '-9-menue-graduation')
   await page.locator('#menuBtn').click()
+  await page.waitForTimeout(600)
   await shot(page, prefix + '-9-theme-graduation')
 }
 

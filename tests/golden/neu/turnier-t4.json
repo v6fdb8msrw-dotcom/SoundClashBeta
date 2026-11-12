@@ -24,8 +24,8 @@
     "series": "single",
     "muted": false,
     "ambience": true,
-    "theme": "silksonic",
-    "bg": "mosaic",
+    "theme": "main",
+    "bg": "aura",
     "genre": "rnb",
     "pool": [],
     "warnOff": false,
@@ -58,7 +58,9 @@
     ],
     "autoScroll": true,
     "pickSec": 0,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [
@@ -92,21 +94,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Yxng Bane",
@@ -124,21 +126,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bugzy Malone",
@@ -156,21 +158,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Wiley",
@@ -188,21 +190,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01010",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Michael Kiwanuka",
@@ -220,21 +222,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10001",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01010",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "AJ Tracey",
@@ -252,21 +254,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10011",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01010",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Dizzee Rascal",
@@ -284,21 +286,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10011",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11010",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Aitch",
@@ -316,21 +318,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10011",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11011",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Professor Green",
@@ -348,21 +350,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10111",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11011",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "FKA twigs",
@@ -380,21 +382,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "Spieler 2",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11011",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Skepta",
@@ -415,7 +417,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Annawählt… [on]",
+      "Annawählt … [on]",
       "Spieler 2Dizzee Rascal"
      ],
      "who": "Anna",
@@ -436,8 +438,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Anna✓ gewählt",
-      "Spieler 2wählt… [on]"
+      "Annagewählt",
+      "Spieler 2wählt … [on]"
      ],
      "who": "Spieler 2",
      "artist": "Dizzee Rascal",
@@ -460,13 +462,13 @@
      "Anna: 0",
      "Spieler 2: 0"
     ],
-    "big": "#1 · 1 PTS",
+    "big": "Platz 1 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Yxng Bane",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Yxng Bane",
       "links": [
        "https://open.spotify.com/search/Yxng%20Bane%20",
        "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
@@ -478,7 +480,7 @@
      {
       "artist": "Dizzee Rascal",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Dizzee Rascal",
       "links": [
        "https://open.spotify.com/search/Dizzee%20Rascal%20",
        "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
@@ -504,7 +506,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Spieler 2wählt… [on]",
+      "Spieler 2wählt … [on]",
       "AnnaFKA twigs"
      ],
      "who": "Spieler 2",
@@ -530,8 +532,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Spieler 2✓ gewählt",
-      "Annawählt… [on]"
+      "Spieler 2gewählt",
+      "Annawählt … [on]"
      ],
      "who": "Anna",
      "artist": "FKA twigs",
@@ -559,13 +561,13 @@
      "Anna: 1",
      "Spieler 2: 0"
     ],
-    "big": "#2 · 1 PTS",
+    "big": "Platz 2 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "FKA twigs",
       "song": "viscus",
-      "dur": "3:40",
+      "dur": "FKA twigs · 3:40",
       "links": [
        "https://open.spotify.com/search/FKA%20twigs%20viscus",
        "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
@@ -577,7 +579,7 @@
      {
       "artist": "Bugzy Malone",
       "song": "Need No One (feat. VICI)",
-      "dur": "2:37",
+      "dur": "Bugzy Malone · 2:37",
       "links": [
        "https://open.spotify.com/search/Bugzy%20Malone%20Need%20No%20One%20(feat.%20VICI)",
        "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Need%20No%20One%20(feat.%20VICI)"
@@ -603,7 +605,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Annawählt… [on]",
+      "Annawählt … [on]",
       "Spieler 2Skepta"
      ],
      "who": "Anna",
@@ -629,8 +631,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Anna✓ gewählt",
-      "Spieler 2wählt… [on]"
+      "Annagewählt",
+      "Spieler 2wählt … [on]"
      ],
      "who": "Spieler 2",
      "artist": "Skepta",
@@ -658,13 +660,13 @@
      "Anna: 1",
      "Spieler 2: 1"
     ],
-    "big": "#3 · 1 PTS",
+    "big": "Platz 3 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Professor Green",
       "song": "NEED U NOW",
-      "dur": "3:22",
+      "dur": "Professor Green · 3:22",
       "links": [
        "https://open.spotify.com/search/Professor%20Green%20NEED%20U%20NOW",
        "https://www.youtube.com/results?search_query=Professor%20Green%20NEED%20U%20NOW"
@@ -676,7 +678,7 @@
      {
       "artist": "Skepta",
       "song": "Victory Lap",
-      "dur": "2:45",
+      "dur": "Skepta · 2:45",
       "links": [
        "https://open.spotify.com/search/Skepta%20Victory%20Lap",
        "https://www.youtube.com/results?search_query=Skepta%20Victory%20Lap"
@@ -702,7 +704,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Spieler 2wählt… [on]",
+      "Spieler 2wählt … [on]",
       "AnnaAJ Tracey"
      ],
      "who": "Spieler 2",
@@ -728,8 +730,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Spieler 2✓ gewählt",
-      "Annawählt… [on]"
+      "Spieler 2gewählt",
+      "Annawählt … [on]"
      ],
      "who": "Anna",
      "artist": "AJ Tracey",
@@ -757,13 +759,13 @@
      "Anna: 2",
      "Spieler 2: 1"
     ],
-    "big": "#4 · 1 PTS",
+    "big": "Platz 4 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "AJ Tracey",
       "song": "Thiago Silva",
-      "dur": "3:21",
+      "dur": "AJ Tracey · 3:21",
       "links": [
        "https://open.spotify.com/search/AJ%20Tracey%20Thiago%20Silva",
        "https://www.youtube.com/results?search_query=AJ%20Tracey%20Thiago%20Silva"
@@ -775,7 +777,7 @@
      {
       "artist": "Wiley",
       "song": "Boasty",
-      "dur": "2:57",
+      "dur": "Wiley · 2:57",
       "links": [
        "https://open.spotify.com/search/Wiley%20Boasty",
        "https://www.youtube.com/results?search_query=Wiley%20Boasty"
@@ -801,7 +803,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Annawählt… [on]",
+      "Annawählt … [on]",
       "Spieler 2Aitch"
      ],
      "who": "Anna",
@@ -827,8 +829,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Anna✓ gewählt",
-      "Spieler 2wählt… [on]"
+      "Annagewählt",
+      "Spieler 2wählt … [on]"
      ],
      "who": "Spieler 2",
      "artist": "Aitch",
@@ -856,13 +858,13 @@
      "Anna: 2",
      "Spieler 2: 2"
     ],
-    "big": "#5 · 2 PTS",
+    "big": "Platz 5 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Michael Kiwanuka",
       "song": "Rolling",
-      "dur": "2:51",
+      "dur": "Michael Kiwanuka · 2:51",
       "links": [
        "https://open.spotify.com/search/Michael%20Kiwanuka%20Rolling",
        "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Rolling"
@@ -874,7 +876,7 @@
      {
       "artist": "Aitch",
       "song": "Baddies",
-      "dur": "2:18",
+      "dur": "Aitch · 2:18",
       "links": [
        "https://open.spotify.com/search/Aitch%20Baddies",
        "https://www.youtube.com/results?search_query=Aitch%20Baddies"
@@ -892,7 +894,7 @@
   "label": "runde-0",
   "data": {
    "kicker": "Runde 1 · Endstand",
-   "title": "Anna ✦",
+   "title": "Anna",
    "stats": [
     {
      "nm": "Anna",
@@ -948,7 +950,7 @@
    "kicker": "Turnier · 4 Spieler",
    "title": "Halbfinale",
    "ranks": [
-    "Anna🏆vsSpieler 2",
+    "AnnavsSpieler 2",
     "Spieler 3vsBenjetzt"
    ],
    "go": "Spieler 3 vs Ben starten →"
@@ -968,21 +970,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Yxng Bane",
@@ -1000,21 +1002,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01000",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bugzy Malone",
@@ -1032,21 +1034,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01000",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00100",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Wiley",
@@ -1064,21 +1066,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01000",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Michael Kiwanuka",
@@ -1096,21 +1098,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01001",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "AJ Tracey",
@@ -1128,21 +1130,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Dizzee Rascal",
@@ -1160,21 +1162,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Aitch",
@@ -1192,21 +1194,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Professor Green",
@@ -1224,21 +1226,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11011",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "FKA twigs",
@@ -1256,21 +1258,21 @@
      "clusters": [
       {
        "name": "Spieler 3",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Skepta",
@@ -1291,7 +1293,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Spieler 3wählt… [on]",
+      "Spieler 3wählt … [on]",
       "BenSkepta"
      ],
      "who": "Spieler 3",
@@ -1317,8 +1319,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Spieler 3✓ gewählt",
-      "Benwählt… [on]"
+      "Spieler 3gewählt",
+      "Benwählt … [on]"
      ],
      "who": "Ben",
      "artist": "Skepta",
@@ -1346,13 +1348,13 @@
      "Spieler 3: 0",
      "Ben: 0"
     ],
-    "big": "#1 · 1 PTS",
+    "big": "Platz 1 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "AJ Tracey",
       "song": "BORN SPINNER",
-      "dur": "3:04",
+      "dur": "AJ Tracey · 3:04",
       "links": [
        "https://open.spotify.com/search/AJ%20Tracey%20BORN%20SPINNER",
        "https://www.youtube.com/results?search_query=AJ%20Tracey%20BORN%20SPINNER"
@@ -1364,7 +1366,7 @@
      {
       "artist": "Skepta",
       "song": "DANGER DANGER",
-      "dur": "3:00",
+      "dur": "Skepta · 3:00",
       "links": [
        "https://open.spotify.com/search/Skepta%20DANGER%20DANGER",
        "https://www.youtube.com/results?search_query=Skepta%20DANGER%20DANGER"
@@ -1390,7 +1392,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Benwählt… [on]",
+      "Benwählt … [on]",
       "Spieler 3Yxng Bane"
      ],
      "who": "Ben",
@@ -1411,8 +1413,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Ben✓ gewählt",
-      "Spieler 3wählt… [on]"
+      "Bengewählt",
+      "Spieler 3wählt … [on]"
      ],
      "who": "Spieler 3",
      "artist": "Yxng Bane",
@@ -1435,13 +1437,13 @@
      "Spieler 3: 0",
      "Ben: 1"
     ],
-    "big": "#2 · 1 PTS",
+    "big": "Platz 2 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Yxng Bane",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Yxng Bane",
       "links": [
        "https://open.spotify.com/search/Yxng%20Bane%20",
        "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
@@ -1453,7 +1455,7 @@
      {
       "artist": "Dizzee Rascal",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Dizzee Rascal",
       "links": [
        "https://open.spotify.com/search/Dizzee%20Rascal%20",
        "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
@@ -1479,7 +1481,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Spieler 3wählt… [on]",
+      "Spieler 3wählt … [on]",
       "BenBugzy Malone"
      ],
      "who": "Spieler 3",
@@ -1505,8 +1507,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Spieler 3✓ gewählt",
-      "Benwählt… [on]"
+      "Spieler 3gewählt",
+      "Benwählt … [on]"
      ],
      "who": "Ben",
      "artist": "Bugzy Malone",
@@ -1534,13 +1536,13 @@
      "Spieler 3: 1",
      "Ben: 1"
     ],
-    "big": "#3 · 1 PTS",
+    "big": "Platz 3 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "FKA twigs",
       "song": "viscus",
-      "dur": "3:40",
+      "dur": "FKA twigs · 3:40",
       "links": [
        "https://open.spotify.com/search/FKA%20twigs%20viscus",
        "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
@@ -1552,7 +1554,7 @@
      {
       "artist": "Bugzy Malone",
       "song": "Ordinary People (feat. JP Cooper)",
-      "dur": "4:30",
+      "dur": "Bugzy Malone · 4:30",
       "links": [
        "https://open.spotify.com/search/Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)",
        "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)"
@@ -1578,7 +1580,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Benwählt… [on]",
+      "Benwählt … [on]",
       "Spieler 3Professor Green"
      ],
      "who": "Ben",
@@ -1604,8 +1606,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Ben✓ gewählt",
-      "Spieler 3wählt… [on]"
+      "Bengewählt",
+      "Spieler 3wählt … [on]"
      ],
      "who": "Spieler 3",
      "artist": "Professor Green",
@@ -1633,13 +1635,13 @@
      "Spieler 3: 1",
      "Ben: 2"
     ],
-    "big": "#4 · 1 PTS",
+    "big": "Platz 4 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Professor Green",
       "song": "I Need You Tonight",
-      "dur": "3:45",
+      "dur": "Professor Green · 3:45",
       "links": [
        "https://open.spotify.com/search/Professor%20Green%20I%20Need%20You%20Tonight",
        "https://www.youtube.com/results?search_query=Professor%20Green%20I%20Need%20You%20Tonight"
@@ -1651,7 +1653,7 @@
      {
       "artist": "Aitch",
       "song": "RMB (Ring My Bell)",
-      "dur": "2:54",
+      "dur": "Aitch · 2:54",
       "links": [
        "https://open.spotify.com/search/Aitch%20RMB%20(Ring%20My%20Bell)",
        "https://www.youtube.com/results?search_query=Aitch%20RMB%20(Ring%20My%20Bell)"
@@ -1677,7 +1679,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Spieler 3wählt… [on]",
+      "Spieler 3wählt … [on]",
       "BenWiley"
      ],
      "who": "Spieler 3",
@@ -1703,8 +1705,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Spieler 3✓ gewählt",
-      "Benwählt… [on]"
+      "Spieler 3gewählt",
+      "Benwählt … [on]"
      ],
      "who": "Ben",
      "artist": "Wiley",
@@ -1732,13 +1734,13 @@
      "Spieler 3: 2",
      "Ben: 2"
     ],
-    "big": "#5 · 2 PTS",
+    "big": "Platz 5 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Michael Kiwanuka",
       "song": "Rolling",
-      "dur": "2:51",
+      "dur": "Michael Kiwanuka · 2:51",
       "links": [
        "https://open.spotify.com/search/Michael%20Kiwanuka%20Rolling",
        "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Rolling"
@@ -1750,7 +1752,7 @@
      {
       "artist": "Wiley",
       "song": "Wearing My Rolex",
-      "dur": "2:50",
+      "dur": "Wiley · 2:50",
       "links": [
        "https://open.spotify.com/search/Wiley%20Wearing%20My%20Rolex",
        "https://www.youtube.com/results?search_query=Wiley%20Wearing%20My%20Rolex"
@@ -1768,7 +1770,7 @@
   "label": "runde-1",
   "data": {
    "kicker": "Runde 1 · Endstand",
-   "title": "Ben ✦",
+   "title": "Ben",
    "stats": [
     {
      "nm": "Spieler 3",
@@ -1824,8 +1826,8 @@
    "kicker": "Turnier · 4 Spieler",
    "title": "Finale",
    "ranks": [
-    "Anna🏆vsSpieler 2",
-    "Spieler 3vsBen🏆",
+    "AnnavsSpieler 2",
+    "Spieler 3vsBen",
     "AnnavsBenjetzt"
    ],
    "go": "Anna vs Ben starten →"
@@ -1845,21 +1847,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Yxng Bane",
@@ -1877,21 +1879,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00100",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bugzy Malone",
@@ -1909,21 +1911,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00100",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00010",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Wiley",
@@ -1941,21 +1943,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00100",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00011",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Michael Kiwanuka",
@@ -1973,21 +1975,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10100",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00011",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "AJ Tracey",
@@ -2005,21 +2007,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10110",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00011",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Dizzee Rascal",
@@ -2037,21 +2039,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10110",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Aitch",
@@ -2069,21 +2071,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10110",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Professor Green",
@@ -2101,21 +2103,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10111",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "FKA twigs",
@@ -2133,21 +2135,21 @@
      "clusters": [
       {
        "name": "Anna",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "Ben",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Skepta",
@@ -2168,7 +2170,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Annawählt… [on]",
+      "Annawählt … [on]",
       "BenSkepta"
      ],
      "who": "Anna",
@@ -2194,8 +2196,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Anna✓ gewählt",
-      "Benwählt… [on]"
+      "Annagewählt",
+      "Benwählt … [on]"
      ],
      "who": "Ben",
      "artist": "Skepta",
@@ -2223,13 +2225,13 @@
      "Anna: 0",
      "Ben: 0"
     ],
-    "big": "#1 · 1 PTS",
+    "big": "Platz 1 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Michael Kiwanuka",
       "song": "Summer Clothes",
-      "dur": "4:25",
+      "dur": "Michael Kiwanuka · 4:25",
       "links": [
        "https://open.spotify.com/search/Michael%20Kiwanuka%20Summer%20Clothes",
        "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Summer%20Clothes"
@@ -2241,7 +2243,7 @@
      {
       "artist": "Skepta",
       "song": "DANGER DANGER",
-      "dur": "3:00",
+      "dur": "Skepta · 3:00",
       "links": [
        "https://open.spotify.com/search/Skepta%20DANGER%20DANGER",
        "https://www.youtube.com/results?search_query=Skepta%20DANGER%20DANGER"
@@ -2267,7 +2269,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Benwählt… [on]",
+      "Benwählt … [on]",
       "AnnaFKA twigs"
      ],
      "who": "Ben",
@@ -2293,8 +2295,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Ben✓ gewählt",
-      "Annawählt… [on]"
+      "Bengewählt",
+      "Annawählt … [on]"
      ],
      "who": "Anna",
      "artist": "FKA twigs",
@@ -2322,13 +2324,13 @@
      "Anna: 1",
      "Ben: 0"
     ],
-    "big": "#2 · 1 PTS",
+    "big": "Platz 2 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "FKA twigs",
       "song": "viscus",
-      "dur": "3:40",
+      "dur": "FKA twigs · 3:40",
       "links": [
        "https://open.spotify.com/search/FKA%20twigs%20viscus",
        "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
@@ -2340,7 +2342,7 @@
      {
       "artist": "Aitch",
       "song": "Bamba",
-      "dur": "3:23",
+      "dur": "Aitch · 3:23",
       "links": [
        "https://open.spotify.com/search/Aitch%20Bamba",
        "https://www.youtube.com/results?search_query=Aitch%20Bamba"
@@ -2366,7 +2368,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Annawählt… [on]",
+      "Annawählt … [on]",
       "BenDizzee Rascal"
      ],
      "who": "Anna",
@@ -2387,8 +2389,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Anna✓ gewählt",
-      "Benwählt… [on]"
+      "Annagewählt",
+      "Benwählt … [on]"
      ],
      "who": "Ben",
      "artist": "Dizzee Rascal",
@@ -2411,13 +2413,13 @@
      "Anna: 1",
      "Ben: 1"
     ],
-    "big": "#3 · 1 PTS",
+    "big": "Platz 3 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Yxng Bane",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Yxng Bane",
       "links": [
        "https://open.spotify.com/search/Yxng%20Bane%20",
        "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
@@ -2429,7 +2431,7 @@
      {
       "artist": "Dizzee Rascal",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Dizzee Rascal",
       "links": [
        "https://open.spotify.com/search/Dizzee%20Rascal%20",
        "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
@@ -2455,7 +2457,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Benwählt… [on]",
+      "Benwählt … [on]",
       "AnnaAJ Tracey"
      ],
      "who": "Ben",
@@ -2481,8 +2483,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Ben✓ gewählt",
-      "Annawählt… [on]"
+      "Bengewählt",
+      "Annawählt … [on]"
      ],
      "who": "Anna",
      "artist": "AJ Tracey",
@@ -2510,13 +2512,13 @@
      "Anna: 2",
      "Ben: 1"
     ],
-    "big": "#4 · 1 PTS",
+    "big": "Platz 4 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "AJ Tracey",
       "song": "Thiago Silva",
-      "dur": "3:21",
+      "dur": "AJ Tracey · 3:21",
       "links": [
        "https://open.spotify.com/search/AJ%20Tracey%20Thiago%20Silva",
        "https://www.youtube.com/results?search_query=AJ%20Tracey%20Thiago%20Silva"
@@ -2528,7 +2530,7 @@
      {
       "artist": "Bugzy Malone",
       "song": "Ordinary People (feat. JP Cooper)",
-      "dur": "4:30",
+      "dur": "Bugzy Malone · 4:30",
       "links": [
        "https://open.spotify.com/search/Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)",
        "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)"
@@ -2554,7 +2556,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "Annawählt… [on]",
+      "Annawählt … [on]",
       "BenWiley"
      ],
      "who": "Anna",
@@ -2580,8 +2582,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "Anna✓ gewählt",
-      "Benwählt… [on]"
+      "Annagewählt",
+      "Benwählt … [on]"
      ],
      "who": "Ben",
      "artist": "Wiley",
@@ -2609,13 +2611,13 @@
      "Anna: 2",
      "Ben: 2"
     ],
-    "big": "#5 · 2 PTS",
+    "big": "Platz 5 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Professor Green",
       "song": "I Need You Tonight",
-      "dur": "3:45",
+      "dur": "Professor Green · 3:45",
       "links": [
        "https://open.spotify.com/search/Professor%20Green%20I%20Need%20You%20Tonight",
        "https://www.youtube.com/results?search_query=Professor%20Green%20I%20Need%20You%20Tonight"
@@ -2627,7 +2629,7 @@
      {
       "artist": "Wiley",
       "song": "Wearing My Rolex",
-      "dur": "2:50",
+      "dur": "Wiley · 2:50",
       "links": [
        "https://open.spotify.com/search/Wiley%20Wearing%20My%20Rolex",
        "https://www.youtube.com/results?search_query=Wiley%20Wearing%20My%20Rolex"
@@ -2645,7 +2647,7 @@
   "label": "runde-2",
   "data": {
    "kicker": "Runde 1 · Endstand",
-   "title": "Anna ✦",
+   "title": "Anna",
    "stats": [
     {
      "nm": "Anna",
@@ -2701,9 +2703,9 @@
    "kicker": "Turniersieger",
    "win": "Anna",
    "ranks": [
-    "Anna🏆vsSpieler 2",
-    "Spieler 3vsBen🏆",
-    "Anna🏆vsBen"
+    "AnnavsSpieler 2",
+    "Spieler 3vsBen",
+    "AnnavsBen"
    ],
    "crate": [
     "Summer ClothesMichael KiwanukaPlatz #1 · Anna",
@@ -2732,16 +2734,16 @@
     ]
    ],
    "buttons": [
-    "↻ Neues Turnier"
+    "Neues Turnier"
    ]
   }
  },
  {
   "label": "baum-final",
   "data": [
-   "Anna🏆vsSpieler 2",
-   "Spieler 3vsBen🏆",
-   "Anna🏆vsBen"
+   "AnnavsSpieler 2",
+   "Spieler 3vsBen",
+   "AnnavsBen"
   ]
  },
  {
@@ -2769,8 +2771,8 @@
     "series": "single",
     "muted": false,
     "ambience": true,
-    "theme": "silksonic",
-    "bg": "mosaic",
+    "theme": "main",
+    "bg": "aura",
     "genre": "uk",
     "pool": [
      "Lana Del Rey",
@@ -2824,7 +2826,9 @@
     ],
     "autoScroll": true,
     "pickSec": 0,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [

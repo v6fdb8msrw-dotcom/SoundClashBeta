@@ -6,13 +6,13 @@ import type { State } from '../core/types'
 import { play } from '../services/audio'
 import { picBigOf, picOf } from '../services/catalog'
 import { spot, yt } from '../services/deezer'
-import { CoverViz } from '../ui/CoverViz'
+import { Deck } from '../ui/Deck'
 import { burstAt } from '../ui/Fx'
 import { ArtImg, AvImg, Btn, Tilt, useAudio } from '../ui/primitives'
-import { Vinyl } from '../ui/Vinyl'
 import { QrCorner } from '../ui/PairPanel'
 import { useHost } from '../ui/PairDialog'
 import { voterRoles } from '../remote/host'
+import { Crown, ExternalLink, Hand, Monitor, Pause, Play, RotateCcw } from '../ui/icons'
 
 /** Duell: Platz gegen Platz, reinhören, abstimmen oder gemeinsam antippen (duelScreen im Original). */
 
@@ -38,7 +38,7 @@ function VoteBlock({ S, p }: { S: State; p: number }) {
       </div>
       {done ? (
         <motion.div className={'vresult' + (win ? ' win' : '')} style={{ ['--pc' as string]: pcol(S, p) }} initial={env.reduce ? false : { scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-          {win ? '👑 ' : ''}
+          {win ? <Crown size={18} /> : null}
           {v}
           {v === 1 ? ' Stimme' : ' Stimmen'}
         </motion.div>
@@ -72,8 +72,8 @@ function Voters({ S, p }: { S: State; p: number }) {
           {pname(S, r)}
         </motion.span>
       ))}
-      {aud ? <span className="voter aud">🙋 {aud} Publikum</span> : null}
-      {local ? <span className="voter aud">🖥 +{local}</span> : null}
+      {aud ? <span className="voter aud"><Hand size={14} /> {aud} Publikum</span> : null}
+      {local ? <span className="voter aud"><Monitor size={14} /> +{local}</span> : null}
     </div>
   )
 }
@@ -111,34 +111,34 @@ function Card({ S, p, idx }: { S: State; p: number; idx: number }) {
           <div className="dart">
             <ArtImg n={a} style={{ width: 50, height: 50, borderRadius: 12 }} />
             <span>
-              <span className="lbl">Artist</span>
+              <span className="lbl">Künstler</span>
               <br />
               <span className="nm">{a}</span>
             </span>
           </div>
           <div className="dsong">
+            <Deck cover={so.cover || glow || undefined} on={on} color={pcol(S, p)} onToggle={so.preview && !S.phoneMode ? () => play(so.preview || '', k) : undefined} />
             <div className="top">
-              <span className={'coverwrap' + (on ? ' playing' : '')}>
-                {on ? <Vinyl cover={so.cover || glow} color={pcol(S, p)} /> : so.cover ? <img src={so.cover} alt="" /> : <span className="cph">♪</span>}
-                <CoverViz on={on} color={pcol(S, p)} />
-              </span>
               <span>
                 <span className="tt">{so.title || 'Kein Song gewählt'}</span>
                 <br />
-                <span className="td">{so.dur || ''}</span>
+                <span className="td">
+                  {a}
+                  {so.dur ? ' · ' + so.dur : ''}
+                </span>
               </span>
             </div>
             {/* Handy-Modus: nur der gewählte Song – gehört wurde er schon beim Aufdecken */}
             {S.phoneMode ? null : (
               <div className="links">
                 <button className={'lnk ' + (on ? 'on' : '')} data-pv3={k} data-url={so.preview || ''} onClick={() => play(so.preview || '', k)}>
-                  {on ? '⏸ Pause' : '▶ 30 Sek'}
+                  {on ? (<><Pause /> Pause</>) : (<><Play /> 30 Sek</>)}
                 </button>
                 <a className="lnk" href={spot(a, so.title || '')} target="_blank" rel="noopener">
-                  ↗ Spotify
+                  <ExternalLink /> Spotify
                 </a>
                 <a className="lnk" href={yt(a, so.title || '')} target="_blank" rel="noopener">
-                  ↗ YouTube
+                  <ExternalLink /> YouTube
                 </a>
               </div>
             )}
@@ -197,7 +197,7 @@ export function Duel({ S }: { S: State }) {
           Battle
         </p>
         <motion.div className="big" initial={env.reduce ? false : { scale: 0.7, opacity: 0, letterSpacing: '0.4em' }} animate={{ scale: 1, opacity: 1, letterSpacing: '0.02em' }} transition={{ type: 'spring', stiffness: 200, damping: 18 }}>
-          {sd ? 'Sudden Death' : '#' + pos + ' · ' + pt + ' PTS'}
+          {sd ? 'Sudden Death' : 'Platz ' + pos + ' · ' + pt + (pt === 1 ? ' Punkt' : ' Punkte')}
         </motion.div>
         {S.phoneMode && S.audience && S.votePhase === 'tally' ? <p className="lede vs-lede">Alle Songs gehört – jetzt am Handy abstimmen</p> : null}
         {sd ? (
@@ -244,7 +244,7 @@ export function Duel({ S }: { S: State }) {
               </>
             )}
             <Btn className="ghost" id="voteAgain" onClick={() => dispatch({ type: 'voteAgain' })}>
-              ↻ Nochmal abstimmen
+              <RotateCcw /> Nochmal abstimmen
             </Btn>
           </div>
         ) : (
@@ -253,7 +253,7 @@ export function Duel({ S }: { S: State }) {
               Abstimmung schließen · {total} {total === 1 ? 'Stimme' : 'Stimmen'} →
             </Btn>
             <Btn className="ghost" id="voteReset" onClick={() => dispatch({ type: 'voteReset' })}>
-              ↻ Zurücksetzen
+              <RotateCcw /> Zurücksetzen
             </Btn>
           </div>
         )

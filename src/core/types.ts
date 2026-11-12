@@ -177,6 +177,12 @@ export interface State {
   colors: Record<number, string> | null
   /** Handy-Modus: Spieler wählen am Handy (gleichzeitig), das Hauptgerät zeigt und spielt ab. */
   phoneMode: boolean
+  /** Favoriten-Modus: jeder legt eigene Lieblingskünstler in den Topf, gezogen werden bevorzugt die der anderen */
+  favMode: boolean
+  /** Künstler-Schlüssel → Spieler, der ihn in den Topf gelegt hat */
+  favOwner: Record<string, number>
+  /** Wer im Setup gerade seine Favoriten wählt */
+  favTurn: number
   /** Handy-Modus: wer mit der Songwahl fertig ist (aktuelles Duell bzw. alle Songs). */
   ready: Record<number, boolean>
   /** Handy-Modus: Abspiel-Reihenfolge des aktuellen Duells und der gerade laufende Song. */
@@ -213,6 +219,8 @@ export interface SavedSettings {
   autoScroll?: boolean
   pickSec?: number
   phoneMode?: boolean
+  favMode?: boolean
+  favOwner?: Record<string, number>
 }
 
 export interface Rivalry {

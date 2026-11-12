@@ -4,6 +4,7 @@ import { roundLabel } from '../core/constants'
 import { tMatch, tPairs, tSize } from '../core/game'
 import type { State } from '../core/types'
 import { Btn } from '../ui/primitives'
+import { Trophy } from '../ui/icons'
 
 /** Turnierbaum (bracketScreen im Original). */
 export function Bracket({ S }: { S: State }) {
@@ -46,7 +47,7 @@ export function Bracket({ S }: { S: State }) {
                           <span className="nm" style={{ fontSize: 15, color: R[pi].col }}>
                             {R[pi].name}
                           </span>
-                          {isW ? <span style={{ fontSize: 13 }}>🏆</span> : null}
+                          {isW ? <Trophy size={14} className="tr-ico" /> : null}
                         </span>
                         {k === 0 ? (
                           <span className="pos" style={{ fontSize: 14, width: 'auto', flex: '0 0 auto' }}>

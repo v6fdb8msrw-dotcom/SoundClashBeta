@@ -107,7 +107,7 @@ export function Pick({ S }: { S: State }) {
                 <span>
                   <span className="nm">{pname(S, q)}</span>
                   <br />
-                  <span className="st">{done ? '✓ gewählt' : q === p ? 'wählt…' : qa || 'wartet'}</span>
+                  <span className="st">{done ? 'gewählt' : q === p ? 'wählt …' : qa || 'wartet'}</span>
                 </span>
               </motion.div>
             )

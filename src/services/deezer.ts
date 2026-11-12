@@ -538,3 +538,15 @@ export function trackList(key: string, artist: string): { list: Track[] | null; 
 /* Spotify / YouTube: nur Links in deren Suche (unverändert). */
 export const spot = (a: string, t: string) => 'https://open.spotify.com/search/' + encodeURIComponent(a + ' ' + t)
 export const yt = (a: string, t: string) => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(a + ' ' + t)
+
+/** Album-Cover (groß) per Suche, z. B. „Graduation Kanye West“. Ergebnis wird für die Sitzung gemerkt. */
+const ALBUM_CACHE: Record<string, Promise<{ cover: string; title: string; artist: string } | null>> = {}
+export function dzAlbum(q: string) {
+  ALBUM_CACHE[q] ??= dz('search/album', { q, limit: 1 })
+    .then((d) => {
+      const a = ((d && d.data) || [])[0] as { cover_xl?: string; cover_big?: string; title?: string; artist?: { name?: string } } | undefined
+      return a ? { cover: a.cover_xl || a.cover_big || '', title: a.title || '', artist: a.artist?.name || '' } : null
+    })
+    .catch(() => null)
+  return ALBUM_CACHE[q]
+}

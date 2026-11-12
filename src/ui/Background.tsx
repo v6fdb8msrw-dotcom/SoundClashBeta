@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { bus } from '../app/bus'
 import { env } from '../app/store'
@@ -6,12 +7,13 @@ import type { State } from '../core/types'
 import { lastCover } from '../services/audio'
 import { picBigOf, picOf, wallPics } from '../services/catalog'
 import { useAudio } from './primitives'
-import { BANDS, onVisFrame, vis } from './visual'
+import { onVisFrame, vis } from './visual'
 import { Vinyl } from './Vinyl'
 
 /**
- * Hintergrund wählbar wie im Original (Künstler-Mosaik, Plattenspieler, Mosaik + Plattenspieler,
- * Aurora, Aurora + Plattenspieler) plus neu: Mosaik (wandernd), Bühne (Lichtkegel), Neon-Horizont.
+ * Hintergrund „Aura“: Wie bei Apple Music liegt das gerade wichtige Cover riesig und weichgezeichnet
+ * hinter allem, darüber treiben Farbwolken in den Album-Farben. Die wählbaren Hintergründe aus dem Menü
+ * legen eine Ebene darüber: Künstler-Mosaik, Plattenspieler, Bühnenlicht oder Neon-Horizont.
  */
 
 let seed = Math.random()
@@ -33,8 +35,21 @@ export function coverForKey(S: State, key: string | null): string {
   return a ? picBigOf(a) || picOf(a) : ''
 }
 
-/** Gemischte Künstlerbilder (fester Zufall pro Sitzung, neu mit „bgSeed“). */
-function useWallPics(n: number, dep: string) {
+/** Bild, das gerade die Stimmung bestimmt: spielender Song, gezogener Künstler oder aktuelles Duell. */
+function moodCover(S: State, playing: string | null): string {
+  const c = coverForKey(S, playing)
+  if (c) return c
+  if (S.screen === 'draft' && S.pending) return picBigOf(S.pending.artist) || picOf(S.pending.artist) || ''
+  if (S.screen === 'duel' || S.screen === 'listen') {
+    for (let p = 1; p <= S.players; p++) {
+      const so = (S.songs[p] || [])[S.duel]
+      if (so?.cover) return so.cover
+    }
+  }
+  return ''
+}
+
+function useWallPics(n: number) {
   const [v, force] = useState(0)
   useEffect(() => bus.on('bgSeed', () => force((x) => x + 1)), [])
   return useMemo(() => {
@@ -48,214 +63,128 @@ function useWallPics(n: number, dep: string) {
       .sort(() => rnd() - 0.5)
       .slice(0, n)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dep, n, v])
+  }, [n, v])
 }
 
-function useLevelVar(ref: React.RefObject<HTMLElement | null>) {
-  useEffect(() => {
-    if (env.reduce) return
-    return onVisFrame(() => {
-      if (ref.current) ref.current.style.setProperty('--lvl', String(vis.level.toFixed(3)))
-    })
-  }, [ref])
-}
-
-const OFF: Record<string, number> = { setup: 0, bracket: -8, draft: -16, songs: -26, pick: -26, duel: -36, round: -48, final: -60 }
-
-/** Künstler-Mosaik wie vorher: geneigte Wand, die langsam schwebt und im Beat pulsiert. */
-function Wall({ S, beat }: { S: State; beat: boolean }) {
-  const cfg = S.bg === 'walldeck' ? { n: 60, size: 140, op: 0.4, im: 0.5 } : { n: 120, size: 78, op: 0.55, im: 0.6 }
-  const pics = useWallPics(cfg.n, S.bg)
-  const ref = useRef<HTMLDivElement>(null)
-  useLevelVar(ref)
+/** Künstler-Mosaik: schräge Wand aus Porträts, die langsam wandert. */
+function Mosaic() {
+  const pics = useWallPics(48)
+  const cols = [0, 1, 2, 3, 4, 5]
   return (
-    <div className="wall-stage" style={{ ['--shift' as string]: (OFF[S.screen] || 0) + 'px' }}>
-      <div
-        id="wall"
-        ref={ref}
-        className={beat ? 'beat' : ''}
-        style={{ gridTemplateColumns: `repeat(auto-fill,minmax(${cfg.size}px,1fr))`, gridAutoRows: cfg.size + 'px', opacity: cfg.op }}
-      >
-        {pics.map((u, i) => (
-          <img key={u + i} src={u} alt="" loading="lazy" style={{ ['--i' as string]: i, ['--im' as string]: cfg.im }} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/**
- * Mosaik (wandernd): Reihen von Künstlerbildern ziehen langsam nach links, jede Reihe mit eigenen
- * Künstlern und eigenem Tempo – so tauchen ständig neue Gesichter auf.
- */
-function FlowWall({ beat }: { beat: boolean }) {
-  const rowH = 118
-  const rows = Math.max(4, Math.ceil((typeof window !== 'undefined' ? window.innerHeight : 900) / (rowH + 8)) + 2)
-  const perRow = 26
-  const pics = useWallPics(rows * perRow, 'flow')
-  const lines = Array.from({ length: rows }, (_, r) => pics.slice((r * perRow) % Math.max(1, pics.length), ((r * perRow) % Math.max(1, pics.length)) + perRow))
-  const ref = useRef<HTMLDivElement>(null)
-  useLevelVar(ref)
-  return (
-    <div className="flow-stage">
-      <div id="flowwall" ref={ref} className={beat ? 'beat' : ''} style={{ ['--rowh' as string]: rowH + 'px' }}>
-        {lines.map((line, r) => (
-          <div className="wall-row" key={r} style={{ ['--dur' as string]: 140 + ((r * 37) % 90) + 's', ['--delay' as string]: -((r * 23) % 60) + 's' }}>
-            {line.concat(line).map((u, i) => (
-              <img key={i} src={u} alt="" loading="lazy" />
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/** Bühne: Lichtkegel in den Album-Farben schwenken durch Dunst, im Beat heller. */
-function StageLights({ beat }: { beat: boolean }) {
-  const ref = useRef<HTMLDivElement>(null)
-  useLevelVar(ref)
-  return (
-    <div className={'scene-stage' + (beat ? ' beat' : '')} ref={ref}>
-      <div className="haze" />
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <i key={i} className={'beam b' + i} />
-      ))}
-      <div className="floor" />
-    </div>
-  )
-}
-
-/** Neon-Horizont: Sonne mit Streifen, Raster-Boden läuft auf einen zu. */
-function Horizon({ beat }: { beat: boolean }) {
-  const ref = useRef<HTMLDivElement>(null)
-  useLevelVar(ref)
-  return (
-    <div className={'scene-horizon' + (beat ? ' beat' : '')} ref={ref}>
-      <div className="sky" />
-      <div className="sun" />
-      <div className="ground">
-        <div className="grid" />
-      </div>
-      <div className="mist" />
-    </div>
-  )
-}
-
-function Aurora({ theme }: { theme: string }) {
-  const ref = useRef<HTMLCanvasElement>(null)
-  useEffect(() => {
-    const c = ref.current
-    if (!c) return
-    const ctx = c.getContext('2d')!
-    const IW = 200,
-      IH = Math.max(60, Math.round(200 * (innerHeight / Math.max(1, innerWidth))))
-    c.width = IW
-    c.height = IH
-    const cs = getComputedStyle(document.body)
-    const cols = [cs.getPropertyValue('--primary').trim() || '#e0a93b', cs.getPropertyValue('--secondary').trim() || '#c74b6b', cs.getPropertyValue('--accent').trim() || '#5aa9e6']
-    const blobs: { c: string; sx: number; sy: number; ph: number; r: number }[] = []
-    for (let i = 0; i < 6; i++) blobs.push({ c: cols[i % cols.length], sx: 0.12 + Math.random() * 0.22, sy: 0.1 + Math.random() * 0.2, ph: Math.random() * 6.28, r: 0.55 + Math.random() * 0.35 })
-    const t0 = performance.now()
-    let raf = 0
-    const frame = (now: number) => {
-      const t = (now - t0) / 1000,
-        pulse = 0.5 + 0.5 * Math.sin(t * 2.2)
-      const boost = vis.level * 0.5 + vis.beat * 0.12
-      ctx.clearRect(0, 0, IW, IH)
-      ctx.globalCompositeOperation = 'lighter'
-      for (const b of blobs) {
-        const bx = (0.5 + 0.42 * Math.sin(t * b.sx + b.ph)) * IW
-        const by = (0.5 + 0.42 * Math.cos(t * b.sy + b.ph * 1.3)) * IH
-        const rad = b.r * IW * (0.7 + pulse * 0.16 + boost)
-        ctx.globalAlpha = 0.42
-        const g = ctx.createRadialGradient(bx, by, 0, bx, by, rad)
-        g.addColorStop(0, b.c)
-        g.addColorStop(1, 'transparent')
-        ctx.fillStyle = g
-        ctx.beginPath()
-        ctx.arc(bx, by, rad, 0, 6.2832)
-        ctx.fill()
-      }
-      ctx.globalAlpha = 1
-      ctx.globalCompositeOperation = 'source-over'
-      raf = env.reduce ? 0 : requestAnimationFrame(frame)
-    }
-    raf = requestAnimationFrame(frame)
-    return () => cancelAnimationFrame(raf)
-    // Farben neu lesen, wenn das Theme wechselt
-  }, [theme])
-  return <canvas id="aurora" ref={ref} aria-hidden />
-}
-
-/** Plattenspieler von oben mit realistischer Platte (Cover als Label) und Frequenz-Ring. */
-function Deck({ S, over }: { S: State; over: boolean }) {
-  const { playing } = useAudio()
-  const cover = playing ? coverForKey(S, playing) : ''
-  const ring = useRef<HTMLCanvasElement>(null)
-  useEffect(() => {
-    const c = ring.current
-    if (!c) return
-    const ctx = c.getContext('2d')!
-    const size = 520
-    c.width = size
-    c.height = size
-    const draw = () => {
-      ctx.clearRect(0, 0, size, size)
-      if (!vis.active) return
-      const cs = getComputedStyle(document.body)
-      const col = cs.getPropertyValue('--primary').trim() || '#fff'
-      const cx = size / 2,
-        r0 = size * 0.43
-      ctx.lineCap = 'round'
-      ctx.strokeStyle = col
-      for (let i = 0; i < BANDS * 2; i++) {
-        const v = vis.bands[i % BANDS]
-        const a = (i / (BANDS * 2)) * Math.PI * 2 - Math.PI / 2
-        const len = 4 + v * size * 0.07
-        ctx.globalAlpha = 0.25 + v * 0.75
-        ctx.lineWidth = 3
-        ctx.beginPath()
-        ctx.moveTo(cx + Math.cos(a) * r0, cx + Math.sin(a) * r0)
-        ctx.lineTo(cx + Math.cos(a) * (r0 + len), cx + Math.sin(a) * (r0 + len))
-        ctx.stroke()
-      }
-      ctx.globalAlpha = 1
-    }
-    return onVisFrame(draw)
-  }, [])
-  return (
-    <div id="deck" className={(playing ? 'spinning-song ' : '') + (over ? 'over-wall' : '')} aria-hidden>
-      <canvas className="deck-ring" ref={ring} />
-      <Vinyl cover={cover} spinning className="deck-vinyl" />
-      <div className="tonearm">
-        <div className="base" />
-        <div className="rod">
-          <div className="head" />
+    <div className="bg-wall">
+      {cols.map((c) => (
+        <div key={c} className="mcol" style={{ ['--c' as string]: c }}>
+          {[...pics.slice(c * 8, c * 8 + 8), ...pics.slice(c * 8, c * 8 + 8)].map((u, i) => (
+            <img key={i} src={u} alt="" loading="lazy" />
+          ))}
         </div>
-      </div>
+      ))}
+    </div>
+  )
+}
+
+/** Schwebende, glänzende 3D-Formen (Kugeln, Ringe, Kapseln, Sterne) in den Theme-Farben */
+function Shapes() {
+  const items = useMemo(
+    () =>
+      Array.from({ length: 14 }, (_, i) => ({
+        k: ['ball', 'ring', 'pill', 'star', 'ball', 'disc'][i % 6],
+        x: (i * 37 + 11) % 96,
+        y: (i * 53 + 7) % 92,
+        s: 40 + ((i * 29) % 90),
+        d: 14 + ((i * 7) % 12),
+        c: ['var(--primary)', 'var(--secondary)', 'var(--accent)', 'var(--primary-soft)'][i % 4],
+        r: (i * 47) % 360,
+      })),
+    [],
+  )
+  return (
+    <div className="bg-shapes">
+      {items.map((it, i) => (
+        <i
+          key={i}
+          className={'shp ' + it.k}
+          style={{ left: it.x + '%', top: it.y + '%', width: it.s, height: it.s, ['--c' as string]: it.c, ['--d' as string]: it.d + 's', ['--r' as string]: it.r + 'deg', animationDelay: -i * 1.7 + 's' }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/** Platten, die langsam durchs Bild schweben (das aktuelle Cover als Etikett) */
+function Records({ cover }: { cover: string }) {
+  const pics = useWallPics(9)
+  return (
+    <div className="bg-records">
+      {Array.from({ length: 9 }, (_, i) => (
+        <div key={i} className="rec" style={{ left: ((i * 23 + 5) % 92) + '%', ['--s' as string]: 90 + ((i * 41) % 130) + 'px', ['--d' as string]: 26 + ((i * 9) % 20) + 's', animationDelay: -i * 4.3 + 's' }}>
+          <Vinyl cover={(i === 0 && cover) || pics[i] || undefined} spinning />
+        </div>
+      ))}
     </div>
   )
 }
 
 export function Background({ S }: { S: State }) {
-  const { beat } = useAudio()
-  const isAU = S.bg === 'aurora' || S.bg === 'auroradeck'
-  const deckOn = S.bg === 'deck' || S.bg === 'walldeck' || S.bg === 'auroradeck'
-  const wallOn = S.bg === 'mosaic' || S.bg === 'walldeck'
-  const pulse = beat && !env.reduce
+  const { playing, beat } = useAudio()
+  const cover = moodCover(S, playing)
+  const root = useRef<HTMLDivElement>(null)
+  const mosaic = S.bg === 'mosaic' || S.bg === 'walldeck' || S.bg === 'flow'
+  const deck = S.bg === 'deck' || S.bg === 'walldeck' || S.bg === 'auroradeck'
+  // Pegel des laufenden Songs → leichtes Atmen der Farbwolken (abschaltbar über „Album-Wand-Puls“)
+  useEffect(() => {
+    if (env.reduce || !S.ambience) {
+      root.current?.style.setProperty('--lvl', '0')
+      return
+    }
+    return onVisFrame(() => root.current?.style.setProperty('--lvl', vis.level.toFixed(3)))
+  }, [S.ambience])
   return (
-    <div className={'bg bg-' + S.bg} aria-hidden>
-      <div className="bg-base" />
-      {wallOn ? <Wall S={S} beat={pulse} /> : null}
-      {S.bg === 'flow' ? <FlowWall beat={pulse} /> : null}
-      {S.bg === 'stage' ? <StageLights beat={pulse} /> : null}
-      {S.bg === 'horizon' ? <Horizon beat={pulse} /> : null}
-      {isAU ? <Aurora theme={S.theme} /> : null}
-      <div id="tint" />
-      <div id="veil" className={'veil-' + S.bg} />
-      {deckOn ? <Deck S={S} over={S.bg === 'walldeck' || S.bg === 'auroradeck'} /> : null}
-      <div id="grain" />
+    <div ref={root} className={'bg bg-' + S.bg + (beat ? ' beat' : '') + (playing ? ' live' : '')} data-screen={S.screen} aria-hidden>
+      <div className="aura">
+        <i className="a1" />
+        <i className="a2" />
+        <i className="a3" />
+        <i className="a4" />
+      </div>
+      <AnimatePresence>
+        {cover ? (
+          <motion.img
+            key={cover}
+            className="aura-cover"
+            src={cover}
+            alt=""
+            initial={{ opacity: 0, scale: 1.15 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: env.reduce ? 0 : 1.4, ease: [0.2, 0.8, 0.2, 1] }}
+          />
+        ) : null}
+      </AnimatePresence>
+      {mosaic ? <Mosaic /> : null}
+      {S.bg === 'shapes' ? <Shapes /> : null}
+      {S.bg === 'records' ? <Records cover={cover} /> : null}
+      {S.bg === 'stage' ? (
+        <div className="bg-stage">
+          <i />
+          <i />
+          <i />
+        </div>
+      ) : null}
+      {S.bg === 'horizon' ? (
+        <div className="bg-horizon">
+          <div className="sun" />
+          <div className="floor" />
+        </div>
+      ) : null}
+      {deck ? (
+        <div className="bg-deck">
+          <Vinyl cover={cover || undefined} spinning={!!playing} />
+          <span className="arm" />
+        </div>
+      ) : null}
+      <div className="veil" />
+      <div className="grain" />
     </div>
   )
 }

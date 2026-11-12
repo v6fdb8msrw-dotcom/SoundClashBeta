@@ -94,7 +94,7 @@ export function fitColor(hex: string, bg: string, target: number): string {
  */
 let COLFIT: Record<number, string> = {}
 let colfitTheme: string | null = null
-let bodyTheme = 'silksonic'
+let bodyTheme = 'main'
 
 export function setBodyTheme(theme: string) {
   bodyTheme = theme

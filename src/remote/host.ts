@@ -137,6 +137,8 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
       return S.screen === 'listen' && !!S.listen && S.listen.order[S.listen.idx] === role
     case 'listenNext':
       return S.screen === 'listen' && !!S.listen && S.listen.shown && S.listen.order[S.listen.idx] === role
+    case 'favToggle':
+      return typeof role === 'number' && role <= S.players && S.screen === 'setup' && S.favMode && typeof m.name === 'string' && m.name.length < 80
   }
   return false
 }
@@ -182,6 +184,13 @@ function onPhone(m: PhoneMsg, peerId: string) {
       return dispatch({ type: 'listenPlay' })
     case 'listenNext':
       return dispatch({ type: 'listenNext' })
+    case 'favToggle': {
+      // Vom Handy nur eigene Favoriten wieder herausnehmen
+      const n = m.name.trim()
+      const key = n.toLowerCase()
+      if (S.pool.some((x) => x.toLowerCase().trim() === key) && S.favOwner[key] && S.favOwner[key] !== ph.role) return
+      return dispatch({ type: 'poolToggle', name: n, by: ph.role as number })
+    }
   }
 }
 

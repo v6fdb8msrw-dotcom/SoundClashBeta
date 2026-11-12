@@ -3,17 +3,17 @@
   "label": "frisch",
   "data": {
    "theme": "igor",
-   "sound": "🔇",
+   "sound": "Ton aus",
    "sel": {
-    "mode": "Clash (alle gegen alle)",
+    "mode": "Kein Turnier",
     "players": "2",
     "size": "5",
-    "series": "Einzelrunde",
+    "series": "1 Runde",
     "songMode": "Vor jedem Duell",
-    "sameArtist": "Normal — jeder eigene Künstler",
-    "audience": "Publikum stimmt ab",
-    "pickSec": "Aus",
-    "ambience": "An — Wand pulsiert zum Song",
+    "sameArtist": "Jeder eigene Künstler",
+    "audience": "Abstimmung",
+    "pickSec": "Ohne",
+    "ambience": "An",
     "autoScroll": "An",
     "genre": "R&B",
     "bg": "Aurora (Beat)",
@@ -28,7 +28,7 @@
     "2:1"
    ],
    "pool": [],
-   "poolPill": "♪ 0 im Topf",
+   "poolPill": "0 im Topf",
    "start": true,
    "hint": "Mindestens 10 Künstler in den Topf legen."
   }
@@ -54,16 +54,16 @@
   "label": "vor-neustart",
   "data": {
    "theme": "igor",
-   "sound": "🔇",
+   "sound": "Ton aus",
    "sel": {
-    "mode": "Clash (alle gegen alle)",
+    "mode": "Kein Turnier",
     "players": "4",
     "size": "10",
     "series": "Best of 5",
     "songMode": "Alle vorab",
     "sameArtist": "Gleicher Künstler für alle",
-    "audience": "Gemeinsam antippen",
-    "pickSec": "45 Sek",
+    "audience": "Gemeinsam",
+    "pickSec": "45 s",
     "ambience": "Aus",
     "autoScroll": "Aus",
     "genre": "Latin",
@@ -88,7 +88,7 @@
     "Bad Bunny",
     "Drake"
    ],
-   "poolPill": "♪ 4 im Topf",
+   "poolPill": "4 im Topf",
    "start": true,
    "hint": "Mindestens 40 Künstler in den Topf legen."
   }
@@ -136,7 +136,9 @@
     "roster": null,
     "autoScroll": false,
     "pickSec": 45,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [
@@ -148,16 +150,16 @@
   "label": "nach-neustart",
   "data": {
    "theme": "igor",
-   "sound": "🔇",
+   "sound": "Ton aus",
    "sel": {
-    "mode": "Clash (alle gegen alle)",
+    "mode": "Kein Turnier",
     "players": "4",
     "size": "10",
     "series": "Best of 5",
     "songMode": "Alle vorab",
     "sameArtist": "Gleicher Künstler für alle",
-    "audience": "Gemeinsam antippen",
-    "pickSec": "45 Sek",
+    "audience": "Gemeinsam",
+    "pickSec": "45 s",
     "ambience": "Aus",
     "autoScroll": "Aus",
     "genre": "Latin",
@@ -182,7 +184,7 @@
     "Bad Bunny",
     "Drake"
    ],
-   "poolPill": "♪ 4 im Topf",
+   "poolPill": "4 im Topf",
    "start": true,
    "hint": "Mindestens 40 Künstler in den Topf legen."
   }
@@ -230,7 +232,9 @@
     "roster": null,
     "autoScroll": false,
     "pickSec": 45,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [
@@ -335,7 +339,9 @@
     ],
     "autoScroll": false,
     "pickSec": 45,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [

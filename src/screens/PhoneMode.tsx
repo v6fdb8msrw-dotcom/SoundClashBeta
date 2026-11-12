@@ -11,6 +11,7 @@ import { QrCorner } from '../ui/PairPanel'
 import { ArtImg, AvImg, Btn, useAudio } from '../ui/primitives'
 import { Vinyl } from '../ui/Vinyl'
 import { Tracks } from './Tracks'
+import { Pause, Play, RefreshCw, Smartphone } from '../ui/icons'
 
 /**
  * Handy-Modus am Hauptgerät: Spieler wählen gleichzeitig am Handy, hier sieht man nur den Stand.
@@ -57,7 +58,7 @@ export function PhonePick({ S }: { S: State }) {
               transition={{ type: 'spring', stiffness: 220, damping: 20, delay: k * 0.06 }}
               data-ptile={p}
             >
-              <span className={'ptile-phone' + (online.has(p) ? ' on' : '')}>{online.has(p) ? '📱 verbunden' : '📱 –'}</span>
+              <span className={'ptile-phone' + (online.has(p) ? ' on' : '')}>{online.has(p) ? 'verbunden' : '–'}</span>
               <AvImg S={S} p={p} className="ptile-av" />
               <div className="ptile-name">{pname(S, p)}</div>
               <div className="ptile-art">
@@ -66,7 +67,7 @@ export function PhonePick({ S }: { S: State }) {
               </div>
               <div className="ptile-state">
                 {ready ? (
-                  '✓ bereit'
+                  'bereit'
                 ) : (
                   <>
                     wählt
@@ -136,7 +137,7 @@ export function PhoneSongs({ S }: { S: State }) {
           const ready = !!S.ready[p]
           return (
             <div key={p} className={'ptile' + (ready ? ' ready' : '')} style={{ ['--pc' as string]: pcol(S, p) }} data-ptile={p}>
-              <span className={'ptile-phone' + (online.has(p) ? ' on' : '')}>{online.has(p) ? '📱 verbunden' : '📱 –'}</span>
+              <span className={'ptile-phone' + (online.has(p) ? ' on' : '')}>{online.has(p) ? 'verbunden' : '–'}</span>
               <AvImg S={S} p={p} className="ptile-av" />
               <div className="ptile-name">{pname(S, p)}</div>
               <div className="ptile-art">
@@ -145,7 +146,7 @@ export function PhoneSongs({ S }: { S: State }) {
               <div className="ptile-progress">
                 <i style={{ width: (done / n) * 100 + '%' }} />
               </div>
-              <div className="ptile-state">{ready ? '✓ fertig' : 'wählt …'}</div>
+              <div className="ptile-state">{ready ? 'fertig' : 'wählt …'}</div>
               {!ready ? (
                 <div>
                   <button className="ptile-manual" onClick={() => setManual(manual === p ? null : p)}>
@@ -176,7 +177,7 @@ export function PhoneSongs({ S }: { S: State }) {
                       <span className="tt">{ch.title}</span>
                     </span>
                     <button className="iconbtn" onClick={() => dispatch({ type: 'clearSong', p: manual, i })}>
-                      ↻
+                      <RefreshCw />
                     </button>
                   </div>
                 ) : (
@@ -321,7 +322,7 @@ export function Listen({ S }: { S: State }) {
                 <i ref={bar} />
               </div>
               <div className="listen-time">
-                <span>{so?.preview ? (L.paused ? '⏸ angehalten' : '30-Sek-Vorschau') : 'keine Vorschau'}</span>
+                <span>{so?.preview ? (L.paused ? 'angehalten' : '30-Sek-Vorschau') : 'keine Vorschau'}</span>
                 <span ref={tl} />
               </div>
             </>
@@ -329,7 +330,7 @@ export function Listen({ S }: { S: State }) {
             <p className="rv-wait">
               {phone ? (
                 <>
-                  📱 {pname(S, p)} drückt Play am Handy <Dots />
+                  <Smartphone size={16} /> {pname(S, p)} drückt Play am Handy <Dots />
                 </>
               ) : (
                 'Handy nicht verbunden – hier aufdecken'
@@ -338,7 +339,7 @@ export function Listen({ S }: { S: State }) {
           )}
           <div className="rv-ctrl">
             <button className={'lnk' + (L.shown && !L.paused ? ' on' : '')} id="listenPlay" onClick={() => dispatch({ type: 'listenPlay' })}>
-              {!L.shown ? '▶ Aufdecken' : L.paused ? '▶ Weiter abspielen' : '⏸ Pause'}
+              {!L.shown ? (<><Play /> Aufdecken</>) : L.paused ? (<><Play /> Weiter abspielen</>) : (<><Pause /> Pause</>)}
             </button>
             {L.shown ? (
               <Btn className="sm" id="listenNext" onClick={() => dispatch({ type: 'listenNext' })}>
@@ -357,7 +358,7 @@ export function Listen({ S }: { S: State }) {
               {qso?.cover && (done || (k === L.idx && L.shown)) ? <img src={qso.cover} alt="" /> : <AvImg S={S} p={q} />}
               <span>
                 <b>{pname(S, q)}</b>
-                <small>{done ? qso?.title || '✓ gehört' : k === L.idx ? (L.shown ? '▶ läuft' : 'deckt auf') : 'gleich'}</small>
+                <small>{done ? qso?.title || 'gehört' : k === L.idx ? (L.shown ? 'läuft' : 'deckt auf') : 'gleich'}</small>
               </span>
             </div>
           )

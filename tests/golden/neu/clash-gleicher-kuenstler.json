@@ -20,7 +20,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Taylor Swift",
@@ -45,7 +45,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Lady Gaga",
@@ -70,7 +70,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Ariana Grande",
@@ -95,7 +95,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bruno Mars",
@@ -120,7 +120,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Katy Perry",
@@ -145,7 +145,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Adele",
@@ -170,7 +170,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Billie Eilish",
@@ -188,7 +188,7 @@
     "Wahl 1 / 2"
    ],
    "chips": [
-    "P1wählt… [on]",
+    "P1wählt … [on]",
     "P2Taylor Swift"
    ],
    "who": "P1",
@@ -214,8 +214,8 @@
     "Wahl 2 / 2"
    ],
    "chips": [
-    "P1✓ gewählt",
-    "P2wählt… [on]"
+    "P1gewählt",
+    "P2wählt … [on]"
    ],
    "who": "P2",
    "artist": "Taylor Swift",
@@ -247,13 +247,13 @@
      "P1: 0",
      "P2: 0"
     ],
-    "big": "#1 · 1 PTS",
+    "big": "Platz 1 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Taylor Swift",
       "song": "Patient Zero",
-      "dur": "3:45",
+      "dur": "Taylor Swift · 3:45",
       "links": [
        "https://open.spotify.com/search/Taylor%20Swift%20Patient%20Zero",
        "https://www.youtube.com/results?search_query=Taylor%20Swift%20Patient%20Zero"
@@ -265,7 +265,7 @@
      {
       "artist": "Taylor Swift",
       "song": "Shake It Off (Taylor's Version)",
-      "dur": "3:39",
+      "dur": "Taylor Swift · 3:39",
       "links": [
        "https://open.spotify.com/search/Taylor%20Swift%20Shake%20It%20Off%20(Taylor's%20Version)",
        "https://www.youtube.com/results?search_query=Taylor%20Swift%20Shake%20It%20Off%20(Taylor%27s%20Version)"
@@ -291,7 +291,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "P2wählt… [on]",
+      "P2wählt … [on]",
       "P1Ariana Grande"
      ],
      "who": "P2",
@@ -318,8 +318,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "P2✓ gewählt",
-      "P1wählt… [on]"
+      "P2gewählt",
+      "P1wählt … [on]"
      ],
      "who": "P1",
      "artist": "Ariana Grande",
@@ -347,13 +347,13 @@
      "P1: 0",
      "P2: 1"
     ],
-    "big": "#2 · 1 PTS",
+    "big": "Platz 2 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Ariana Grande",
       "song": "Handarbeit",
-      "dur": "",
+      "dur": "Ariana Grande",
       "links": [
        "https://open.spotify.com/search/Ariana%20Grande%20Handarbeit",
        "https://www.youtube.com/results?search_query=Ariana%20Grande%20Handarbeit"
@@ -365,7 +365,7 @@
      {
       "artist": "Ariana Grande",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Ariana Grande",
       "links": [
        "https://open.spotify.com/search/Ariana%20Grande%20",
        "https://www.youtube.com/results?search_query=Ariana%20Grande%20"
@@ -391,7 +391,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "P1wählt… [on]",
+      "P1wählt … [on]",
       "P2Katy Perry"
      ],
      "who": "P1",
@@ -417,8 +417,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "P1✓ gewählt",
-      "P2wählt… [on]"
+      "P1gewählt",
+      "P2wählt … [on]"
      ],
      "who": "P2",
      "artist": "Katy Perry",
@@ -446,13 +446,13 @@
      "P1: 1",
      "P2: 1"
     ],
-    "big": "#3 · 1 PTS",
+    "big": "Platz 3 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Katy Perry",
       "song": "The One That Got Away",
-      "dur": "3:47",
+      "dur": "Katy Perry · 3:47",
       "links": [
        "https://open.spotify.com/search/Katy%20Perry%20The%20One%20That%20Got%20Away",
        "https://www.youtube.com/results?search_query=Katy%20Perry%20The%20One%20That%20Got%20Away"
@@ -464,7 +464,7 @@
      {
       "artist": "Katy Perry",
       "song": "Legendary Lovers",
-      "dur": "3:44",
+      "dur": "Katy Perry · 3:44",
       "links": [
        "https://open.spotify.com/search/Katy%20Perry%20Legendary%20Lovers",
        "https://www.youtube.com/results?search_query=Katy%20Perry%20Legendary%20Lovers"
@@ -490,7 +490,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "P2wählt… [on]",
+      "P2wählt … [on]",
       "P1Billie Eilish"
      ],
      "who": "P2",
@@ -516,8 +516,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "P2✓ gewählt",
-      "P1wählt… [on]"
+      "P2gewählt",
+      "P1wählt … [on]"
      ],
      "who": "P1",
      "artist": "Billie Eilish",
@@ -545,13 +545,13 @@
      "P1: 1",
      "P2: 2"
     ],
-    "big": "#4 · 1 PTS",
+    "big": "Platz 4 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Billie Eilish",
       "song": "when the party's over",
-      "dur": "3:19",
+      "dur": "Billie Eilish · 3:19",
       "links": [
        "https://open.spotify.com/search/Billie%20Eilish%20when%20the%20party's%20over",
        "https://www.youtube.com/results?search_query=Billie%20Eilish%20when%20the%20party%27s%20over"
@@ -563,7 +563,7 @@
      {
       "artist": "Billie Eilish",
       "song": "WILDFLOWER",
-      "dur": "4:21",
+      "dur": "Billie Eilish · 4:21",
       "links": [
        "https://open.spotify.com/search/Billie%20Eilish%20WILDFLOWER",
        "https://www.youtube.com/results?search_query=Billie%20Eilish%20WILDFLOWER"
@@ -589,7 +589,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "P1wählt… [on]",
+      "P1wählt … [on]",
       "P2Adele"
      ],
      "who": "P1",
@@ -611,8 +611,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "P1✓ gewählt",
-      "P2wählt… [on]"
+      "P1gewählt",
+      "P2wählt … [on]"
      ],
      "who": "P2",
      "artist": "Adele",
@@ -636,13 +636,13 @@
      "P1: 2",
      "P2: 2"
     ],
-    "big": "#5 · 1 PTS",
+    "big": "Platz 5 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Adele",
       "song": "Aint She Sweet",
-      "dur": "2:44",
+      "dur": "Adele · 2:44",
       "links": [
        "https://open.spotify.com/search/Adele%20Aint%20She%20Sweet",
        "https://www.youtube.com/results?search_query=Adele%20Aint%20She%20Sweet"
@@ -654,7 +654,7 @@
      {
       "artist": "Adele",
       "song": "Aint She Sweet",
-      "dur": "2:44",
+      "dur": "Adele · 2:44",
       "links": [
        "https://open.spotify.com/search/Adele%20Aint%20She%20Sweet",
        "https://www.youtube.com/results?search_query=Adele%20Aint%20She%20Sweet"
@@ -680,7 +680,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "P2wählt… [on]",
+      "P2wählt … [on]",
       "P1Bruno Mars"
      ],
      "who": "P2",
@@ -706,8 +706,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "P2✓ gewählt",
-      "P1wählt… [on]"
+      "P2gewählt",
+      "P1wählt … [on]"
      ],
      "who": "P1",
      "artist": "Bruno Mars",
@@ -735,13 +735,13 @@
      "P1: 2",
      "P2: 3"
     ],
-    "big": "#6 · 2 PTS",
+    "big": "Platz 6 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Bruno Mars",
       "song": "Just the Way You Are",
-      "dur": "3:40",
+      "dur": "Bruno Mars · 3:40",
       "links": [
        "https://open.spotify.com/search/Bruno%20Mars%20Just%20the%20Way%20You%20Are",
        "https://www.youtube.com/results?search_query=Bruno%20Mars%20Just%20the%20Way%20You%20Are"
@@ -753,7 +753,7 @@
      {
       "artist": "Bruno Mars",
       "song": "Uptown Funk (feat. Bruno Mars)",
-      "dur": "4:30",
+      "dur": "Bruno Mars · 4:30",
       "links": [
        "https://open.spotify.com/search/Bruno%20Mars%20Uptown%20Funk%20(feat.%20Bruno%20Mars)",
        "https://www.youtube.com/results?search_query=Bruno%20Mars%20Uptown%20Funk%20(feat.%20Bruno%20Mars)"
@@ -779,7 +779,7 @@
       "Wahl 1 / 2"
      ],
      "chips": [
-      "P1wählt… [on]",
+      "P1wählt … [on]",
       "P2Lady Gaga"
      ],
      "who": "P1",
@@ -805,8 +805,8 @@
       "Wahl 2 / 2"
      ],
      "chips": [
-      "P1✓ gewählt",
-      "P2wählt… [on]"
+      "P1gewählt",
+      "P2wählt … [on]"
      ],
      "who": "P2",
      "artist": "Lady Gaga",
@@ -834,13 +834,13 @@
      "P1: 4",
      "P2: 3"
     ],
-    "big": "#7 · 2 PTS",
+    "big": "Platz 7 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Lady Gaga",
       "song": "Judas",
-      "dur": "4:09",
+      "dur": "Lady Gaga · 4:09",
       "links": [
        "https://open.spotify.com/search/Lady%20Gaga%20Judas",
        "https://www.youtube.com/results?search_query=Lady%20Gaga%20Judas"
@@ -852,7 +852,7 @@
      {
       "artist": "Lady Gaga",
       "song": "Always Remember Us This Way",
-      "dur": "3:30",
+      "dur": "Lady Gaga · 3:30",
       "links": [
        "https://open.spotify.com/search/Lady%20Gaga%20Always%20Remember%20Us%20This%20Way",
        "https://www.youtube.com/results?search_query=Lady%20Gaga%20Always%20Remember%20Us%20This%20Way"
@@ -870,7 +870,7 @@
   "label": "runde",
   "data": {
    "kicker": "Runde 1 · Endstand",
-   "title": "P2 ✦",
+   "title": "P2",
    "stats": [
     {
      "nm": "P1",
@@ -930,8 +930,8 @@
    "kicker": "Sieger",
    "win": "P2",
    "ranks": [
-    "1P21 Rundensiege · 5 pts🏆",
-    "2P10 Rundensiege · 4 pts"
+    "1P21 Rundensieg · 5 Punkte",
+    "2P10 Rundensiege · 4 Punkte"
    ],
    "crate": [
     "Shake It Off (Taylor's Version)Taylor SwiftPlatz #1 · P2",
@@ -967,7 +967,7 @@
    ],
    "buttons": [
     "⇪ Teilen",
-    "↻ Neues Match"
+    "Neues Match"
    ]
   }
  },
@@ -996,8 +996,8 @@
     "series": "single",
     "muted": false,
     "ambience": true,
-    "theme": "silksonic",
-    "bg": "mosaic",
+    "theme": "main",
+    "bg": "aura",
     "genre": "pop",
     "pool": [
      "The Weeknd",
@@ -1017,7 +1017,9 @@
     "roster": null,
     "autoScroll": true,
     "pickSec": 30,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": {
     "p1|p2": {

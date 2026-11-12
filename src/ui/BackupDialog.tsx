@@ -111,7 +111,7 @@ export function BackupDialog({ onClose }: { onClose: () => void }) {
             </Btn>
           </div>
         </div>
-        {error ? <div className="warn">⚠ {error}</div> : null}
+        {error ? <div className="warn">{error}</div> : null}
         {preview ? (
           <div className="bk-preview" id="importPreview">
             <p>

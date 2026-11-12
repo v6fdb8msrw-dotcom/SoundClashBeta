@@ -4,6 +4,7 @@ import { useGame } from '../app/store'
 import { pcol, pname } from '../core/game'
 import { joinUrl, startHost } from '../remote/host'
 import { useHost } from './PairDialog'
+import { Hand } from './icons'
 
 /** QR-Code als SVG (lokal erzeugt, kein externer Dienst). */
 export function useQr(url: string | null) {
@@ -40,7 +41,7 @@ export function PairPanel() {
               <small>{roles.has(p) ? 'verbunden' : 'wartet'}</small>
             </span>
           ))}
-          {audience ? <span className="pp-chip on aud">🙋 {audience} Publikum</span> : null}
+          {audience ? <span className="pp-chip on aud"><Hand size={14} /> {audience} Publikum</span> : null}
         </div>
         <p className="pair-code">
           Code <b id="pairCode">{code}</b>
@@ -70,7 +71,7 @@ function LinkRow({ url }: { url: string }) {
           })
         }}
       >
-        {done ? '✓ Kopiert' : 'Link kopieren'}
+        {done ? 'Kopiert' : 'Link kopieren'}
       </button>
       {share ? (
         <button type="button" className="lnk" onClick={() => void navigator.share({ title: 'Sound Clash', text: 'Komm in die Runde:', url }).catch(() => undefined)}>

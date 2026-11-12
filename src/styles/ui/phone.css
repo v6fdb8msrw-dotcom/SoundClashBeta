@@ -1,0 +1,242 @@
+/* Handy-Modus: große Bühne am Hauptgerät (Songwahl, Aufdecken) */
+.cine-head {
+  text-align: center;
+  margin-bottom: 22px;
+}
+.cine-title {
+  font-family: var(--font-title);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+.cine-sub {
+  color: var(--ink-2);
+  font-size: 16px;
+}
+.ptiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+.ptile {
+  --pc: var(--primary);
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 20px 14px;
+  border-radius: var(--r-lg);
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--hair);
+  box-shadow: var(--rim), var(--sh-1);
+  text-align: center;
+}
+.ptile-av {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--pc),
+    0 10px 24px color-mix(in srgb, var(--pc) 40%, transparent);
+}
+.ptile-name {
+  font-size: 18px;
+  font-weight: 800;
+}
+.ptile-art {
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.ptile-state {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pc);
+}
+.ptile-phone {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.ptile-phone.on {
+  color: #3ddc84;
+}
+.ptile-progress {
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--glass-soft);
+  overflow: hidden;
+}
+.ptile-manual {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  text-decoration: underline;
+}
+
+/* Aufdecken eines Songs */
+.rv {
+  --pc: var(--primary);
+  display: grid;
+  gap: 20px;
+}
+.rv-main {
+  display: grid;
+  grid-template-columns: minmax(200px, 360px) 1fr;
+  align-items: center;
+  gap: clamp(20px, 4vw, 48px);
+}
+@media (max-width: 760px) {
+  .rv-main {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+.rv-disc {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+.rv-q {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-num);
+  font-size: 120px;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+.rv-info {
+  display: grid;
+  gap: 10px;
+}
+.rv-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 750;
+  color: var(--pc);
+}
+.rv-av {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--pc);
+}
+.rv-kicker {
+  font-size: 13px;
+  color: var(--ink-3);
+  font-weight: 650;
+}
+.rv-artist {
+  font-size: clamp(18px, 2.6vw, 24px);
+  font-weight: 650;
+  color: var(--ink-2);
+}
+.rv-title {
+  font-family: var(--font-title);
+  font-size: clamp(34px, 5.6vw, 64px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+.rv-title.hidden {
+  color: var(--ink-4);
+}
+.listen-bar {
+  height: 5px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  overflow: hidden;
+}
+.listen-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.rv-ctrl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.rv-wait {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.dots {
+  display: inline-flex;
+  gap: 3px;
+}
+.dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dot 1.2s ease-in-out infinite;
+}
+.dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes dot {
+  50% {
+    opacity: 0.25;
+    transform: translateY(-3px);
+  }
+}
+.queue {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.qitem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  background: var(--glass);
+  border: 1px solid var(--hair);
+  font-size: 13px;
+}
+.qitem img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.manual-pick {
+  margin-top: 12px;
+}
+
+/* Kleinkram aus common.tsx */
+.backlink {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.gchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.gchip {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--glass-soft);
+  border: 1px solid var(--hair);
+  font-size: 14px;
+  font-weight: 600;
+}

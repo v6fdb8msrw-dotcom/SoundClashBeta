@@ -11,6 +11,9 @@ export const AV: readonly { c: string }[] = [
 ]
 
 export const BGS: readonly [string, string][] = [
+  ['aura', 'Farbwolken'],
+  ['shapes', 'Schwebende Formen'],
+  ['records', 'Platten-Regen'],
   ['mosaic', 'Künstler-Mosaik'],
   ['deck', 'Plattenspieler'],
   ['walldeck', 'Mosaik + Plattenspieler'],
@@ -23,24 +26,17 @@ export const BGS: readonly [string, string][] = [
 ]
 
 export const THEMES: readonly [string, string][] = [
-  ['silksonic', 'Silk Sonic'],
+  ['main', 'Sound Clash'],
   ['graduation', 'Graduation'],
-  ['igor', 'IGOR'],
-  ['sos', 'SOS'],
-  ['llasap', 'Long. Live. A$AP'],
   ['afterhours', 'After Hours'],
+  ['sos', 'SOS'],
   ['blonde', 'Blonde'],
-  ['currents', 'Currents'],
-  ['nectar', 'Nectar'],
-  ['warmlime', 'Warm Lime'],
-  ['skymint', 'Sky Mint'],
-  ['emerald', 'Emerald'],
-  ['ultraviolet', 'Ultra Violet'],
+  ['igor', 'IGOR'],
 ]
 
 /** Theme-Hintergrund (--bg) – Grundlage für die Kontrast-Anpassung der Spielerfarben. */
 export const THEME_BG: Record<string, string> = {
-  silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
+  main: '#0E0B22', silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
   afterhours: '#12060A', blonde: '#0B1A0E', currents: '#0C1922', nectar: '#160913', warmlime: '#20280F',
   skymint: '#1B1D22', emerald: '#053E2F', ultraviolet: '#22083D',
 }

@@ -4,7 +4,7 @@ import { mmss } from '../core/game'
 import type { Track } from '../core/types'
 import { play, stopAudio } from '../services/audio'
 import { picOf } from '../services/catalog'
-import { MQ, TQ, loadTopsFor, onSongQuery, trackList } from '../services/deezer'
+import { MQ, TQ, dzSearchArtist, loadTopsFor, onSongQuery, trackList } from '../services/deezer'
 import { Eq, useAudio, useDeezer } from '../ui/primitives'
 import { Vinyl } from '../ui/Vinyl'
 import { ask, chooseRole, connect, getClient, subscribeClient } from './client'
@@ -426,11 +426,73 @@ function RevealPhone({ V, me, avatars }: { V: HostView; me: number; avatars: Rec
   )
 }
 
+/** Favoriten-Modus: eigene Lieblingskünstler am Handy suchen und in den Topf legen */
+function FavPicker({ V, me }: { V: HostView; me: number }) {
+  const [q, setQ] = useState('')
+  const [res, setRes] = useState<{ name: string; pic: string; fans: number }[]>([])
+  const [busy, setBusy] = useState(false)
+  useEffect(() => {
+    const term = q.trim()
+    if (term.length < 2) {
+      setRes([])
+      return
+    }
+    setBusy(true)
+    const t = setTimeout(() => {
+      void dzSearchArtist(term, 12)
+        .then((a) => setRes(a.map((x) => ({ name: x.name, pic: x.picture_medium || '', fans: x.nb_fan || 0 }))))
+        .catch(() => setRes([]))
+        .finally(() => setBusy(false))
+    }, 280)
+    return () => clearTimeout(t)
+  }, [q])
+  const owner = V.favOwner || {}
+  const mine = V.pool.filter((a) => owner[a.toLowerCase().trim()] === me)
+  const inPool = (n: string) => V.pool.some((a) => a.toLowerCase().trim() === n.toLowerCase().trim())
+  const color = V.colors[me]
+  return (
+    <Hero color={color} kicker="Favoriten-Modus" title="Deine Lieblinge" sub={`${mine.length} im Topf · ungefähr 10 sind ideal`}>
+      <input className="r-fav-search" type="search" placeholder="Künstler suchen …" value={q} onChange={(e) => setQ(e.target.value)} autoComplete="off" />
+      <div className="r-fav-list">
+        {busy && !res.length ? (
+          <p className="r-hint">
+            Sucht <Dots />
+          </p>
+        ) : null}
+        {res.map((a) => {
+          const on = inPool(a.name)
+          const theirs = on && owner[a.name.toLowerCase().trim()] && owner[a.name.toLowerCase().trim()] !== me
+          return (
+            <button key={a.name} type="button" className={'r-fav' + (on ? ' on' : '')} disabled={!!theirs} onClick={() => ask({ t: 'favToggle', name: a.name })}>
+              {a.pic ? <img src={a.pic} alt="" /> : <span className="r-fav-ph" />}
+              <span>
+                <b>{a.name}</b>
+                <small>{theirs ? 'schon von jemand anderem gewählt' : a.fans >= 1e6 ? (a.fans / 1e6).toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' Mio. Fans' : Math.round(a.fans / 1000) + ' Tsd. Fans'}</small>
+              </span>
+              <i>{on ? '✓' : '+'}</i>
+            </button>
+          )
+        })}
+      </div>
+      {mine.length ? (
+        <div className="r-fav-mine">
+          {mine.map((a) => (
+            <button key={a} type="button" className="r-fav-chip" onClick={() => ask({ t: 'favToggle', name: a })}>
+              {a} <span>×</span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </Hero>
+  )
+}
+
 function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; avatars: Record<number, string> }) {
   const p = typeof me === 'number' ? me : 0
   const mine = getClient().mine
   const mineVote = mine && mine.key === V.duelKey ? mine.vote : null
   void code
+  if (V.screen === 'setup' && V.favMode && p) return <FavPicker V={V} me={p} />
   if (V.screen === 'draft') {
     if (V.spin && V.pool.length > 1) {
       const who = V.drawer
@@ -590,7 +652,7 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
   if (V.screen === 'round' || V.screen === 'final') {
     const best = Math.max(...Object.values(V.scores))
     return (
-      <Hero color="var(--primary)" kicker={V.screen === 'final' ? 'Endstand' : 'Runde ' + V.round + ' · Endstand'} title="🏆 Ergebnis">
+      <Hero color="var(--primary)" kicker={V.screen === 'final' ? 'Endstand' : 'Runde ' + V.round + ' · Endstand'} title="Ergebnis">
         {Array.from({ length: V.players }, (_, j) => j + 1)
           .sort((x, y) => (V.wins[y] || 0) - (V.wins[x] || 0) || V.scores[y] - V.scores[x])
           .map((q) => (
@@ -598,7 +660,7 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
               <Avatar src={avatars[q]} color={V.colors[q]} size={34} />
               <b>{V.names[q - 1]}</b>
               <span>
-                {V.scores[q]} pts · {V.wins[q] || 0}/{V.target} Siege
+                {V.scores[q]} Punkte · {V.wins[q] || 0}/{V.target} Siege
               </span>
             </div>
           ))}

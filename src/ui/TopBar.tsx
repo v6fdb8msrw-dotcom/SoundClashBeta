@@ -5,7 +5,7 @@ import { BGS, THEMES } from '../core/constants'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
-import { Sel } from './primitives'
+import { ArrowUpDown, ImageIcon, Info, Palette, Smartphone, Volume2, VolumeX, Zap } from './icons'
 
 /**
  * Kopfleiste, bewusst schlicht: Logo (→ Sound-Clash-Start), Handys koppeln und ein Menü.
@@ -45,10 +45,7 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
         <nav className="topbar" aria-label="Werkzeuge">
           <div className="tools">
             <button className={'tool' + (host.code ? ' on' : '')} id="pairBtn" onClick={() => setPair(true)} title="Handys per QR-Code koppeln">
-              <svg className="ico" viewBox="0 0 24 24" aria-hidden>
-                <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                <path d="M10.5 18.5h3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
+              <Smartphone />
               {host.code ? <span className="tool-n">{host.phones.length}</span> : null}
             </button>
             <button className={'tool' + (menu ? ' on' : '')} id="menuBtn" aria-expanded={menu} aria-controls="menuSheet" onClick={(e) => (e.stopPropagation(), setMenu((m) => !m))} title="Menü">
@@ -61,26 +58,47 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
           </div>
         </nav>
         <div className={'menusheet' + (menu ? ' open' : '')} id="menuSheet" onClick={(e) => e.stopPropagation()} aria-hidden={!menu}>
-          <div className="ms-row">
-            <span className="ms-l">Farbe</span>
-            <Sel id="theme" value={S.theme} opts={THEMES.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'theme', v })} />
+          <p className="ms-l">
+            <Palette size={15} /> Farbe
+          </p>
+          <div className="swatches" role="radiogroup" aria-label="Farbe">
+            {THEMES.map(([v, t]) => (
+              <button
+                key={v}
+                type="button"
+                role="radio"
+                data-op="theme"
+                data-v={v}
+                data-theme={v}
+                aria-selected={S.theme === v}
+                aria-checked={S.theme === v}
+                className={'swatch' + (S.theme === v ? ' on' : '')}
+                onClick={() => dispatch({ type: 'pick', id: 'theme', v })}
+              >
+                <span className="sw-art" />
+                <span className="sw-name">{t}</span>
+              </button>
+            ))}
           </div>
-          <div className="ms-row">
-            <span className="ms-l">Hintergrund</span>
-            <Sel id="bg" value={S.bg} opts={BGS.map(([v, t]) => ({ v, t }))} onPick={(v) => dispatch({ type: 'pick', id: 'bg', v })} />
-          </div>
-          <div className="ms-row">
-            <span className="ms-l">Ton</span>
-            <button className="tool" id="soundBtn" title="Ton" onClick={() => dispatch({ type: 'toggleMute' })}>
-              {S.muted ? '🔇' : '🔊'}
-            </button>
+          <p className="ms-l">
+            <ImageIcon size={15} /> Hintergrund
+          </p>
+          <div className="bgchips" role="radiogroup" aria-label="Hintergrund">
+            {BGS.map(([v, t]) => (
+              <button key={v} type="button" role="radio" data-op="bg" data-v={v} aria-selected={S.bg === v} aria-checked={S.bg === v} className={'bgchip' + (S.bg === v ? ' on' : '')} onClick={() => dispatch({ type: 'pick', id: 'bg', v })}>
+                {t}
+              </button>
+            ))}
           </div>
           <div className="ms-btns">
+            <button className={'tool' + (S.muted ? '' : ' on')} id="soundBtn" title="Ton" aria-pressed={!S.muted} onClick={() => dispatch({ type: 'toggleMute' })}>
+              {S.muted ? <VolumeX /> : <Volume2 />} {S.muted ? 'Ton aus' : 'Ton an'}
+            </button>
             <button className={'tool' + (rules ? ' on' : '')} id="rulesBtn" onClick={() => (setRules((r) => !r), setMenu(false))} aria-expanded={rules}>
-              ⓘ Spielanleitung
+              <Info /> Spielanleitung
             </button>
             <button className="tool" id="backupBtn" onClick={() => (setBackup(true), setMenu(false))} title="Spielstand sichern oder übernehmen">
-              ⇅ Spielstand
+              <ArrowUpDown /> Spielstand
             </button>
           </div>
         </div>
@@ -110,7 +128,9 @@ function Rules() {
   return (
     <div className="card rules-card">
       <div className="quickstart">
-        <h3 style={{ marginTop: 0 }}>⚡ In 10 Sekunden</h3>
+        <h3 style={{ marginTop: 0 }}>
+          <Zap size={18} /> In 10 Sekunden
+        </h3>
         <ol>
           <li>
             <b>Spieler &amp; Genre</b> wählen, Künstler in den Topf.
@@ -122,7 +142,7 @@ function Rules() {
             Pro Platz euren <b>besten Song</b> wählen, reinhören, <b>Sieger tippen</b>.
           </li>
           <li>
-            Meiste Punkte = <b>Clash gewonnen</b> 🏆
+            Meiste Punkte = <b>Clash gewonnen</b>
           </li>
         </ol>
         <p className="qs-note">Reicht zum Loslegen — die Details stehen unten.</p>

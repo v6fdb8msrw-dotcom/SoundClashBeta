@@ -1,22 +1,9 @@
-/* Schriften lokal gebündelt (offline-fähig). Variable Schriften nur mit lateinischem Zeichensatz. */
+/* Zwei Schriften: Text in der Apple-Systemschrift (SF Pro auf Apple-Geräten, sonst Manrope, lokal gebündelt),
+   große Zahlen und Titel in Anton (schmal, kräftig). */
 @font-face {
   font-family: 'Manrope';
   font-style: normal;
   font-display: swap;
   font-weight: 200 800;
   src: url('../../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2') format('woff2-variations');
-}
-@font-face {
-  font-family: 'Fraunces';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2') format('woff2-variations');
-}
-@font-face {
-  font-family: 'Fraunces';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2') format('woff2-variations');
 }

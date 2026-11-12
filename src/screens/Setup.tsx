@@ -9,6 +9,51 @@ import { GEN, ak, fansOf, realName } from '../services/catalog'
 import { ArtImg, AvImg, Btn, Presence, Seg, Sel, type Opt } from '../ui/primitives'
 import { Warn } from '../ui/Warn'
 import { PairPanel } from '../ui/PairPanel'
+import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus, ListMusic, Monitor, Pencil, Plus, Search, Smartphone, X } from '../ui/icons'
+import { Vinyl } from '../ui/Vinyl'
+import { dzAlbum } from '../services/deezer'
+
+/** Album zum Theme (das Cover ist echt, kommt von Deezer) */
+const THEME_ALBUMS: Record<string, string[]> = {
+  main: ['Graduation Kanye West', 'After Hours The Weeknd', 'Blonde Frank Ocean'],
+  graduation: ['Graduation Kanye West', 'Late Registration Kanye West', 'The College Dropout Kanye West'],
+  afterhours: ['After Hours The Weeknd', 'Starboy The Weeknd', 'Dawn FM The Weeknd'],
+  sos: ['SOS SZA', 'Ctrl SZA', 'Lana SZA'],
+  blonde: ['Blonde Frank Ocean', 'Channel Orange Frank Ocean', 'nostalgia ultra Frank Ocean'],
+  igor: ['IGOR Tyler, The Creator', 'Flower Boy Tyler, The Creator', 'Call Me If You Get Lost Tyler, The Creator'],
+}
+type Album = { cover: string; title: string; artist: string }
+
+/** Plattenregal: drei echte Alben, vorne das Album des Themes. Die Platte gleitet heraus und dreht sich. */
+function HeroStack({ S }: { S: State }) {
+  const [albums, setAlbums] = useState<(Album | null)[]>([null, null, null])
+  useEffect(() => {
+    let alive = true
+    const list = THEME_ALBUMS[S.theme] || THEME_ALBUMS.main
+    void Promise.all(list.map((q) => dzAlbum(q))).then((a) => alive && setAlbums(a))
+    return () => {
+      alive = false
+    }
+  }, [S.theme])
+  const front = albums[0]
+  return (
+    <div className="hero3d" aria-hidden>
+      <div className="h3-scene">
+        {albums.map((al, i) => (
+          <div key={i + (al?.cover || '')} className={'h3-rec r' + i}>
+            <Vinyl cover={al?.cover || undefined} spinning />
+            <div className="h3-sleeve" style={al?.cover ? { backgroundImage: `url(${al.cover})` } : undefined} />
+          </div>
+        ))}
+      </div>
+      {front ? (
+        <p className="h3-cap">
+          <b>{front.title}</b> · {front.artist}
+        </p>
+      ) : null}
+    </div>
+  )
+}
 
 const pick = (id: PickId) => (v: string) => dispatch({ type: 'pick', id, v })
 
@@ -105,10 +150,11 @@ function ArtistList({ S }: { S: State }) {
             <ArtImg n={n} />
             <span className="meta">
               <span className="nm">{realName(n)}</span>
-              <span className="sub">{f ? Math.round(f / 1000) + 'K Fans' : 'Artist'}</span>
+              <span className="sub">{f ? (f >= 1e6 ? (f / 1e6).toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' Mio. Fans' : Math.round(f / 1000) + ' Tsd. Fans') : 'Künstler'}</span>
             </span>
             <motion.button className={'act ' + (has ? 'rm' : '')} data-add={n} whileTap={{ scale: 0.8 }} onClick={() => dispatch({ type: 'poolToggle', name: n })} aria-label={(has ? 'Aus dem Topf: ' : 'In den Topf: ') + n}>
-              {has ? '✓' : '+'}
+              {has ? <Check /> : <Plus />}
+              <span className="sr">{has ? '✓' : '+'}</span>
             </motion.button>
           </motion.div>
         )
@@ -133,7 +179,7 @@ function PlayersCard({ S }: { S: State }) {
           <button type="button" className="pav-btn" data-avtoggle={p} aria-expanded={open === p} onClick={() => setOpen(open === p ? null : p)} title="Avatar ändern">
             <AvImg S={S} p={p} className="pav" />
             <span className="pav-edit" aria-hidden>
-              ✎
+              <Pencil />
             </span>
           </button>
           <NameInput data-nm={p} value={pname(S, p)} onValue={(v) => dispatch({ type: 'name', p, value: v })} aria-label={'Name Spieler ' + p} />
@@ -149,7 +195,7 @@ function PlayersCard({ S }: { S: State }) {
             )
           })}
           <button type="button" className="upav" data-up={p} title="Eigenes Bild hochladen" onClick={() => uploadAvatar(p)}>
-            +
+            <ImagePlus />
           </button>
         </div>
       </div>,
@@ -182,7 +228,7 @@ function RosterCard({ S }: { S: State }) {
               <button type="button" className="pav-btn" data-tavtoggle={i} aria-expanded={open === i} onClick={() => setOpen(open === i ? null : i)} title="Avatar ändern">
                 <img className="pav" src={r.av} alt="" style={{ ['--pc' as string]: r.col }} />
                 <span className="pav-edit" aria-hidden>
-                  ✎
+                  <Pencil />
                 </span>
               </button>
               <NameInput data-tn={i} value={r.name} onValue={(v) => dispatch({ type: 'tName', i, value: v })} aria-label={'Name Kaderplatz ' + (i + 1)} />
@@ -197,13 +243,71 @@ function RosterCard({ S }: { S: State }) {
                 )
               })}
               <button type="button" className="upav" data-tup={i} title="Eigenes Bild hochladen" onClick={() => uploadAvatar(-1 - i)}>
-                +
+                <ImagePlus />
               </button>
             </div>
           </div>
         ))}
       </div>
     </section>
+  )
+}
+
+/** Große Kacheln für die Spielart (Klassisch, Favoriten, gleicher Künstler, Turnier) */
+function ModeTiles({ S }: { S: State }) {
+  const cur = isT(S) ? 'tour' : S.sameArtist ? 'same' : S.favMode ? 'fav' : 'classic'
+  const set = (k: string) => {
+    if (k !== 'tour' && isT(S)) dispatch({ type: 'pick', id: 'mode', v: 'clash' })
+    if (k === 'tour' && !isT(S)) dispatch({ type: 'pick', id: 'mode', v: 't4' })
+    if ((k === 'same') !== S.sameArtist) dispatch({ type: 'pick', id: 'sameArtist', v: k === 'same' ? '1' : '0' })
+    if ((k === 'fav') !== S.favMode) dispatch({ type: 'pick', id: 'favMode', v: k === 'fav' ? '1' : '0' })
+  }
+  const tiles = [
+    { k: 'classic', t: 'Klassisch', d: 'Ein gemeinsamer Topf, jeder setzt blind.', i: <Disc3 /> },
+    { k: 'fav', t: 'Favoriten', d: 'Jeder bringt seine Lieblinge mit. Du ziehst die der anderen.', i: <Heart /> },
+    { k: 'same', t: 'Gleicher Künstler', d: 'Alle bekommen denselben Künstler. Wer findet den besten Song?', i: <Target /> },
+    { k: 'tour', t: 'Turnier', d: 'K.-o.-Baum mit 4, 8 oder 16 Spielern.', i: <Trophy /> },
+  ]
+  return (
+    <div className="modetiles" role="radiogroup" aria-label="Spielmodus">
+      {tiles.map((x) => (
+        <motion.button
+          key={x.k}
+          type="button"
+          role="radio"
+          aria-checked={cur === x.k}
+          data-modetile={x.k}
+          className={'modetile' + (cur === x.k ? ' on' : '')}
+          onClick={() => set(x.k)}
+          whileTap={env.reduce ? undefined : { scale: 0.96 }}
+        >
+          <span className="mt-ico">{x.i}</span>
+          <b>{x.t}</b>
+          <small>{x.d}</small>
+        </motion.button>
+      ))}
+    </div>
+  )
+}
+
+/** Favoriten-Modus: wer wählt gerade seine Künstler? */
+function FavTurn({ S }: { S: State }) {
+  const count = (p: number) => S.pool.filter((a) => S.favOwner[ak(a)] === p).length
+  return (
+    <div className="favturn">
+      <p className="hint">Wer wählt gerade? Jeder legt seine Lieblingskünstler in den Topf (mit dem Handy-Modus auch am eigenen Handy). Beim Drehen bekommst du bevorzugt die Künstler der anderen.</p>
+      <div className="ft-players">
+        {Array.from({ length: S.players }, (_, j) => j + 1).map((p) => (
+          <button key={p} type="button" className={'ft-p' + (S.favTurn === p ? ' on' : '')} style={{ ['--pc' as string]: pcol(S, p) }} onClick={() => dispatch({ type: 'favTurn', p })}>
+            <AvImg S={S} p={p} />
+            <span>
+              <b>{pname(S, p)}</b>
+              <small>{count(p)} Favoriten</small>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -215,42 +319,54 @@ export function Setup({ S }: { S: State }) {
     <div className="setup">
       <Warn S={S} />
       <div className="setup-head">
-        <p className="eyebrow">— neues match</p>
-        <h2 className="display">
-          Sound <em>Clash</em>
-        </h2>
-        <p className="lede">Blind ranken. Song für Song. Bis einer krönt.</p>
+        <div className="sh-text">
+          <p className="eyebrow">Neues Match</p>
+          <h2 className="display">
+            Wer hat den
+            <br />
+            <em>besseren Geschmack?</em>
+          </h2>
+          <p className="lede">Künstler ziehen, blind auf Plätze setzen, dann tritt Song gegen Song an. Wer am Ende die meisten Punkte holt, gewinnt.</p>
+        </div>
+        <HeroStack S={S} />
       </div>
       <section className="card scard" data-card="mode">
-        <Seg id="phoneMode" label="Wie wird gesteuert?" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[{ v: '0', t: '🖥 An diesem Gerät' }, { v: '1', t: '📱 Mit den Handys' }]} />
+        <Seg id="phoneMode" label="Wie wird gesteuert?" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[
+            { v: '0', t: 'An diesem Gerät', i: <Monitor /> },
+            { v: '1', t: 'Mit den Handys', i: <Smartphone /> },
+          ]} />
         <p className="hint" style={{ textAlign: 'left', margin: '10px 0 0' }}>
           {S.phoneMode
             ? 'Jeder steuert am eigenen Handy: drehen, setzen, Songs wählen, aufdecken und abstimmen. Dieses Gerät ist die große Bühne und spielt die Musik.'
-            : 'Alles wird an diesem Gerät gespielt. Handys können trotzdem zum Abstimmen dazukommen (📱 oben).'}
+            : 'Alles wird an diesem Gerät gespielt. Handys können trotzdem zum Abstimmen dazukommen (Handy-Symbol oben).'}
         </p>
         {S.phoneMode ? <PairPanel /> : null}
       </section>
       {isT(S) ? <RosterCard S={S} /> : <PlayersCard S={S} />}
       <section className="card scard" data-card="cfg">
         <div className="cardhead">
-          <h2 style={{ margin: 0 }}>Regeln</h2>
+          <h2 style={{ margin: 0 }}>Spielmodus</h2>
         </div>
-        <div className="g2">
+        <ModeTiles S={S} />
+        <div className="g2" style={{ marginTop: 18 }}>
           <Seg id="size" label="Songs pro Spieler" value={S.size} onPick={pick('size')} opts={[5, 7, 10, 15].map((v) => ({ v, t: String(v) }))} />
-          <Seg id="series" label="Spielmodus" value={S.series} onPick={pick('series')} opts={[{ v: 'single', t: 'Einzelrunde' }, { v: 'bo3', t: 'Best of 3' }, { v: 'bo5', t: 'Best of 5' }]} />
-          <Seg id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
-          <Seg id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam antippen' }, { v: '1', t: 'Publikum stimmt ab' }]} />
+          <Seg id="series" label="Länge" value={S.series} onPick={pick('series')} opts={[{ v: 'single', t: '1 Runde' }, { v: 'bo3', t: 'Best of 3' }, { v: 'bo5', t: 'Best of 5' }]} />
         </div>
         <button type="button" className={'advtoggle' + (adv ? ' on' : '')} id="advToggle" aria-expanded={adv} onClick={() => setAdv((a) => !a)}>
-          Mehr Optionen <span className="chev">▾</span>
+          Feinheiten{' '}
+          <span className="chev">
+            <ChevronDown />
+          </span>
         </button>
         <div className={'adv' + (adv ? ' open' : '')} aria-hidden={!adv}>
           <div className="g2">
-            <Sel id="mode" label="Spielart" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Clash (alle gegen alle)' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
-            <Sel id="sameArtist" label="Künstler" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Normal \u2014 jeder eigene K\u00fcnstler' }, { v: '1', t: 'Gleicher K\u00fcnstler f\u00fcr alle' }]} />
-            <Seg id="pickSec" label="Pick-Timer" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Aus' }, { v: '30', t: '30 Sek' }, { v: '45', t: '45 Sek' }, { v: '60', t: '60 Sek' }]} />
-            <Seg id="ambience" label="Album-Wand-Puls" value={S.ambience ? '1' : '0'} onPick={pick('ambience')} opts={[{ v: '1', t: 'An — Wand pulsiert zum Song' }, { v: '0', t: 'Aus' }]} />
-            <Seg id="autoScroll" label="Auto-Scroll (Desktop)" value={S.autoScroll ? '1' : '0'} onPick={pick('autoScroll')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
+            <Seg id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
+            <Seg id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam' }, { v: '1', t: 'Abstimmung' }]} />
+            <Seg id="pickSec" label="Zeit pro Songwahl" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Ohne' }, { v: '30', t: '30 s' }, { v: '45', t: '45 s' }, { v: '60', t: '60 s' }]} />
+            <Sel id="mode" label="Turniergröße" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Kein Turnier' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
+            <Sel id="sameArtist" label="Künstler" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Jeder eigene Künstler' }, { v: '1', t: 'Gleicher Künstler für alle' }]} />
+            <Seg id="ambience" label="Hintergrund bewegt sich zur Musik" value={S.ambience ? '1' : '0'} onPick={pick('ambience')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
+            <Seg id="autoScroll" label="Automatisch mitscrollen" value={S.autoScroll ? '1' : '0'} onPick={pick('autoScroll')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
             {isT(S) ? <Sel id="_x" label="Spieler" value={String(tSize(S))} onPick={pick('_x')} opts={[{ v: String(tSize(S)), t: tSize(S) + ' (Turnierbaum)' }]} /> : null}
           </div>
         </div>
@@ -259,7 +375,7 @@ export function Setup({ S }: { S: State }) {
         <div className="cardhead">
           <h2 style={{ margin: 0 }}>Künstler-Topf</h2>
           <motion.span className="pill" key={S.pool.length} initial={env.reduce ? false : { scale: 1.25 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 500, damping: 18 }}>
-            ♪ <b>{S.pool.length}</b> im Topf
+            <ListMusic /> <b>{S.pool.length}</b> im Topf
           </motion.span>
         </div>
         <div className="g2" style={{ marginBottom: 14 }}>
@@ -268,12 +384,13 @@ export function Setup({ S }: { S: State }) {
             <label htmlFor="asearch">Künstler suchen…</label>
             <div className="searchwrap">
               <span className="mag" aria-hidden>
-                ⌕
+                <Search />
               </span>
               <input key={S.genre} type="text" id="asearch" placeholder="Künstler suchen…" autoComplete="off" onChange={(e) => onSearch(e.target.value, S.genre)} />
             </div>
           </div>
         </div>
+        {S.favMode && !isT(S) ? <FavTurn S={S} /> : null}
         <ArtistList S={S} />
         {S.pool.length ? (
           <>
@@ -283,11 +400,11 @@ export function Setup({ S }: { S: State }) {
             <div className="poolchips">
               <Presence>
                 {S.pool.map((a) => (
-                  <motion.span className="pchip-pool" key={a} layout={!env.reduce} initial={env.reduce ? false : { opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={env.reduce ? undefined : { opacity: 0, scale: 0.7, transition: { duration: 0.12 } }}>
+                  <motion.span className="pchip-pool" key={a} style={S.favMode && S.favOwner[ak(a)] ? { ['--oc' as string]: pcol(S, S.favOwner[ak(a)]) } : undefined} layout={!env.reduce} initial={env.reduce ? false : { opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={env.reduce ? undefined : { opacity: 0, scale: 0.7, transition: { duration: 0.12 } }}>
                     <ArtImg n={a} />
                     <span className="nm">{a}</span>
                     <button className="act rm" data-rm={a} onClick={() => dispatch({ type: 'poolRemove', name: a })} aria-label={'Entfernen: ' + a}>
-                      ✕
+                      <X />
                     </button>
                   </motion.span>
                 ))}
@@ -297,11 +414,13 @@ export function Setup({ S }: { S: State }) {
         ) : null}
       </section>
       <div className="startbar">
-        <span className="hint" style={{ margin: 0, textAlign: 'left' }}>
-          Mindestens {need} Künstler in den Topf legen.
+        <span className="sb-meter" style={{ ['--p' as string]: Math.min(1, S.pool.length / need) }} aria-hidden>
+          <b>{Math.min(S.pool.length, need)}</b>
+          <small>/{need}</small>
         </span>
+        <span className="hint sb-text">{S.pool.length >= need ? 'Der Topf ist voll genug. Los geht’s!' : `Mindestens ${need} Künstler in den Topf legen.`}</span>
         <Btn id="startBtn" className={S.pool.length >= need ? 'ready' : ''} disabled={S.pool.length < need} onClick={() => dispatch({ type: 'start' })}>
-          Match starten →
+          Match starten <ArrowRight />
         </Btn>
       </div>
     </div>

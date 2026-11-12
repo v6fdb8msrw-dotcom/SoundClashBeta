@@ -24,8 +24,8 @@
     "series": "bo3",
     "muted": false,
     "ambience": true,
-    "theme": "silksonic",
-    "bg": "mosaic",
+    "theme": "main",
+    "bg": "aura",
     "genre": "deutschrap",
     "pool": [
      "Sido",
@@ -53,7 +53,9 @@
     "roster": null,
     "autoScroll": true,
     "pickSec": 0,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [
@@ -75,28 +77,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Apache 207",
@@ -114,28 +116,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bonez MC",
@@ -153,28 +155,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bushido",
@@ -192,28 +194,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00100",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Alligatoah",
@@ -231,28 +233,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Kollegah",
@@ -270,28 +272,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01001",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Ufo361",
@@ -309,28 +311,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01001",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Kontra K",
@@ -348,28 +350,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11010",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01001",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Farid Bang",
@@ -387,28 +389,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11010",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01011",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "RAF Camora",
@@ -426,28 +428,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11010",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01011",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Nimo",
@@ -465,28 +467,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11010",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01011",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Capital Bra",
@@ -504,28 +506,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11010",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11011",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Kay One",
@@ -543,28 +545,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11011",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11011",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Cro",
@@ -582,28 +584,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11011",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Loredana",
@@ -621,28 +623,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Letzten Künstler ziehen →"
+     "spinLabel": "Letzten Künstler ziehen Leertaste"
     },
     "reveal": {
      "artist": "Sido",
@@ -740,13 +742,13 @@
      "P2: 0",
      "P3: 0"
     ],
-    "big": "#1 · 1 PTS",
+    "big": "Platz 1 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Apache 207",
       "song": "Roller",
-      "dur": "2:38",
+      "dur": "Apache 207 · 2:38",
       "links": [
        "https://open.spotify.com/search/Apache%20207%20Roller",
        "https://www.youtube.com/results?search_query=Apache%20207%20Roller"
@@ -758,7 +760,7 @@
      {
       "artist": "Capital Bra",
       "song": "Neymar",
-      "dur": "4:24",
+      "dur": "Capital Bra · 4:24",
       "links": [
        "https://open.spotify.com/search/Capital%20Bra%20Neymar",
        "https://www.youtube.com/results?search_query=Capital%20Bra%20Neymar"
@@ -770,7 +772,7 @@
      {
       "artist": "Sido",
       "song": "PUZZLETEIL",
-      "dur": "2:47",
+      "dur": "Sido · 2:47",
       "links": [
        "https://open.spotify.com/search/Sido%20PUZZLETEIL",
        "https://www.youtube.com/results?search_query=Sido%20PUZZLETEIL"
@@ -795,13 +797,13 @@
      "P2: 0",
      "P3: 0"
     ],
-    "big": "#2 · 1 PTS",
+    "big": "Platz 2 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Ufo361",
       "song": "Scheiß auf eure Party",
-      "dur": "3:40",
+      "dur": "Ufo361 · 3:40",
       "links": [
        "https://open.spotify.com/search/Ufo361%20Schei%C3%9F%20auf%20eure%20Party",
        "https://www.youtube.com/results?search_query=Ufo361%20Schei%C3%9F%20auf%20eure%20Party"
@@ -813,7 +815,7 @@
      {
       "artist": "Bonez MC",
       "song": "Ohne mein Team",
-      "dur": "3:09",
+      "dur": "Bonez MC · 3:09",
       "links": [
        "https://open.spotify.com/search/Bonez%20MC%20Ohne%20mein%20Team",
        "https://www.youtube.com/results?search_query=Bonez%20MC%20Ohne%20mein%20Team"
@@ -825,7 +827,7 @@
      {
       "artist": "Nimo",
       "song": "2011",
-      "dur": "3:50",
+      "dur": "Nimo · 3:50",
       "links": [
        "https://open.spotify.com/search/Nimo%202011",
        "https://www.youtube.com/results?search_query=Nimo%202011"
@@ -850,13 +852,13 @@
      "P2: 1",
      "P3: 0"
     ],
-    "big": "#3 · 1 PTS",
+    "big": "Platz 3 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Cro",
       "song": "Nie mehr",
-      "dur": "3:04",
+      "dur": "Cro · 3:04",
       "links": [
        "https://open.spotify.com/search/Cro%20Nie%20mehr",
        "https://www.youtube.com/results?search_query=Cro%20Nie%20mehr"
@@ -868,7 +870,7 @@
      {
       "artist": "Loredana",
       "song": "BALLADE",
-      "dur": "2:35",
+      "dur": "Loredana · 2:35",
       "links": [
        "https://open.spotify.com/search/Loredana%20BALLADE",
        "https://www.youtube.com/results?search_query=Loredana%20BALLADE"
@@ -880,7 +882,7 @@
      {
       "artist": "Bushido",
       "song": "Sonnenbank Flavour",
-      "dur": "3:40",
+      "dur": "Bushido · 3:40",
       "links": [
        "https://open.spotify.com/search/Bushido%20Sonnenbank%20Flavour",
        "https://www.youtube.com/results?search_query=Bushido%20Sonnenbank%20Flavour"
@@ -905,13 +907,13 @@
      "P2: 2",
      "P3: 0"
     ],
-    "big": "#4 · 1 PTS",
+    "big": "Platz 4 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Kontra K",
       "song": "Nur für Dich",
-      "dur": "3:12",
+      "dur": "Kontra K · 3:12",
       "links": [
        "https://open.spotify.com/search/Kontra%20K%20Nur%20f%C3%BCr%20Dich",
        "https://www.youtube.com/results?search_query=Kontra%20K%20Nur%20f%C3%BCr%20Dich"
@@ -923,7 +925,7 @@
      {
       "artist": "Farid Bang",
       "song": "Mein Lieblingssong",
-      "dur": "",
+      "dur": "Farid Bang",
       "links": [
        "https://open.spotify.com/search/Farid%20Bang%20Mein%20Lieblingssong",
        "https://www.youtube.com/results?search_query=Farid%20Bang%20Mein%20Lieblingssong"
@@ -935,7 +937,7 @@
      {
       "artist": "RAF Camora",
       "song": "Blaues Licht",
-      "dur": "2:24",
+      "dur": "RAF Camora · 2:24",
       "links": [
        "https://open.spotify.com/search/RAF%20Camora%20Blaues%20Licht",
        "https://www.youtube.com/results?search_query=RAF%20Camora%20Blaues%20Licht"
@@ -960,13 +962,13 @@
      "P2: 3",
      "P3: 0"
     ],
-    "big": "#5 · 2 PTS",
+    "big": "Platz 5 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Kay One",
       "song": "Keep Calm (feat. Emory)",
-      "dur": "4:43",
+      "dur": "Kay One · 4:43",
       "links": [
        "https://open.spotify.com/search/Kay%20One%20Keep%20Calm%20(feat.%20Emory)",
        "https://www.youtube.com/results?search_query=Kay%20One%20Keep%20Calm%20(feat.%20Emory)"
@@ -978,7 +980,7 @@
      {
       "artist": "Kollegah",
       "song": "Du bist Boss",
-      "dur": "2:43",
+      "dur": "Kollegah · 2:43",
       "links": [
        "https://open.spotify.com/search/Kollegah%20Du%20bist%20Boss",
        "https://www.youtube.com/results?search_query=Kollegah%20Du%20bist%20Boss"
@@ -990,7 +992,7 @@
      {
       "artist": "Alligatoah",
       "song": "PARTNER IN CRIME (feat. Tarek K.I.Z)",
-      "dur": "3:30",
+      "dur": "Alligatoah · 3:30",
       "links": [
        "https://open.spotify.com/search/Alligatoah%20PARTNER%20IN%20CRIME%20(feat.%20Tarek%20K.I.Z)",
        "https://www.youtube.com/results?search_query=Alligatoah%20PARTNER%20IN%20CRIME%20(feat.%20Tarek%20K.I.Z)"
@@ -1048,7 +1050,7 @@
      {
       "artist": "Ali Bumaye",
       "song": "Sex ohne Grund (feat. Shindy)",
-      "dur": "3:07",
+      "dur": "Ali Bumaye · 3:07",
       "links": [
        "https://open.spotify.com/search/Ali%20Bumaye%20Sex%20ohne%20Grund%20(feat.%20Shindy)",
        "https://www.youtube.com/results?search_query=Ali%20Bumaye%20Sex%20ohne%20Grund%20(feat.%20Shindy)"
@@ -1060,7 +1062,7 @@
      {
       "artist": "Fler",
       "song": "Swagger",
-      "dur": "2:37",
+      "dur": "Fler · 2:37",
       "links": [
        "https://open.spotify.com/search/Fler%20Swagger",
        "https://www.youtube.com/results?search_query=Fler%20Swagger"
@@ -1078,7 +1080,7 @@
   "label": "runde-1",
   "data": {
    "kicker": "Runde 1 · Endstand",
-   "title": "P2 ✦",
+   "title": "P2",
    "stats": [
     {
      "nm": "P1",
@@ -1159,7 +1161,7 @@
  },
  {
   "label": "topf-runde2",
-  "data": "♪ 15 im Topf"
+  "data": " 15 im Topf"
  },
  {
   "label": "draft-2",
@@ -1175,28 +1177,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "0/5 Plätze · 1 W",
+       "st": "0/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Sido",
@@ -1214,28 +1216,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "0/5 Plätze · 1 W",
+       "st": "0/5 Plätze · 1 Sieg",
        "on": true,
        "taken": "00000",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": false,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Cro",
@@ -1253,28 +1255,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "1/5 Plätze · 1 W",
+       "st": "1/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00100",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "0/5 Plätze · 0 W",
+       "st": "0/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00000",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Nimo",
@@ -1292,28 +1294,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "1/5 Plätze · 1 W",
+       "st": "1/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00100",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "00001",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Kontra K",
@@ -1331,28 +1333,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": false,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "1/5 Plätze · 1 W",
+       "st": "1/5 Plätze · 1 Sieg",
        "on": true,
        "taken": "00100",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01001",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Kollegah",
@@ -1370,28 +1372,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "1/5 Plätze · 0 W",
+       "st": "1/5 Plätze · 0 Siege",
        "on": true,
        "taken": "10000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "2/5 Plätze · 1 W",
+       "st": "2/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00101",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01001",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Kay One",
@@ -1409,28 +1411,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11000",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "2/5 Plätze · 1 W",
+       "st": "2/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00101",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01001",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bushido",
@@ -1448,28 +1450,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "2/5 Plätze · 1 W",
+       "st": "2/5 Plätze · 1 Sieg",
        "on": true,
        "taken": "00101",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01001",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Ufo361",
@@ -1487,28 +1489,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "3/5 Plätze · 1 W",
+       "st": "3/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "2/5 Plätze · 0 W",
+       "st": "2/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01001",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Farid Bang",
@@ -1526,28 +1528,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "3/5 Plätze · 1 W",
+       "st": "3/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "00111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01101",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Capital Bra",
@@ -1565,28 +1567,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "3/5 Plätze · 1 W",
+       "st": "3/5 Plätze · 1 Sieg",
        "on": true,
        "taken": "00111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "RAF Camora",
@@ -1604,28 +1606,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "3/5 Plätze · 0 W",
+       "st": "3/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11001",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "4/5 Plätze · 1 W",
+       "st": "4/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "10111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Apache 207",
@@ -1643,28 +1645,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "11011",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "4/5 Plätze · 1 W",
+       "st": "4/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "10111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Alligatoah",
@@ -1682,28 +1684,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "4/5 Plätze · 1 W",
+       "st": "4/5 Plätze · 1 Sieg",
        "on": true,
        "taken": "10111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": false,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Rad drehen · [space]"
+     "spinLabel": "Rad drehen Leertaste"
     },
     "reveal": {
      "artist": "Bonez MC",
@@ -1721,28 +1723,28 @@
      "clusters": [
       {
        "name": "P1",
-       "st": "5/5 Plätze · 0 W",
+       "st": "5/5 Plätze · 0 Siege",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "P2",
-       "st": "5/5 Plätze · 1 W",
+       "st": "5/5 Plätze · 1 Sieg",
        "on": false,
        "taken": "11111",
        "two": "00001"
       },
       {
        "name": "P3",
-       "st": "4/5 Plätze · 0 W",
+       "st": "4/5 Plätze · 0 Siege",
        "on": true,
        "taken": "01111",
        "two": "00001"
       }
      ],
      "ask": "",
-     "spinLabel": "Letzten Künstler ziehen →"
+     "spinLabel": "Letzten Künstler ziehen Leertaste"
     },
     "reveal": {
      "artist": "Loredana",
@@ -1762,13 +1764,13 @@
      "P2: 0",
      "P3: 0"
     ],
-    "big": "#1 · 1 PTS",
+    "big": "Platz 1 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Sido",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Sido",
       "links": [
        "https://open.spotify.com/search/Sido%20",
        "https://www.youtube.com/results?search_query=Sido%20"
@@ -1780,7 +1782,7 @@
      {
       "artist": "RAF Camora",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "RAF Camora",
       "links": [
        "https://open.spotify.com/search/RAF%20Camora%20",
        "https://www.youtube.com/results?search_query=RAF%20Camora%20"
@@ -1792,7 +1794,7 @@
      {
       "artist": "Loredana",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Loredana",
       "links": [
        "https://open.spotify.com/search/Loredana%20",
        "https://www.youtube.com/results?search_query=Loredana%20"
@@ -1817,13 +1819,13 @@
      "P2: 1",
      "P3: 0"
     ],
-    "big": "#2 · 1 PTS",
+    "big": "Platz 2 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Kay One",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Kay One",
       "links": [
        "https://open.spotify.com/search/Kay%20One%20",
        "https://www.youtube.com/results?search_query=Kay%20One%20"
@@ -1835,7 +1837,7 @@
      {
       "artist": "Bonez MC",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Bonez MC",
       "links": [
        "https://open.spotify.com/search/Bonez%20MC%20",
        "https://www.youtube.com/results?search_query=Bonez%20MC%20"
@@ -1847,7 +1849,7 @@
      {
       "artist": "Kontra K",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Kontra K",
       "links": [
        "https://open.spotify.com/search/Kontra%20K%20",
        "https://www.youtube.com/results?search_query=Kontra%20K%20"
@@ -1872,13 +1874,13 @@
      "P2: 2",
      "P3: 0"
     ],
-    "big": "#3 · 1 PTS",
+    "big": "Platz 3 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Alligatoah",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Alligatoah",
       "links": [
        "https://open.spotify.com/search/Alligatoah%20",
        "https://www.youtube.com/results?search_query=Alligatoah%20"
@@ -1890,7 +1892,7 @@
      {
       "artist": "Cro",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Cro",
       "links": [
        "https://open.spotify.com/search/Cro%20",
        "https://www.youtube.com/results?search_query=Cro%20"
@@ -1902,7 +1904,7 @@
      {
       "artist": "Farid Bang",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Farid Bang",
       "links": [
        "https://open.spotify.com/search/Farid%20Bang%20",
        "https://www.youtube.com/results?search_query=Farid%20Bang%20"
@@ -1927,13 +1929,13 @@
      "P2: 2",
      "P3: 1"
     ],
-    "big": "#4 · 1 PTS",
+    "big": "Platz 4 · 1 Punkt",
     "lede": "",
     "cards": [
      {
       "artist": "Apache 207",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Apache 207",
       "links": [
        "https://open.spotify.com/search/Apache%20207%20",
        "https://www.youtube.com/results?search_query=Apache%20207%20"
@@ -1945,7 +1947,7 @@
      {
       "artist": "Ufo361",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Ufo361",
       "links": [
        "https://open.spotify.com/search/Ufo361%20",
        "https://www.youtube.com/results?search_query=Ufo361%20"
@@ -1957,7 +1959,7 @@
      {
       "artist": "Capital Bra",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Capital Bra",
       "links": [
        "https://open.spotify.com/search/Capital%20Bra%20",
        "https://www.youtube.com/results?search_query=Capital%20Bra%20"
@@ -1982,13 +1984,13 @@
      "P2: 2",
      "P3: 2"
     ],
-    "big": "#5 · 2 PTS",
+    "big": "Platz 5 · 2 Punkte",
     "lede": "",
     "cards": [
      {
       "artist": "Bushido",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Bushido",
       "links": [
        "https://open.spotify.com/search/Bushido%20",
        "https://www.youtube.com/results?search_query=Bushido%20"
@@ -2000,7 +2002,7 @@
      {
       "artist": "Kollegah",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Kollegah",
       "links": [
        "https://open.spotify.com/search/Kollegah%20",
        "https://www.youtube.com/results?search_query=Kollegah%20"
@@ -2012,7 +2014,7 @@
      {
       "artist": "Nimo",
       "song": "Kein Song gewählt",
-      "dur": "",
+      "dur": "Nimo",
       "links": [
        "https://open.spotify.com/search/Nimo%20",
        "https://www.youtube.com/results?search_query=Nimo%20"
@@ -2030,7 +2032,7 @@
   "label": "runde-2",
   "data": {
    "kicker": "Runde 2 · Endstand",
-   "title": "P2 ✦",
+   "title": "P2",
    "stats": [
     {
      "nm": "P1",
@@ -2106,9 +2108,9 @@
    "kicker": "Sieger",
    "win": "P2",
    "ranks": [
-    "1P22 Rundensiege · 4 pts🏆",
-    "2P30 Rundensiege · 2 pts",
-    "3P10 Rundensiege · 0 pts"
+    "1P22 Rundensiege · 4 Punkte",
+    "2P30 Rundensiege · 2 Punkte",
+    "3P10 Rundensiege · 0 Punkte"
    ],
    "crate": [
     "RAF CamoraRAF CamoraPlatz #1 · P2",
@@ -2145,7 +2147,7 @@
    ],
    "buttons": [
     "⇪ Teilen",
-    "↻ Neues Match"
+    "Neues Match"
    ]
   }
  },
@@ -2174,8 +2176,8 @@
     "series": "bo3",
     "muted": false,
     "ambience": true,
-    "theme": "silksonic",
-    "bg": "mosaic",
+    "theme": "main",
+    "bg": "aura",
     "genre": "deutschrap",
     "pool": [],
     "warnOff": false,
@@ -2187,7 +2189,9 @@
     "roster": null,
     "autoScroll": true,
     "pickSec": 0,
-    "phoneMode": false
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {}
    },
    "rivalry": null,
    "keys": [

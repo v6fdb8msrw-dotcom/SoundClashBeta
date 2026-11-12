@@ -4,6 +4,7 @@ import { isT, leader, pcol, pname, roundMax, roundScore, target, wins } from '..
 import type { State } from '../core/types'
 import { AvImg, Btn, Tilt } from '../ui/primitives'
 import { CountUp, Recap } from './Results'
+import { Sparkles, Trophy } from '../ui/icons'
 
 /** Rundenende (roundScreen im Original). */
 export function Round({ S }: { S: State }) {
@@ -22,7 +23,7 @@ export function Round({ S }: { S: State }) {
         animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
         transition={{ type: 'spring', stiffness: 170, damping: 15 }}
       >
-        {pname(S, w)} <span className="sparkle">✦</span>
+        {pname(S, w)} <Sparkles className="sparkle" />
       </motion.h2>
       <div className="cols" style={{ marginTop: 26 }}>
         {Array.from({ length: S.players }, (_, j) => j + 1).map((p, idx) => (
@@ -31,7 +32,7 @@ export function Round({ S }: { S: State }) {
               <div className="top">
                 <AvImg S={S} p={p} />
                 <span className="nm">{pname(S, p)}</span>
-                {p === w ? <span style={{ fontSize: 20 }}>🏆</span> : null}
+                {p === w ? <Trophy size={20} className="tr-ico" /> : null}
               </div>
               <div className="stats">
                 <div>

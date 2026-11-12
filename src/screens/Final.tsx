@@ -6,6 +6,7 @@ import type { State } from '../core/types'
 import { AvImg, Btn } from '../ui/primitives'
 import { Crate, Recap, Rivalry, Trophy } from './Results'
 import { share } from './share'
+import { RotateCcw, Trophy as TrophyIcon } from '../ui/icons'
 
 const rowIn = (i: number) => ({ initial: env.reduce ? false : ({ opacity: 0, x: -24 } as const), animate: { opacity: 1, x: 0 }, transition: { delay: 0.35 + i * 0.09, type: 'spring' as const, stiffness: 240, damping: 22 } })
 
@@ -42,7 +43,7 @@ export function Final({ S }: { S: State }) {
                           <span className="nm" style={{ fontSize: 14, color: R[pi].col }}>
                             {R[pi].name}
                           </span>
-                          {win === pi ? <span style={{ fontSize: 12 }}>🏆</span> : null}
+                          {win === pi ? <TrophyIcon size={14} className="tr-ico" /> : null}
                         </span>
                         {k === 0 ? (
                           <span className="pos" style={{ fontSize: 13, width: 'auto' }}>
@@ -61,7 +62,7 @@ export function Final({ S }: { S: State }) {
         <Recap S={S} titel="Line-up des Finales" />
         <div className="row">
           <Btn className="ghost" id="newBtn" onClick={() => dispatch({ type: 'newMatch' })}>
-            ↻ Neues Turnier
+            <RotateCcw /> Neues Turnier
           </Btn>
         </div>
       </div>
@@ -90,10 +91,10 @@ export function Final({ S }: { S: State }) {
               <span className="nm">{pname(S, r.p)}</span>
               <br />
               <span className="sub">
-                {r.w} Rundensiege · {r.s} pts
+                {r.w} {r.w === 1 ? 'Rundensieg' : 'Rundensiege'} · {r.s} {r.s === 1 ? 'Punkt' : 'Punkte'}
               </span>
             </span>
-            {i === 0 ? <span style={{ fontSize: 18 }}>🏆</span> : null}
+            {i === 0 ? <TrophyIcon size={20} className="tr-ico" /> : null}
           </motion.div>
         ))}
       </div>
@@ -105,7 +106,7 @@ export function Final({ S }: { S: State }) {
           ⇪ Teilen
         </Btn>
         <Btn className="ghost" id="newBtn" onClick={() => dispatch({ type: 'newMatch' })}>
-          ↻ Neues Match
+          <RotateCcw /> Neues Match
         </Btn>
       </div>
     </div>

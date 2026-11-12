@@ -7,6 +7,7 @@ import { picBigOf, picOf } from '../services/catalog'
 import { burst, burstAt } from '../ui/Fx'
 import { ArtImg, AvImg, Btn, Presence, hideOnError } from '../ui/primitives'
 import { Wheel } from './Wheel'
+import { ArrowDown, ArrowRight, Target } from '../ui/icons'
 import { useOnline } from './PhoneMode'
 
 /** Ziehen: Rad in der Mitte, Spalten pro Spieler, Künstler blind auf einen Platz setzen. */
@@ -60,7 +61,7 @@ function Cluster({ S, p, pl, ro }: { S: State; p: number; pl: number; ro?: boole
         <span>
           <span className="nm">{pname(S, p)}</span>
           <span className="st">
-            {filled(S, p)}/{N(S)} Plätze · {wins(S, p)} W
+            {filled(S, p)}/{N(S)} Plätze · {wins(S, p)} {wins(S, p) === 1 ? 'Sieg' : 'Siege'}
           </span>
         </span>
         {active ? <span className="turn">am Zug</span> : null}
@@ -141,8 +142,8 @@ function CineDraft({ S }: { S: State }) {
     ? S.spin
       ? 'dreht das Rad …'
       : S.pending
-        ? '📱 setzt den Künstler am Handy'
-        : '📱 dreht am Handy'
+        ? 'setzt den Künstler am Handy'
+        : 'dreht am Handy'
     : S.pending
       ? '↓ Platz wählen ' + (sameArt(S) ? 'im gemeinsamen Grid' : 'in der Spalte')
       : 'Handy nicht verbunden – hier drehen'
@@ -199,7 +200,7 @@ function CineDraft({ S }: { S: State }) {
       <div className="cine-active">{sameArt(S) ? <SharedGrid S={S} pl={pl} c={c} ro={phone} /> : <Cluster S={S} p={pl} pl={pl} ro={phone} />}</div>
       {!phone && !S.pending ? (
         <Btn className="spinbtn" id="spinBtn" disabled={!!S.spin} onClick={() => dispatch({ type: 'spin' })}>
-          {S.pool.length === 1 ? 'Letzten Künstler ziehen →' : 'Rad drehen · [space]'}
+          {S.pool.length === 1 ? 'Letzten Künstler ziehen' : 'Rad drehen'} <ArrowRight />
         </Btn>
       ) : null}
       {!sameArt(S) ? (
@@ -256,7 +257,7 @@ function SharedGrid({ S, pl, c, ro }: { S: State; pl: number; c: string; ro?: bo
   return (
     <div className="pcluster on" style={{ ['--pc' as string]: c }}>
       <div className="pch">
-        <span style={{ fontSize: 22 }}>{'\ud83c\udfaf'}</span>
+        <Target />
         <span>
           <span className="nm">Gemeinsames Grid</span>
           <span className="st">
@@ -302,11 +303,11 @@ export function Draft({ S }: { S: State }) {
       </Wheel>
       {S.pending ? (
         <motion.p className="askplace" style={{ color: c }} initial={env.reduce ? false : { y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-          ↓ {pname(S, pl)}, wähle einen Platz {sameArt(S) ? 'im gemeinsamen Grid' : 'in deiner Spalte'}
+          <ArrowDown size={18} /> {pname(S, pl)}, wähle einen Platz {sameArt(S) ? 'im gemeinsamen Grid' : 'in deiner Spalte'}
         </motion.p>
       ) : (
         <Btn className="spinbtn" id="spinBtn" disabled={!!S.spin} onClick={() => dispatch({ type: 'spin' })}>
-          {S.pool.length === 1 ? 'Letzten Künstler ziehen →' : 'Rad drehen · [space]'}
+          {S.pool.length === 1 ? 'Letzten Künstler ziehen' : 'Rad drehen'} <kbd className="kbd">Leertaste</kbd>
         </Btn>
       )}
     </div>
@@ -338,7 +339,7 @@ export function Draft({ S }: { S: State }) {
           {wheel}
           <div className="pcluster on" style={{ ['--pc' as string]: c }}>
             <div className="pch">
-              <span style={{ fontSize: 22 }}>{'🎯'}</span>
+              <Target />
               <span>
                 <span className="nm">Gemeinsames Grid</span>
                 <span className="st">
