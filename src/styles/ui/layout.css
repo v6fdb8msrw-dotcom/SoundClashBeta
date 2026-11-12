@@ -1,0 +1,236 @@
+/* Spielfeld-Anordnung (Rad in der Mitte, Spielfelder links und rechts, ohne Scrollen) – aus der Version vom 15.–17.10. übernommen */
+/* ---------- Rad: größer und edler; Spielfelder links und rechts ---------- */
+@media (min-width: 941px) {
+  .draftgrid.sides {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 18px 22px;
+  }
+  /* Rad-Feld so hoch wie die Spielfelder daneben – unten alles auf einer Linie, Rad mittig */
+  .draftgrid.sides > .draftstage {
+    grid-column: 2;
+    grid-row: var(--wr, 1);
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .draftgrid.sides > .pcluster {
+    grid-column: var(--gc, auto);
+    grid-row: var(--gr, auto);
+  }
+  .draftgrid.sides .draftstage .wheelbox {
+    width: min(540px, 36vw, calc(100vh - 290px));
+    min-width: 360px;
+  }
+  .draftgrid.solo .draftstage .wheelbox {
+    width: min(600px, 84vw, calc(100vh - 270px));
+  }
+  .draftgrid.solo {
+    max-width: 760px;
+  }
+}
+/* Längliche Felder: #1 … #5 untereinander (2 Spieler beide, ab 3 Spielern der Spieler am Zug rechts groß) */
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) {
+  display: flex;
+  flex-direction: column;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slots {
+  flex: 1;
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--srows, 5), minmax(46px, 1fr));
+  grid-auto-flow: column;
+  gap: 8px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  padding: 8px 16px;
+  text-align: left;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot .n {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 20px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster.on) .slot .n {
+  font-size: 24px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot.taken .n {
+  font-size: 16px;
+  font-weight: 700;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster.on) .slot.taken .n {
+  font-size: 19px;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot .x {
+  margin-top: 0;
+  font-size: 12.5px;
+  flex: 0 0 auto;
+}
+:is(.draftgrid.sides.list > .pcluster, .draftgrid.sides.focus > .pcluster) .slot .sart {
+  left: 38%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 55%);
+  mask-image: linear-gradient(90deg, transparent, #000 55%);
+  opacity: 0.55;
+}
+.draftgrid.sides.focus > .pcluster.on {
+  animation: focusIn 0.5s var(--ease-out, ease-out);
+}
+@keyframes focusIn {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.98);
+  }
+}
+/* 3–4 Spieler: die anderen links als kompakte Felder */
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) {
+  padding: 10px 12px 12px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .pch {
+  margin-bottom: 6px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .pch img {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .pch .nm {
+  font-size: 16px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slots {
+  grid-template-rows: repeat(var(--srows, 5), minmax(24px, 1fr));
+  gap: 5px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot {
+  padding: 4px 12px;
+  border-radius: 10px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot .n {
+  font-size: 15px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot.taken .n {
+  font-size: 13.5px;
+}
+.draftgrid.sides.focus:not(.mini) > .pcluster:not(.on) .slot .x {
+  font-size: 11px;
+}
+/* 5–6 Spieler: die anderen links als Kachel-Leisten, nach unten verlängert – Künstlerfoto als Kachel,
+   Platznummer als kleines Abzeichen, Name unten; leere Plätze zeigen #n und ×1/×2 */
+.draftgrid.sides.focus.mini > .pcluster:not(.on) {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px 12px;
+  border-radius: 18px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch {
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch img {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch .nm {
+  font-size: 15px;
+  display: inline;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .pch .st {
+  margin-left: 8px;
+  font-size: 10.5px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slots {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--mcols, 5), minmax(0, 1fr));
+  grid-template-rows: none;
+  grid-auto-rows: minmax(70px, 1fr);
+  grid-auto-flow: row;
+  gap: 6px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot {
+  min-height: 0;
+  height: auto;
+  padding: 0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot .n {
+  flex: 0 0 auto;
+  font-size: 18px;
+  color: var(--muted);
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot .sart {
+  left: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot .x {
+  margin-top: 0;
+  font-size: 10px;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken {
+  justify-content: flex-end;
+  border-color: color-mix(in srgb, var(--pc) 55%, transparent);
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken .sart {
+  opacity: 1;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), transparent 62%);
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken .n {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 5px 6px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: none;
+}
+.draftgrid.sides.focus.mini > .pcluster:not(.on) .slot.taken .x {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 9.5px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+}
+@media (min-width: 941px) {
+  .draftgrid.sides.focus.mini .draftstage .wheelbox {
+    width: min(520px, 34vw, calc(100vh - 290px));
+  }
+}
+@media (max-width: 940px) {
+  .draftgrid.sides > .draftstage {
+
+/* Fernseher: Inhalt vergrößern (Faktor --tvz aus services/display.ts) */
+html[data-screen='tv'] .wrap,
+html[data-screen='tv'] .toast {
+  zoom: var(--tvz, 1);
+}
+/* Spielbildschirme ohne Scrollen */
+.fitbox {
+  transform-origin: top center;
+}

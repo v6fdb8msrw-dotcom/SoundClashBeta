@@ -23,7 +23,45 @@ export const BGS: readonly [string, string][] = [
   ['flow', 'Mosaik (wandernd)'],
   ['stage', 'Bühne (Lichtkegel)'],
   ['horizon', 'Neon-Horizont'],
+  ['waves', 'Klangwellen'],
+  ['plain', 'Schlicht'],
+  // Plattenspieler zu jedem Hintergrund zuschaltbar (Tims Wunsch)
+  ['flowdeck', 'Mosaik (wandernd) + Plattenspieler'],
+  ['stagedeck', 'Bühne + Plattenspieler'],
+  ['horizondeck', 'Neon-Horizont + Plattenspieler'],
+  ['wavesdeck', 'Klangwellen + Plattenspieler'],
+  ['auradeck', 'Farbwolken + Plattenspieler'],
+  ['shapesdeck', 'Formen + Plattenspieler'],
 ]
+
+/** Im Menü angebotene Hintergründe (die übrigen Werte bleiben für alte Spielstände gültig) */
+export const BG_MENU = ['aura', 'shapes', 'records', 'mosaic', 'waves', 'stage', 'horizon', 'plain']
+
+/**
+ * Hintergrund ohne → mit Plattenspieler. Im Menü wählt man den Hintergrund und schaltet den
+ * Plattenspieler getrennt dazu; gespeichert wird weiter ein einzelner Wert (wie im Original).
+ */
+export const BG_DECK: Readonly<Record<string, string>> = {
+  aura: 'auradeck',
+  shapes: 'shapesdeck',
+  records: 'records',
+  mosaic: 'walldeck',
+  flow: 'flowdeck',
+  aurora: 'auroradeck',
+  stage: 'stagedeck',
+  horizon: 'horizondeck',
+  waves: 'wavesdeck',
+  plain: 'deck',
+}
+/** Grund-Hintergrund ohne Plattenspieler (z. B. „walldeck“ → „mosaic“). */
+export function bgBase(bg: string): string {
+  if (BG_DECK[bg]) return bg
+  for (const k in BG_DECK) if (BG_DECK[k] === bg) return k
+  return bg
+}
+export function bgHasDeck(bg: string): boolean {
+  return bgBase(bg) !== bg
+}
 
 export const THEMES: readonly [string, string][] = [
   ['main', 'Sound Clash'],

@@ -75,14 +75,18 @@ test('Begleiter · koppeln, vom Handy drehen, setzen, Song wählen und abstimmen
 
   // Abstimmen vom Handy (Publikum stimmt ab ist Standard)
   await host.locator('.duelhead').waitFor()
-  await phone.locator('[data-rvote="1"]').click({ timeout: 30_000 })
+  // Für den eigenen Song kann P1 nicht stimmen
+  await expect(phone.locator('[data-rvote="1"]')).toBeDisabled({ timeout: 30_000 })
+  await expect(phone.locator('[data-rvote="1"]')).toHaveClass(/own/)
+  await phone.locator('[data-rvote="2"]').click({ timeout: 30_000 })
   await expect(host.locator('#voteClose')).toContainText('1 Stimme', { timeout: 15_000 })
-  await fan.locator('[data-rvote="2"]').click({ timeout: 30_000 })
+  await fan.locator('[data-rvote="1"]').click({ timeout: 30_000 })
   await expect(host.locator('#voteClose')).toContainText('2 Stimmen', { timeout: 15_000 })
-  // Stimme ändern: P1-Handy wechselt zu P2 → 0 : 2
-  await phone.locator('[data-rvote="2"]').click()
+  // Stimme ändern: Zuschauer wechselt zu P2 → 0 : 2
+  await fan.locator('[data-rvote="2"]').click()
   await expect(host.locator('.dcard').nth(1).locator('.vpct')).toHaveText('100%', { timeout: 15_000 })
   await expect(host.locator('#voteClose')).toContainText('2 Stimmen')
+  await expect(fan.locator('[data-rvote="2"]')).toHaveClass(/mine/)
   await expect(phone.locator('[data-rvote="2"]')).toHaveClass(/mine/)
   await SHOT(phone, 'handy-5-abstimmen')
   // Doppelt tippen zählt nicht doppelt

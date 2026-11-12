@@ -109,3 +109,37 @@ test('Spielstand · Export als Datei und Import auf „einem anderen Gerät“',
   await expect(p2.locator('.modal .warn')).toContainText('nicht aus Sound Clash')
   await other.close()
 })
+
+test('Startseite · Modus-Kacheln, Feinheiten eingeklappt, Favoriten-Modus, Fernseher-Modus', async ({ app, page }) => {
+  await app.open()
+  // Spieler, Modus und Künstler-Topf sind sichtbar, Feinheiten eingeklappt
+  await expect(page.locator('[data-op="players"][data-v="3"]')).toBeVisible()
+  await expect(page.locator('#alist')).toBeVisible()
+  await expect(page.locator('[data-modetile]')).toHaveCount(4)
+  await expect(page.locator('[data-op="songMode"][data-v="upfront"]')).toBeHidden()
+  await page.locator('#advToggle').click()
+  await expect(page.locator('[data-op="songMode"][data-v="upfront"]')).toBeVisible()
+  await page.locator('[data-op="size"][data-v="7"]').click()
+  await expect(page.locator('[data-op="size"][aria-selected="true"]')).toHaveText('7')
+  // Favoriten: Spieler 2 wählt, seine Künstler bekommen seine Farbe
+  await page.locator('[data-modetile="fav"]').click()
+  await expect(page.locator('[data-modetile="fav"]')).toHaveAttribute('aria-checked', 'true')
+  await page.locator('.ft-p').nth(1).click()
+  await page.locator('#alist [data-add]').filter({ hasText: '+' }).first().click()
+  await expect(page.locator('.ft-p').nth(1)).toContainText('1 Favoriten')
+  await page.locator('[data-modetile="classic"]').click()
+  await page.locator('[data-op="size"][data-v="5"]').click()
+
+  // Fernseher: Inhalt wird vergrößert, ohne seitlich überzulaufen; bleibt nach Neuladen
+  await page.locator('#menuBtn').click()
+  await page.locator('#screen-tv').click()
+  await expect(page.locator('html')).toHaveAttribute('data-screen', 'tv')
+  const zoom = await page.evaluate(() => Number(getComputedStyle(document.querySelector('.wrap')!).zoom))
+  expect(zoom).toBeGreaterThanOrEqual(1.2)
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('data-screen', 'tv')
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await page.locator('#menuBtn').click()
+  await page.locator('#screen-laptop').click()
+  await expect(page.locator('html')).toHaveAttribute('data-screen', 'laptop')
+})

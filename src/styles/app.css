@@ -9,6 +9,7 @@
 @import './vinyl.css';
 @import './ui/setup.css';
 @import './ui/draft.css';
+@import './ui/layout.css';
 @import './ui/play.css';
 @import './ui/results.css';
 @import './ui/overlays.css';

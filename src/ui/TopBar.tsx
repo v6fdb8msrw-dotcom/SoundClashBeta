@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { dispatch } from '../app/store'
-import { BGS, THEMES } from '../core/constants'
+import { BG_DECK, BG_MENU, BGS, THEMES, bgBase, bgHasDeck } from '../core/constants'
+import { getScreen, setScreen, subscribeScreen } from '../services/display'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
-import { ArrowUpDown, ImageIcon, Info, Palette, Smartphone, Volume2, VolumeX, Zap } from './icons'
+import { ArrowUpDown, Disc3, ImageIcon, Info, Laptop, Palette, Smartphone, Tv, Volume2, VolumeX, Zap } from './icons'
 
 /**
  * Kopfleiste, bewusst schlicht: Logo (→ Sound-Clash-Start), Handys koppeln und ein Menü.
@@ -84,11 +85,40 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
             <ImageIcon size={15} /> Hintergrund
           </p>
           <div className="bgchips" role="radiogroup" aria-label="Hintergrund">
-            {BGS.map(([v, t]) => (
-              <button key={v} type="button" role="radio" data-op="bg" data-v={v} aria-selected={S.bg === v} aria-checked={S.bg === v} className={'bgchip' + (S.bg === v ? ' on' : '')} onClick={() => dispatch({ type: 'pick', id: 'bg', v })}>
-                {t}
-              </button>
-            ))}
+            {BGS.filter(([v]) => BG_MENU.includes(v)).map(([v, t]) => {
+              const on = bgBase(S.bg) === v
+              return (
+                <button
+                  key={v}
+                  type="button"
+                  role="radio"
+                  data-op="bg"
+                  data-v={v}
+                  aria-selected={on}
+                  aria-checked={on}
+                  className={'bgchip' + (on ? ' on' : '')}
+                  onClick={() => dispatch({ type: 'pick', id: 'bg', v: bgHasDeck(S.bg) && BG_DECK[v] ? BG_DECK[v] : v })}
+                >
+                  {t}
+                </button>
+              )
+            })}
+          </div>
+          <div className="ms-toggles">
+            <button
+              type="button"
+              className={'ms-toggle' + (bgHasDeck(S.bg) ? ' on' : '')}
+              id="deckBtn"
+              aria-pressed={bgHasDeck(S.bg)}
+              onClick={() => {
+                const base = bgBase(S.bg)
+                dispatch({ type: 'pick', id: 'bg', v: bgHasDeck(S.bg) ? base : BG_DECK[base] || 'deck' })
+              }}
+            >
+              <Disc3 /> Plattenspieler
+              <span className="sw" aria-hidden />
+            </button>
+            <ScreenSwitch />
           </div>
           <div className="ms-btns">
             <button className={'tool' + (S.muted ? '' : ' on')} id="soundBtn" title="Ton" aria-pressed={!S.muted} onClick={() => dispatch({ type: 'toggleMute' })}>
@@ -193,6 +223,29 @@ function Rules() {
       <p>
         Bei Best of 3/5 zählt jeder Rundensieg. Der Endstand lässt sich als Bild <b>teilen</b>.
       </p>
+    </div>
+  )
+}
+
+/** Laptop / Fernseher: Fernseher vergrößert alles für die Couch (wird auf diesem Gerät gemerkt). */
+function ScreenSwitch() {
+  const m = useSyncExternalStore(subscribeScreen, getScreen, getScreen)
+  return (
+    <div className="seg ms-seg" role="radiogroup" aria-label="Bildschirm">
+      {(
+        [
+          ['laptop', 'Laptop', <Laptop key="l" />],
+          ['tv', 'Fernseher', <Tv key="t" />],
+        ] as const
+      ).map(([v, t, ic]) => (
+        <button key={v} type="button" role="radio" id={'screen-' + v} aria-checked={m === v} className={m === v ? 'on' : ''} onClick={() => setScreen(v)}>
+          {m === v ? <span className="seg-ind" /> : null}
+          <span className="seg-t">
+            {ic}
+            {t}
+          </span>
+        </button>
+      ))}
     </div>
   )
 }

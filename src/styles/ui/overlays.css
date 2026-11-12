@@ -431,3 +431,51 @@ body .menusheet .swatch .sw-name {
     grid-template-columns: 1fr;
   }
 }
+.ms-toggles {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.ms-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: var(--glass-soft);
+  border: 1px solid var(--hair);
+  font-size: 15px;
+  font-weight: 650;
+}
+.ms-toggle svg {
+  width: 19px;
+  height: 19px;
+}
+.ms-toggle .sw {
+  position: relative;
+  margin-left: auto;
+  width: 46px;
+  height: 28px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 18%, transparent);
+  transition: background 0.25s var(--ease);
+}
+.ms-toggle .sw::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s var(--spring);
+}
+.ms-toggle.on .sw {
+  background: #34c759;
+}
+.ms-toggle.on .sw::after {
+  transform: translateX(18px);
+}

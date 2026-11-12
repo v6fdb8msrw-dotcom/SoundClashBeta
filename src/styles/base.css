@@ -585,8 +585,8 @@ input::placeholder {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(50% - 50vw);
-  right: calc(50% - 50vw);
+  left: calc(50% - 50vw / var(--tvz, 1));
+  right: calc(50% - 50vw / var(--tvz, 1));
   z-index: -1;
   background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 96%, transparent), color-mix(in srgb, var(--bg) 86%, transparent));
   backdrop-filter: blur(18px) saturate(150%);

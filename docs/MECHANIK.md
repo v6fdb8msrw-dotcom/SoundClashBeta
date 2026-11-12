@@ -322,13 +322,43 @@ Referenzen (`tests/golden/neu/`), alles andere weiter mit dem Original.
 - Es gibt nur noch **Sound Clash**. Die App startet direkt in der Sound-Clash-Einrichtung, das Logo
   führt dorthin zurück. **Guess the Song, Timeline Masters, Jahrzehnt-Duell und Sing it Back** sind
   ausgeblendet: Die Logik bleibt im Code (`src/core/game.ts`), die Bildschirme liegen ungenutzt in `src/screens/`.
-- Die Einrichtung ist vereinfacht. Spieler, Regeln und Künstler-Topf stehen untereinander, seltene
-  Optionen unter „Mehr Optionen“. Farbe, Hintergrund, Ton, Spielanleitung und Spielstand liegen im
-  Menü oben rechts. Alle Funktionen sind erhalten.
-- Gestaltung: Die Platten sind echte Schallplatten (Rillen, Glanz, Cover als Etikett mit Mittelloch)
-  und drehen ruhiger. Hintergründe: die fünf des Originals (Künstler-Mosaik wie vorher, Plattenspieler
+- Die Startseite ist minimalistisch (Tims Vorgabe, 15.10.2026): oben „Wie wird gesteuert?“, dann
+  **① Spieler** und **② Künstler-Topf** – beide immer sichtbar und immer selbst zu wählen. Die Regeln
+  stehen als **eine Zeile** mit dem aktuellen Stand und klappen auf; ab Werk gilt der
+  **Schnellstart-Standard** (5 Songs · Einzelrunde · Vor jedem Duell · Publikum stimmt ab). Geänderte Regeln
+  werden wie im Original gespeichert; „↺ Auf Schnellstart-Standard zurücksetzen“ stellt sie zurück.
+  Seltene Optionen unter „Mehr Optionen“. Farbe, Hintergrund, Bildschirm, Ton, Spielanleitung und
+  Spielstand liegen im Menü oben rechts. Alle Funktionen sind erhalten.
+- **Bildschirm: Laptop / Fernseher** (Menü): „Fernseher“ vergrößert die ganze Oberfläche, sodass sie wie
+  ein Bild mit etwa 1280 × 760 Punkten wirkt – gut lesbar von der Couch. Gemerkt nur auf diesem Gerät
+  (`soundclash.app.display`), nicht im Spielstand.
+- **Überblendungen zwischen den Spielphasen:** Im normalen Modus gleitet eine Fläche in den Farben des
+  gewählten Albums mit leuchtender Kante von links nach rechts durchs Bild, der Titel baut sich Wort
+  für Wort auf: „Das Rad entscheidet“ / „Wer zieht wen?“ / „Neue Runde, neues Glück“ (Ziehen),
+  „Song Battle 1, 2, 3 …“ (mit „doppelte Punkte“ und „Das letzte Battle“), bei „Vor jedem Duell“
+  danach kurz „VS“, „Plattenkiste“ (alle Songs vorab), „Sudden Death“, „Abpfiff“ (Rundenende),
+  „Die Krönung“ (Endstand), „Turnierbaum“. Dauer 2,8 Sek, die Titelkarte ist gut 1 Sek komplett
+  lesbar. Der Handy-Modus nutzt dieselbe Überblendung (Tims Wunsch, §11). Rein optisch, keine Wartezeit.
+- Das Glücksrad ist größer (bis 540 px) und hat einen metallischen Rand in der Album-Farbe, feine helle
+  Trennlinien, eine Glas-Kuppel und einen neuen Zeiger.
+- **Spielbildschirme ohne Scrollen** (Ziehen, Songwahl, Aufdecken, Duell – beide Modi): Das Spielfeld
+  füllt die Bildschirmhöhe, die Felder enden unten bündig. Ist der Inhalt höher als der Bildschirm,
+  wird er automatisch passend verkleinert (bis 60 %); Songlisten scrollen nur innerhalb ihres Kastens.
+  Start, Rundenende, Endstand und Turnierbaum scrollen normal. Auf schmalen Bildschirmen (Handy
+  hochkant, unter 900 px Breite) bleibt alles wie bisher scrollbar.
+- **Ziehen am Mac (normaler Modus):** Spielfelder als längliche Felder #1 … #5 untereinander.
+  2 Spieler: links und rechts vom Rad, beide groß. Ab 3 Spielern: wer am Zug ist, steht rechts groß;
+  die anderen links – bei 3–4 Spielern als kompakte Felder, bei 5–6 als Mini-Leisten mit kleinen
+  Kacheln (Künstlerfoto, Platznummer, Name). Rad-Feld und Spielfelder enden unten auf einer Linie.
+  Gleicher Künstler für alle: gemeinsames Feld unter dem Rad wie bisher.
+- Gestaltung: Die Platten sind echte Schallplatten (Rillen, Glanz, Mittelloch) und drehen ruhiger.
+  Mit Cover sind es Picture-Discs: das Cover liegt über der ganzen Platte, nicht nur auf dem Etikett
+  (Tims Wunsch). Hintergründe: die fünf des Originals (Künstler-Mosaik wie vorher, Plattenspieler
   ohne hellen Sockel, Mosaik + Plattenspieler, Aurora, Aurora + Plattenspieler) plus neu
-  **Mosaik (wandernd)**, **Bühne (Lichtkegel)** und **Neon-Horizont**. Die Album-Farbschemas bleiben.
+  **Mosaik (wandernd)**, **Bühne (Lichtkegel)**, **Neon-Horizont**, **Klangwellen** und **Schlicht**.
+  Im Menü wählt man den Hintergrund und schaltet den **Plattenspieler** getrennt an oder aus – bei
+  jedem Hintergrund (gespeichert als ein Wert, z. B. „walldeck“, „wavesdeck“; „Schlicht“ + Plattenspieler
+  = „Plattenspieler“ des Originals). Die Album-Farbschemas bleiben.
 
 ## 11. Handy-Modus (Tims Vorgabe, 12.10.2026)
 
@@ -336,16 +366,17 @@ In der Einrichtung steht **„Wie wird gesteuert?“**: **„🖥 An diesem Ger�
 Abschnitte 2.1–2.9 unverändert) oder **„📱 Mit den Handys“**. Die Wahl wird mit den Einstellungen
 gespeichert (`phoneMode`). Im Handy-Modus steuern die Spieler alles am eigenen Handy, das Hauptgerät
 (z. B. MacBook) ist die große, „kinoartige“ Bühne und spielt die Musik. Punkte, Wertung, Sieger,
-Sudden Death, Serie und Turnier bleiben genau wie im Original. Zwischen den Szenen gibt es kurze
-Kino-Überblendungen (schwarze Blenden mit Titelkarte, z. B. „Runde 1“, „P2 ist dran“, „VS“).
+Sudden Death, Serie und Turnier bleiben genau wie im Original. Zwischen den Szenen gibt es dieselbe
+Wisch-Überblendung wie im normalen Modus, mit eigenen Karten wie „Alle haben gewählt“, „P2 ist dran“, „VS“.
 
 1. **Koppeln:** In der Einrichtung erscheinen QR-Code, Spielcode, der Verbindungslink (kopieren/teilen)
    und pro Spieler „verbunden/wartet“. Zuschauer können jederzeit dazukommen, auch mitten in der Runde
    (kleiner QR-Code unten rechts).
 2. **Ziehen:** gleiche Reihenfolge und Regeln wie in 2.3. Am Hauptgerät steht oben groß der Spieler am
    Zug mit seinem Spielfeld, darunter klein die Spielfelder der anderen. Wer dran ist, hat am Handy nur
-   den Knopf zum Drehen; dann wird das Rad groß am Hauptgerät eingeblendet und klein am Handy gezeigt.
-   Nach der Enthüllung verschwindet das Rad, der Spieler setzt den Künstler am Handy.
+   den Knopf zum Drehen; dann wird das Rad groß am Hauptgerät eingeblendet. Das Handy zeigt **kein Rad**
+   (Tims Vorgabe), nur „… dreht – schau auf den großen Bildschirm“. Steht das Rad, erscheint der gezogene
+   Künstler groß oben am Handy (bei allen); der Spieler setzt ihn am Handy.
    Ist sein Handy nicht verbunden, wird wie gewohnt am Hauptgerät gedreht und gesetzt.
 3. **Songwahl „Vor jedem Duell“:** Alle Teilnehmer wählen **gleichzeitig** am Handy und tippen
    „Fertig“ (danach noch änderbar). Das Hauptgerät zeigt nur Kacheln „P1 wählt …“ / „✓ bereit“, keine
@@ -363,5 +394,9 @@ Kino-Überblendungen (schwarze Blenden mit Titelkarte, z. B. „Runde 1“, „P
    Song steht, wer per Handy dafür gestimmt hat (Spieler mit Bild und Name, Zuschauer als „🙋 n Publikum“,
    Stimmen vom Hauptgerät als „🖥 +n“). Abstimmung schließen, Sieger bestätigen, Stimmengleichheit,
    Sudden Death – alles wie gehabt.
+   **Nicht für den eigenen Song (Tims Vorgabe):** Wer als Spieler gekoppelt ist, kann am Handy nicht für
+   seinen eigenen Song stimmen – die Karte ist ausgegraut („dein Song“), das Hauptgerät nimmt eine solche
+   Stimme auch nicht an. Gilt für jede Handy-Stimme (auch im klassischen Modus mit Handys); Zuschauer und
+   „+1 Stimme“ am Hauptgerät sind nicht betroffen.
 6. **Handy:** „Dein Line-up“ steht immer unten (Plätze, Künstler, Songs, „jetzt“). Beim Aufdecken sehen
    alle die Reihenfolge, was gerade läuft („läuft gerade“) und welche Songs noch geheim sind.

@@ -125,6 +125,41 @@
     inset 0 2px 6px rgba(255, 255, 255, 0.06),
     inset 0 -6px 18px rgba(0, 0, 0, 0.6);
 }
+/* Picture-Disc: Cover über die ganze Platte, Rillen glänzen darüber, Rand und Mitte leicht dunkler */
+.vinyl-art {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+.vinyl-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.18) 0 12%, transparent 30% 80%, rgba(0, 0, 0, 0.45) 97%, rgba(0, 0, 0, 0.7) 100%);
+}
+.vinyl.pic .vinyl-grooves {
+  opacity: 0.75;
+  -webkit-mask: radial-gradient(circle, transparent 0 14%, #000 14.5% 96.5%, transparent 97%);
+  mask: radial-gradient(circle, transparent 0 14%, #000 14.5% 96.5%, transparent 97%);
+}
+.vinyl.pic .vinyl-label {
+  inset: 42%;
+  background: transparent;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+.vinyl.pic .vinyl-label::after,
+.vinyl.pic .vinyl-label-ring {
+  display: none;
+}
+.vinyl.pic .vinyl-sheen {
+  -webkit-mask: radial-gradient(circle, transparent 0 12%, #000 16% 96%, transparent 97%);
+  mask: radial-gradient(circle, transparent 0 12%, #000 16% 96%, transparent 97%);
+}
 @media (prefers-reduced-motion: reduce) {
   .vinyl.spin .vinyl-disc {
     animation: none;

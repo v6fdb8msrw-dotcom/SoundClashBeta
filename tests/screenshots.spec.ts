@@ -75,6 +75,8 @@ async function flow(page: Page, prefix: string, mobile: boolean) {
   await page.locator('#menuBtn').click()
   await page.locator('[data-op="theme"][data-v="graduation"]').click()
   await page.locator('[data-op="bg"][data-v="shapes"]').click()
+  // Plattenspieler wird getrennt zugeschaltet
+  await page.locator('#deckBtn').click()
   await page.waitForTimeout(400)
   await shot(page, prefix + '-9-menue-graduation')
   await page.locator('#menuBtn').click()

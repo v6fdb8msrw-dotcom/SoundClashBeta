@@ -7,6 +7,7 @@ import type { State } from '../core/types'
 import { lastCover } from '../services/audio'
 import { picBigOf, picOf, wallPics } from '../services/catalog'
 import { useAudio } from './primitives'
+import { bgBase, bgHasDeck } from '../core/constants'
 import { onVisFrame, vis } from './visual'
 import { Vinyl } from './Vinyl'
 
@@ -111,6 +112,44 @@ function Shapes() {
   )
 }
 
+/** Klangwellen: weiche Linien, die mit der Musik atmen */
+function WaveLines() {
+  const ref = useRef<HTMLCanvasElement>(null)
+  useEffect(() => {
+    const c = ref.current
+    if (!c) return
+    const ctx = c.getContext('2d')!
+    let t = 0
+    const draw = () => {
+      const W = (c.width = innerWidth),
+        H = (c.height = innerHeight)
+      ctx.clearRect(0, 0, W, H)
+      const cs = getComputedStyle(document.body)
+      const cols = ['--primary', '--secondary', '--accent'].map((v) => cs.getPropertyValue(v).trim() || '#fff')
+      const lvl = vis.level || 0
+      for (let k = 0; k < 3; k++) {
+        ctx.beginPath()
+        for (let x = 0; x <= W; x += 8) {
+          const y = H * (0.55 + k * 0.08) + Math.sin(x / (180 + k * 60) + t * (0.6 + k * 0.25)) * (40 + lvl * 120) + Math.sin(x / 70 + t * 1.3 + k) * (8 + lvl * 30)
+          if (x) ctx.lineTo(x, y)
+          else ctx.moveTo(x, y)
+        }
+        ctx.strokeStyle = cols[k]
+        ctx.globalAlpha = 0.35
+        ctx.lineWidth = 3 + k
+        ctx.stroke()
+      }
+      t += 0.012
+    }
+    if (env.reduce) {
+      draw()
+      return
+    }
+    return onVisFrame(draw)
+  }, [])
+  return <canvas className="bg-waves" ref={ref} />
+}
+
 /** Platten, die langsam durchs Bild schweben (das aktuelle Cover als Etikett) */
 function Records({ cover }: { cover: string }) {
   const pics = useWallPics(9)
@@ -129,8 +168,9 @@ export function Background({ S }: { S: State }) {
   const { playing, beat } = useAudio()
   const cover = moodCover(S, playing)
   const root = useRef<HTMLDivElement>(null)
-  const mosaic = S.bg === 'mosaic' || S.bg === 'walldeck' || S.bg === 'flow'
-  const deck = S.bg === 'deck' || S.bg === 'walldeck' || S.bg === 'auroradeck'
+  const base = bgBase(S.bg)
+  const mosaic = base === 'mosaic' || base === 'flow'
+  const deck = bgHasDeck(S.bg) && base !== 'records'
   // Pegel des laufenden Songs → leichtes Atmen der Farbwolken (abschaltbar über „Album-Wand-Puls“)
   useEffect(() => {
     if (env.reduce || !S.ambience) {
@@ -141,7 +181,7 @@ export function Background({ S }: { S: State }) {
   }, [S.ambience])
   return (
     <div ref={root} className={'bg bg-' + S.bg + (beat ? ' beat' : '') + (playing ? ' live' : '')} data-screen={S.screen} aria-hidden>
-      <div className="aura">
+      <div className={'aura' + (base === 'plain' ? ' calm' : '')}>
         <i className="a1" />
         <i className="a2" />
         <i className="a3" />
@@ -162,16 +202,17 @@ export function Background({ S }: { S: State }) {
         ) : null}
       </AnimatePresence>
       {mosaic ? <Mosaic /> : null}
-      {S.bg === 'shapes' ? <Shapes /> : null}
-      {S.bg === 'records' ? <Records cover={cover} /> : null}
-      {S.bg === 'stage' ? (
+      {base === 'shapes' ? <Shapes /> : null}
+      {base === 'records' ? <Records cover={cover} /> : null}
+      {base === 'waves' ? <WaveLines /> : null}
+      {base === 'stage' ? (
         <div className="bg-stage">
           <i />
           <i />
           <i />
         </div>
       ) : null}
-      {S.bg === 'horizon' ? (
+      {base === 'horizon' ? (
         <div className="bg-horizon">
           <div className="sun" />
           <div className="floor" />

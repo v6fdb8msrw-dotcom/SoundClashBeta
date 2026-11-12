@@ -36,6 +36,8 @@ export {
   Palette,
   Image as ImageIcon,
   Hand,
+  Laptop,
+  Tv,
   Heart,
   AlertTriangle,
 } from 'lucide-react'

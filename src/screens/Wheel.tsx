@@ -5,6 +5,7 @@ import { onWheelFrame, wheel } from '../app/wheelAnim'
 import { mixHex } from '../core/colors'
 import { GENRE_HUE, WCOL } from '../core/constants'
 import { picOf } from '../services/catalog'
+import { tvZoom } from '../services/display'
 import type { State } from '../core/types'
 
 /**
@@ -37,7 +38,7 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
   if (!cv) return
   const ctx = cv.getContext('2d')
   if (!ctx) return
-  const dpr = Math.min(2.5, window.devicePixelRatio || 1),
+  const dpr = Math.min(5, (window.devicePixelRatio || 1) * tvZoom()),
     W = cv.clientWidth || 400
   if (cv.width !== Math.round(W * dpr)) {
     cv.width = Math.round(W * dpr)
