@@ -16,7 +16,7 @@
     "ambience": "An",
     "autoScroll": "An",
     "genre": "R&B",
-    "bg": "Aurora (Beat)",
+    "bg": "Schwebende Formen",
     "theme": "IGOR"
    },
    "names": [
@@ -67,7 +67,7 @@
     "ambience": "Aus",
     "autoScroll": "Aus",
     "genre": "Latin",
-    "bg": "Aurora (Beat)",
+    "bg": "Schwebende Formen",
     "theme": "IGOR"
    },
    "names": [
@@ -119,7 +119,7 @@
     "muted": true,
     "ambience": false,
     "theme": "igor",
-    "bg": "aurora",
+    "bg": "shapes",
     "genre": "latin",
     "pool": [
      "Shakira",
@@ -163,7 +163,7 @@
     "ambience": "Aus",
     "autoScroll": "Aus",
     "genre": "Latin",
-    "bg": "Aurora (Beat)",
+    "bg": "Schwebende Formen",
     "theme": "IGOR"
    },
    "names": [
@@ -215,7 +215,7 @@
     "muted": true,
     "ambience": false,
     "theme": "igor",
-    "bg": "aurora",
+    "bg": "shapes",
     "genre": "latin",
     "pool": [
      "Shakira",
@@ -281,7 +281,7 @@
     "muted": true,
     "ambience": false,
     "theme": "igor",
-    "bg": "aurora",
+    "bg": "shapes",
     "genre": "latin",
     "pool": [
      "Shakira",

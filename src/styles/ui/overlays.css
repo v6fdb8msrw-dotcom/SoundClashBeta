@@ -100,7 +100,7 @@
   overflow: auto;
   padding: 18px;
   border-radius: var(--r-lg);
-  background: var(--glass-strong);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
   -webkit-backdrop-filter: blur(44px) saturate(190%);
   backdrop-filter: blur(44px) saturate(190%);
   border: 1px solid var(--hair-2);

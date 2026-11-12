@@ -644,7 +644,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Letzten Künstler ziehen Leertaste"
+     "spinLabel": "Letzten Künstler ziehen"
     },
     "reveal": {
      "artist": "Sido",
@@ -1744,7 +1744,7 @@
       }
      ],
      "ask": "",
-     "spinLabel": "Letzten Künstler ziehen Leertaste"
+     "spinLabel": "Letzten Künstler ziehen"
     },
     "reveal": {
      "artist": "Loredana",

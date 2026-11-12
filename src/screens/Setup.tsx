@@ -12,17 +12,9 @@ import { PairPanel } from '../ui/PairPanel'
 import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus, ListMusic, Monitor, Pencil, Plus, Search, Smartphone, X } from '../ui/icons'
 import { Vinyl } from '../ui/Vinyl'
 import { dzAlbum } from '../services/deezer'
+import { THEME_ALBUMS, type Album } from '../services/albums'
 
-/** Album zum Theme (das Cover ist echt, kommt von Deezer) */
-const THEME_ALBUMS: Record<string, string[]> = {
-  main: ['Graduation Kanye West', 'After Hours The Weeknd', 'Blonde Frank Ocean'],
-  graduation: ['Graduation Kanye West', 'Late Registration Kanye West', 'The College Dropout Kanye West'],
-  afterhours: ['After Hours The Weeknd', 'Starboy The Weeknd', 'Dawn FM The Weeknd'],
-  sos: ['SOS SZA', 'Ctrl SZA', 'Lana SZA'],
-  blonde: ['Blonde Frank Ocean', 'Channel Orange Frank Ocean', 'nostalgia ultra Frank Ocean'],
-  igor: ['IGOR Tyler, The Creator', 'Flower Boy Tyler, The Creator', 'Call Me If You Get Lost Tyler, The Creator'],
-}
-type Album = { cover: string; title: string; artist: string }
+
 
 /** Plattenregal: drei echte Alben, vorne das Album des Themes. Die Platte gleitet heraus und dreht sich. */
 function HeroStack({ S }: { S: State }) {

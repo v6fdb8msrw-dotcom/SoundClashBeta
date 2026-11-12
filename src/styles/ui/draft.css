@@ -215,6 +215,8 @@
   align-items: center;
   font-size: 12px;
   font-weight: 750;
+  white-space: nowrap;
+  flex: none;
   background: var(--pc);
   color: #fff;
   box-shadow: 0 4px 14px color-mix(in srgb, var(--pc) 55%, transparent);

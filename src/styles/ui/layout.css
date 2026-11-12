@@ -224,6 +224,10 @@
 }
 @media (max-width: 940px) {
   .draftgrid.sides > .draftstage {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+}
 
 /* Fernseher: Inhalt vergrößern (Faktor --tvz aus services/display.ts) */
 html[data-screen='tv'] .wrap,

@@ -3,6 +3,7 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
 import { dispatch } from '../app/store'
 import { BG_DECK, BG_MENU, BGS, THEMES, bgBase, bgHasDeck } from '../core/constants'
 import { getScreen, setScreen, subscribeScreen } from '../services/display'
+import { useThemeCover } from '../services/albums'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
@@ -76,7 +77,7 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
                 className={'swatch' + (S.theme === v ? ' on' : '')}
                 onClick={() => dispatch({ type: 'pick', id: 'theme', v })}
               >
-                <span className="sw-art" />
+                <SwatchArt theme={v} />
                 <span className="sw-name">{t}</span>
               </button>
             ))}
@@ -248,4 +249,10 @@ function ScreenSwitch() {
       ))}
     </div>
   )
+}
+
+/** Farbkachel: echtes Album-Cover des Themes, beim Hauptdesign der Farbverlauf */
+function SwatchArt({ theme }: { theme: string }) {
+  const c = useThemeCover(theme)
+  return <span className="sw-art" style={c ? { backgroundImage: `url(${c})`, backgroundSize: 'cover' } : undefined} />
 }

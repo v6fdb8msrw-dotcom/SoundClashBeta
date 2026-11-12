@@ -23,7 +23,7 @@ test('Speicher · Einstellungen, Namen, Avatar, Topf, Theme und Hintergrund übe
     })
   await app.open()
   await app.select('theme', 'igor')
-  await app.select('bg', 'aurora')
+  await app.select('bg', 'shapes')
   await app.tool('#soundBtn')
   await app.go('setup')
   app.record('frisch', await visible())
