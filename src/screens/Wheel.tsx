@@ -54,7 +54,7 @@ export function drawWheel(cv: HTMLCanvasElement | null, S: State) {
   const cols = gh
     ? base.map((c, i) => {
         try {
-          return mixHex(c, gh, 0.32 + 0.16 * Math.sin(i * 1.7))
+          return mixHex(c, gh, 0.1 + 0.06 * Math.sin(i * 1.7)) // Cover-Farben bleiben erkennbar, Genre tönt nur leicht
         } catch {
           return c
         }

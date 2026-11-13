@@ -135,7 +135,7 @@
     background-position: 0 64px;
   }
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .holo-grid {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .holo-grid {
   opacity: 0.22;
 }
 
@@ -180,7 +180,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
     opacity: 0.55;
   }
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .light-beams i {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .light-beams i {
   mix-blend-mode: multiply;
   opacity: 0.18;
 }

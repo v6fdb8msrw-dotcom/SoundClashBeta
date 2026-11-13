@@ -105,6 +105,8 @@ export function Background({ S }: { S: State }) {
         <i className="a2" />
         <i className="a3" />
         <i className="a4" />
+        <i className="a5" />
+        <i className="a6" />
       </div>
       <AnimatePresence>
         {cover ? (

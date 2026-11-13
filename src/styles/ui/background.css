@@ -22,7 +22,7 @@
   mix-blend-mode: screen;
   will-change: transform;
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .aura i {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .aura i {
   mix-blend-mode: multiply;
   opacity: 0.45;
 }
@@ -31,7 +31,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   height: 62vmax;
   left: -6%;
   top: -12%;
-  background: radial-gradient(circle, var(--primary) 0%, transparent 62%);
+  background: radial-gradient(circle, var(--c1) 0%, transparent 62%);
   animation: drift1 26s ease-in-out infinite alternate;
 }
 .aura .a2 {
@@ -39,7 +39,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   height: 55vmax;
   right: -10%;
   top: 8%;
-  background: radial-gradient(circle, var(--secondary) 0%, transparent 62%);
+  background: radial-gradient(circle, var(--c2) 0%, transparent 62%);
   animation: drift2 32s ease-in-out infinite alternate;
 }
 .aura .a3 {
@@ -47,8 +47,8 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   height: 48vmax;
   left: 22%;
   bottom: -18%;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
-  opacity: 0.5;
+  background: radial-gradient(circle, var(--c3) 0%, transparent 60%);
+  opacity: 0.6;
   animation: drift3 38s ease-in-out infinite alternate;
 }
 .aura .a4 {
@@ -56,8 +56,8 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   height: 40vmax;
   right: 18%;
   bottom: 4%;
-  background: radial-gradient(circle, var(--primary-soft) 0%, transparent 60%);
-  opacity: 0.35;
+  background: radial-gradient(circle, var(--c4) 0%, transparent 60%);
+  opacity: 0.48;
   animation: drift1 44s ease-in-out infinite alternate-reverse;
 }
 @keyframes drift1 {
@@ -85,7 +85,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   filter: blur(90px) saturate(170%) brightness(0.85);
   opacity: 0.85;
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .aura-cover {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .aura-cover {
   filter: blur(90px) saturate(150%) brightness(1.25);
   opacity: 0.55;
 }
@@ -115,7 +115,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   opacity: 0.28;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .bg-wall {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .bg-wall {
   opacity: 0.22;
 }
 .mcol {
@@ -320,4 +320,24 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
 .aura.calm {
   filter: blur(90px) saturate(110%);
   opacity: 0.6;
+}
+
+/* Zwei weitere Farbwolken für die übrigen Cover-Farben */
+.aura .a5 {
+  width: 36vmax;
+  height: 36vmax;
+  left: 48%;
+  top: -14%;
+  background: radial-gradient(circle, var(--c5) 0%, transparent 60%);
+  opacity: 0.55;
+  animation: drift2 44s ease-in-out infinite alternate-reverse;
+}
+.aura .a6 {
+  width: 34vmax;
+  height: 34vmax;
+  left: -8%;
+  bottom: -10%;
+  background: radial-gradient(circle, var(--c6) 0%, transparent 60%);
+  opacity: 0.5;
+  animation: drift1 40s ease-in-out infinite alternate-reverse;
 }
