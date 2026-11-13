@@ -77,10 +77,14 @@ export const THEMES: readonly [string, string][] = [
   ['testing', 'TESTING'],
   ['ajtracey', 'AJ Tracey'],
   ['berliner', 'Ich bin 2 Berliner'],
+  ['silksonic', 'Silk Sonic'],
+  ['graphit', 'Graphit (neutral)'],
 ]
 
 /** Jedes Theme startet mit seinem Album-Cover als Hintergrund (danach im Menü frei wählbar). */
-export const THEME_DEFAULT_BG: Record<string, string> = Object.fromEntries(THEMES.map(([k]) => [k, 'cover']))
+export const THEME_DEFAULT_BG: Record<string, string> = Object.fromEntries(
+  THEMES.map(([k]) => [k, k === 'graphit' ? 'aura' : 'cover']),
+)
 
 /** Theme mit hellem Hintergrund (dunkle Schrift). */
 export const LIGHT_THEMES: string[] = []
@@ -89,9 +93,9 @@ export const LIGHT_THEMES: string[] = []
 export const THEME_BG: Record<string, string> = {
   main: '#2A1450', testing: '#0B0B0B', ajtracey: '#0B0C10', c23: '#F2C230', psychodrama: '#02060F', konnichiwa: '#F4F2EE',
   russisch: '#080808', kiox: '#1230F5', itoldthem: '#0B1A2A', heavenorhell: '#1A0F0D', wunna: '#04211F', geist: '#0C1414', berliner: '#1C0F20', tooloud: '#170707',
-  justice: '#071413', megatron: '#12111C', heavyhead: '#0A1412', universum: '#020308', raop: '#F6E7D2', astroworld: '#24160A', tpab: '#0E0D0C', darkside: '#050506', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#190A07', graduation: '#210947', igor: '#1E0D14', sos: '#050D18', llasap: '#070707',
+  justice: '#071413', megatron: '#12111C', heavyhead: '#0A1412', universum: '#020308', raop: '#F6E7D2', astroworld: '#24160A', tpab: '#0E0D0C', darkside: '#050506', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#1A0F08', graduation: '#210947', igor: '#1E0D14', sos: '#050D18', llasap: '#070707',
   afterhours: '#120A08', blonde: '#0E1410', currents: '#0C1922', nectar: '#160913', warmlime: '#20280F',
-  skymint: '#1B1D22', emerald: '#053E2F', ultraviolet: '#22083D',
+  skymint: '#1B1D22', graphit: '#101113', emerald: '#053E2F', ultraviolet: '#22083D',
 }
 
 /** Farben der Radsegmente: Theme-Farben + feste Töne. */

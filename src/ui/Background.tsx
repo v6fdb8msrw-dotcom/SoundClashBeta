@@ -104,7 +104,7 @@ export function Background({ S }: { S: State }) {
   }, [S.ambience])
   return (
     <div ref={root} className={'bg bg-' + S.bg + (beat ? ' beat' : '') + (playing ? ' live' : '')} data-screen={S.screen} aria-hidden>
-      <div className={'aura' + (base === 'plain' ? ' calm' : '') + (base === 'cover' ? ' under' : '')}>
+      <div className={'aura' + (base === 'plain' ? ' calm' : '') + (showAlbum ? ' under' : '')}>
         <i className="a1" />
         <i className="a2" />
         <i className="a3" />

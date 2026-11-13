@@ -15,6 +15,7 @@ export const THEME_ALBUMS: Record<string, string[]> = {
   testing: ['TESTING A$AP Rocky', 'LONG.LIVE.A$AP A$AP Rocky', 'AT.LONG.LAST.A$AP A$AP Rocky'],
   ajtracey: ['AJ Tracey AJ Tracey', 'Flu Game AJ Tracey', 'Ladbroke Grove AJ Tracey'],
   berliner: ['Ich bin 2 Berliner Ufo361', 'Ich bin ein Berliner Ufo361', 'VVS Ufo361'],
+  silksonic: ['An Evening With Silk Sonic Bruno Mars', '24K Magic Bruno Mars', 'Malibu Anderson .Paak'],
 }
 export type Album = { cover: string; title: string; artist: string }
 
