@@ -642,3 +642,8 @@
   backdrop-filter: var(--blur);
   font-size: 14px;
 }
+
+/* Graphit: neutral, der Plattenstapel in Graustufen */
+body[data-theme='graphit'] .hero3d .h3-rec {
+  filter: grayscale(1) contrast(1.05) brightness(0.9);
+}

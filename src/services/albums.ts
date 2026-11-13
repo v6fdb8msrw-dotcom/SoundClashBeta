@@ -17,6 +17,8 @@ export const THEME_ALBUMS: Record<string, string[]> = {
   berliner: ['Ich bin 2 Berliner Ufo361', 'Ich bin ein Berliner Ufo361', 'VVS Ufo361'],
   silksonic: ['An Evening With Silk Sonic Bruno Mars', '24K Magic Bruno Mars', 'Malibu Anderson .Paak'],
 }
+/** Plattenstapel für Themes ohne eigenes Album (Graphit): Tims meistgehörte Künstler, in Graustufen */
+export const NEUTRAL_ALBUMS = ['DS4EVER Gunna', 'I Told Them Burna Boy', 'Heaven Or Hell Don Toliver']
 export type Album = { cover: string; title: string; artist: string }
 
 /** Cover des Theme-Albums (für die Farbauswahl); das Hauptdesign hat kein eigenes Album */

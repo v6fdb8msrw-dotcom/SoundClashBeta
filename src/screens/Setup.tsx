@@ -14,7 +14,7 @@ import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus
 import { Vinyl } from '../ui/Vinyl'
 import { bgBase } from '../core/constants'
 import { dzAlbum } from '../services/deezer'
-import { THEME_ALBUMS, type Album } from '../services/albums'
+import { NEUTRAL_ALBUMS, THEME_ALBUMS, type Album } from '../services/albums'
 
 
 
@@ -23,7 +23,7 @@ function HeroStack({ S }: { S: State }) {
   const [albums, setAlbums] = useState<(Album | null)[]>([null, null, null])
   useEffect(() => {
     let alive = true
-    const list = THEME_ALBUMS[S.theme] || THEME_ALBUMS.main
+    const list = THEME_ALBUMS[S.theme] || NEUTRAL_ALBUMS
     void Promise.all(list.map((q) => dzAlbum(q))).then((a) => alive && setAlbums(a))
     return () => {
       alive = false
