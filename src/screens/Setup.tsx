@@ -12,6 +12,7 @@ import { useHost } from '../ui/PairDialog'
 import { onlineRoles } from '../remote/host'
 import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus, ListMusic, Pencil, Plus, Search, X } from '../ui/icons'
 import { Vinyl } from '../ui/Vinyl'
+import { bgBase } from '../core/constants'
 import { dzAlbum } from '../services/deezer'
 import { THEME_ALBUMS, type Album } from '../services/albums'
 
@@ -30,7 +31,8 @@ function HeroStack({ S }: { S: State }) {
   }, [S.theme])
   const front = albums[0]
   return (
-    <div className="hero3d" aria-hidden>
+    // Mit Album-Cover als Hintergrund steht nur der Titel da (das Cover ist ja schon groß zu sehen)
+    <div className={'hero3d' + (bgBase(S.bg) === 'cover' ? ' cap-only' : '')} aria-hidden>
       <div className="h3-scene">
         {albums.map((al, i) => (
           <div key={i + (al?.cover || '')} className={'h3-rec r' + i}>

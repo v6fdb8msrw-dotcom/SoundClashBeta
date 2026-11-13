@@ -25,7 +25,7 @@
     "muted": false,
     "ambience": true,
     "theme": "main",
-    "bg": "aura",
+    "bg": "cover",
     "genre": "deutschrap",
     "pool": [
      "Sido",
@@ -2178,7 +2178,7 @@
     "muted": false,
     "ambience": true,
     "theme": "main",
-    "bg": "aura",
+    "bg": "cover",
     "genre": "deutschrap",
     "pool": [],
     "warnOff": false,

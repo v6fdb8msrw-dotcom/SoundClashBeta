@@ -624,3 +624,21 @@
 .setup-head .display {
   font-size: clamp(36px, 5.2vw, 64px);
 }
+
+/* Album-Cover-Hintergrund: Plattenstapel ausblenden, nur Titel · Künstler als Etikett unten rechts */
+.hero3d.cap-only {
+  align-self: end;
+}
+.hero3d.cap-only .h3-scene {
+  display: none;
+}
+.hero3d.cap-only .h3-cap {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--glass-strong);
+  border: 1px solid var(--hair);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  font-size: 14px;
+}

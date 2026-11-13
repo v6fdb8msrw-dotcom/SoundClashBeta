@@ -22,7 +22,7 @@
   mix-blend-mode: screen;
   will-change: transform;
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .aura i {
+body:is([data-theme='__none__']) .aura i {
   mix-blend-mode: multiply;
   opacity: 0.45;
 }
@@ -85,7 +85,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   filter: blur(90px) saturate(170%) brightness(0.85);
   opacity: 0.85;
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .aura-cover {
+body:is([data-theme='__none__']) .aura-cover {
   filter: blur(90px) saturate(150%) brightness(1.25);
   opacity: 0.55;
 }
@@ -115,7 +115,7 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   opacity: 0.28;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
 }
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .bg-wall {
+body:is([data-theme='__none__']) .bg-wall {
   opacity: 0.22;
 }
 .mcol {
@@ -340,4 +340,49 @@ body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-t
   background: radial-gradient(circle, var(--c6) 0%, transparent 60%);
   opacity: 0.5;
   animation: drift1 40s ease-in-out infinite alternate-reverse;
+}
+
+/* Album-Cover als Hintergrund: das echte Cover groß und scharf, links/rechts füllt es weichgezeichnet auf */
+.bg-album {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.bg-album img {
+  position: absolute;
+  object-fit: cover;
+}
+.bg-album .ba-fill {
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  filter: blur(60px) saturate(140%) brightness(0.5);
+  opacity: 0.9;
+}
+.bg-album .ba-main {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+  /* Cover abgedunkelt und leicht in die Theme-Farbe getönt: auch helle Cover wirken dunkel */
+  filter: brightness(0.6) saturate(1.2);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
+}
+@media (max-aspect-ratio: 1/1) {
+  .bg-album .ba-main {
+    object-position: center top;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+  }
+}
+/* Lesbarkeit: Schleier in der Theme-Grundfarbe, links (wo der Text steht) etwas dichter */
+.bg-cover .veil {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bg) 72%, transparent) 0%, color-mix(in srgb, var(--bg) 48%, transparent) 55%, color-mix(in srgb, var(--bg) 30%, transparent) 100%),
+    linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--bg) 45%, transparent) 100%);
+}
+.aura.under {
+  opacity: 0;
 }

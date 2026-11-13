@@ -9,6 +9,7 @@ import { picBigOf, picOf, wallPics } from '../services/catalog'
 import { useAudio } from './primitives'
 import { BG_MENU, bgBase } from '../core/constants'
 import { onVisFrame, vis } from './visual'
+import { useThemeCover } from '../services/albums'
 
 /**
  * Hintergrund „Aura“: Wie bei Apple Music liegt das gerade wichtige Cover riesig und weichgezeichnet
@@ -90,6 +91,9 @@ export function Background({ S }: { S: State }) {
   // Entfernte Hintergründe (Formen, Platten-Regen, Bühne, Klangwellen) zeigen die Farbwolken
   const base = BG_MENU.includes(bgBase(S.bg)) ? bgBase(S.bg) : 'aura'
   const mosaic = base === 'mosaic' || base === 'flow'
+  // Album-Cover als Hintergrund: das echte Cover des Themes füllt den Bildschirm
+  const album = useThemeCover(S.theme)
+  const showAlbum = base === 'cover' && !!album
   // Pegel des laufenden Songs → leichtes Atmen der Farbwolken (abschaltbar über „Album-Wand-Puls“)
   useEffect(() => {
     if (env.reduce || !S.ambience) {
@@ -100,7 +104,7 @@ export function Background({ S }: { S: State }) {
   }, [S.ambience])
   return (
     <div ref={root} className={'bg bg-' + S.bg + (beat ? ' beat' : '') + (playing ? ' live' : '')} data-screen={S.screen} aria-hidden>
-      <div className={'aura' + (base === 'plain' ? ' calm' : '')}>
+      <div className={'aura' + (base === 'plain' ? ' calm' : '') + (base === 'cover' ? ' under' : '')}>
         <i className="a1" />
         <i className="a2" />
         <i className="a3" />
@@ -109,7 +113,22 @@ export function Background({ S }: { S: State }) {
         <i className="a6" />
       </div>
       <AnimatePresence>
-        {cover ? (
+        {showAlbum ? (
+          <motion.div
+            key={'album-' + album}
+            className="bg-album"
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: env.reduce ? 0 : 1.2, ease: [0.2, 0.8, 0.2, 1] }}
+          >
+            <img className="ba-fill" src={album} alt="" />
+            <img className="ba-main" src={album} alt="" />
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+      <AnimatePresence>
+        {cover && !showAlbum ? (
           <motion.img
             key={cover}
             className="aura-cover"

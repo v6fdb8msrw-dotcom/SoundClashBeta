@@ -69,7 +69,7 @@ body {
 }
 
 /* Helles Theme (IGOR): dunkle Schrift, helleres Glas, weichere Schatten */
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) {
+body:is([data-theme='__none__']) {
   --glass: color-mix(in srgb, #fff 52%, transparent);
   --glass-strong: color-mix(in srgb, #fff 74%, transparent);
   --glass-soft: color-mix(in srgb, #fff 40%, transparent);

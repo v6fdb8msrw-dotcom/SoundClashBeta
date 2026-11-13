@@ -11,6 +11,7 @@ export const AV: readonly { c: string }[] = [
 ]
 
 export const BGS: readonly [string, string][] = [
+  ['cover', 'Album-Cover'],
   ['aura', 'Farbwolken'],
   ['shapes', 'Schwebende Formen'],
   ['records', 'Platten-Regen'],
@@ -35,7 +36,7 @@ export const BGS: readonly [string, string][] = [
 ]
 
 /** Im Menü angebotene Hintergründe (die übrigen Werte bleiben für alte Spielstände gültig) */
-export const BG_MENU = ['aura', 'mosaic', 'horizon', 'plain']
+export const BG_MENU = ['cover', 'aura', 'mosaic', 'horizon', 'plain']
 
 /**
  * Hintergrund ohne → mit Plattenspieler. Im Menü wählt man den Hintergrund und schaltet den
@@ -66,54 +67,30 @@ export function bgHasDeck(bg: string): boolean {
 export const THEMES: readonly [string, string][] = [
   ['main', 'Graduation'],
   ['itoldthem', 'I Told Them...'],
+  ['astroworld', 'Astroworld'],
+  ['afterhours', 'After Hours'],
+  ['igor', 'IGOR'],
+  ['blonde', 'Blonde'],
+  ['darkside', 'Dark Side of the Moon'],
   ['heavenorhell', 'Heaven Or Hell'],
   ['wunna', 'WUNNA'],
   ['testing', 'TESTING'],
   ['ajtracey', 'AJ Tracey'],
-  ['tooloud', 'tooloud vol. 1'],
-  ['universum', 'Universum regelt'],
-  ['megatron', 'Planet Megatron'],
-  ['geist', 'Geist'],
   ['berliner', 'Ich bin 2 Berliner'],
-  ['justice', 'Justice'],
-  ['heavyhead', 'Heavy Is The Head'],
-  ['c23', '23'],
-  ['psychodrama', 'PSYCHODRAMA'],
-  ['konnichiwa', 'Konnichiwa'],
-  ['russisch', 'Russisch Roulette'],
-  ['kiox', 'KIOX'],
-  ['raop', 'Raop'],
-  ['afterhours', 'After Hours'],
-  ['sos', 'SOS'],
-  ['blonde', 'Blonde'],
-  ['igor', 'IGOR'],
-  ['astroworld', 'Astroworld'],
-  ['tpab', 'To Pimp a Butterfly'],
-  ['views', 'Views'],
-  ['darkside', 'Dark Side of the Moon'],
-  ['thriller', 'Thriller'],
-  ['discovery', 'Discovery'],
-  ['abbeyroad', 'Abbey Road'],
 ]
 
-/** Passender Hintergrund je Theme (wird beim Wechsel gesetzt, danach frei wählbar). */
-export const THEME_DEFAULT_BG: Record<string, string> = {
-  main: 'aura', itoldthem: 'mosaic', heavenorhell: 'aura', wunna: 'aura', testing: 'mosaic', ajtracey: 'aura', tooloud: 'plain',
-  universum: 'horizon', megatron: 'horizon', geist: 'aura', berliner: 'aura', justice: 'aura', heavyhead: 'aura', c23: 'mosaic',
-  psychodrama: 'horizon', konnichiwa: 'plain', russisch: 'mosaic', kiox: 'plain', raop: 'aura', afterhours: 'horizon', sos: 'aura',
-  blonde: 'plain', igor: 'aura', astroworld: 'aura', tpab: 'mosaic', views: 'aura', darkside: 'horizon', thriller: 'plain',
-  discovery: 'horizon', abbeyroad: 'aura',
-}
+/** Jedes Theme startet mit seinem Album-Cover als Hintergrund (danach im Menü frei wählbar). */
+export const THEME_DEFAULT_BG: Record<string, string> = Object.fromEntries(THEMES.map(([k]) => [k, 'cover']))
 
 /** Theme mit hellem Hintergrund (dunkle Schrift). */
-export const LIGHT_THEMES = ['igor', 'c23', 'konnichiwa', 'raop', 'heavenorhell', 'thriller']
+export const LIGHT_THEMES: string[] = []
 
 /** Theme-Hintergrund (--bg) – Grundlage für die Kontrast-Anpassung der Spielerfarben. */
 export const THEME_BG: Record<string, string> = {
-  main: '#0E0B22', testing: '#0A0A08', ajtracey: '#050806', c23: '#F2C230', psychodrama: '#02060F', konnichiwa: '#F4F2EE',
-  russisch: '#080808', kiox: '#1230F5', itoldthem: '#0A0F14', heavenorhell: '#EFE7D8', wunna: '#031C1B', geist: '#0C1414', berliner: '#1C1020', tooloud: '#170707',
-  justice: '#071413', megatron: '#12111C', heavyhead: '#0A1412', universum: '#020308', raop: '#F6E7D2', astroworld: '#1A0F06', tpab: '#0E0D0C', darkside: '#050507', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
-  afterhours: '#12060A', blonde: '#0B1A0E', currents: '#0C1922', nectar: '#160913', warmlime: '#20280F',
+  main: '#2A1450', testing: '#0B0B0B', ajtracey: '#0B0C10', c23: '#F2C230', psychodrama: '#02060F', konnichiwa: '#F4F2EE',
+  russisch: '#080808', kiox: '#1230F5', itoldthem: '#0B1A2A', heavenorhell: '#1A0F0D', wunna: '#04211F', geist: '#0C1414', berliner: '#1C0F20', tooloud: '#170707',
+  justice: '#071413', megatron: '#12111C', heavyhead: '#0A1412', universum: '#020308', raop: '#F6E7D2', astroworld: '#24160A', tpab: '#0E0D0C', darkside: '#050506', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#190A07', graduation: '#210947', igor: '#1E0D14', sos: '#050D18', llasap: '#070707',
+  afterhours: '#120A08', blonde: '#0E1410', currents: '#0C1922', nectar: '#160913', warmlime: '#20280F',
   skymint: '#1B1D22', emerald: '#053E2F', ultraviolet: '#22083D',
 }
 

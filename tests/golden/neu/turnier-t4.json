@@ -25,7 +25,7 @@
     "muted": false,
     "ambience": true,
     "theme": "main",
-    "bg": "aura",
+    "bg": "cover",
     "genre": "rnb",
     "pool": [],
     "warnOff": false,
@@ -2773,7 +2773,7 @@
     "muted": false,
     "ambience": true,
     "theme": "main",
-    "bg": "aura",
+    "bg": "cover",
     "genre": "uk",
     "pool": [
      "Lana Del Rey",

@@ -144,7 +144,7 @@ export type Action =
 export function initialState(): State {
   return {
     screen: 'home', pendingMode: null, pickSec: 0, players: 2, names: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6'], avatar: {}, size: 5, series: 'single',
-    muted: false, ambience: true, autoScroll: true, theme: 'main', bg: 'aura', genre: 'rnb', pool: [], custom: [],
+    muted: false, ambience: true, autoScroll: true, theme: 'main', bg: 'cover', genre: 'rnb', pool: [], custom: [],
     songMode: 'perduel', sameArtist: false, favMode: false, favOwner: {}, favTurn: 1, reveal: true, pickIdx: 0, audience: true, tally: {}, votePhase: null, voteWinner: null, eras: 'off', eraMap: [],
     setupTab: 'cfg',
     mode: 'clash', T: null,

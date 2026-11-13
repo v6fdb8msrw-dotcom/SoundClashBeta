@@ -301,42 +301,42 @@
      {
       "name": "Spieler 1",
       "av": "data:b6bb1194dd",
-      "col": "#de1c39"
+      "col": "#E5344E"
      },
      {
       "name": "Spieler 2",
       "av": "data:d3828dc1a0",
-      "col": "#007aa3"
+      "col": "#33CCFF"
      },
      {
       "name": "Spieler 3",
       "av": "data:65fc4a0268",
-      "col": "#167f3d"
+      "col": "#22C55E"
      },
      {
       "name": "Spieler 4",
       "av": "data:5f31670aa0",
-      "col": "#936d14"
+      "col": "#E5B23C"
      },
      {
       "name": "Spieler 5",
       "av": "data:04ab0531a7",
-      "col": "#9c3efa"
+      "col": "#C084FC"
      },
      {
       "name": "Kim",
       "av": "data:5c807830df",
-      "col": "#0c8076"
+      "col": "#14D4C4"
      },
      {
       "name": "Spieler 7",
       "av": "data:90a5b66143",
-      "col": "#c24d00"
+      "col": "#FF8A3D"
      },
      {
       "name": "Spieler 8",
       "av": "data:77ed0bf35b",
-      "col": "#db117a"
+      "col": "#F472B6"
      }
     ],
     "autoScroll": false,

@@ -157,14 +157,12 @@ details > summary::-webkit-details-marker {
   white-space: nowrap;
 }
 
-/* Helle Themes: Verlauf in die dunkle Zweitfarbe statt ins Helle, sonst verschwindet er im Hintergrund */
-body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='raop'],[data-theme='heavenorhell'],[data-theme='thriller']) .display em {
-  background: linear-gradient(100deg, var(--primary), var(--primary) 35%, var(--secondary));
+/* Überschrift im Verlauf aus drei Cover-Farben (je Theme die gut lesbaren) */
+.display em {
+  background: linear-gradient(100deg, var(--hl1, var(--c1)), var(--hl2, var(--c2)) 50%, var(--hl3, var(--c3)));
   -webkit-background-clip: text;
   background-clip: text;
 }
-
-/* Dark Side of the Moon: Überschrift im Prisma-Regenbogen des Covers */
 body[data-theme='darkside'] .display em {
   background: linear-gradient(100deg, var(--c1), var(--c2) 22%, var(--c3) 42%, var(--c4) 62%, var(--c5) 80%, var(--c6));
   -webkit-background-clip: text;
