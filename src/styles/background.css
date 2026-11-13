@@ -135,7 +135,7 @@
     background-position: 0 64px;
   }
 }
-body[data-theme='igor'] .holo-grid {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .holo-grid {
   opacity: 0.22;
 }
 
@@ -180,7 +180,7 @@ body[data-theme='igor'] .holo-grid {
     opacity: 0.55;
   }
 }
-body[data-theme='igor'] .light-beams i {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .light-beams i {
   mix-blend-mode: multiply;
   opacity: 0.18;
 }

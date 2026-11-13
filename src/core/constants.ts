@@ -65,22 +65,32 @@ export function bgHasDeck(bg: string): boolean {
 
 export const THEMES: readonly [string, string][] = [
   ['main', 'Graduation'],
+  ['testing', 'TESTING'],
+  ['ajtracey', 'AJ Tracey'],
+  ['c23', '23'],
+  ['psychodrama', 'PSYCHODRAMA'],
+  ['konnichiwa', 'Konnichiwa'],
   ['afterhours', 'After Hours'],
-  ['sos', 'SOS'],
-  ['blonde', 'Blonde'],
   ['igor', 'IGOR'],
-  ['astroworld', 'Astroworld'],
-  ['tpab', 'To Pimp a Butterfly'],
-  ['darkside', 'Dark Side of the Moon'],
-  ['thriller', 'Thriller'],
-  ['views', 'Views'],
-  ['discovery', 'Discovery'],
-  ['abbeyroad', 'Abbey Road'],
+  ['russisch', 'Russisch Roulette'],
+  ['kiox', 'KIOX'],
+  ['wildberry', 'Wildberry Lillet'],
+  ['raop', 'Raop'],
 ]
+
+/** Passender Hintergrund je Theme (wird beim Wechsel gesetzt, danach frei wählbar). */
+export const THEME_DEFAULT_BG: Record<string, string> = {
+  main: 'aura', testing: 'mosaic', ajtracey: 'aura', c23: 'mosaic', psychodrama: 'horizon', konnichiwa: 'plain',
+  afterhours: 'horizon', igor: 'aura', russisch: 'mosaic', kiox: 'plain', wildberry: 'aura', raop: 'aura',
+}
+
+/** Theme mit hellem Hintergrund (dunkle Schrift). */
+export const LIGHT_THEMES = ['igor', 'c23', 'konnichiwa', 'wildberry', 'raop']
 
 /** Theme-Hintergrund (--bg) – Grundlage für die Kontrast-Anpassung der Spielerfarben. */
 export const THEME_BG: Record<string, string> = {
-  main: '#0E0B22', astroworld: '#1A0F06', tpab: '#0E0D0C', darkside: '#050507', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
+  main: '#0E0B22', testing: '#0A0A08', ajtracey: '#050806', c23: '#F2C230', psychodrama: '#02060F', konnichiwa: '#F4F2EE',
+  russisch: '#080808', kiox: '#1230F5', wildberry: '#DCD8FA', raop: '#F6E7D2', astroworld: '#1A0F06', tpab: '#0E0D0C', darkside: '#050507', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
   afterhours: '#12060A', blonde: '#0B1A0E', currents: '#0C1922', nectar: '#160913', warmlime: '#20280F',
   skymint: '#1B1D22', emerald: '#053E2F', ultraviolet: '#22083D',
 }

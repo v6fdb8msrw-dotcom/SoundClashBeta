@@ -1,7 +1,7 @@
 import { produce } from 'immer'
 import { AVATARS } from '../data/avatars'
 import { resetColorCache, setBodyTheme, themeColors } from './colors'
-import { AV, BGS, DIFF_CFG, ERAS, GUESS_STEPS, THEMES, decadeOf, eraOk } from './constants'
+import { AV, BGS, DIFF_CFG, ERAS, GUESS_STEPS, THEME_DEFAULT_BG, THEMES, decadeOf, eraOk } from './constants'
 import type { PoolSong, SavedSettings, Song, State, Track, WinnerRecord } from './types'
 
 /**
@@ -619,6 +619,11 @@ function pick(S: State, c: Ctx, id: PickId, v: string) {
   switch (id) {
     case 'theme': {
       S.theme = v
+      // Jedes Theme bringt seinen passenden Hintergrund mit (danach im Menü frei änderbar)
+      if (THEME_DEFAULT_BG[v] && S.bg !== THEME_DEFAULT_BG[v]) {
+        S.bg = THEME_DEFAULT_BG[v]
+        c.fx.push({ t: 'bgSeed' })
+      }
       resetColorCache()
       setBodyTheme(v)
       if (S.T && S.T.roster) {

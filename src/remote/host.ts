@@ -197,6 +197,7 @@ function onPhone(m: PhoneMsg, peerId: string) {
         if (playing === k) return stopAudio()
         return play(so?.preview || '', k, so?.cover)
       }
+      if (m.a === 'forceReady') return parts(S).forEach((q) => !S.ready[q] && dispatch({ type: 'phoneReady', p: q }))
       if (m.a === 'win' || m.a === 'vwin') return dispatch({ type: m.a, p: m.p! })
       return dispatch({ type: m.a } as never)
     }

@@ -14,7 +14,7 @@ test('Übernahme · Spielstand aus dem Original wird kopiert, alte und Muscle-St
   await page.goto('/legacy/index.html')
   await page.evaluate((ms) => Object.entries(ms).forEach(([k, v]) => localStorage.setItem(k, v)), MUSCLE)
   await page.locator('[data-go="setup"]').click()
-  await app.select('theme', 'sos')
+  await app.select('theme', 'afterhours')
   await app.select('players', 3)
   await page.locator('[data-nm="1"]').fill('Tim')
   await page.locator('[data-nm="2"]').fill('Lea')
@@ -38,7 +38,7 @@ test('Übernahme · Spielstand aus dem Original wird kopiert, alte und Muscle-St
   expect(Object.keys(after).sort()).toEqual([...Object.keys(before), 'soundclash.app.settings', 'soundclash.app.rivalry'].sort())
 
   // 3) Oberfläche zeigt die übernommenen Einstellungen
-  await expect(page.locator('body')).toHaveAttribute('data-theme', 'sos')
+  await expect(page.locator('body')).toHaveAttribute('data-theme', 'afterhours')
   await expect(page.locator('[data-nm="1"]')).toHaveValue('Tim')
   await expect(page.locator('[data-nm="3"]')).toHaveValue('P3')
   await expect(page.locator('[data-op="songMode"][aria-selected="true"]')).toHaveText('Alle vorab')

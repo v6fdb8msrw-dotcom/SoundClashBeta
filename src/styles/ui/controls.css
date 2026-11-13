@@ -207,7 +207,7 @@ input::placeholder {
     var(--rim),
     0 3px 10px rgba(0, 0, 0, 0.22);
 }
-body:is([data-theme='igor'],[data-theme='thriller']) .seg-ind {
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .seg-ind {
   background: #fff;
 }
 .seg-t {

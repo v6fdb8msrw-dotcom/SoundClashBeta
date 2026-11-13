@@ -92,7 +92,7 @@ export interface CtlButton {
   on?: boolean
   color?: string
 }
-export type CtlAction = 'start' | 'spin' | 'play' | 'win' | 'voteClose' | 'voteReset' | 'vwin' | 'voteAgain' | 'pickNext' | 'toBattle' | 'listenPlay' | 'listenNext' | 'nextRound' | 'toFinal' | 'tNext' | 'tGo' | 'newMatch'
+export type CtlAction = 'start' | 'spin' | 'play' | 'win' | 'voteClose' | 'voteReset' | 'vwin' | 'voteAgain' | 'pickNext' | 'toBattle' | 'listenPlay' | 'listenNext' | 'nextRound' | 'toFinal' | 'tNext' | 'tGo' | 'newMatch' | 'forceReady'
 
 /**
  * Was der Spielleiter gerade am Handy drücken kann – genau die Hauptknöpfe des Bildschirms am Hauptgerät.
@@ -108,7 +108,8 @@ export function ctlButtons(S: State, playingKey: string | null = null): CtlButto
       if (!S.pending && !S.spin && !allFull(S) && S.pool.length) out.push({ a: 'spin', label: S.pool.length === 1 ? 'Letzten Künstler ziehen' : 'Rad drehen · ' + pname(S, drawer(S)), kind: 'primary', color: pcol(S, drawer(S)) })
       break
     case 'pick':
-      if (!S.phoneMode) out.push({ a: 'pickNext', label: S.songs[pickOrder(S, S.duel)[S.pickIdx]]?.[S.duel] ? 'Song bestätigen' : 'Überspringen', kind: 'primary' })
+      if (S.phoneMode) out.push({ a: 'forceReady', label: 'Nicht warten – weiter', kind: 'ghost' })
+      else out.push({ a: 'pickNext', label: S.songs[pickOrder(S, S.duel)[S.pickIdx]]?.[S.duel] ? 'Song bestätigen' : 'Überspringen', kind: 'primary' })
       break
     case 'songs':
       out.push({ a: 'toBattle', label: S.phoneMode ? 'Nicht warten – zum Battle' : 'Zum Battle', kind: S.phoneMode ? 'ghost' : 'primary' })

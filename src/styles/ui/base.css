@@ -156,3 +156,10 @@ details > summary::-webkit-details-marker {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Helle Themes: Verlauf in die dunkle Zweitfarbe statt ins Helle, sonst verschwindet er im Hintergrund */
+body:is([data-theme='igor'],[data-theme='c23'],[data-theme='konnichiwa'],[data-theme='wildberry'],[data-theme='raop']) .display em {
+  background: linear-gradient(100deg, var(--primary), var(--primary) 35%, var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+}

@@ -181,7 +181,7 @@ export function Draft({ S }: { S: State }) {
 
   if (sameArt(S)) {
     const slots = []
-    for (let i = 0; i < N(S); i++) slots.push(<Slot key={i} S={S} p={1} i={i} active shared ro={phone} />)
+    for (let i = 0; i < N(S); i++) slots.push(<Slot key={i} S={S} p={1} i={i} active shared />)
     return (
       <div className="draft-fit">
         {head}
@@ -222,9 +222,9 @@ export function Draft({ S }: { S: State }) {
       <div className="draft-fit">
         {head}
         <div className={sides} style={style}>
-          <Cluster S={S} p={1} pl={pl} place={place(1)} ro={phone} />
+          <Cluster S={S} p={1} pl={pl} place={place(1)} />
           {wheel}
-          <Cluster S={S} p={2} pl={pl} place={place(2)} ro={phone} />
+          <Cluster S={S} p={2} pl={pl} place={place(2)} />
         </div>
       </div>
     )
@@ -235,7 +235,7 @@ export function Draft({ S }: { S: State }) {
   const focusPlace = (p: number): CSSProperties =>
     p === pl ? { ['--gc' as string]: '3', ['--gr' as string]: '1 / span ' + k } : { ['--gc' as string]: '1', ['--gr' as string]: String(others.indexOf(p) + 1) }
   const cl = []
-  for (let p = 1; p <= S.players; p++) cl.push(<Cluster key={p} S={S} p={p} pl={pl} place={focusPlace(p)} ro={phone} />)
+  for (let p = 1; p <= S.players; p++) cl.push(<Cluster key={p} S={S} p={p} pl={pl} place={focusPlace(p)} />)
   return (
     <div className="draft-fit">
       {head}

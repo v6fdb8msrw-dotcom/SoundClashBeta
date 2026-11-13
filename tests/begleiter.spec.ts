@@ -67,15 +67,16 @@ test('Begleiter · koppeln, vom Handy drehen, setzen, Song wählen und abstimmen
     await host.waitForTimeout(100)
   }
 
-  // Songwahl: P1 wählt am Handy und bestätigt
+  // Songwahl: Ein Spieler-Handy ist verbunden → Handy-Modus. P1 wählt am Handy, P2 hat kein Handy,
+  // das Hauptgerät geht ohne zu warten weiter (einheitliche Steuerung: alles geht auch hier)
   await phone.locator('[data-rpick]').first().click({ timeout: 30_000 })
   await SHOT(phone, 'handy-4-songwahl')
-  await expect(host.locator('#pickNext')).toContainText('bestätigen', { timeout: 15_000 })
-  await phone.locator('[data-rnext]').click()
-  await expect(host.locator('.pchip.on')).toContainText('P2', { timeout: 15_000 })
-  await host.locator('[data-pick]').first().waitFor({ timeout: 30_000 })
-  await host.locator('[data-pick]').first().click()
-  await host.locator('#pickNext').click()
+  await phone.locator('[data-rdone]').click({ timeout: 15_000 })
+  await host.locator('#forceReady').click({ timeout: 15_000 })
+  for (let k = 0; k < 2; k++) {
+    await host.locator('#listenPlay').click({ timeout: 15_000 })
+    await host.locator('#listenNext').click({ timeout: 15_000 })
+  }
 
   // Abstimmen vom Handy (Publikum stimmt ab ist Standard)
   await host.locator('.duelhead').waitFor()

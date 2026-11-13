@@ -94,13 +94,13 @@ async function flow(page: Page, prefix: string, mobile: boolean) {
   // anderes Theme über das Menü
   await page.locator('.brand-home').click()
   await page.locator('#menuBtn').click()
-  await page.locator('[data-op="theme"][data-v="astroworld"]').click()
+  await page.locator('[data-op="theme"][data-v="testing"]').click()
   await page.locator('[data-op="bg"][data-v="mosaic"]').click()
   await page.waitForTimeout(400)
-  await shot(page, prefix + '-9-menue-astroworld')
+  await shot(page, prefix + '-9-menue-testing')
   await page.locator('#menuBtn').click()
   await page.waitForTimeout(600)
-  await shot(page, prefix + '-9-theme-astroworld')
+  await shot(page, prefix + '-9-theme-testing')
 }
 
 test('Mac · 1440×900', async ({ browser }) => {
