@@ -14,8 +14,7 @@ import { Setup } from './screens/Setup'
 import { Songs } from './screens/Songs'
 import { configureAudio } from './services/audio'
 import { dz } from './services/deezer'
-import { onlineRoles, resumeHost } from './remote/host'
-import { drawer } from './core/game'
+import { resumeHost } from './remote/host'
 import { loadRivalry } from './services/rivalry'
 import { configureSfx } from './services/sfx'
 import { loadSettings, migrateLegacy } from './services/storage'
@@ -105,8 +104,6 @@ export default function App() {
         tag = ((t && t.tagName) || '').toLowerCase()
       if (tag === 'input' || tag === 'textarea' || tag === 'button' || (t && t.isContentEditable)) return
       if (getState().screen !== 'draft') return
-      // Handy-Modus: dreht der Spieler am Handy, nicht per Leertaste am Hauptgerät
-      if (getState().phoneMode && onlineRoles().includes(drawer(getState()))) return
       e.preventDefault()
       dispatch({ type: 'spin' })
     }

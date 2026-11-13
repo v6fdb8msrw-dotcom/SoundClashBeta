@@ -620,71 +620,7 @@
   font-weight: 700;
 }
 
-/* Kompakter: Steuerung und Spieler nehmen weniger Fläche ein (Tims Wunsch) */
+/* Titel etwas kleiner; Spieler-Karte in voller Größe (Tims Wunsch) */
 .setup-head .display {
   font-size: clamp(36px, 5.2vw, 64px);
-}
-.scard[data-card='mode'] {
-  padding: 14px 18px;
-  border-radius: var(--r-md);
-}
-.scard[data-card='mode'] .field {
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 14px;
-}
-.scard[data-card='mode'] .seg button {
-  min-height: 36px;
-  font-size: 14px;
-}
-.scard[data-card='mode'] .hint {
-  margin-top: 8px;
-  font-size: 12.5px;
-}
-.scard[data-card='players'] {
-  padding: 16px 18px;
-}
-.scard[data-card='players'] .cardhead {
-  margin-bottom: 10px;
-}
-.scard[data-card='players'] .cardhead h2 {
-  font-size: 19px;
-}
-.scard[data-card='players'] .field {
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 14px;
-}
-.scard[data-card='players'] .field .seg {
-  max-width: 340px;
-}
-.scard[data-card='players'] .seg button {
-  min-height: 34px;
-}
-.plist {
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 8px;
-  margin-top: 12px;
-}
-.prow {
-  padding: 6px;
-}
-.prow.open {
-  grid-column: 1 / -1;
-}
-.pav-btn,
-.pav {
-  width: 40px;
-  height: 40px;
-}
-.ptop input {
-  height: 40px;
-  font-size: 15.5px;
-}
-@media (max-width: 560px) {
-  .scard[data-card='mode'] .field,
-  .scard[data-card='players'] .field {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
 }

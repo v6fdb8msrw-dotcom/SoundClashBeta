@@ -1,9 +1,9 @@
 import { joinRoom, type Room } from 'trystero'
 import { dispatch, getState, subscribe } from '../app/store'
-import { playing, subscribeAudio } from '../services/audio'
+import { play, playing, stopAudio, subscribeAudio } from '../services/audio'
 import { allFull, drawer, parts, pickOrder, voteTotal } from '../core/game'
 import type { State } from '../core/types'
-import { APP_ID, buildView, duelKey, newCode, slimTrack, type PhoneMsg, type PhoneState, type Role } from './protocol'
+import { APP_ID, buildView, ctlButtons, duelKey, newCode, slimTrack, type PhoneMsg, type PhoneState, type Role } from './protocol'
 
 /**
  * Hauptgerät: öffnet einen Raum mit Spielcode, schickt den Spielstand an gekoppelte Handys
@@ -82,7 +82,7 @@ export function voterRoles(): Record<number, Role[]> {
 function pushView(target?: string) {
   if (!room || !sendView) return
   const S = getState()
-  sendView(buildView(S, { nowPlaying: nowPlayingPlayer(), online: onlineRoles(), voters: voterRoles() }), target ? { target } : undefined)
+  sendView(buildView(S, { playingKey: playing, nowPlaying: nowPlayingPlayer(), online: onlineRoles(), voters: voterRoles() }), target ? { target } : undefined)
   const av = avatarsOf(S)
   const sig = JSON.stringify(av).length + ':' + Object.values(av).map((x) => x.slice(-24)).join('|')
   if (target || sig !== lastAvatars) {
@@ -139,6 +139,9 @@ function canAct(S: State, role: Role | null, m: PhoneMsg): boolean {
       return S.screen === 'listen' && !!S.listen && S.listen.order[S.listen.idx] === role
     case 'listenNext':
       return S.screen === 'listen' && !!S.listen && S.listen.shown && S.listen.order[S.listen.idx] === role
+    case 'ctl':
+      // Spielleiter: Spieler 1 darf alles, was gerade auch am Hauptgerät als Knopf steht
+      return role === 1 && ctlButtons(S, playing).some((b) => b.a === m.a && (b.p ?? null) === (m.p ?? null))
     case 'favToggle':
       return typeof role === 'number' && role <= S.players && S.screen === 'setup' && S.favMode && typeof m.name === 'string' && m.name.length < 80
   }
@@ -186,6 +189,17 @@ function onPhone(m: PhoneMsg, peerId: string) {
       return dispatch({ type: 'listenPlay' })
     case 'listenNext':
       return dispatch({ type: 'listenNext' })
+    case 'ctl': {
+      if (m.a === 'play') {
+        const i = S.duel
+        const so = (S.songs[m.p!] || [])[i]
+        const k = 'd' + m.p + '_' + i
+        if (playing === k) return stopAudio()
+        return play(so?.preview || '', k, so?.cover)
+      }
+      if (m.a === 'win' || m.a === 'vwin') return dispatch({ type: m.a, p: m.p! })
+      return dispatch({ type: m.a } as never)
+    }
     case 'favToggle': {
       // Vom Handy nur eigene Favoriten wieder herausnehmen
       const n = m.name.trim()

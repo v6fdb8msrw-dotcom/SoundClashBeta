@@ -8,8 +8,9 @@ import type { State } from '../core/types'
 import { GEN, ak, fansOf, realName } from '../services/catalog'
 import { ArtImg, AvImg, Btn, Presence, Seg, Sel, type Opt } from '../ui/primitives'
 import { Warn } from '../ui/Warn'
-import { PairPanel } from '../ui/PairPanel'
-import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus, ListMusic, Monitor, Pencil, Plus, Search, Smartphone, X } from '../ui/icons'
+import { useHost } from '../ui/PairDialog'
+import { onlineRoles } from '../remote/host'
+import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus, ListMusic, Pencil, Plus, Search, X } from '../ui/icons'
 import { Vinyl } from '../ui/Vinyl'
 import { dzAlbum } from '../services/deezer'
 import { THEME_ALBUMS, type Album } from '../services/albums'
@@ -306,6 +307,14 @@ function FavTurn({ S }: { S: State }) {
 export function Setup({ S }: { S: State }) {
   const need = picks(S)
   const [adv, setAdv] = useState(false)
+  // Gesteuert wird einheitlich: am Hauptgerät oder per Handy. Sobald ein Spieler-Handy verbunden ist,
+  // wählen alle am eigenen Handy (Handy-Modus), ohne Handy läuft alles hier.
+  const host = useHost()
+  const phones = host.code ? onlineRoles().filter((r) => r <= S.players).length : 0
+  useEffect(() => {
+    const want = phones > 0
+    if (S.phoneMode !== want) dispatch({ type: 'pick', id: 'phoneMode', v: want ? '1' : '0' })
+  }, [phones, S.phoneMode])
   const genreOpts: Opt[] = Object.keys(GEN).map((k) => ({ v: k, t: GEN[k].label }))
   return (
     <div className="setup">
@@ -322,18 +331,6 @@ export function Setup({ S }: { S: State }) {
         </div>
         <HeroStack S={S} />
       </div>
-      <section className="card scard" data-card="mode">
-        <Seg id="phoneMode" label="Wie wird gesteuert?" value={S.phoneMode ? '1' : '0'} onPick={pick('phoneMode')} opts={[
-            { v: '0', t: 'An diesem Gerät', i: <Monitor /> },
-            { v: '1', t: 'Mit den Handys', i: <Smartphone /> },
-          ]} />
-        <p className="hint" style={{ textAlign: 'left', margin: '10px 0 0' }}>
-          {S.phoneMode
-            ? 'Jeder steuert am eigenen Handy: drehen, setzen, Songs wählen, aufdecken und abstimmen. Dieses Gerät ist die große Bühne und spielt die Musik.'
-            : 'Alles wird an diesem Gerät gespielt. Handys können trotzdem zum Abstimmen dazukommen (Handy-Symbol oben).'}
-        </p>
-        {S.phoneMode ? <PairPanel /> : null}
-      </section>
       {isT(S) ? <RosterCard S={S} /> : <PlayersCard S={S} />}
       <section className="card scard" data-card="cfg">
         <div className="cardhead">

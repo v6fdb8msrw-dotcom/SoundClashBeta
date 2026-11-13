@@ -153,11 +153,13 @@ export function Draft({ S }: { S: State }) {
         <motion.p className="askplace" style={{ color: c }} initial={env.reduce ? false : { y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
           <ArrowDown size={18} /> {pname(S, pl)}, wähle einen Platz {sameArt(S) ? 'im gemeinsamen Grid' : 'in deiner Spalte'}
         </motion.p>
-      ) : (
-        <Btn className="spinbtn" id="spinBtn" disabled={!!S.spin} onClick={() => dispatch({ type: 'spin' })}>
-          {S.pool.length === 1 ? 'Letzten Künstler ziehen' : 'Rad drehen'} {S.pool.length === 1 ? <ArrowRight /> : <kbd className="kbd">Leertaste</kbd>}
+      ) : null}
+      {/* Gedreht werden kann immer auch hier am Hauptgerät (einheitliche Steuerung) */}
+      {!S.pending ? (
+        <Btn className={'spinbtn' + (phone ? ' ghost sm' : '')} id="spinBtn" disabled={!!S.spin} onClick={() => dispatch({ type: 'spin' })}>
+          {S.pool.length === 1 ? 'Letzten Künstler ziehen' : phone ? 'Hier drehen' : 'Rad drehen'} {S.pool.length === 1 || phone ? <ArrowRight /> : <kbd className="kbd">Leertaste</kbd>}
         </Btn>
-      )}
+      ) : null}
     </div>
   )
 

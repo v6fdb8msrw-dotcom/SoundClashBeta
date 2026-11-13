@@ -88,7 +88,7 @@ function RolePicker({ code, V, avatars }: { code: string; V: HostView; avatars: 
           >
             <Avatar src={avatars[j + 1]} color={V.colors[j + 1]} size={56} />
             <span>{n}</span>
-            {V.online.includes(j + 1) ? <small>schon verbunden</small> : <small>Spieler {j + 1}</small>}
+            {V.online.includes(j + 1) ? <small>schon verbunden</small> : <small>{j === 0 ? 'Spieler 1 · Spielleiter' : 'Spieler ' + (j + 1)}</small>}
           </motion.button>
         ))}
       </div>
@@ -695,6 +695,33 @@ function SongsAll({ V, me }: { V: HostView; me: number }) {
   )
 }
 
+/** Spielleiter-Leiste: Spieler 1 bedient das Hauptgerät (Start, Rad, Weiter, Abstimmung schließen …). */
+function CtlBar({ V }: { V: HostView }) {
+  // Was Spieler 1 ohnehin gerade selbst als großen Knopf hat (eigener Dreh, eigenes Aufdecken), nicht doppelt zeigen
+  const own = (V.screen === 'draft' && V.drawer === 1) || (V.screen === 'listen' && V.listen?.order[V.listen.idx] === 1)
+  const list = (V.ctl || []).filter((b) => !(own && (b.a === 'spin' || b.a === 'listenPlay' || b.a === 'listenNext')))
+  if (!list.length) return null
+  return (
+    <motion.section className="r-ctl" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} key={V.screen}>
+      <p className="r-ctl-k">Spielleiter · steuert das Hauptgerät</p>
+      <div className="r-ctl-row">
+        {list.map((b) => (
+          <button
+            key={b.a + (b.p ?? '')}
+            className={'r-ctl-b ' + (b.kind || 'primary') + (b.on ? ' on' : '')}
+            data-ctl={b.a}
+            data-p={b.p ?? ''}
+            style={b.color ? { ['--pc' as string]: b.color } : undefined}
+            onClick={() => (vib(15), ask({ t: 'ctl', a: b.a, p: b.p }))}
+          >
+            {b.label}
+          </button>
+        ))}
+      </div>
+    </motion.section>
+  )
+}
+
 export function RemoteApp({ code }: { code: string }) {
   const st = useSyncExternalStore(subscribeClient, getClient, getClient)
   const [pickRole, setPickRole] = useState(false)
@@ -760,6 +787,7 @@ export function RemoteApp({ code }: { code: string }) {
         ) : (
           <motion.main key="main" className="r-main" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             {st.status === 'lost' ? <p className="r-warn">Verbindung zum Hauptgerät unterbrochen – warte auf Wiederverbindung …</p> : null}
+            {me === 1 ? <CtlBar V={V} /> : null}
             <Turn code={code} V={V} me={me} avatars={st.avatars} />
             {showLineup ? <MyLineup V={V} me={me as number} /> : null}
           </motion.main>

@@ -53,6 +53,9 @@ export function PairDialog({ onClose }: { onClose: () => void }) {
               <li>im Duell für den besseren Song abstimmen,</li>
               <li>sein Line-up sehen und welcher Künstler als Nächstes dran ist,</li>
               <li>wenn er dran ist: Rad drehen, Künstler setzen, Song wählen (Vorschau leise am Handy).</li>
+              <li>
+                <b>Spieler 1 ist Spielleiter:</b> startet das Match, dreht das Rad, schließt die Abstimmung und startet die nächste Runde, ganz ohne Fernbedienung.
+              </li>
             </ul>
             <p className="pair-code">
               Code <b id="pairCode">{code}</b>

@@ -1,4 +1,4 @@
-import { drawer, isT, N, parts, pcol, pickOrder, pname, pts, roundScore, target, wins } from '../core/game'
+import { allFull, drawer, isT, leader, N, parts, pcol, pickOrder, picks, pname, pts, roundScore, target, voteTotal, wins } from '../core/game'
 import type { State, Track } from '../core/types'
 import { picOf } from '../services/catalog'
 
@@ -79,6 +79,82 @@ export interface HostView {
   online: number[]
   /** Wer per Handy für welchen Song gestimmt hat (Spieler-Nr. oder Publikum). */
   voters: Record<number, Role[]>
+  /** Spielleiter (Spieler 1): Knöpfe, die gerade auch am Hauptgerät stehen. */
+  ctl: CtlButton[]
+}
+
+/** Ein Knopf der Spielleiter-Steuerung (Spieler 1 bedient das Hauptgerät vom Handy aus). */
+export interface CtlButton {
+  a: CtlAction
+  p?: number
+  label: string
+  kind?: 'primary' | 'ghost' | 'play'
+  on?: boolean
+  color?: string
+}
+export type CtlAction = 'start' | 'spin' | 'play' | 'win' | 'voteClose' | 'voteReset' | 'vwin' | 'voteAgain' | 'pickNext' | 'toBattle' | 'listenPlay' | 'listenNext' | 'nextRound' | 'toFinal' | 'tNext' | 'tGo' | 'newMatch'
+
+/**
+ * Was der Spielleiter gerade am Handy drücken kann – genau die Hauptknöpfe des Bildschirms am Hauptgerät.
+ * Der Host prüft jeden Wunsch gegen diese Liste, das Handy kann also nichts, was hier nicht steht.
+ */
+export function ctlButtons(S: State, playingKey: string | null = null): CtlButton[] {
+  const out: CtlButton[] = []
+  switch (S.screen) {
+    case 'setup':
+      if (S.pool.length >= picks(S)) out.push({ a: 'start', label: 'Match starten', kind: 'primary' })
+      break
+    case 'draft':
+      if (!S.pending && !S.spin && !allFull(S) && S.pool.length) out.push({ a: 'spin', label: S.pool.length === 1 ? 'Letzten Künstler ziehen' : 'Rad drehen · ' + pname(S, drawer(S)), kind: 'primary', color: pcol(S, drawer(S)) })
+      break
+    case 'pick':
+      if (!S.phoneMode) out.push({ a: 'pickNext', label: S.songs[pickOrder(S, S.duel)[S.pickIdx]]?.[S.duel] ? 'Song bestätigen' : 'Überspringen', kind: 'primary' })
+      break
+    case 'songs':
+      out.push({ a: 'toBattle', label: S.phoneMode ? 'Nicht warten – zum Battle' : 'Zum Battle', kind: S.phoneMode ? 'ghost' : 'primary' })
+      break
+    case 'listen': {
+      const L = S.listen
+      if (!L) break
+      const p = L.order[L.idx]
+      out.push({ a: 'listenPlay', label: !L.shown ? pname(S, p) + ' aufdecken' : L.paused ? 'Weiter abspielen' : 'Pause', kind: 'play', on: L.shown && !L.paused, color: pcol(S, p) })
+      if (L.shown) out.push({ a: 'listenNext', label: L.idx + 1 >= L.order.length ? 'Zum Versus' : 'Nächster Spieler', kind: 'primary' })
+      break
+    }
+    case 'duel': {
+      const ps = parts(S)
+      if (!S.phoneMode)
+        for (const p of ps) {
+          const so = (S.songs[p] || [])[S.duel]
+          if (so?.preview) out.push({ a: 'play', p, label: (playingKey === 'd' + p + '_' + S.duel ? 'Pause · ' : 'Abspielen · ') + pname(S, p), kind: 'play', on: playingKey === 'd' + p + '_' + S.duel, color: pcol(S, p) })
+        }
+      if (!S.audience) for (const p of ps) out.push({ a: 'win', p, label: pname(S, p) + ' gewinnt', kind: 'primary', color: pcol(S, p) })
+      else if (S.votePhase === 'result') {
+        if (S.voteWinner) out.push({ a: 'vwin', p: S.voteWinner, label: pname(S, S.voteWinner) + ' holt die Punkte', kind: 'primary', color: pcol(S, S.voteWinner) })
+        else for (const p of ps) out.push({ a: 'vwin', p, label: pname(S, p) + ' gewinnt', kind: 'primary', color: pcol(S, p) })
+        out.push({ a: 'voteAgain', label: 'Nochmal abstimmen', kind: 'ghost' })
+      } else {
+        const t = voteTotal(S)
+        if (t) out.push({ a: 'voteClose', label: 'Abstimmung schließen · ' + t + (t === 1 ? ' Stimme' : ' Stimmen'), kind: 'primary' })
+        out.push({ a: 'voteReset', label: 'Stimmen zurücksetzen', kind: 'ghost' })
+      }
+      break
+    }
+    case 'round': {
+      const ld = leader(S)
+      if (isT(S) && (ld || S.series === 'single')) out.push({ a: 'tNext', label: 'Weiter im Turnier', kind: 'primary' })
+      else if (ld || S.series === 'single') out.push({ a: 'toFinal', label: 'Endstand ansehen', kind: 'primary' })
+      else out.push({ a: 'nextRound', label: 'Nächste Runde', kind: 'primary' })
+      break
+    }
+    case 'bracket':
+      out.push({ a: 'tGo', label: 'Nächstes Duell starten', kind: 'primary' })
+      break
+    case 'final':
+      out.push({ a: 'newMatch', label: 'Neues Match', kind: 'primary' })
+      break
+  }
+  return out
 }
 
 export function duelKey(S: State) {
@@ -86,6 +162,7 @@ export function duelKey(S: State) {
 }
 
 export interface ViewExtra {
+  playingKey?: string | null
   nowPlaying: number | null
   online: number[]
   voters: Record<number, Role[]>
@@ -152,6 +229,7 @@ export function buildView(S: State, extra: ViewExtra = { nowPlaying: null, onlin
     nowPlaying: extra.nowPlaying,
     online: extra.online,
     voters: extra.voters,
+    ctl: ctlButtons(S, extra.playingKey ?? null),
   }
 }
 
@@ -171,6 +249,7 @@ export type PhoneMsg =
   | { t: 'reveal' }
   | { t: 'listenNext' }
   | { t: 'favToggle'; name: string }
+  | { t: 'ctl'; a: CtlAction; p?: number }
 
 /** Antwort des Hosts an ein Handy (z. B. eigene Stimme). */
 export interface PhoneState {

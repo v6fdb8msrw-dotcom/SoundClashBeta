@@ -27,7 +27,8 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   const hostCtx = await ctx({ viewport: { width: 1440, height: 900 } })
   const host = await hostCtx.newPage()
   await host.goto(baseURL!)
-  await host.locator('[data-op="phoneMode"][data-v="1"]').click()
+  // Handy-Button oben rechts öffnet das Koppeln (eigene Karte „Wie wird gesteuert“ gibt es nicht mehr)
+  await host.locator('#pairBtn').click()
   const code = (await host.locator('#pairCode').textContent())!.trim()
   expect(code).toMatch(/^[A-Z2-9]{5}$/)
 
@@ -42,16 +43,20 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   await p1.locator('[data-role="1"]').click()
   const p2 = await join('2', devices['iPhone 13'])
   await p2.locator('[data-role="2"]').click()
-  await expect(host.locator('.pp-chip.on')).toHaveCount(2, { timeout: 30_000 })
+  await expect(host.locator('.pair-phones')).toContainText('2 Handys verbunden', { timeout: 30_000 })
+  await expect(host.locator('.pair-phones')).not.toContainText('wählt noch', { timeout: 30_000 })
   await SHOT(host, 'mac-14-handymodus-einrichtung')
+  await host.locator('.modal-x').click()
 
-  // Match vorbereiten
+  // Match vorbereiten; starten tut der Spielleiter (Spieler 1) am Handy
   for (let i = 0; i < 10; i++) await host.locator('#alist [data-add]').filter({ hasText: '+' }).first().click()
-  await host.locator('#startBtn').click()
+  await expect(p2.locator('[data-ctl]')).toHaveCount(0)
+  await p1.locator('[data-ctl="start"]').click({ timeout: 30_000 })
 
   // Ziehen: nur am Handy (am Hauptgerät gibt es keinen Dreh-Knopf, solange das Handy verbunden ist)
   await host.locator('.draftstage .phonehint').waitFor({ timeout: 30_000 })
-  await expect(host.locator('#spinBtn')).toHaveCount(0)
+  // Am Hauptgerät kann man trotzdem drehen (einheitliche Steuerung)
+  await expect(host.locator('#spinBtn')).toHaveCount(1)
   const phones = [p1, p2]
   let shotSpin = false
   let shotPlace = false
@@ -168,6 +173,13 @@ test('Handy-Modus · alles am Handy, Songs nacheinander am Hauptgerät', async (
   await expect(fan.locator('[data-rvote="2"] .r-voter')).toContainText(/P1|Spieler 1/, { timeout: 15_000 })
   await SHOT(host, 'mac-19-handymodus-versus')
   await SHOT(p1, 'handy-13-abstimmen')
+
+  // Spielleiter: Abstimmung schließen und Punkte vergeben, alles vom Handy aus
+  await p1.locator('[data-ctl="voteClose"]').click({ timeout: 15_000 })
+  await expect(host.locator('#voteAgain')).toBeVisible({ timeout: 15_000 })
+  await SHOT(p1, 'handy-14-spielleiter')
+  await p1.locator('[data-ctl="vwin"]').first().click({ timeout: 15_000 })
+  await expect(host.locator('.duelhead')).toHaveCount(0, { timeout: 15_000 })
 
   await hostCtx.close()
 })
