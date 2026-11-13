@@ -7,6 +7,8 @@ import { trackList, trackYear } from '../services/deezer'
 import { ArtImg, AvImg, Btn } from '../ui/primitives'
 import { Warn } from '../ui/Warn'
 import { Tracks } from './Tracks'
+import { useOnline } from './PhoneMode'
+import { Smartphone } from '../ui/icons'
 
 /** Pick-Timer: Startzeit je (Runde, Duell/SD, Wahl) einmal festgelegt (pickTimerSync im Original). */
 const timer = { key: '', deadline: 0 }
@@ -65,6 +67,7 @@ function timeUp() {
 }
 
 export function Pick({ S }: { S: State }) {
+  const online = useOnline()
   const order = pickOrder(S, S.duel)
   const p = order[S.pickIdx]
   const sd = !!S.sd,
@@ -114,6 +117,11 @@ export function Pick({ S }: { S: State }) {
           })}
         </div>
       </div>
+      {online.has(p) ? (
+        <p className="phone-also">
+          <Smartphone size={15} /> {pname(S, p)} kann auch am eigenen Handy wählen
+        </p>
+      ) : null}
       <div className="pick-head">
         <motion.h2 className="display pick-who" style={{ color: pcol(S, p) }} initial={env.reduce ? false : { x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 22 }}>
           {pname(S, p)}

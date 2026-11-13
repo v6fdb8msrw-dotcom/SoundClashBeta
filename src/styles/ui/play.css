@@ -655,3 +655,73 @@
   font-size: 13px;
   color: var(--ink-3);
 }
+
+/* Handy: Plattenspieler neben die Songinfos, damit das Duell auf einen Blick passt */
+@media (max-width: 760px) {
+  .dcard-in {
+    padding: 14px;
+    gap: 12px;
+  }
+  .dsong {
+    gap: 10px;
+  }
+  .deck {
+    grid-template-columns: 116px 1fr;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 8px;
+  }
+  .deck-stage {
+    width: 116px;
+    margin: 0;
+    grid-row: 1 / 3;
+  }
+  .deck.playing .deck-disc {
+    translate: 16% 0;
+  }
+  .deck-play {
+    width: 38px;
+    height: 38px;
+    right: 6px;
+    bottom: 6px;
+  }
+  .deck-play svg {
+    width: 16px;
+    height: 16px;
+  }
+  .wave {
+    height: 28px;
+    align-self: end;
+  }
+  .deck-progress {
+    align-self: start;
+  }
+  .dsong .top .tt {
+    font-size: 19px;
+  }
+  .links {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .lnk {
+    height: 36px;
+    padding: 0 13px;
+    font-size: 13.5px;
+  }
+  .veq {
+    height: 34px;
+  }
+}
+.phone-also {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: -8px 0 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #34c759 18%, var(--glass));
+  border: 1px solid color-mix(in srgb, #34c759 45%, transparent);
+  font-size: 13.5px;
+  font-weight: 650;
+}

@@ -404,7 +404,16 @@ function FavPicker({ V, me }: { V: HostView; me: number }) {
     setBusy(true)
     const t = setTimeout(() => {
       void dzSearchArtist(term, 12)
-        .then((a) => setRes(a.map((x) => ({ name: x.name, pic: x.picture_medium || '', fans: x.nb_fan || 0 }))))
+        .then((a) => {
+          // gleichnamige Künstler zusammenfassen (der bekannteste zählt)
+          const best = new Map<string, { name: string; pic: string; fans: number }>()
+          for (const x of a) {
+            const k = x.name.toLowerCase().trim()
+            const cur = best.get(k)
+            if (!cur || (x.nb_fan || 0) > cur.fans) best.set(k, { name: x.name, pic: x.picture_medium || '', fans: x.nb_fan || 0 })
+          }
+          setRes([...best.values()])
+        })
         .catch(() => setRes([]))
         .finally(() => setBusy(false))
     }, 280)
@@ -431,7 +440,7 @@ function FavPicker({ V, me }: { V: HostView; me: number }) {
               {a.pic ? <img src={a.pic} alt="" /> : <span className="r-fav-ph" />}
               <span>
                 <b>{a.name}</b>
-                <small>{theirs ? 'schon von jemand anderem gewählt' : a.fans >= 1e6 ? (a.fans / 1e6).toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' Mio. Fans' : Math.round(a.fans / 1000) + ' Tsd. Fans'}</small>
+                <small>{theirs ? 'schon von jemand anderem gewählt' : a.fans >= 1e6 ? (a.fans / 1e6).toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' Mio. Fans' : a.fans >= 1000 ? Math.round(a.fans / 1000) + ' Tsd. Fans' : 'Künstler'}</small>
               </span>
               <i>{on ? '✓' : '+'}</i>
             </button>
@@ -579,7 +588,13 @@ function Turn({ code, V, me, avatars }: { code: string; V: HostView; me: Role; a
             <SongPicker V={V} me={p} i={V.sd ? 0 : i} artist={a} />
             <div className="r-actions">
               <button className="r-primary" data-rnext disabled={!so} onClick={() => (stopAudio(), ask({ t: 'pickNext' }))}>
-                {so ? '„' + so.title + '“ bestätigen →' : 'Erst einen Song wählen'}
+                {so ? (
+                  <>
+                    <span className="r-ptitle">{so.title}</span> bestätigen
+                  </>
+                ) : (
+                  'Erst einen Song wählen'
+                )}
               </button>
               <button className="r-ghost" onClick={() => (stopAudio(), ask({ t: 'pickNext' }))}>
                 Überspringen
