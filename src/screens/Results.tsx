@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from 'motion/react'
 import { useEffect, useRef, useSyncExternalStore } from 'react'
-import { dispatch, env } from '../app/store'
+import { env } from '../app/store'
 import { N, pcol, pname, pts, roundScore, sdArt, winnerRecords } from '../core/game'
 import type { State } from '../core/types'
 import { play } from '../services/audio'
@@ -118,8 +118,6 @@ export function Crate({ S }: { S: State }) {
               onClick={() => {
                 const url = r.song.preview || ''
                 if (url) {
-                  // Plattenspieler sichtbar machen (falls nicht schon), dann spielen
-                  dispatch({ type: 'lpBg' })
                   play(url, k, cov)
                 } else if (!S.muted) tone(660, 0, 0.06, 0.07)
               }}

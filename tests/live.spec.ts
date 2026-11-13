@@ -15,6 +15,10 @@ test('Live · Deezer-Hörprobe spielt wirklich · Links führen zur Suche', asyn
   `)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('')
+  // Verhalten wie im Original prüfen: Songs nicht einzeln aufdecken
+  await page.locator('#advToggle').click()
+  await page.locator('[data-op="reveal"][data-v="0"]').click()
+  await page.locator('#advToggle').click()
   if (await page.locator('[data-go="setup"]').count()) await page.locator('[data-go="setup"]').click()
   await page.locator('#startBtn').waitFor()
   for (let i = 0; i < 10; i++) await page.locator('#alist [data-add]').filter({ hasText: '+' }).first().click()

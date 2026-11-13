@@ -7,9 +7,8 @@ import type { State } from '../core/types'
 import { lastCover } from '../services/audio'
 import { picBigOf, picOf, wallPics } from '../services/catalog'
 import { useAudio } from './primitives'
-import { bgBase, bgHasDeck } from '../core/constants'
+import { BG_MENU, bgBase } from '../core/constants'
 import { onVisFrame, vis } from './visual'
-import { Vinyl } from './Vinyl'
 
 /**
  * Hintergrund „Aura“: Wie bei Apple Music liegt das gerade wichtige Cover riesig und weichgezeichnet
@@ -84,93 +83,13 @@ function Mosaic() {
   )
 }
 
-/** Schwebende, glänzende 3D-Formen (Kugeln, Ringe, Kapseln, Sterne) in den Theme-Farben */
-function Shapes() {
-  const items = useMemo(
-    () =>
-      Array.from({ length: 14 }, (_, i) => ({
-        k: ['ball', 'ring', 'pill', 'star', 'ball', 'disc'][i % 6],
-        x: (i * 37 + 11) % 96,
-        y: (i * 53 + 7) % 92,
-        s: 40 + ((i * 29) % 90),
-        d: 14 + ((i * 7) % 12),
-        c: ['var(--primary)', 'var(--secondary)', 'var(--accent)', 'var(--primary-soft)'][i % 4],
-        r: (i * 47) % 360,
-      })),
-    [],
-  )
-  return (
-    <div className="bg-shapes">
-      {items.map((it, i) => (
-        <i
-          key={i}
-          className={'shp ' + it.k}
-          style={{ left: it.x + '%', top: it.y + '%', width: it.s, height: it.s, ['--c' as string]: it.c, ['--d' as string]: it.d + 's', ['--r' as string]: it.r + 'deg', animationDelay: -i * 1.7 + 's' }}
-        />
-      ))}
-    </div>
-  )
-}
-
-/** Klangwellen: weiche Linien, die mit der Musik atmen */
-function WaveLines() {
-  const ref = useRef<HTMLCanvasElement>(null)
-  useEffect(() => {
-    const c = ref.current
-    if (!c) return
-    const ctx = c.getContext('2d')!
-    let t = 0
-    const draw = () => {
-      const W = (c.width = innerWidth),
-        H = (c.height = innerHeight)
-      ctx.clearRect(0, 0, W, H)
-      const cs = getComputedStyle(document.body)
-      const cols = ['--primary', '--secondary', '--accent'].map((v) => cs.getPropertyValue(v).trim() || '#fff')
-      const lvl = vis.level || 0
-      for (let k = 0; k < 3; k++) {
-        ctx.beginPath()
-        for (let x = 0; x <= W; x += 8) {
-          const y = H * (0.55 + k * 0.08) + Math.sin(x / (180 + k * 60) + t * (0.6 + k * 0.25)) * (40 + lvl * 120) + Math.sin(x / 70 + t * 1.3 + k) * (8 + lvl * 30)
-          if (x) ctx.lineTo(x, y)
-          else ctx.moveTo(x, y)
-        }
-        ctx.strokeStyle = cols[k]
-        ctx.globalAlpha = 0.35
-        ctx.lineWidth = 3 + k
-        ctx.stroke()
-      }
-      t += 0.012
-    }
-    if (env.reduce) {
-      draw()
-      return
-    }
-    return onVisFrame(draw)
-  }, [])
-  return <canvas className="bg-waves" ref={ref} />
-}
-
-/** Platten, die langsam durchs Bild schweben (das aktuelle Cover als Etikett) */
-function Records({ cover }: { cover: string }) {
-  const pics = useWallPics(9)
-  return (
-    <div className="bg-records">
-      {Array.from({ length: 9 }, (_, i) => (
-        <div key={i} className="rec" style={{ left: ((i * 23 + 5) % 92) + '%', ['--s' as string]: 90 + ((i * 41) % 130) + 'px', ['--d' as string]: 26 + ((i * 9) % 20) + 's', animationDelay: -i * 4.3 + 's' }}>
-          <Vinyl cover={(i === 0 && cover) || pics[i] || undefined} spinning />
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export function Background({ S }: { S: State }) {
   const { playing, beat } = useAudio()
   const cover = moodCover(S, playing)
   const root = useRef<HTMLDivElement>(null)
-  const base = bgBase(S.bg)
+  // Entfernte Hintergründe (Formen, Platten-Regen, Bühne, Klangwellen) zeigen die Farbwolken
+  const base = BG_MENU.includes(bgBase(S.bg)) ? bgBase(S.bg) : 'aura'
   const mosaic = base === 'mosaic' || base === 'flow'
-  const deck = bgHasDeck(S.bg) && base !== 'records'
   // Pegel des laufenden Songs → leichtes Atmen der Farbwolken (abschaltbar über „Album-Wand-Puls“)
   useEffect(() => {
     if (env.reduce || !S.ambience) {
@@ -202,26 +121,10 @@ export function Background({ S }: { S: State }) {
         ) : null}
       </AnimatePresence>
       {mosaic ? <Mosaic /> : null}
-      {base === 'shapes' ? <Shapes /> : null}
-      {base === 'records' ? <Records cover={cover} /> : null}
-      {base === 'waves' ? <WaveLines /> : null}
-      {base === 'stage' ? (
-        <div className="bg-stage">
-          <i />
-          <i />
-          <i />
-        </div>
-      ) : null}
       {base === 'horizon' ? (
         <div className="bg-horizon">
           <div className="sun" />
           <div className="floor" />
-        </div>
-      ) : null}
-      {deck ? (
-        <div className="bg-deck">
-          <Vinyl cover={cover || undefined} spinning={!!playing} />
-          <span className="arm" />
         </div>
       ) : null}
       <div className="veil" />

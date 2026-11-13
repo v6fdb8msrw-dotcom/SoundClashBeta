@@ -11,7 +11,7 @@ import { QrCorner } from '../ui/PairPanel'
 import { ArtImg, AvImg, Btn, useAudio } from '../ui/primitives'
 import { Vinyl } from '../ui/Vinyl'
 import { Tracks } from './Tracks'
-import { Pause, Play, RefreshCw, Smartphone } from '../ui/icons'
+import { ArrowRight, Pause, Play, RefreshCw, SkipForward, Smartphone } from '../ui/icons'
 
 /**
  * Handy-Modus am Hauptgerät: Spieler wählen gleichzeitig am Handy, hier sieht man nur den Stand.
@@ -333,7 +333,7 @@ export function Listen({ S }: { S: State }) {
                   <Smartphone size={16} /> {pname(S, p)} drückt Play am Handy <Dots />
                 </>
               ) : (
-                'Handy nicht verbunden – hier aufdecken'
+                S.phoneMode ? 'Handy nicht verbunden – hier aufdecken' : pname(S, p) + ' deckt seinen Song auf'
               )}
             </p>
           )}
@@ -343,7 +343,7 @@ export function Listen({ S }: { S: State }) {
             </button>
             {L.shown ? (
               <Btn className="sm" id="listenNext" onClick={() => dispatch({ type: 'listenNext' })}>
-                {last ? 'Zum Versus →' : 'Nächster Spieler ⏭'}
+                {last ? (<>Zum Versus <ArrowRight /></>) : (<>Nächster Spieler <SkipForward /></>)}
               </Btn>
             ) : null}
           </div>
@@ -358,7 +358,8 @@ export function Listen({ S }: { S: State }) {
               {qso?.cover && (done || (k === L.idx && L.shown)) ? <img src={qso.cover} alt="" /> : <AvImg S={S} p={q} />}
               <span>
                 <b>{pname(S, q)}</b>
-                <small>{done ? qso?.title || 'gehört' : k === L.idx ? (L.shown ? 'läuft' : 'deckt auf') : 'gleich'}</small>
+                <em>{(S.sd ? sdArt(S, q) : (S.lineup[q] || [])[i]) || ''}</em>
+                <small>{done ? qso?.title || 'gehört' : k === L.idx ? (L.shown ? 'läuft gerade' : 'deckt auf') : k === L.idx + 1 ? 'als Nächstes' : 'gleich'}</small>
               </span>
             </div>
           )

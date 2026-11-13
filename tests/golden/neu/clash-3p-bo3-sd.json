@@ -55,7 +55,8 @@
     "pickSec": 0,
     "phoneMode": false,
     "favMode": false,
-    "favOwner": {}
+    "favOwner": {},
+    "reveal": false
    },
    "rivalry": null,
    "keys": [
@@ -748,7 +749,7 @@
      {
       "artist": "Apache 207",
       "song": "Roller",
-      "dur": "Apache 207 · 2:38",
+      "dur": "2:38",
       "links": [
        "https://open.spotify.com/search/Apache%20207%20Roller",
        "https://www.youtube.com/results?search_query=Apache%20207%20Roller"
@@ -760,7 +761,7 @@
      {
       "artist": "Capital Bra",
       "song": "Neymar",
-      "dur": "Capital Bra · 4:24",
+      "dur": "4:24",
       "links": [
        "https://open.spotify.com/search/Capital%20Bra%20Neymar",
        "https://www.youtube.com/results?search_query=Capital%20Bra%20Neymar"
@@ -772,7 +773,7 @@
      {
       "artist": "Sido",
       "song": "PUZZLETEIL",
-      "dur": "Sido · 2:47",
+      "dur": "2:47",
       "links": [
        "https://open.spotify.com/search/Sido%20PUZZLETEIL",
        "https://www.youtube.com/results?search_query=Sido%20PUZZLETEIL"
@@ -803,7 +804,7 @@
      {
       "artist": "Ufo361",
       "song": "Scheiß auf eure Party",
-      "dur": "Ufo361 · 3:40",
+      "dur": "3:40",
       "links": [
        "https://open.spotify.com/search/Ufo361%20Schei%C3%9F%20auf%20eure%20Party",
        "https://www.youtube.com/results?search_query=Ufo361%20Schei%C3%9F%20auf%20eure%20Party"
@@ -815,7 +816,7 @@
      {
       "artist": "Bonez MC",
       "song": "Ohne mein Team",
-      "dur": "Bonez MC · 3:09",
+      "dur": "3:09",
       "links": [
        "https://open.spotify.com/search/Bonez%20MC%20Ohne%20mein%20Team",
        "https://www.youtube.com/results?search_query=Bonez%20MC%20Ohne%20mein%20Team"
@@ -827,7 +828,7 @@
      {
       "artist": "Nimo",
       "song": "2011",
-      "dur": "Nimo · 3:50",
+      "dur": "3:50",
       "links": [
        "https://open.spotify.com/search/Nimo%202011",
        "https://www.youtube.com/results?search_query=Nimo%202011"
@@ -858,7 +859,7 @@
      {
       "artist": "Cro",
       "song": "Nie mehr",
-      "dur": "Cro · 3:04",
+      "dur": "3:04",
       "links": [
        "https://open.spotify.com/search/Cro%20Nie%20mehr",
        "https://www.youtube.com/results?search_query=Cro%20Nie%20mehr"
@@ -870,7 +871,7 @@
      {
       "artist": "Loredana",
       "song": "BALLADE",
-      "dur": "Loredana · 2:35",
+      "dur": "2:35",
       "links": [
        "https://open.spotify.com/search/Loredana%20BALLADE",
        "https://www.youtube.com/results?search_query=Loredana%20BALLADE"
@@ -882,7 +883,7 @@
      {
       "artist": "Bushido",
       "song": "Sonnenbank Flavour",
-      "dur": "Bushido · 3:40",
+      "dur": "3:40",
       "links": [
        "https://open.spotify.com/search/Bushido%20Sonnenbank%20Flavour",
        "https://www.youtube.com/results?search_query=Bushido%20Sonnenbank%20Flavour"
@@ -913,7 +914,7 @@
      {
       "artist": "Kontra K",
       "song": "Nur für Dich",
-      "dur": "Kontra K · 3:12",
+      "dur": "3:12",
       "links": [
        "https://open.spotify.com/search/Kontra%20K%20Nur%20f%C3%BCr%20Dich",
        "https://www.youtube.com/results?search_query=Kontra%20K%20Nur%20f%C3%BCr%20Dich"
@@ -925,7 +926,7 @@
      {
       "artist": "Farid Bang",
       "song": "Mein Lieblingssong",
-      "dur": "Farid Bang",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Farid%20Bang%20Mein%20Lieblingssong",
        "https://www.youtube.com/results?search_query=Farid%20Bang%20Mein%20Lieblingssong"
@@ -937,7 +938,7 @@
      {
       "artist": "RAF Camora",
       "song": "Blaues Licht",
-      "dur": "RAF Camora · 2:24",
+      "dur": "2:24",
       "links": [
        "https://open.spotify.com/search/RAF%20Camora%20Blaues%20Licht",
        "https://www.youtube.com/results?search_query=RAF%20Camora%20Blaues%20Licht"
@@ -968,7 +969,7 @@
      {
       "artist": "Kay One",
       "song": "Keep Calm (feat. Emory)",
-      "dur": "Kay One · 4:43",
+      "dur": "4:43",
       "links": [
        "https://open.spotify.com/search/Kay%20One%20Keep%20Calm%20(feat.%20Emory)",
        "https://www.youtube.com/results?search_query=Kay%20One%20Keep%20Calm%20(feat.%20Emory)"
@@ -980,7 +981,7 @@
      {
       "artist": "Kollegah",
       "song": "Du bist Boss",
-      "dur": "Kollegah · 2:43",
+      "dur": "2:43",
       "links": [
        "https://open.spotify.com/search/Kollegah%20Du%20bist%20Boss",
        "https://www.youtube.com/results?search_query=Kollegah%20Du%20bist%20Boss"
@@ -992,7 +993,7 @@
      {
       "artist": "Alligatoah",
       "song": "PARTNER IN CRIME (feat. Tarek K.I.Z)",
-      "dur": "Alligatoah · 3:30",
+      "dur": "3:30",
       "links": [
        "https://open.spotify.com/search/Alligatoah%20PARTNER%20IN%20CRIME%20(feat.%20Tarek%20K.I.Z)",
        "https://www.youtube.com/results?search_query=Alligatoah%20PARTNER%20IN%20CRIME%20(feat.%20Tarek%20K.I.Z)"
@@ -1050,7 +1051,7 @@
      {
       "artist": "Ali Bumaye",
       "song": "Sex ohne Grund (feat. Shindy)",
-      "dur": "Ali Bumaye · 3:07",
+      "dur": "3:07",
       "links": [
        "https://open.spotify.com/search/Ali%20Bumaye%20Sex%20ohne%20Grund%20(feat.%20Shindy)",
        "https://www.youtube.com/results?search_query=Ali%20Bumaye%20Sex%20ohne%20Grund%20(feat.%20Shindy)"
@@ -1062,7 +1063,7 @@
      {
       "artist": "Fler",
       "song": "Swagger",
-      "dur": "Fler · 2:37",
+      "dur": "2:37",
       "links": [
        "https://open.spotify.com/search/Fler%20Swagger",
        "https://www.youtube.com/results?search_query=Fler%20Swagger"
@@ -1770,7 +1771,7 @@
      {
       "artist": "Sido",
       "song": "Kein Song gewählt",
-      "dur": "Sido",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Sido%20",
        "https://www.youtube.com/results?search_query=Sido%20"
@@ -1782,7 +1783,7 @@
      {
       "artist": "RAF Camora",
       "song": "Kein Song gewählt",
-      "dur": "RAF Camora",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/RAF%20Camora%20",
        "https://www.youtube.com/results?search_query=RAF%20Camora%20"
@@ -1794,7 +1795,7 @@
      {
       "artist": "Loredana",
       "song": "Kein Song gewählt",
-      "dur": "Loredana",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Loredana%20",
        "https://www.youtube.com/results?search_query=Loredana%20"
@@ -1825,7 +1826,7 @@
      {
       "artist": "Kay One",
       "song": "Kein Song gewählt",
-      "dur": "Kay One",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Kay%20One%20",
        "https://www.youtube.com/results?search_query=Kay%20One%20"
@@ -1837,7 +1838,7 @@
      {
       "artist": "Bonez MC",
       "song": "Kein Song gewählt",
-      "dur": "Bonez MC",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Bonez%20MC%20",
        "https://www.youtube.com/results?search_query=Bonez%20MC%20"
@@ -1849,7 +1850,7 @@
      {
       "artist": "Kontra K",
       "song": "Kein Song gewählt",
-      "dur": "Kontra K",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Kontra%20K%20",
        "https://www.youtube.com/results?search_query=Kontra%20K%20"
@@ -1880,7 +1881,7 @@
      {
       "artist": "Alligatoah",
       "song": "Kein Song gewählt",
-      "dur": "Alligatoah",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Alligatoah%20",
        "https://www.youtube.com/results?search_query=Alligatoah%20"
@@ -1892,7 +1893,7 @@
      {
       "artist": "Cro",
       "song": "Kein Song gewählt",
-      "dur": "Cro",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Cro%20",
        "https://www.youtube.com/results?search_query=Cro%20"
@@ -1904,7 +1905,7 @@
      {
       "artist": "Farid Bang",
       "song": "Kein Song gewählt",
-      "dur": "Farid Bang",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Farid%20Bang%20",
        "https://www.youtube.com/results?search_query=Farid%20Bang%20"
@@ -1935,7 +1936,7 @@
      {
       "artist": "Apache 207",
       "song": "Kein Song gewählt",
-      "dur": "Apache 207",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Apache%20207%20",
        "https://www.youtube.com/results?search_query=Apache%20207%20"
@@ -1947,7 +1948,7 @@
      {
       "artist": "Ufo361",
       "song": "Kein Song gewählt",
-      "dur": "Ufo361",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Ufo361%20",
        "https://www.youtube.com/results?search_query=Ufo361%20"
@@ -1959,7 +1960,7 @@
      {
       "artist": "Capital Bra",
       "song": "Kein Song gewählt",
-      "dur": "Capital Bra",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Capital%20Bra%20",
        "https://www.youtube.com/results?search_query=Capital%20Bra%20"
@@ -1990,7 +1991,7 @@
      {
       "artist": "Bushido",
       "song": "Kein Song gewählt",
-      "dur": "Bushido",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Bushido%20",
        "https://www.youtube.com/results?search_query=Bushido%20"
@@ -2002,7 +2003,7 @@
      {
       "artist": "Kollegah",
       "song": "Kein Song gewählt",
-      "dur": "Kollegah",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Kollegah%20",
        "https://www.youtube.com/results?search_query=Kollegah%20"
@@ -2014,7 +2015,7 @@
      {
       "artist": "Nimo",
       "song": "Kein Song gewählt",
-      "dur": "Nimo",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Nimo%20",
        "https://www.youtube.com/results?search_query=Nimo%20"
@@ -2191,7 +2192,8 @@
     "pickSec": 0,
     "phoneMode": false,
     "favMode": false,
-    "favOwner": {}
+    "favOwner": {},
+    "reveal": false
    },
    "rivalry": null,
    "keys": [

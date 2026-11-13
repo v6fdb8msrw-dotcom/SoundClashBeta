@@ -165,17 +165,32 @@ describe('Handy-Modus (Tims Vorgabe, MECHANIK §11)', () => {
     ])
   })
 
-  it('„Nur Hauptgerät“ bleibt wie das Original', () => {
-    let S = started(2)
+  const draftDone = (reveal: boolean) => {
+    let S = run(started(2), { type: 'pick', id: 'reveal', v: reveal ? '1' : '0' })
     while (S.screen === 'draft') {
       S = run(S, { type: 'spin' }, { type: 'land' })
       S = run(S, { type: 'place', pos: S.lineup[S.pending!.player].indexOf(null) })
     }
+    return S
+  }
+
+  it('„Nur Hauptgerät“ ohne Einzeln-Aufdecken bleibt wie das Original', () => {
+    let S = draftDone(false)
     expect(S.phoneMode).toBe(false)
     S = run(S, ...ready(1, 2))
     expect(S.screen).toBe('pick')
     S = run(S, { type: 'pickNext' }, { type: 'pickNext' })
     expect(S.screen).toBe('duel')
     expect(S.listen).toBeNull()
+  })
+
+  it('„Nur Hauptgerät“ mit Einzeln-Aufdecken (Standard): erst jeder Song einzeln, dann das Duell', () => {
+    let S = draftDone(true)
+    S = run(S, ...ready(1, 2))
+    S = run(S, { type: 'pickNext' }, { type: 'pickNext' })
+    expect(S.screen).toBe('listen')
+    expect(S.listen!.order).toEqual([1, 2])
+    S = run(S, { type: 'listenPlay' }, { type: 'listenNext' }, { type: 'listenPlay' }, { type: 'listenNext' })
+    expect(S.screen).toBe('duel')
   })
 })

@@ -54,7 +54,7 @@ export type Fx =
   | { t: 'spinAnim'; target: number; n: number }
 
 export type PickId =
-  | 'theme' | 'players' | 'size' | 'series' | 'genre' | 'songMode' | 'sameArtist' | 'mode' | 'favMode' | '_x'
+  | 'theme' | 'players' | 'size' | 'series' | 'genre' | 'songMode' | 'sameArtist' | 'mode' | 'favMode' | 'reveal' | '_x'
   | 'audience' | 'autoScroll' | 'pickSec' | 'ambience' | 'bg' | 'phoneMode'
 
 export type Action =
@@ -145,7 +145,7 @@ export function initialState(): State {
   return {
     screen: 'home', pendingMode: null, pickSec: 0, players: 2, names: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6'], avatar: {}, size: 5, series: 'single',
     muted: false, ambience: true, autoScroll: true, theme: 'main', bg: 'aura', genre: 'rnb', pool: [], custom: [],
-    songMode: 'perduel', sameArtist: false, favMode: false, favOwner: {}, favTurn: 1, pickIdx: 0, audience: true, tally: {}, votePhase: null, voteWinner: null, eras: 'off', eraMap: [],
+    songMode: 'perduel', sameArtist: false, favMode: false, favOwner: {}, favTurn: 1, reveal: true, pickIdx: 0, audience: true, tally: {}, votePhase: null, voteWinner: null, eras: 'off', eraMap: [],
     setupTab: 'cfg',
     mode: 'clash', T: null,
     lineup: {}, songs: {}, winners: [], used: {}, pending: null, duel: 0, wins: {}, round: 1, sd: null, sdArt: null, regularWinners: null, regular: null,
@@ -477,7 +477,8 @@ function pickNext(S: State, c: Ctx) {
   S.pickIdx++
   if (S.pickIdx >= pickOrder(S, S.duel).length) {
     S.pickIdx = 0
-    S.screen = 'duel'
+    if (S.reveal && !S.phoneMode) startListen(S, c)
+    else S.screen = 'duel'
   }
 }
 
@@ -503,7 +504,7 @@ function advance(S: State, c: Ctx) {
     if (perDuel(S)) {
       S.screen = 'pick'
       c.fx.push({ t: 'loadTopsFor', names: duelArtists(S, S.duel) })
-    } else if (S.phoneMode) startListen(S, c)
+    } else if (S.phoneMode || S.reveal) startListen(S, c)
   } else finishRound(S, c)
 }
 
@@ -663,6 +664,10 @@ function pick(S: State, c: Ctx, id: PickId, v: string) {
       resetAll(S, c)
       save(c)
       return
+    case 'reveal':
+      S.reveal = v === '1'
+      save(c)
+      return
     case 'favMode':
       S.favMode = v === '1'
       S.favTurn = 1
@@ -732,6 +737,7 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       if (['upfront', 'perduel'].includes(d.songMode as string)) S.songMode = d.songMode as State['songMode']
       if (typeof d.sameArtist === 'boolean') S.sameArtist = d.sameArtist
       if (typeof d.favMode === 'boolean') S.favMode = d.favMode
+      if (typeof d.reveal === 'boolean') S.reveal = d.reveal
       if (d.favOwner && typeof d.favOwner === 'object') S.favOwner = { ...d.favOwner }
       if (['clash', 't4', 't8', 't16'].includes(d.mode as string)) S.mode = d.mode as State['mode']
       if (typeof d.audience === 'boolean') S.audience = d.audience
@@ -769,7 +775,7 @@ export function savedSettings(S: State): SavedSettings {
     series: S.series, muted: S.muted, ambience: S.ambience, theme: S.theme, bg: S.bg, genre: S.genre, pool: S.pool,
     warnOff: S.warnOff, songMode: S.songMode, sameArtist: S.sameArtist, custom: S.custom, audience: S.audience,
     mode: S.mode, roster: S.T ? S.T.roster : null,
-    autoScroll: S.autoScroll, pickSec: S.pickSec, phoneMode: S.phoneMode, favMode: S.favMode, favOwner: S.favOwner,
+    autoScroll: S.autoScroll, pickSec: S.pickSec, phoneMode: S.phoneMode, favMode: S.favMode, favOwner: S.favOwner, reveal: S.reveal,
   }
 }
 
@@ -933,7 +939,7 @@ function apply(S: State, a: Action, c: Ctx) {
     case 'skipSongs':
       stopAudio(c)
       S.duel = 0
-      if (S.phoneMode) return startListen(S, c)
+      if (S.phoneMode || S.reveal) return startListen(S, c)
       S.screen = 'duel'
       return
     case 'phoneReady': {

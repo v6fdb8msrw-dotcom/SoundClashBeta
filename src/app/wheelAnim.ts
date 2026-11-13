@@ -32,10 +32,11 @@ export function spinAnim(tg: number, n: number, reduce: boolean, land: () => voi
   let lp = Math.floor(wheel.rot / ps)
   let last = t0
   // Bewegung in drei Phasen: kurz ausholen, kräftig drehen und weich ausrollen, minimal überschießen und einrasten
-  const WIND = reduce ? 0 : 280,
-    SETTLE = reduce ? 0 : 420,
-    back = reduce ? 0 : 0.22,
-    over = reduce ? 0 : Math.min(seg * 0.28, 0.07)
+  // Tims Wunsch: kein Ausholen und kein Zurückpendeln – das Rad läuft weich aus und landet direkt
+  const WIND = 0,
+    SETTLE = 0,
+    back = 0,
+    over = 0
   const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2)
   const easeOutQuint = (x: number) => 1 - Math.pow(1 - x, 5)
   const frame = (t: number) => {

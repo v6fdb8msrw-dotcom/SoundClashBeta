@@ -6,13 +6,14 @@ import type { State } from '../core/types'
 import { play } from '../services/audio'
 import { picBigOf, picOf } from '../services/catalog'
 import { spot, yt } from '../services/deezer'
-import { Deck } from '../ui/Deck'
+import { CoverViz } from '../ui/CoverViz'
 import { burstAt } from '../ui/Fx'
 import { ArtImg, AvImg, Btn, Tilt, useAudio } from '../ui/primitives'
+import { Vinyl } from '../ui/Vinyl'
 import { QrCorner } from '../ui/PairPanel'
 import { useHost } from '../ui/PairDialog'
 import { voterRoles } from '../remote/host'
-import { Crown, ExternalLink, Hand, Monitor, Pause, Play, RotateCcw } from '../ui/icons'
+import { Crown, ExternalLink, Hand, Monitor, Music2, Pause, Play, RotateCcw } from '../ui/icons'
 
 /** Duell: Platz gegen Platz, reinhören, abstimmen oder gemeinsam antippen (duelScreen im Original). */
 
@@ -30,11 +31,14 @@ function VoteBlock({ S, p }: { S: State; p: number }) {
     win = done && S.voteWinner === p
   return (
     <>
-      <div className="veq" style={{ ['--bc' as string]: pcol(S, p), ['--lvl' as string]: pct }}>
-        {Array.from({ length: 14 }, (_, bi) => (
-          <span key={bi} className={'eqbar' + (bi < Math.round((pct / 100) * 14) ? ' lit' : '')} style={{ ['--bi' as string]: bi }} />
-        ))}
+      <div className="vmeter" style={{ ['--bc' as string]: pcol(S, p) }}>
+        <div className="vm-track">
+          <motion.i className="vm-fill" initial={false} animate={{ width: pct + '%' }} transition={{ type: 'spring', stiffness: 160, damping: 22 }} />
+        </div>
         <span className="vpct">{pct}%</span>
+        <span className="vm-n">
+          {v} {v === 1 ? 'Stimme' : 'Stimmen'}
+        </span>
       </div>
       {done ? (
         <motion.div className={'vresult' + (win ? ' win' : '')} style={{ ['--pc' as string]: pcol(S, p) }} initial={env.reduce ? false : { scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
@@ -117,15 +121,15 @@ function Card({ S, p, idx }: { S: State; p: number; idx: number }) {
             </span>
           </div>
           <div className="dsong">
-            <Deck cover={so.cover || glow || undefined} on={on} color={pcol(S, p)} onToggle={so.preview && !S.phoneMode ? () => play(so.preview || '', k) : undefined} />
             <div className="top">
+              <span className={'coverwrap' + (on ? ' playing' : '')}>
+                {on ? <Vinyl cover={so.cover || glow} color={pcol(S, p)} /> : so.cover ? <img src={so.cover} alt="" /> : <span className="cph"><Music2 /></span>}
+                <CoverViz on={on} color={pcol(S, p)} />
+              </span>
               <span>
                 <span className="tt">{so.title || 'Kein Song gewählt'}</span>
                 <br />
-                <span className="td">
-                  {a}
-                  {so.dur ? ' · ' + so.dur : ''}
-                </span>
+                <span className="td">{so.dur || ''}</span>
               </span>
             </div>
             {/* Handy-Modus: nur der gewählte Song – gehört wurde er schon beim Aufdecken */}
@@ -215,7 +219,7 @@ export function Duel({ S }: { S: State }) {
         {cards.length === 2 ? (
           <>
             {cards[0]}
-            <div className="vs" aria-hidden>
+            <div className="vs" aria-hidden style={{ ['--c1' as string]: pcol(S, 1), ['--c2' as string]: pcol(S, 2) }}>
               <span>VS</span>
             </div>
             {cards[1]}

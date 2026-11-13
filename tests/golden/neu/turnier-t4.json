@@ -60,7 +60,8 @@
     "pickSec": 0,
     "phoneMode": false,
     "favMode": false,
-    "favOwner": {}
+    "favOwner": {},
+    "reveal": false
    },
    "rivalry": null,
    "keys": [
@@ -468,7 +469,7 @@
      {
       "artist": "Yxng Bane",
       "song": "Kein Song gewählt",
-      "dur": "Yxng Bane",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Yxng%20Bane%20",
        "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
@@ -480,7 +481,7 @@
      {
       "artist": "Dizzee Rascal",
       "song": "Kein Song gewählt",
-      "dur": "Dizzee Rascal",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Dizzee%20Rascal%20",
        "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
@@ -567,7 +568,7 @@
      {
       "artist": "FKA twigs",
       "song": "viscus",
-      "dur": "FKA twigs · 3:40",
+      "dur": "3:40",
       "links": [
        "https://open.spotify.com/search/FKA%20twigs%20viscus",
        "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
@@ -579,7 +580,7 @@
      {
       "artist": "Bugzy Malone",
       "song": "Need No One (feat. VICI)",
-      "dur": "Bugzy Malone · 2:37",
+      "dur": "2:37",
       "links": [
        "https://open.spotify.com/search/Bugzy%20Malone%20Need%20No%20One%20(feat.%20VICI)",
        "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Need%20No%20One%20(feat.%20VICI)"
@@ -666,7 +667,7 @@
      {
       "artist": "Professor Green",
       "song": "NEED U NOW",
-      "dur": "Professor Green · 3:22",
+      "dur": "3:22",
       "links": [
        "https://open.spotify.com/search/Professor%20Green%20NEED%20U%20NOW",
        "https://www.youtube.com/results?search_query=Professor%20Green%20NEED%20U%20NOW"
@@ -678,7 +679,7 @@
      {
       "artist": "Skepta",
       "song": "Victory Lap",
-      "dur": "Skepta · 2:45",
+      "dur": "2:45",
       "links": [
        "https://open.spotify.com/search/Skepta%20Victory%20Lap",
        "https://www.youtube.com/results?search_query=Skepta%20Victory%20Lap"
@@ -765,7 +766,7 @@
      {
       "artist": "AJ Tracey",
       "song": "Thiago Silva",
-      "dur": "AJ Tracey · 3:21",
+      "dur": "3:21",
       "links": [
        "https://open.spotify.com/search/AJ%20Tracey%20Thiago%20Silva",
        "https://www.youtube.com/results?search_query=AJ%20Tracey%20Thiago%20Silva"
@@ -777,7 +778,7 @@
      {
       "artist": "Wiley",
       "song": "Boasty",
-      "dur": "Wiley · 2:57",
+      "dur": "2:57",
       "links": [
        "https://open.spotify.com/search/Wiley%20Boasty",
        "https://www.youtube.com/results?search_query=Wiley%20Boasty"
@@ -864,7 +865,7 @@
      {
       "artist": "Michael Kiwanuka",
       "song": "Rolling",
-      "dur": "Michael Kiwanuka · 2:51",
+      "dur": "2:51",
       "links": [
        "https://open.spotify.com/search/Michael%20Kiwanuka%20Rolling",
        "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Rolling"
@@ -876,7 +877,7 @@
      {
       "artist": "Aitch",
       "song": "Baddies",
-      "dur": "Aitch · 2:18",
+      "dur": "2:18",
       "links": [
        "https://open.spotify.com/search/Aitch%20Baddies",
        "https://www.youtube.com/results?search_query=Aitch%20Baddies"
@@ -1354,7 +1355,7 @@
      {
       "artist": "AJ Tracey",
       "song": "BORN SPINNER",
-      "dur": "AJ Tracey · 3:04",
+      "dur": "3:04",
       "links": [
        "https://open.spotify.com/search/AJ%20Tracey%20BORN%20SPINNER",
        "https://www.youtube.com/results?search_query=AJ%20Tracey%20BORN%20SPINNER"
@@ -1366,7 +1367,7 @@
      {
       "artist": "Skepta",
       "song": "DANGER DANGER",
-      "dur": "Skepta · 3:00",
+      "dur": "3:00",
       "links": [
        "https://open.spotify.com/search/Skepta%20DANGER%20DANGER",
        "https://www.youtube.com/results?search_query=Skepta%20DANGER%20DANGER"
@@ -1443,7 +1444,7 @@
      {
       "artist": "Yxng Bane",
       "song": "Kein Song gewählt",
-      "dur": "Yxng Bane",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Yxng%20Bane%20",
        "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
@@ -1455,7 +1456,7 @@
      {
       "artist": "Dizzee Rascal",
       "song": "Kein Song gewählt",
-      "dur": "Dizzee Rascal",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Dizzee%20Rascal%20",
        "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
@@ -1542,7 +1543,7 @@
      {
       "artist": "FKA twigs",
       "song": "viscus",
-      "dur": "FKA twigs · 3:40",
+      "dur": "3:40",
       "links": [
        "https://open.spotify.com/search/FKA%20twigs%20viscus",
        "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
@@ -1554,7 +1555,7 @@
      {
       "artist": "Bugzy Malone",
       "song": "Ordinary People (feat. JP Cooper)",
-      "dur": "Bugzy Malone · 4:30",
+      "dur": "4:30",
       "links": [
        "https://open.spotify.com/search/Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)",
        "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)"
@@ -1641,7 +1642,7 @@
      {
       "artist": "Professor Green",
       "song": "I Need You Tonight",
-      "dur": "Professor Green · 3:45",
+      "dur": "3:45",
       "links": [
        "https://open.spotify.com/search/Professor%20Green%20I%20Need%20You%20Tonight",
        "https://www.youtube.com/results?search_query=Professor%20Green%20I%20Need%20You%20Tonight"
@@ -1653,7 +1654,7 @@
      {
       "artist": "Aitch",
       "song": "RMB (Ring My Bell)",
-      "dur": "Aitch · 2:54",
+      "dur": "2:54",
       "links": [
        "https://open.spotify.com/search/Aitch%20RMB%20(Ring%20My%20Bell)",
        "https://www.youtube.com/results?search_query=Aitch%20RMB%20(Ring%20My%20Bell)"
@@ -1740,7 +1741,7 @@
      {
       "artist": "Michael Kiwanuka",
       "song": "Rolling",
-      "dur": "Michael Kiwanuka · 2:51",
+      "dur": "2:51",
       "links": [
        "https://open.spotify.com/search/Michael%20Kiwanuka%20Rolling",
        "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Rolling"
@@ -1752,7 +1753,7 @@
      {
       "artist": "Wiley",
       "song": "Wearing My Rolex",
-      "dur": "Wiley · 2:50",
+      "dur": "2:50",
       "links": [
        "https://open.spotify.com/search/Wiley%20Wearing%20My%20Rolex",
        "https://www.youtube.com/results?search_query=Wiley%20Wearing%20My%20Rolex"
@@ -2231,7 +2232,7 @@
      {
       "artist": "Michael Kiwanuka",
       "song": "Summer Clothes",
-      "dur": "Michael Kiwanuka · 4:25",
+      "dur": "4:25",
       "links": [
        "https://open.spotify.com/search/Michael%20Kiwanuka%20Summer%20Clothes",
        "https://www.youtube.com/results?search_query=Michael%20Kiwanuka%20Summer%20Clothes"
@@ -2243,7 +2244,7 @@
      {
       "artist": "Skepta",
       "song": "DANGER DANGER",
-      "dur": "Skepta · 3:00",
+      "dur": "3:00",
       "links": [
        "https://open.spotify.com/search/Skepta%20DANGER%20DANGER",
        "https://www.youtube.com/results?search_query=Skepta%20DANGER%20DANGER"
@@ -2330,7 +2331,7 @@
      {
       "artist": "FKA twigs",
       "song": "viscus",
-      "dur": "FKA twigs · 3:40",
+      "dur": "3:40",
       "links": [
        "https://open.spotify.com/search/FKA%20twigs%20viscus",
        "https://www.youtube.com/results?search_query=FKA%20twigs%20viscus"
@@ -2342,7 +2343,7 @@
      {
       "artist": "Aitch",
       "song": "Bamba",
-      "dur": "Aitch · 3:23",
+      "dur": "3:23",
       "links": [
        "https://open.spotify.com/search/Aitch%20Bamba",
        "https://www.youtube.com/results?search_query=Aitch%20Bamba"
@@ -2419,7 +2420,7 @@
      {
       "artist": "Yxng Bane",
       "song": "Kein Song gewählt",
-      "dur": "Yxng Bane",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Yxng%20Bane%20",
        "https://www.youtube.com/results?search_query=Yxng%20Bane%20"
@@ -2431,7 +2432,7 @@
      {
       "artist": "Dizzee Rascal",
       "song": "Kein Song gewählt",
-      "dur": "Dizzee Rascal",
+      "dur": "",
       "links": [
        "https://open.spotify.com/search/Dizzee%20Rascal%20",
        "https://www.youtube.com/results?search_query=Dizzee%20Rascal%20"
@@ -2518,7 +2519,7 @@
      {
       "artist": "AJ Tracey",
       "song": "Thiago Silva",
-      "dur": "AJ Tracey · 3:21",
+      "dur": "3:21",
       "links": [
        "https://open.spotify.com/search/AJ%20Tracey%20Thiago%20Silva",
        "https://www.youtube.com/results?search_query=AJ%20Tracey%20Thiago%20Silva"
@@ -2530,7 +2531,7 @@
      {
       "artist": "Bugzy Malone",
       "song": "Ordinary People (feat. JP Cooper)",
-      "dur": "Bugzy Malone · 4:30",
+      "dur": "4:30",
       "links": [
        "https://open.spotify.com/search/Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)",
        "https://www.youtube.com/results?search_query=Bugzy%20Malone%20Ordinary%20People%20(feat.%20JP%20Cooper)"
@@ -2617,7 +2618,7 @@
      {
       "artist": "Professor Green",
       "song": "I Need You Tonight",
-      "dur": "Professor Green · 3:45",
+      "dur": "3:45",
       "links": [
        "https://open.spotify.com/search/Professor%20Green%20I%20Need%20You%20Tonight",
        "https://www.youtube.com/results?search_query=Professor%20Green%20I%20Need%20You%20Tonight"
@@ -2629,7 +2630,7 @@
      {
       "artist": "Wiley",
       "song": "Wearing My Rolex",
-      "dur": "Wiley · 2:50",
+      "dur": "2:50",
       "links": [
        "https://open.spotify.com/search/Wiley%20Wearing%20My%20Rolex",
        "https://www.youtube.com/results?search_query=Wiley%20Wearing%20My%20Rolex"
@@ -2828,7 +2829,8 @@
     "pickSec": 0,
     "phoneMode": false,
     "favMode": false,
-    "favOwner": {}
+    "favOwner": {},
+    "reveal": false
    },
    "rivalry": null,
    "keys": [

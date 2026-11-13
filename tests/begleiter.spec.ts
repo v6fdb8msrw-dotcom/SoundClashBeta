@@ -18,6 +18,10 @@ test('Begleiter · koppeln, vom Handy drehen, setzen, Song wählen und abstimmen
   await mockNetwork(hostCtx)
   const host = await hostCtx.newPage()
   await host.goto(baseURL!)
+  // Verhalten wie im Original prüfen: Songs nicht einzeln aufdecken
+  await host.locator('#advToggle').click()
+  await host.locator('[data-op="reveal"][data-v="0"]').click()
+  await host.locator('#advToggle').click()
   await host.locator('#pairBtn').click()
   const code = (await host.locator('#pairCode').textContent())!.trim()
   expect(code).toMatch(/^[A-Z2-9]{5}$/)

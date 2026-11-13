@@ -314,9 +314,9 @@ export function Setup({ S }: { S: State }) {
         <div className="sh-text">
           <p className="eyebrow">Neues Match</p>
           <h2 className="display">
-            Wer hat den
+            Wer hat den besseren
             <br />
-            <em>besseren Geschmack?</em>
+            <em>Musikgeschmack?</em>
           </h2>
           <p className="lede">Künstler ziehen, blind auf Plätze setzen, dann tritt Song gegen Song an. Wer am Ende die meisten Punkte holt, gewinnt.</p>
         </div>
@@ -354,6 +354,7 @@ export function Setup({ S }: { S: State }) {
           <div className="g2">
             <Seg id="songMode" label="Songwahl" value={S.songMode} onPick={pick('songMode')} opts={[{ v: 'upfront', t: 'Alle vorab' }, { v: 'perduel', t: 'Vor jedem Duell' }]} />
             <Seg id="audience" label="Wer entscheidet?" value={S.audience ? '1' : '0'} onPick={pick('audience')} opts={[{ v: '0', t: 'Gemeinsam' }, { v: '1', t: 'Abstimmung' }]} />
+            <Seg id="reveal" label="Songs vor dem Duell einzeln aufdecken" value={S.reveal ? '1' : '0'} onPick={pick('reveal')} opts={[{ v: '1', t: 'An' }, { v: '0', t: 'Aus' }]} />
             <Seg id="pickSec" label="Zeit pro Songwahl" value={String(S.pickSec || 0)} onPick={pick('pickSec')} opts={[{ v: '0', t: 'Ohne' }, { v: '30', t: '30 s' }, { v: '45', t: '45 s' }, { v: '60', t: '60 s' }]} />
             <Sel id="mode" label="Turniergröße" value={S.mode} onPick={pick('mode')} opts={[{ v: 'clash', t: 'Kein Turnier' }, { v: 't4', t: 'Turnier · 4 Spieler' }, { v: 't8', t: 'Turnier · 8 Spieler' }, { v: 't16', t: 'Turnier · 16 Spieler' }]} />
             <Sel id="sameArtist" label="Künstler" value={S.sameArtist ? '1' : '0'} onPick={pick('sameArtist')} opts={[{ v: '0', t: 'Jeder eigene Künstler' }, { v: '1', t: 'Gleicher Künstler für alle' }]} />

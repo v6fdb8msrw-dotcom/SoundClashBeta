@@ -36,6 +36,7 @@ export {
   Palette,
   Image as ImageIcon,
   Hand,
+  SkipForward,
   Laptop,
   Tv,
   Heart,

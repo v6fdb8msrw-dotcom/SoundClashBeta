@@ -22,7 +22,7 @@
   mix-blend-mode: screen;
   will-change: transform;
 }
-body[data-theme='igor'] .aura i {
+body:is([data-theme='igor'],[data-theme='thriller']) .aura i {
   mix-blend-mode: multiply;
   opacity: 0.45;
 }
@@ -85,7 +85,7 @@ body[data-theme='igor'] .aura i {
   filter: blur(90px) saturate(170%) brightness(0.85);
   opacity: 0.85;
 }
-body[data-theme='igor'] .aura-cover {
+body:is([data-theme='igor'],[data-theme='thriller']) .aura-cover {
   filter: blur(90px) saturate(150%) brightness(1.25);
   opacity: 0.55;
 }
@@ -115,7 +115,7 @@ body[data-theme='igor'] .aura-cover {
   opacity: 0.28;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
 }
-body[data-theme="igor"] .bg-wall {
+body:is([data-theme='igor'],[data-theme='thriller']) .bg-wall {
   opacity: 0.22;
 }
 .mcol {

@@ -2,9 +2,50 @@
  {
   "label": "start-speicher",
   "data": {
-   "settings": null,
+   "settings": {
+    "players": 2,
+    "names": [
+     "P1",
+     "P2",
+     "P3",
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "avatar": {
+     "1": "data:b6bb1194dd",
+     "2": "data:d3828dc1a0",
+     "3": "data:65fc4a0268",
+     "4": "data:5f31670aa0",
+     "5": "data:04ab0531a7",
+     "6": "data:5c807830df"
+    },
+    "size": 5,
+    "series": "single",
+    "muted": false,
+    "ambience": true,
+    "theme": "main",
+    "bg": "aura",
+    "genre": "rnb",
+    "pool": [],
+    "warnOff": false,
+    "songMode": "perduel",
+    "sameArtist": false,
+    "custom": [],
+    "audience": true,
+    "mode": "clash",
+    "roster": null,
+    "autoScroll": true,
+    "pickSec": 0,
+    "phoneMode": false,
+    "favMode": false,
+    "favOwner": {},
+    "reveal": false
+   },
    "rivalry": null,
-   "keys": []
+   "keys": [
+    "soundclash.v5"
+   ]
   }
  },
  {
@@ -413,7 +454,7 @@
      {
       "artist": "John Legend",
       "song": "All of Me",
-      "dur": "John Legend · 4:29",
+      "dur": "4:29",
       "links": [
        "https://open.spotify.com/search/John%20Legend%20All%20of%20Me",
        "https://www.youtube.com/results?search_query=John%20Legend%20All%20of%20Me"
@@ -425,7 +466,7 @@
      {
       "artist": "Jhené Aiko",
       "song": "So Good",
-      "dur": "Jhené Aiko · 3:57",
+      "dur": "3:57",
       "links": [
        "https://open.spotify.com/search/Jhen%C3%A9%20Aiko%20So%20Good",
        "https://www.youtube.com/results?search_query=Jhen%C3%A9%20Aiko%20So%20Good"
@@ -453,7 +494,7 @@
      {
       "artist": "John Legend",
       "song": "All of Me",
-      "dur": "John Legend · 4:29",
+      "dur": "4:29",
       "links": [
        "https://open.spotify.com/search/John%20Legend%20All%20of%20Me",
        "https://www.youtube.com/results?search_query=John%20Legend%20All%20of%20Me"
@@ -465,7 +506,7 @@
      {
       "artist": "Jhené Aiko",
       "song": "So Good",
-      "dur": "Jhené Aiko · 3:57",
+      "dur": "3:57",
       "links": [
        "https://open.spotify.com/search/Jhen%C3%A9%20Aiko%20So%20Good",
        "https://www.youtube.com/results?search_query=Jhen%C3%A9%20Aiko%20So%20Good"
@@ -493,7 +534,7 @@
      {
       "artist": "John Legend",
       "song": "All of Me",
-      "dur": "John Legend · 4:29",
+      "dur": "4:29",
       "links": [
        "https://open.spotify.com/search/John%20Legend%20All%20of%20Me",
        "https://www.youtube.com/results?search_query=John%20Legend%20All%20of%20Me"
@@ -505,7 +546,7 @@
      {
       "artist": "Jhené Aiko",
       "song": "So Good",
-      "dur": "Jhené Aiko · 3:57",
+      "dur": "3:57",
       "links": [
        "https://open.spotify.com/search/Jhen%C3%A9%20Aiko%20So%20Good",
        "https://www.youtube.com/results?search_query=Jhen%C3%A9%20Aiko%20So%20Good"
@@ -595,7 +636,7 @@
      {
       "artist": "Chris Brown",
       "song": "Under The Influence",
-      "dur": "Chris Brown · 3:04",
+      "dur": "3:04",
       "links": [
        "https://open.spotify.com/search/Chris%20Brown%20Under%20The%20Influence",
        "https://www.youtube.com/results?search_query=Chris%20Brown%20Under%20The%20Influence"
@@ -607,7 +648,7 @@
      {
       "artist": "The Weeknd",
       "song": "Blinding Lights",
-      "dur": "The Weeknd · 3:20",
+      "dur": "3:20",
       "links": [
        "https://open.spotify.com/search/The%20Weeknd%20Blinding%20Lights",
        "https://www.youtube.com/results?search_query=The%20Weeknd%20Blinding%20Lights"
@@ -635,7 +676,7 @@
      {
       "artist": "Chris Brown",
       "song": "Under The Influence",
-      "dur": "Chris Brown · 3:04",
+      "dur": "3:04",
       "links": [
        "https://open.spotify.com/search/Chris%20Brown%20Under%20The%20Influence",
        "https://www.youtube.com/results?search_query=Chris%20Brown%20Under%20The%20Influence"
@@ -647,7 +688,7 @@
      {
       "artist": "The Weeknd",
       "song": "Blinding Lights",
-      "dur": "The Weeknd · 3:20",
+      "dur": "3:20",
       "links": [
        "https://open.spotify.com/search/The%20Weeknd%20Blinding%20Lights",
        "https://www.youtube.com/results?search_query=The%20Weeknd%20Blinding%20Lights"
@@ -675,7 +716,7 @@
      {
       "artist": "Chris Brown",
       "song": "Under The Influence",
-      "dur": "Chris Brown · 3:04",
+      "dur": "3:04",
       "links": [
        "https://open.spotify.com/search/Chris%20Brown%20Under%20The%20Influence",
        "https://www.youtube.com/results?search_query=Chris%20Brown%20Under%20The%20Influence"
@@ -687,7 +728,7 @@
      {
       "artist": "The Weeknd",
       "song": "Blinding Lights",
-      "dur": "The Weeknd · 3:20",
+      "dur": "3:20",
       "links": [
        "https://open.spotify.com/search/The%20Weeknd%20Blinding%20Lights",
        "https://www.youtube.com/results?search_query=The%20Weeknd%20Blinding%20Lights"
@@ -777,7 +818,7 @@
      {
       "artist": "Mary J. Blige",
       "song": "Family Affair",
-      "dur": "Mary J. Blige · 4:25",
+      "dur": "4:25",
       "links": [
        "https://open.spotify.com/search/Mary%20J.%20Blige%20Family%20Affair",
        "https://www.youtube.com/results?search_query=Mary%20J.%20Blige%20Family%20Affair"
@@ -789,7 +830,7 @@
      {
       "artist": "R. Kelly",
       "song": "Bump & Grind 2014",
-      "dur": "R. Kelly · 3:02",
+      "dur": "3:02",
       "links": [
        "https://open.spotify.com/search/R.%20Kelly%20Bump%20%26%20Grind%202014",
        "https://www.youtube.com/results?search_query=R.%20Kelly%20Bump%20%26%20Grind%202014"
@@ -817,7 +858,7 @@
      {
       "artist": "Mary J. Blige",
       "song": "Family Affair",
-      "dur": "Mary J. Blige · 4:25",
+      "dur": "4:25",
       "links": [
        "https://open.spotify.com/search/Mary%20J.%20Blige%20Family%20Affair",
        "https://www.youtube.com/results?search_query=Mary%20J.%20Blige%20Family%20Affair"
@@ -829,7 +870,7 @@
      {
       "artist": "R. Kelly",
       "song": "Bump & Grind 2014",
-      "dur": "R. Kelly · 3:02",
+      "dur": "3:02",
       "links": [
        "https://open.spotify.com/search/R.%20Kelly%20Bump%20%26%20Grind%202014",
        "https://www.youtube.com/results?search_query=R.%20Kelly%20Bump%20%26%20Grind%202014"
@@ -857,7 +898,7 @@
      {
       "artist": "Mary J. Blige",
       "song": "Family Affair",
-      "dur": "Mary J. Blige · 4:25",
+      "dur": "4:25",
       "links": [
        "https://open.spotify.com/search/Mary%20J.%20Blige%20Family%20Affair",
        "https://www.youtube.com/results?search_query=Mary%20J.%20Blige%20Family%20Affair"
@@ -869,7 +910,7 @@
      {
       "artist": "R. Kelly",
       "song": "Bump & Grind 2014",
-      "dur": "R. Kelly · 3:02",
+      "dur": "3:02",
       "links": [
        "https://open.spotify.com/search/R.%20Kelly%20Bump%20%26%20Grind%202014",
        "https://www.youtube.com/results?search_query=R.%20Kelly%20Bump%20%26%20Grind%202014"
@@ -959,7 +1000,7 @@
      {
       "artist": "Beyoncé",
       "song": "Crazy In Love (feat. JAŸ-Z)",
-      "dur": "Beyoncé · 3:55",
+      "dur": "3:55",
       "links": [
        "https://open.spotify.com/search/Beyonc%C3%A9%20Crazy%20In%20Love%20(feat.%20JA%C5%B8-Z)",
        "https://www.youtube.com/results?search_query=Beyonc%C3%A9%20Crazy%20In%20Love%20(feat.%20JA%C5%B8-Z)"
@@ -971,7 +1012,7 @@
      {
       "artist": "Alicia Keys",
       "song": "Girl on Fire",
-      "dur": "Alicia Keys · 3:45",
+      "dur": "3:45",
       "links": [
        "https://open.spotify.com/search/Alicia%20Keys%20Girl%20on%20Fire",
        "https://www.youtube.com/results?search_query=Alicia%20Keys%20Girl%20on%20Fire"
@@ -999,7 +1040,7 @@
      {
       "artist": "Beyoncé",
       "song": "Crazy In Love (feat. JAŸ-Z)",
-      "dur": "Beyoncé · 3:55",
+      "dur": "3:55",
       "links": [
        "https://open.spotify.com/search/Beyonc%C3%A9%20Crazy%20In%20Love%20(feat.%20JA%C5%B8-Z)",
        "https://www.youtube.com/results?search_query=Beyonc%C3%A9%20Crazy%20In%20Love%20(feat.%20JA%C5%B8-Z)"
@@ -1011,7 +1052,7 @@
      {
       "artist": "Alicia Keys",
       "song": "Girl on Fire",
-      "dur": "Alicia Keys · 3:45",
+      "dur": "3:45",
       "links": [
        "https://open.spotify.com/search/Alicia%20Keys%20Girl%20on%20Fire",
        "https://www.youtube.com/results?search_query=Alicia%20Keys%20Girl%20on%20Fire"
@@ -1039,7 +1080,7 @@
      {
       "artist": "Beyoncé",
       "song": "Crazy In Love (feat. JAŸ-Z)",
-      "dur": "Beyoncé · 3:55",
+      "dur": "3:55",
       "links": [
        "https://open.spotify.com/search/Beyonc%C3%A9%20Crazy%20In%20Love%20(feat.%20JA%C5%B8-Z)",
        "https://www.youtube.com/results?search_query=Beyonc%C3%A9%20Crazy%20In%20Love%20(feat.%20JA%C5%B8-Z)"
@@ -1051,7 +1092,7 @@
      {
       "artist": "Alicia Keys",
       "song": "Girl on Fire",
-      "dur": "Alicia Keys · 3:45",
+      "dur": "3:45",
       "links": [
        "https://open.spotify.com/search/Alicia%20Keys%20Girl%20on%20Fire",
        "https://www.youtube.com/results?search_query=Alicia%20Keys%20Girl%20on%20Fire"
@@ -1141,7 +1182,7 @@
      {
       "artist": "Khalid",
       "song": "Save My Love",
-      "dur": "Khalid · 3:31",
+      "dur": "3:31",
       "links": [
        "https://open.spotify.com/search/Khalid%20Save%20My%20Love",
        "https://www.youtube.com/results?search_query=Khalid%20Save%20My%20Love"
@@ -1153,7 +1194,7 @@
      {
       "artist": "Rihanna",
       "song": "We Found Love",
-      "dur": "Rihanna · 3:36",
+      "dur": "3:36",
       "links": [
        "https://open.spotify.com/search/Rihanna%20We%20Found%20Love",
        "https://www.youtube.com/results?search_query=Rihanna%20We%20Found%20Love"
@@ -1181,7 +1222,7 @@
      {
       "artist": "Khalid",
       "song": "Save My Love",
-      "dur": "Khalid · 3:31",
+      "dur": "3:31",
       "links": [
        "https://open.spotify.com/search/Khalid%20Save%20My%20Love",
        "https://www.youtube.com/results?search_query=Khalid%20Save%20My%20Love"
@@ -1193,7 +1234,7 @@
      {
       "artist": "Rihanna",
       "song": "We Found Love",
-      "dur": "Rihanna · 3:36",
+      "dur": "3:36",
       "links": [
        "https://open.spotify.com/search/Rihanna%20We%20Found%20Love",
        "https://www.youtube.com/results?search_query=Rihanna%20We%20Found%20Love"
@@ -1221,7 +1262,7 @@
      {
       "artist": "Khalid",
       "song": "Save My Love",
-      "dur": "Khalid · 3:31",
+      "dur": "3:31",
       "links": [
        "https://open.spotify.com/search/Khalid%20Save%20My%20Love",
        "https://www.youtube.com/results?search_query=Khalid%20Save%20My%20Love"
@@ -1233,7 +1274,7 @@
      {
       "artist": "Rihanna",
       "song": "We Found Love",
-      "dur": "Rihanna · 3:36",
+      "dur": "3:36",
       "links": [
        "https://open.spotify.com/search/Rihanna%20We%20Found%20Love",
        "https://www.youtube.com/results?search_query=Rihanna%20We%20Found%20Love"
@@ -1389,7 +1430,8 @@
     "pickSec": 0,
     "phoneMode": false,
     "favMode": false,
-    "favOwner": {}
+    "favOwner": {},
+    "reveal": false
    },
    "rivalry": {
     "p1|p2": {

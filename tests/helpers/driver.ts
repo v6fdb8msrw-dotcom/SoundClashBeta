@@ -75,6 +75,12 @@ export class App {
     await this.page.locator('[data-go="setup"], #startBtn').first().waitFor()
     // Startbild abwarten (Original: 1 s bei reduzierter Bewegung)
     await this.page.waitForFunction(() => !document.getElementById('splash'), null, { timeout: 8000 }).catch(() => undefined)
+    // Neue Fassung: „Songs einzeln aufdecken“ für die Verhaltensvergleiche mit dem Original ausschalten
+    if (await this.page.locator('[data-op="reveal"][data-v="0"]').count()) {
+      await this.select('reveal', '0')
+      const t = this.page.locator('#advToggle')
+      if ((await t.getAttribute('aria-expanded')) === 'true') await t.click()
+    }
   }
 
   async setRandom(v: number) {

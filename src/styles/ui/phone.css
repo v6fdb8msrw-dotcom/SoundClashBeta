@@ -240,3 +240,236 @@
   font-size: 14px;
   font-weight: 600;
 }
+
+/* ---------- Aufdecken: bewährter Aufbau (Platte links, Infos rechts) im neuen Design ---------- */
+.screen-listen .rv {
+  padding-top: 3vh;
+  gap: 26px;
+}
+.rv-kicker {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink-3);
+  margin: 0;
+}
+.rv-main {
+  grid-template-columns: minmax(260px, 440px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+}
+.rv-disc {
+  width: 100%;
+  max-width: 440px;
+  justify-self: end;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+}
+.rv-disc .vinyl {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+.rv-q {
+  font-size: clamp(90px, 12vw, 150px);
+}
+.rv-info {
+  gap: 14px;
+  max-width: 620px;
+}
+.rv-who {
+  gap: 14px;
+}
+.rv-who .rv-av,
+.rv-av {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--pc),
+    0 14px 30px color-mix(in srgb, var(--pc) 45%, transparent);
+}
+.rv-who span {
+  display: grid;
+  line-height: 1.1;
+}
+.rv-who small {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink-3);
+}
+.rv-who b {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 3.6vw, 42px);
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  color: var(--pc);
+}
+.rv-artist {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rv-artist img,
+.rv-artist .ph {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+.rv-artist span {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.rv-title {
+  font-size: clamp(42px, 6vw, 78px);
+  line-height: 1;
+}
+.listen-bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pc), color-mix(in srgb, var(--pc) 50%, #fff));
+}
+.rv-ctrl .lnk {
+  height: 46px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+.rv-ctrl .btn.sm {
+  min-height: 46px;
+  padding: 0 22px;
+  font-size: 15px;
+}
+.queue {
+  gap: 10px;
+}
+.qitem {
+  padding: 8px 18px 8px 8px;
+  border-radius: 16px;
+  transition: all 0.3s var(--ease);
+}
+.qitem img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+.qitem span {
+  display: grid;
+  line-height: 1.2;
+}
+.qitem b {
+  font-size: 14px;
+}
+.qitem small {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.qitem.now {
+  border-color: var(--pc);
+  background: color-mix(in srgb, var(--pc) 16%, var(--glass));
+  box-shadow: 0 12px 30px -12px var(--pc);
+}
+.qitem.done {
+  opacity: 0.65;
+}
+@media (max-width: 760px) {
+  .rv-main {
+    grid-template-columns: 1fr;
+  }
+  .rv-disc {
+    max-width: 260px;
+    justify-self: center;
+  }
+  .rv-who {
+    justify-content: center;
+  }
+  .rv-artist {
+    justify-content: center;
+  }
+}
+
+/* Aufdecken: „gewählt von“ und Künstler nebeneinander statt übereinander */
+.rv-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 28px;
+  row-gap: 14px;
+}
+.rv-info > * {
+  flex-basis: 100%;
+}
+.rv-info > .rv-who,
+.rv-info > .rv-artist {
+  flex-basis: auto;
+}
+.rv-info > .rv-artist {
+  padding-left: 28px;
+  border-left: 1px solid var(--hair-2);
+  min-height: 56px;
+}
+.rv-artist img,
+.rv-artist .ph {
+  width: 56px;
+  height: 56px;
+}
+.rv-artist span {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 700;
+  color: var(--ink);
+}
+/* Reihenfolge unten: größer, mit Künstler */
+.queue {
+  gap: 14px;
+}
+.qitem {
+  padding: 10px 22px 10px 10px;
+  border-radius: 20px;
+  min-width: 220px;
+}
+.qitem img {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+}
+.qitem b {
+  font-size: 17px;
+}
+.qitem em {
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.qitem small {
+  font-size: 12.5px;
+}
+@media (max-width: 760px) {
+  .rv-info > .rv-artist {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .qitem {
+    min-width: 0;
+  }
+}
+
+/* „gewählt von P1“ so groß wie der Künstler, mit Abstand zum Songtitel */
+.rv-info > .rv-who,
+.rv-info > .rv-artist {
+  margin-bottom: 14px;
+}
+.rv-who .rv-av,
+.rv-av {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  box-shadow: 0 0 0 2.5px var(--pc), 0 10px 22px color-mix(in srgb, var(--pc) 40%, transparent);
+}
+.rv-who b {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 750;
+}

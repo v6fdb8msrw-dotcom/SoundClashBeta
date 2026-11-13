@@ -179,6 +179,8 @@ export interface State {
   phoneMode: boolean
   /** Favoriten-Modus: jeder legt eigene Lieblingskünstler in den Topf, gezogen werden bevorzugt die der anderen */
   favMode: boolean
+  /** Songs vor dem Duell einzeln aufdecken (wie im Handy-Modus), auch am Hauptgerät */
+  reveal: boolean
   /** Künstler-Schlüssel → Spieler, der ihn in den Topf gelegt hat */
   favOwner: Record<string, number>
   /** Wer im Setup gerade seine Favoriten wählt */
@@ -220,6 +222,7 @@ export interface SavedSettings {
   pickSec?: number
   phoneMode?: boolean
   favMode?: boolean
+  reveal?: boolean
   favOwner?: Record<string, number>
 }
 

@@ -16,6 +16,25 @@ async function shot(page: Page, name: string) {
   await page.screenshot({ path: new URL(name + '.jpg', OUT).pathname, type: 'jpeg', quality: 78 })
 }
 
+/** Songs einzeln aufdecken: jeden Song abspielen, dann weiter (bis zum Versus) */
+async function passListen(page: Page, shots?: string) {
+  for (let i = 0; i < 6; i++) {
+    if (!(await page.locator('#listenNext, #listenPlay').count())) {
+      await page.waitForTimeout(500)
+      if (!(await page.locator('#listenNext, #listenPlay').count())) return
+    }
+    const play = page.locator('#listenPlay')
+    if (shots && i === 0) await shot(page, shots + '-6a-aufdecken')
+    if (await play.count()) {
+      await play.click({ force: true })
+      await page.waitForTimeout(900)
+      if (shots && i === 0) await shot(page, shots + '-6b-song-laeuft')
+    }
+    await page.locator('#listenNext').click({ force: true })
+    await page.waitForTimeout(600)
+  }
+}
+
 async function flow(page: Page, prefix: string, mobile: boolean) {
   await page.goto('')
   await page.waitForTimeout(2400)
@@ -49,6 +68,7 @@ async function flow(page: Page, prefix: string, mobile: boolean) {
   await page.locator('[data-pick]').nth(1).waitFor({ timeout: 30000 })
   await page.locator('[data-pick]').nth(1).click()
   await page.locator('#pickNext').click()
+  await passListen(page, prefix)
   await page.locator('.dcard').first().waitFor()
   await page.locator('[data-pv3]').first().click()
   await page.locator('[data-bump="1"][data-d="1"]').click()
@@ -60,6 +80,7 @@ async function flow(page: Page, prefix: string, mobile: boolean) {
   for (let d = 1; d < 5; d++) {
     await page.locator('#pickSkip').click()
     await page.locator('#pickSkip').click()
+    await passListen(page)
     await page.locator(`[data-bump="${(d % 2) + 1}"][data-d="1"]`).click()
     await page.locator('#voteClose').click()
     await page.locator('[data-vwin]').first().click()
@@ -73,15 +94,13 @@ async function flow(page: Page, prefix: string, mobile: boolean) {
   // anderes Theme über das Menü
   await page.locator('.brand-home').click()
   await page.locator('#menuBtn').click()
-  await page.locator('[data-op="theme"][data-v="graduation"]').click()
-  await page.locator('[data-op="bg"][data-v="shapes"]').click()
-  // Plattenspieler wird getrennt zugeschaltet
-  await page.locator('#deckBtn').click()
+  await page.locator('[data-op="theme"][data-v="astroworld"]').click()
+  await page.locator('[data-op="bg"][data-v="mosaic"]').click()
   await page.waitForTimeout(400)
-  await shot(page, prefix + '-9-menue-graduation')
+  await shot(page, prefix + '-9-menue-astroworld')
   await page.locator('#menuBtn').click()
   await page.waitForTimeout(600)
-  await shot(page, prefix + '-9-theme-graduation')
+  await shot(page, prefix + '-9-theme-astroworld')
 }
 
 test('Mac · 1440×900', async ({ browser }) => {

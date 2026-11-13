@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { dispatch } from '../app/store'
-import { BG_DECK, BG_MENU, BGS, THEMES, bgBase, bgHasDeck } from '../core/constants'
+import { BG_MENU, BGS, THEMES, bgBase } from '../core/constants'
 import { getScreen, setScreen, subscribeScreen } from '../services/display'
 import { useThemeCover } from '../services/albums'
 import type { State } from '../core/types'
 import { BackupDialog } from './BackupDialog'
 import { PairDialog, useHost } from './PairDialog'
-import { ArrowUpDown, Disc3, ImageIcon, Info, Laptop, Palette, Smartphone, Tv, Volume2, VolumeX, Zap } from './icons'
+import { ArrowUpDown, ImageIcon, Info, Laptop, Palette, Smartphone, Tv, Volume2, VolumeX, Zap } from './icons'
 
 /**
  * Kopfleiste, bewusst schlicht: Logo (→ Sound-Clash-Start), Handys koppeln und ein Menü.
@@ -98,7 +98,7 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
                   aria-selected={on}
                   aria-checked={on}
                   className={'bgchip' + (on ? ' on' : '')}
-                  onClick={() => dispatch({ type: 'pick', id: 'bg', v: bgHasDeck(S.bg) && BG_DECK[v] ? BG_DECK[v] : v })}
+                  onClick={() => dispatch({ type: 'pick', id: 'bg', v })}
                 >
                   {t}
                 </button>
@@ -106,19 +106,6 @@ export function TopBar({ S, shrink }: { S: State; shrink: boolean }) {
             })}
           </div>
           <div className="ms-toggles">
-            <button
-              type="button"
-              className={'ms-toggle' + (bgHasDeck(S.bg) ? ' on' : '')}
-              id="deckBtn"
-              aria-pressed={bgHasDeck(S.bg)}
-              onClick={() => {
-                const base = bgBase(S.bg)
-                dispatch({ type: 'pick', id: 'bg', v: bgHasDeck(S.bg) ? base : BG_DECK[base] || 'deck' })
-              }}
-            >
-              <Disc3 /> Plattenspieler
-              <span className="sw" aria-hidden />
-            </button>
             <ScreenSwitch />
           </div>
           <div className="ms-btns">

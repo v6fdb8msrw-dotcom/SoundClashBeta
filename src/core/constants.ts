@@ -35,7 +35,7 @@ export const BGS: readonly [string, string][] = [
 ]
 
 /** Im Menü angebotene Hintergründe (die übrigen Werte bleiben für alte Spielstände gültig) */
-export const BG_MENU = ['aura', 'shapes', 'records', 'mosaic', 'waves', 'stage', 'horizon', 'plain']
+export const BG_MENU = ['aura', 'mosaic', 'horizon', 'plain']
 
 /**
  * Hintergrund ohne → mit Plattenspieler. Im Menü wählt man den Hintergrund und schaltet den
@@ -64,17 +64,23 @@ export function bgHasDeck(bg: string): boolean {
 }
 
 export const THEMES: readonly [string, string][] = [
-  ['main', 'Sound Clash'],
-  ['graduation', 'Graduation'],
+  ['main', 'Graduation'],
   ['afterhours', 'After Hours'],
   ['sos', 'SOS'],
   ['blonde', 'Blonde'],
   ['igor', 'IGOR'],
+  ['astroworld', 'Astroworld'],
+  ['tpab', 'To Pimp a Butterfly'],
+  ['darkside', 'Dark Side of the Moon'],
+  ['thriller', 'Thriller'],
+  ['views', 'Views'],
+  ['discovery', 'Discovery'],
+  ['abbeyroad', 'Abbey Road'],
 ]
 
 /** Theme-Hintergrund (--bg) – Grundlage für die Kontrast-Anpassung der Spielerfarben. */
 export const THEME_BG: Record<string, string> = {
-  main: '#0E0B22', silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
+  main: '#0E0B22', astroworld: '#1A0F06', tpab: '#0E0D0C', darkside: '#050507', thriller: '#F4EEE4', views: '#0F1318', discovery: '#0B0B12', abbeyroad: '#0B1622', silksonic: '#190A07', graduation: '#210947', igor: '#F0CFC6', sos: '#050D18', llasap: '#070707',
   afterhours: '#12060A', blonde: '#0B1A0E', currents: '#0C1922', nectar: '#160913', warmlime: '#20280F',
   skymint: '#1B1D22', emerald: '#053E2F', ultraviolet: '#22083D',
 }
