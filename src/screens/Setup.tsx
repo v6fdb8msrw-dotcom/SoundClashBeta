@@ -12,7 +12,7 @@ import { useHost } from '../ui/PairDialog'
 import { onlineRoles } from '../remote/host'
 import { ArrowRight, Check, ChevronDown, Disc3, Heart, Target, Trophy, ImagePlus, ListMusic, Pencil, Plus, Search, X } from '../ui/icons'
 import { Vinyl } from '../ui/Vinyl'
-import { bgBase } from '../core/constants'
+import { bgBase, MAX_PLAYERS } from '../core/constants'
 import { dzAlbum } from '../services/deezer'
 import { NEUTRAL_ALBUMS, THEME_ALBUMS, type Album } from '../services/albums'
 
@@ -201,7 +201,7 @@ function PlayersCard({ S }: { S: State }) {
       <div className="cardhead">
         <h2 style={{ margin: 0 }}>Spieler</h2>
       </div>
-      <Seg id="players" label="Wie viele?" value={S.players} onPick={pick('players')} opts={[2, 3, 4, 5, 6].map((v) => ({ v, t: String(v) }))} />
+      <Seg id="players" label="Wie viele?" value={S.players} onPick={pick('players')} opts={Array.from({ length: MAX_PLAYERS - 1 }, (_, j) => j + 2).map((v) => ({ v, t: String(v) }))} />
       <div className="plist">{rows}</div>
     </section>
   )

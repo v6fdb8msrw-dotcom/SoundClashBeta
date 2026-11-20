@@ -32,6 +32,13 @@
   align-items: center;
   perspective: 1200px;
 }
+/* 7–8 Spieler (MECHANIK §12): zwei ruhige Reihen à 4 statt 5 + 3 */
+@media (min-width: 721px){
+  .duelcols.n7,
+  .duelcols.n8{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
 .vs{
   position: relative;
   width: 74px;

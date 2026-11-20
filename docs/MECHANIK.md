@@ -15,7 +15,7 @@ Sound Clash ist ein Partyspiel rund um Musik. Startbildschirm „Wähle deinen M
 
 | Kachel | Ziel | Spieler | Abzeichen |
 |---|---|---|---|
-| 🥊 Sound Clash | Blind ranken, Song für Song | 2–6 (Turnier 4/8/16) | (Hauptmodus, hervorgehoben) |
+| 🥊 Sound Clash | Blind ranken, Song für Song | 2–6 (Turnier 4/8/16); neue Fassung 2–8, §12 | (Hauptmodus, hervorgehoben) |
 | 🎧 Guess the Song | Song an kurzer Stichprobe erraten | 1 | „⚙ In Production“ |
 | 🕰️ Timeline Masters | Songs ins richtige Jahr einsortieren / Jahrzehnt-Duell | 1–6 bzw. 2 Teams | „⚙ In Production“ |
 
@@ -31,7 +31,7 @@ Auswahl **Hintergrund**, Ton an/aus (🔊/🔇), Auswahl **Farbe** (Theme).
 | Feld (`id`) | Optionen | Standard | Wirkung beim Ändern |
 |---|---|---|---|
 | Spielart (`mode`) | Clash (alle gegen alle) · Turnier 4 · Turnier 8 · Turnier 16 | clash | Farben zurücksetzen (`colors=null`). Turnier: Kader neu (bestehende Einträge bleiben), Spieler = 2, Publikum = aus. Clash: Turnier löschen, Spieler = 2. Danach `resetAll` |
-| Spieler (`players`) | 2–6 (im Turnier fest: Kadergröße) | 2 | `resetAll` |
+| Spieler (`players`) | 2–6 (im Turnier fest: Kadergröße); neue Fassung 2–8, §12 | 2 | `resetAll` |
 | Songs pro Spieler (`size`) | 5 · 7 · 10 · 15 | 5 | `resetAll` |
 | Spielmodus (`series`) | Einzelrunde · Best of 3 · Best of 5 | single | `resetAll` |
 | Songwahl (`songMode`) | Alle vorab (`upfront`) · Vor jedem Duell (`perduel`) | perduel | `resetAll` |
@@ -270,7 +270,7 @@ Original: `localStorage` (bzw. `window.storage`, falls vorhanden), Herkunft
 | `soundclash.rivalry` | JSON: `{"a|b": {a, b, aw, bw, draws, last}}` |
 
 Gespeichert wird nach fast jeder Änderung (Setup, Draft-Schritte, Theme, Hintergrund, Ton …).
-Beim Laden wird geprüft: players 2–6, size ∈ {5,7,10,15}, series/songMode/mode gültig, bg/theme
+Beim Laden wird geprüft: players 2–6 (neue Fassung 2–8, §12), size ∈ {5,7,10,15}, series/songMode/mode gültig, bg/theme
 bekannt (sonst mosaic/silksonic), genre vorhanden, custom max. 12 Strings; Turnier-Kader nur bei
 passender Größe. Nicht gespeichert: Pick-Timer, Auto-Scroll, laufende Partie.
 
@@ -400,3 +400,19 @@ Wisch-Überblendung wie im normalen Modus, mit eigenen Karten wie „Alle haben 
    „+1 Stimme“ am Hauptgerät sind nicht betroffen.
 6. **Handy:** „Dein Line-up“ steht immer unten (Plätze, Künstler, Songs, „jetzt“). Beim Aufdecken sehen
    alle die Reihenfolge, was gerade läuft („läuft gerade“) und welche Songs noch geheim sind.
+
+## 12. Bis zu 8 Spieler (Tims Wunsch, 20.11.2026)
+
+Sound Clash geht in der neuen Fassung mit **2 bis 8 Spielern** (Original: 2–6). Sonst ändert sich nichts:
+Regeln, Reihenfolge beim Ziehen, Doppelplätze, Wertung, Sudden Death, Serie und Turnier laufen für 7 und 8
+Spieler genau wie für 2–6. Turniere bleiben 1 gegen 1 (Kader 4/8/16).
+
+1. **Einrichtung:** „Wie viele?“ bietet 2–8. Der Künstler-Topf braucht wie immer Spieler × Songs
+   (8 × 5 = 40, 8 × 15 = 120); vorher bleibt „Start“ gesperrt.
+2. **Spieler 7 und 8** bekommen Namen (P7, P8), eine eigene Farbe und einen eingebauten Avatar, sobald sie
+   mitspielen. Für P1–P6 bleibt die Avatar-Vergabe wie im Original.
+3. **Gespeicherte Einstellungen** mit 7 oder 8 Spielern werden beim Laden übernommen.
+4. **Handys:** Auch Spieler 7 und 8 können sich koppeln (Rolle 1–8).
+5. **Texte:** Spielanleitung und Startkachel sagen „2–8“.
+
+Geprüft mit `tests/acht.spec.ts` (eine ganze Runde mit 8 Spielern, nur neue Fassung).

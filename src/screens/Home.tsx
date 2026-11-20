@@ -55,7 +55,7 @@ export function Home() {
       </h1>
       <p className="lede">Wähle deinen Modus.</p>
       <motion.div className="modes" variants={list} initial="hidden" animate="show">
-        <Tile go="setup" ic="🥊" name="Sound Clash" desc="Blind ranken, Song für Song — bis einer krönt. Der Original-Modus." tag="2–6 Spieler" feat />
+        <Tile go="setup" ic="🥊" name="Sound Clash" desc="Blind ranken, Song für Song — bis einer krönt. Der Original-Modus." tag="2–8 Spieler" feat />
         <Tile go="guess" ic="🎧" name="Guess the Song" desc="Errate den Song an einer Mini-Stichprobe. Je früher du triffst, desto mehr Punkte." tag="1 Spieler" prod />
         <Tile go="timeline" ic="🕰️" name="Timeline Masters" desc="Erkenne den Song an der 30-Sek-Vorschau und sortiere ihn ins richtige Jahr. Wer zuerst 10 hat, gewinnt." tag="2–6 Spieler" prod />
       </motion.div>

@@ -3,6 +3,7 @@ import { dispatch, getState, subscribe } from '../app/store'
 import { play, playing, stopAudio, subscribeAudio } from '../services/audio'
 import { allFull, drawer, parts, pickOrder, voteTotal } from '../core/game'
 import type { State } from '../core/types'
+import { MAX_PLAYERS } from '../core/constants'
 import { APP_ID, buildView, ctlButtons, duelKey, newCode, slimTrack, type PhoneMsg, type PhoneState, type Role } from './protocol'
 
 /**
@@ -152,7 +153,7 @@ function onPhone(m: PhoneMsg, peerId: string) {
   const ph = phones.get(peerId) || { role: null }
   phones.set(peerId, ph)
   if (m.t === 'hello') {
-    ph.role = m.role === 'audience' || (typeof m.role === 'number' && m.role >= 1 && m.role <= 6) ? m.role : null
+    ph.role = m.role === 'audience' || (typeof m.role === 'number' && m.role >= 1 && m.role <= MAX_PLAYERS) ? m.role : null
     notify()
     pushView()
     pushMine(peerId)

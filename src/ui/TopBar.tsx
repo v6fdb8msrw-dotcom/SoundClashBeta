@@ -172,7 +172,7 @@ function Rules() {
       </p>
       <h3>1 · Einrichten</h3>
       <p>
-        <b>Spieler:</b> 2–6, je mit Avatar und Farbe — über <b>+</b> lädst du eigene Bilder hoch. <b>Songs pro Spieler:</b> 5, 7, 10 oder 15. <b>Spielmodus:</b> Einzelrunde, Best of 3 oder Best of 5.{' '}
+        <b>Spieler:</b> 2–8, je mit Avatar und Farbe — über <b>+</b> lädst du eigene Bilder hoch. <b>Songs pro Spieler:</b> 5, 7, 10 oder 15. <b>Spielmodus:</b> Einzelrunde, Best of 3 oder Best of 5.{' '}
         <b>Songwahl:</b> alle vorab oder vor jedem Duell. Unter „Mehr Optionen“: Turnier, gleicher Künstler für alle, Pick-Timer.
       </p>
       <p>

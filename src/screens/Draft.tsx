@@ -229,7 +229,7 @@ export function Draft({ S }: { S: State }) {
       </div>
     )
   // Ab 3 Spielern (Tims Wunsch): wer am Zug ist, steht rechts groß wie bei 2 Spielern; die anderen
-  // links – bei 3–4 Spielern als kompakte Felder, bei 5–6 als Mini-Leisten mit kleinen Kästchen.
+  // links – bei 3–4 Spielern als kompakte Felder, ab 5 als Mini-Leisten mit kleinen Kästchen.
   const others = Array.from({ length: S.players }, (_, j) => j + 1).filter((p) => p !== pl)
   const k = others.length
   const focusPlace = (p: number): CSSProperties =>

@@ -3,6 +3,9 @@
  * Auswahllisten und gespeicherte Daten.
  */
 
+/** Höchstzahl der Spieler in einer Runde. Original: 6 – Tims Freigabe 20.11.2026: 8 (MECHANIK §12). */
+export const MAX_PLAYERS = 8
+
 /** Grundfarben der Spieler (P1 rot, P2 blau, …). */
 export const AV: readonly { c: string }[] = [
   { c: '#E5344E' }, { c: '#33CCFF' }, { c: '#22C55E' }, { c: '#E5B23C' }, { c: '#C084FC' }, { c: '#14D4C4' },

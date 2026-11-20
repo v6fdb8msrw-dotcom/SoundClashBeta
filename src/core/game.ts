@@ -1,7 +1,7 @@
 import { produce } from 'immer'
 import { AVATARS } from '../data/avatars'
 import { resetColorCache, setBodyTheme, themeColors } from './colors'
-import { AV, BGS, DIFF_CFG, ERAS, GUESS_STEPS, THEME_DEFAULT_BG, THEMES, decadeOf, eraOk } from './constants'
+import { AV, BGS, DIFF_CFG, ERAS, GUESS_STEPS, THEME_DEFAULT_BG, THEMES, decadeOf, eraOk, MAX_PLAYERS } from './constants'
 import type { PoolSong, SavedSettings, Song, State, Track, WinnerRecord } from './types'
 
 /**
@@ -641,6 +641,7 @@ function pick(S: State, c: Ctx, id: PickId, v: string) {
     }
     case 'players':
       S.players = +v
+      fillAvatars(S, S.players)
       resetAll(S, c)
       save(c)
       return
@@ -727,7 +728,7 @@ function pick(S: State, c: Ctx, id: PickId, v: string) {
 function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
   if (d) {
     try {
-      if ((d.players as number) >= 2 && (d.players as number) <= 6) S.players = d.players as number
+      if ((d.players as number) >= 2 && (d.players as number) <= MAX_PLAYERS) S.players = d.players as number
       if (Array.isArray(d.names))
         d.names.forEach((n, i) => {
           if (n) S.names[i] = n
@@ -768,9 +769,14 @@ function load(S: State, c: Ctx, d: Partial<SavedSettings> | null) {
       // wie im Original: fehlerhafte Daten werden ignoriert
     }
   }
-  const pool = avatarPool(S)
-  for (let p = 1; p <= 6; p++) if (!S.avatar[p]) S.avatar[p] = pool[S.custom.length + p - 1] || pool[p - 1]
+  fillAvatars(S, Math.max(6, S.players))
   resetAll(S, c)
+}
+
+/** Fehlende Avatare vergeben (wie im Original für P1–P6; Spieler 7 und 8 erst, wenn sie mitspielen). */
+function fillAvatars(S: State, upto: number) {
+  const pool = avatarPool(S)
+  for (let p = 1; p <= upto; p++) if (!S.avatar[p]) S.avatar[p] = pool[S.custom.length + p - 1] || pool[p - 1]
 }
 
 /** Zu speichernde Einstellungen (wie save() im Original). */
